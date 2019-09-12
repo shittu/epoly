@@ -65,7 +65,7 @@
                             </li>
                             @if(!auth()->check())
                             <li>
-                                <a href="{{route('login')}}">Sign In</a>
+                                <a href="{{route('student.login')}}">Sign In</a>
                             </li>
                             @endif
                             @yield('nav-bar')

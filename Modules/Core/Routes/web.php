@@ -11,12 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-
-Auth::routes();
-
-Route::get('student/login','Auth\LoginController@showLoginForm')->name('student.login');
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('core')->group(function() {
+    Route::get('/', 'CoreController@index');
+});

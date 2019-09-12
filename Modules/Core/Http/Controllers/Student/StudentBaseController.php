@@ -1,25 +1,20 @@
 <?php
 
-namespace Modules\Admin\Http\Controllers;
+namespace Modules\Core\Http\Controllers\Student;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Core\Http\Controllers\Admin\AdminBaseController;
+use Illuminate\Routing\Controller;
 
-class AdminController extends AdminBaseController
+class StudentBaseController extends Controller
 {
-
-    public function verify()
-    {
-        return redirect()->route('admin.dashboard');
-    }
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        return view('admin::index');
+        return view('core::index');
     }
 
     /**
@@ -28,7 +23,7 @@ class AdminController extends AdminBaseController
      */
     public function create()
     {
-        return view('admin::create');
+        return view('core::create');
     }
 
     /**
@@ -48,7 +43,7 @@ class AdminController extends AdminBaseController
      */
     public function show($id)
     {
-        return view('admin::show');
+        return view('core::show');
     }
 
     /**
@@ -58,7 +53,7 @@ class AdminController extends AdminBaseController
      */
     public function edit($id)
     {
-        return view('admin::edit');
+        return view('core::edit');
     }
 
     /**
