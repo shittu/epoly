@@ -1,17 +1,12 @@
 <section class="padding-section">
             <div class="grid-row clear-fix">
-                <h2 class="center-text">Programme Offered</h2>
+                <h2 class="center-text">Programmes Offered</h2>
                 <div class="grid-col-row">
                     <div class="grid-col grid-col-4">
                         <!-- course item -->
                         <div class="course-item">
-                            <div class="course-hover">
-                                <img src="http://placehold.it/370x280" data-at2x="http://placehold.it/370x280" alt>
-                                <div class="hover-bg bg-color-1"></div>
-                                <a href="">Learn More</a>
-                            </div>
+                            
                             <div class="course-name clear-fix">
-                                <span class="price">$75</span>
                             <h3><a href="#">Science In The New Era</a></h3>
                                 </div>
                             <div class="course-date bg-color-1 clear-fix">
@@ -25,11 +20,6 @@
                     <div class="grid-col grid-col-4">
                         <!-- course item -->
                         <div class="course-item">
-                            <div class="course-hover">
-                                <img src="http://placehold.it/370x280" data-at2x="http://placehold.it/370x280" alt="">
-                                <div class="hover-bg bg-color-2"></div>
-                                <a href="">Learn More</a>
-                            </div>
                             <div class="course-name clear-fix">
                                 <span class="price">Free</span>
                             <h3><a href="#">Campus Party</a></h3>
@@ -45,11 +35,7 @@
                     <div class="grid-col grid-col-4">
                         <!-- course item -->
                         <div class="course-item">
-                            <div class="course-hover">
-                                <img src="http://placehold.it/370x280" data-at2x="http://placehold.it/370x280" alt="">
-                                <div class="hover-bg bg-color-3"></div>
-                                <a href="">Learn More</a>
-                            </div>
+                            
                             <div class="course-name clear-fix">
                                 <span class="price">$45</span>
                             <h3><a href="#">Design Practice</a></h3>

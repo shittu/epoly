@@ -1,4 +1,4 @@
-<div class="parallaxed">
+        <div class="parallaxed">
             <div class="parallax-image" data-parallax-left="0.5" data-parallax-top="0.3" data-parallax-scroll-speed="0.5">
                 <img src="img/parallax.png" alt="">
             </div>
@@ -12,23 +12,6 @@
                 </form>
             </div>
         </div>
-        <!-- parallax section -->
-        
-        
-        <!-- parallax section -->
-        <div class="parallaxed">
-            <div class="parallax-image" data-parallax-left="0.5" data-parallax-top="0.3" data-parallax-scroll-speed="0.5">
-                <img src="img/parallax.png" alt="">
-            </div>
-            <div class="them-mask bg-color-3"></div>
-            <div class="grid-row center-text">
-                <!-- twitter -->
-                <div class="twitter-1"></div>
-                <!-- / twitter -->
-            </div>
-        </div>
-        <!-- parallax section -->
-        <!-- section -->
         <section class="padding-section">
             <div class="grid-row clear-fix">
                 <h2 class="center-text">Community Life</h2>
@@ -69,12 +52,5 @@
                 </div>
             </div>
         </section>
-        <!-- / section -->
-        <hr class="divider-color" />
-        <!-- section -->
         
-        <!-- / section -->
-        <!-- google map -->
-        <div class="wow fadeInUp">
-            <div id="map" class="google-map"></div>
-        </div>
+        

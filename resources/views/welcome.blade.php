@@ -1,5 +1,5 @@
-@include('layouts.app')
+@extends('layouts.app')
 
 @section('page-content')
-   <h2>hello</h2>
+   @include('include.pages.content')
 @endsection    

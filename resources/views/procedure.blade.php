@@ -9,7 +9,7 @@
                             <div class="action-block">
                                 <span><i class="flaticon-magnifier"></i></span>
                                 <div class="text">
-                                    <h3>Search your course</h3>
+                                    <h3>Create Account</h3>
                                     <p>Lorem ipsum  dolor sit amet, consectetuer adipisc ing elit. Aenean commodo ligula.</p>
                                 </div>
                             </div>

@@ -1,73 +1,39 @@
-@extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+@extends('layouts.minimal')
+@section('title')
+    Sokoto state poly student lonin page
+@endsection
+@section('page-content')
+    <br><br>
+    <section class="">
+        <div class="grid-row">
+            <div class="login-block">
+                <div class="logo">
+                    <img src="{{asset('img/logo.png')}}" data-at2x='img/logo@2x.png' alt>
+                    <h2>Student Login</h2>
                 </div>
+                <form class="login-form">
+                    <div class="form-group">
+                        <input type="text" class="login-input" placeholder="Username">
+                        <span class="input-icon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="login-input" placeholder="Pasword">
+                        <span class="input-icon">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                    </div>
+                    <br>
+                    <p class="">
+                        <a href="{{ route('password.request') }}">Forgot Password ?</a>
+                    </p>
+                    <button class="button-fullwidth cws-button bt-color-3 alt">{{ __('Login') }}</button>
+                    
+                    <a href="{{route('welcome')}}" class="button-fullwidth cws-button bt-color-3">Home</a>
+                </form>
             </div>
         </div>
-    </div>
-</div>
-@endsection
+    </section>
+@endsection    

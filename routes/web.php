@@ -13,8 +13,10 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
+
+Route::get('student/login','Auth\LoginController@showLoginForm')->name('login');
 
 Route::get('/home', 'HomeController@index')->name('home');
