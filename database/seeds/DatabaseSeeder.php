@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Modules\Admin\Database\Seeders\AdminDatabaseSeeder;
+use Modules\Staff\Database\Seeders\StaffDatabaseSeeder;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -12,5 +14,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(AdminDatabaseSeeder::class);
+        $this->call(staffDatabaseSeeder::class);
     }
 }
