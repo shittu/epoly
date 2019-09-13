@@ -1,9 +1,27 @@
 @extends('admin::layouts.master')
 
-@section('content')
-    <h1>Hello World</h1>
-
-    <p>
-        This view is loaded from module: {!! config('admin.name') !!}
-    </p>
+@section('page-content')
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 @endsection

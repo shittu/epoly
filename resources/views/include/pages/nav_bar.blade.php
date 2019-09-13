@@ -1,12 +1,11 @@
-<body>
-    
+
     <header class="only-color">
         <div class="sticky-wrapper">
             <div class="sticky-menu">
                 <div class="grid-row clear-fix">
                     <!-- logo -->
                     <a href="index.html" class="logo">
-                        <img src="img/logo.png"  data-at2x="img/logo@2x.png" alt>
+                        <img src="{{ asset('img/logo.png') }}"  data-at2x="img/logo@2x.png" alt>
                         <h1>sosPoly</h1>
                     </a>
                     <!-- / logo -->
@@ -63,12 +62,22 @@
                                 </ul>
                                 <!-- / sub menu -->
                             </li>
+                            @yield('nav-bar')
                             @if(!auth()->check())
                             <li>
                                 <a href="{{route('student.login')}}">Sign In</a>
                             </li>
+                            @else
+                                <li><a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();"><i class="ti-power-off m-r-5"></i> Logout</a>
+                                </li>
+
+                                <form id="logout-form" action="{{ route('logout') }}"    method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             @endif
-                            @yield('nav-bar')
+                            
                             <!-- /menus -->
                         </ul>
                     </nav>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Modules\Admin\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -8,11 +8,6 @@ use Auth;
 
 class AdminLoginController extends Controller
 {
-    public function __construct()
-    {
-      $this->middleware('guest:admin', ['except' => ['logout']]);
-    }
-
     public function showLoginForm()
     {
       return view('admin::auth.login');
@@ -39,6 +34,6 @@ class AdminLoginController extends Controller
     public function logout()
     {
         Auth::guard('admin')->logout();
-        return redirect('/');
+        return redirect('/admin/login');
     }
 }

@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Module Admin</title>
+@extends('layouts.app')
 
-       {{-- Laravel Mix - CSS File --}}
-       {{-- <link rel="stylesheet" href="{{ mix('css/admin.css') }}"> --}}
+@section('nav-bar')
+   @include('include.menu.admin.menu')
+@endsection
 
-    </head>
-    <body>
-        @yield('content')
+@section('page-content')
 
-        {{-- Laravel Mix - JS File --}}
-        {{-- <script src="{{ mix('js/admin.js') }}"></script> --}}
-    </body>
-</html>
+@endsection

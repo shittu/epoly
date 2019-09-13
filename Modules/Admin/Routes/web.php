@@ -14,7 +14,17 @@
 Route::prefix('admin')->group(function() {
   Route::get('/', 'AdminController@verify')->name('admin');
   Route::get('/dashboard', 'AdminController@index')->name('admin.dashboard');
-  Route::get('/login', 'Auth\AdminLoginController@login')->name('admin.auth.login');
-  Route::post('/login', 'Auth\AdminLoginController@loginAdmin')->name('admin.login');
+  Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.auth.login');
+  Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login');
   Route::post('logout', 'Auth\AdminLoginController@logout')->name('admin.auth.logout');
+  //college route group
+  Route::prefix('college')
+    ->namespace('School')
+    ->name('admin.college.')
+    ->group(function() {
+  	Route::get('/', 'CollegeController@index')->name('index');
+  	Route::get('/create', 'CollegeController@create')->name('create');
+  	Route::post('/register', 'CollegeController@register')->name('register');
+  	Route::post('/update', 'CollegeController@update')->name('update');
+  });
 });

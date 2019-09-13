@@ -1,68 +1,50 @@
-@extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+@extends('layouts.minimal')
+@section('title')
+    Sokoto state poly admin lonin page
+@endsection
+@section('page-content')
+    <br><br>
+    <section class="">
+        <div class="grid-row">
+            <div class="login-block">
+                <div class="logo">
+                    <img src="{{asset('img/logo.png')}}">
+                    <h2>Admin Login</h2>
                 </div>
+                <form class="login-form" action="{{route('admin.login')}}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <input type="text" name="email" class="login-input" placeholder="email">
+                        <span class="input-icon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="login-input" placeholder="Pasword">
+                        <span class="input-icon">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <br>
+                    <p class="">
+                        <a href="{{ route('password.request') }}">Forgot Password ?</a>
+                    </p>
+                    <button class="button-fullwidth cws-button bt-color-3 alt">{{ __('Login') }}</button>
+                    
+                    <a href="{{route('welcome')}}" class="button-fullwidth cws-button bt-color-3">Home</a>
+                </form>
             </div>
         </div>
-    </div>
-</div>
-@endsection
+    </section>
+@endsection    
