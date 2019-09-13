@@ -7,8 +7,8 @@
 <div class="col-md-4">
     <br><br>
     <div class="row">
-    	<div class="col-lg-4"></div>
-    	<div class="col-lg-4">
+    	<div class="col-md-4"></div>
+    	<div class="col-md-4">
     		<img src="{{asset('img/logo.png')}}">
     	</div>
     </div>

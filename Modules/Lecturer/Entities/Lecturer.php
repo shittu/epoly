@@ -2,9 +2,9 @@
 
 namespace Modules\Lecturer\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class Lecturer extends Model
+class Lecturer extends BaseModel
 {
-    protected $fillable = [];
+    
 }

@@ -4,6 +4,3 @@
    @include('include.menu.admin.menu')
 @endsection
 
-@section('page-content')
-
-@endsection

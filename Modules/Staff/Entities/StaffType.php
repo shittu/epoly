@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class StaffType extends Model
 {
-    protected $fillable = [];
+    public function staffs()
+    {
+    	return $this->hasMany(Staff::class);
+    }
+    
 }

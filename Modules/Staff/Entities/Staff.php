@@ -2,9 +2,23 @@
 
 namespace Modules\Staff\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class Staff extends Model
+class Staff extends BaseModel
 {
-    protected $fillable = [];
+
+    public function lecturer()
+    {
+    	return $this->hasOne('Modules\Lecturer\Entities\Lecturer');
+    }
+
+    public function staffType()
+    {
+    	return $this->belongsTo(StaffType::class);
+    }
+
+    public function profile()
+    {
+    	return $this->belongsTo(Profile::class);
+    }
 }
