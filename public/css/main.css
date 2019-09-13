@@ -249,6 +249,10 @@ h6 {
 	font-size: 14px;
 	line-height: 1.4;
 }
+
+a {
+	color: white;
+}
 .font-style-1 {
 	font-family: "Merriweather";
 	font-weight: 300;

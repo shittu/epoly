@@ -16,5 +16,14 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('rs-plugin/css/settings.css')}}" media="screen">
     <link rel="stylesheet" href="{{ asset('css/animate.css')}}">
     <!--styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    <!-- Scripts -->
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
     @yield('header')
 </head>
+<body>

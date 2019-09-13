@@ -25,6 +25,7 @@ class CreateCollegesTable extends Migration
             ->update('cascade');
             $table->string('name');
             $table->string('established_date');
+            $table->string('description');
             $table->timestamps();
         });
     }

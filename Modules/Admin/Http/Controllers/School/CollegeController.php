@@ -2,8 +2,9 @@
 
 namespace Modules\Admin\Http\Controllers\School;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\College\Entities\College;
+use Modules\College\Http\Requests\CollegeFormRequest;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 
 class CollegeController extends AdminBaseController
@@ -31,19 +32,20 @@ class CollegeController extends AdminBaseController
      * @param Request $request
      * @return Response
      */
-    public function register(Request $request)
+    public function register(CollegeFormRequest $request)
     {
         admin()->colleges()->firstOrCreate([
             'name'=>$request->name,
-            'established_date'=>$request->established_date
+            'established_date'=>$request->established_date,
+            'description'=>$request->description
         ]);
         session()->flash('message','College created successfully');
         return redirect()->route('admin.college.index');
     }
 
-    public function edit($id)
+    public function edit($college,$college_id)
     {
-        return view('admin::edit');
+        return view('admin::college.edit',['college'=>College::find($college_id)]);
     }
 
     /**
@@ -52,9 +54,17 @@ class CollegeController extends AdminBaseController
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(CollegeFormRequest $request, $college, $college_id)
     {
-        //
+        $college = College::find($college_id);
+        $college->update([
+            'name'=>$request->name,
+            'established_date'=>$request->established_date,
+            'description'=>$request->description
+        ]);
+
+        session()->flash('message','College updated successfully');
+        return redirect()->route('admin.college.index');
     }
 
     /**
@@ -62,8 +72,11 @@ class CollegeController extends AdminBaseController
      * @param int $id
      * @return Response
      */
-    public function destroy($id)
+    public function delete($college,$college_id)
     {
-        //
+        $college = College::find($college_id);
+        $college->delete();
+        session()->flash('message','College deleted successfully');
+        return redirect()->route('admin.college.index');
     }
 }

@@ -1,27 +1,5 @@
 @extends('admin::layouts.master')
 
 @section('page-content')
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<h1>administration dashboard</h1>
 @endsection

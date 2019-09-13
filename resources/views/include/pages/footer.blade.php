@@ -1,6 +1,6 @@
 <!-- footer -->
-    <footer>
-        <div class="grid-row">
+    <footer class="footer">
+        <!-- <div class="grid-row">
             <div class="grid-col-row clear-fix">
                 <section class="grid-col grid-col-4 footer-about">
                     <h2 class="corner-radius">About Us</h2>
@@ -61,34 +61,12 @@
                     </form>
                 </section>
             </div>
-        </div>
-        <div class="footer-bottom">
+        </div> -->
+        <!-- <div class="footer-bottom">
             <div class="grid-row clear-fix">
-                <div class="copyright">sosPoly<span></span> {{date('Y')}} . All Rights Reserved</div>
-                <nav class="footer-nav">
-                    <ul class="clear-fix">
-                        <li>
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li>
-                            <a href="courses-grid.html">Courses</a>
-                        </li>
-                        <li>
-                            <a href="content-elements.html">Plans</a>
-                        </li>
-                        <li>
-                            <a href="blog-default.html">News</a>
-                        </li>
-                        <li>
-                            <a href="page-about-us.html">Pages</a>
-                        </li>
-                        <li>
-                            <a href="contact-us.html">Contact</a>
-                        </li>
-                    </ul>
-                </nav>
+                <div class="">sosPoly<span></span> {{date('Y')}} . All Rights Reserved</div>
             </div>
-        </div>
+        </div> -->
     </footer>
     <!-- / footer -->
     <script src="{{asset('js/jquery.min.js')}}"></script>
@@ -119,6 +97,7 @@
     <script src="{{ asset('js/jquery.fancybox.pack.js')}}"></script>
     <script src="{{ asset('js/jquery.fancybox-media.js')}}"></script>
     <script src="{{ asset('js/retina.min.js')}}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     @yield('footer')
 </body>
 </html>
