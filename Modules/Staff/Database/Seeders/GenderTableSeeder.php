@@ -4,6 +4,7 @@ namespace Modules\Staff\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Staff\Entities\Gender;
 
 class GenderTableSeeder extends Seeder
 {
@@ -16,6 +17,9 @@ class GenderTableSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        $genders = ['Male','Female','Others'];
+        foreach ($genders as $gender) {
+            Gender::firstOrCreate(['name'=>$gender]);
+        }
     }
 }

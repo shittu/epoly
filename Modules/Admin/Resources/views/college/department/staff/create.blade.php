@@ -19,7 +19,7 @@
 		        @csrf
 		        <div class="form-group">
 		        	<label>Staff First Name</label>
-		            <input type="text" name="first_name" class="form-control" placeholder="college name">
+		            <input type="text" name="first_name" class="form-control" placeholder="staff first name">
 		            @error('first_name')
 		                <span class="invalid-feedback" role="alert">
 		                    <strong>{{ $message }}</strong>
@@ -38,7 +38,10 @@
 		        <div class="form-group">
 		        	<label>Gender</label>
 		            <select class="form-control" name="gender">
-		            	<option></option>
+		            	<option value="">Gender</option>
+		            	@foreach(admin()->genders() as $gender)
+                            <option value="{{$gender->id}}">{{$gender->name}}</option>
+		            	@endforeach
 		            </select>
 		            @error('gender')
 		                <span class="invalid-feedback" role="alert">
@@ -49,7 +52,10 @@
 		        <div class="form-group">
 		        	<label>Religion</label>
 		            <select class="form-control" name="religion">
-		            	<option></option>
+		            	<option value="">Religion</option>
+		            	@foreach(admin()->religions() as $religion)
+                            <option value="{{$religion->id}}">{{$religion->name}}</option>
+		            	@endforeach
 		            </select>
 		            @error('religion')
 		                <span class="invalid-feedback" role="alert">
@@ -60,7 +66,10 @@
 		        <div class="form-group">
 		        	<label>Tribe</label>
 		            <select class="form-control" name="tribe">
-		            	<option></option>
+		            	<option value="">Tribe</option>
+		            	@foreach(admin()->tribes() as $tribe)
+                            <option value="{{$tribe->id}}">{{$tribe->name}}</option>
+		            	@endforeach
 		            </select>
 		            @error('tribe')
 		                <span class="invalid-feedback" role="alert">
@@ -71,7 +80,16 @@
 		        <div class="form-group">
 		        	<label>Department</label>
 		            <select class="form-control" name="department">
-		            	<option></option>
+		            	<option value="">Department</option>
+		            	@foreach(admin()->colleges as $college)
+		            	    <optgroup label="{{$colle->name}}">
+		            	    	@foreach($collage->departments as $department)
+		                            <option value="{{$department->id}}">
+		                            	{{$department->name}}
+		                            </option>
+				            	@endforeach
+		            	    </optgroup>
+		            	@endforeach
 		            </select>
 		            @error('department')
 		                <span class="invalid-feedback" role="alert">
@@ -82,9 +100,14 @@
 		        <div class="form-group">
 		        	<label>Staff Category</label>
 		            <select class="form-control" name="category">
-		            	<option></option>
+		            	<option value="">Category</option>
+		            	@foreach(admin()->staffTypes() as $staff)
+                            <option value="{{$staff->id}}">
+                            	{{$staff->name}}
+                            </option>
+		            	@endforeach
 		            </select>
-		            @error('department')
+		            @error('category')
 		                <span class="invalid-feedback" role="alert">
 		                    <strong>{{ $message }}</strong>
 		                </span>
@@ -101,7 +124,7 @@
 		        </div>
 		        <div class="form-group">
 		        	<label>Staff Phone Number</label>
-		            <input type="text" name="phone" class="form-control" placeholder="college name">
+		            <input type="text" name="phone" class="form-control" placeholder="staff phone number">
 		            @error('phone')
 		                <span class="invalid-feedback" role="alert">
 		                    <strong>{{ $message }}</strong>
@@ -119,7 +142,7 @@
 		        </div>
 		        <div class="form-group">
 		        	<label>Home Address</label>
-		            <textarea rows="3" name="address" class="form-control"></textarea>
+		            <textarea rows="3" name="address" class="form-control" placeholder="staff home address"></textarea>
 		        </div>
 		        <button class="button-fullwidth cws-button bt-color-3">Register</button>
 		    </form><br><br>

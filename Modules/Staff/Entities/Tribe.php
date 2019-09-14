@@ -2,9 +2,12 @@
 
 namespace Modules\Staff\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class Tribe extends Model
+class Tribe extends BaseModel
 {
-    protected $fillable = [];
+    public function profiles()
+    {
+    	return $this->hasMany(Profile::class);
+    }
 }

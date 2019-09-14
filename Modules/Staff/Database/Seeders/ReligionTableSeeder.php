@@ -4,6 +4,7 @@ namespace Modules\Staff\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Staff\Entities\Religion;
 
 class ReligionTableSeeder extends Seeder
 {
@@ -16,6 +17,9 @@ class ReligionTableSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        $religions = ['Islam','Christianity','Others'];
+        foreach ($religions as $religion) {
+            Religion::firstOrCreate(['name'=>$religion]);
+        }
     }
 }

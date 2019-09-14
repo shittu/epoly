@@ -2,13 +2,13 @@
 
 namespace Modules\Staff\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class StaffType extends Model
+class StaffType extends BaseModel
 {
-    public function staffs()
+    public function staff()
     {
-    	return $this->hasMany(Staff::class);
+    	return $this->belongsTo(Staff::class);
     }
-    
+
 }

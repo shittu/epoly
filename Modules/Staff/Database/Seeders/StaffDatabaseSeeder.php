@@ -15,7 +15,9 @@ class StaffDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
-        // $this->call("OthersTableSeeder");
+        $this->call(GenderTableSeeder::class);
+        $this->call(ReligionTableSeeder::class);
+        $this->call(StaffTypeTableSeeder::class);
+        $this->call(TribeTableSeeder::class);
     }
 }
