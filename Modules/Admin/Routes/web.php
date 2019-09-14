@@ -39,7 +39,7 @@ Route::prefix('admin')->group(function() {
 		  	Route::get('/create', 'DepartmentController@create')->name('create');
 		  	Route::post('/register', 'DepartmentController@register')->name('register');
 		  	Route::post('/{department}/{department_id}/update', 'DepartmentController@update')->name('update');
-		  	Route::get('/{department}/{department_id}/show', 'DepartmentController@edit')->name('edit');
+		  	Route::get('/{department}/{department_id}/edit', 'DepartmentController@edit')->name('edit');
 		  	Route::get('/{department}/{department_id}/delete', 'DepartmentController@delete')->name('delete');
 		    
 
@@ -51,9 +51,12 @@ Route::prefix('admin')->group(function() {
 			  	Route::get('/', 'StaffController@index')->name('index');
 			  	Route::get('/create', 'StaffController@create')->name('create');
 			  	Route::post('/register', 'StaffController@register')->name('register');
+			  	Route::post('/register', 'StaffController@search')->name('search');
 			  	Route::post('/{staff}/{staff_id}/update', 'StaffController@update')->name('update');
-			  	Route::get('/{staff}/{staff_id}/show', 'StaffController@edit')->name('edit');
-			  	Route::get('/{staff}/{staff_id}/delete', 'StaffController@delete')->name('delete');
+			  	Route::get('/{staff_id}/edit', 'StaffController@edit')->name('edit');
+			  	Route::get('/{staff_id}/delete', 'StaffController@delete')->name('delete');
+			  	Route::get('/{staff_id}/show', 'StaffController@show')->name('show');
+			  	Route::get('/staffs', 'StaffController@staff')->name('staff');
 		    }); 
 	    });
 	});

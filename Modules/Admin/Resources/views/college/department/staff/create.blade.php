@@ -1,6 +1,6 @@
 @extends('admin::layouts.master')
 @section('title')
-    admin create college page
+    staff registration page
 @endsection
 @section('page-content')
 
@@ -82,8 +82,8 @@
 		            <select class="form-control" name="department">
 		            	<option value="">Department</option>
 		            	@foreach(admin()->colleges as $college)
-		            	    <optgroup label="{{$colle->name}}">
-		            	    	@foreach($collage->departments as $department)
+		            	    <optgroup label="{{$college->name}}">
+		            	    	@foreach($college->departments as $department)
 		                            <option value="{{$department->id}}">
 		                            	{{$department->name}}
 		                            </option>

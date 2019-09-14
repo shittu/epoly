@@ -19,6 +19,11 @@ class Staff extends BaseModel
 
     public function profile()
     {
-    	return $this->belongsTo(Profile::class);
+    	return $this->hasOne(Profile::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo('Modules\Department\Entities\Department');
     }
 }

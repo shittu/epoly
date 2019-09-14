@@ -17,7 +17,7 @@
         @csrf
         <div class="form-group">
         	<label>Department Name</label>
-            <input type="text" name="name" class="form-control" placeholder="college name">
+            <input type="text" name="name" class="form-control" placeholder="department name">
             @error('name')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

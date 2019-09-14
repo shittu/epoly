@@ -20,4 +20,15 @@ class Profile extends BaseModel
     {
     	return $this->belongsTo(Staff::class);
     }
+
+    public function tribe()
+    {
+        return $this->belongsTo(Tribe::class);
+    }
+
+    public function religion()
+    {
+        return $this->belongsTo(Religion::class);
+    }
+
 }

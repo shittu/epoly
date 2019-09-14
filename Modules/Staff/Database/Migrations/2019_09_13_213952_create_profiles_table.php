@@ -20,7 +20,7 @@ class CreateProfilesTable extends Migration
             ->nullable()
             ->foreign()
             ->references('id')
-            ->on('staffs')
+            ->on('staff')
             ->delete('restrict')
             ->update('cascade');
             $table->integer('gender_id')

@@ -4,7 +4,12 @@ namespace Modules\Admin\Http\Controllers\College\Department\Staff;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Staff\Entities\Staff;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Hash;
+use Modules\Staff\Entities\StaffType;
+use Modules\College\Entities\College;
+use Modules\Department\Entities\Department;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 
 class StaffController extends AdminBaseController
@@ -32,9 +37,30 @@ class StaffController extends AdminBaseController
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function register(Request $request)
     {
-        //
+        $data = $request->all();
+        $staff_type = StaffType::find($data['category']);
+        $staff = $staff_type->staffs()->create([
+           'first_name'=>$data['first_name'],
+           'last_name'=>$data['last_name'],
+           'phone'=>$data['phone'],
+           'email'=>$data['email'],
+           'staffID'=>$data['staffID'],
+           'password'=>Hash::make($data['staffID']),
+           'department_id' => $data['department']
+        ]);
+
+        $staff->profile()->create([
+            'gender_id' => $data['gender'],
+            'religion_id' => $data['religion'],
+            'tribe_id' => $data['tribe'],
+            'address' => $data['address'],
+            'biography' => 'staff biography',
+        ]);
+
+        session()->flash('message','Congratulation the new staff has been register successfully the staff can login and update his documents and other information using '.$data['email'].' as email and '.$data['staffID'].' as password ');
+        return redirect()->route('admin.college.department.staff.show',[$staff->id]);
     }
 
     /**
@@ -63,14 +89,69 @@ class StaffController extends AdminBaseController
      * @param int $id
      * @return Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        
     }
 
+    public function show($staff_id)
+    {
+        return view('admin::college.department.staff.show',['staff'=>Staff::find($staff_id)]);
+    }
 
+    public function search(Request $request)
+    {
+        $flag = null;
+        $staffs = [];
+        if($request->college){
+            $flag = 'college';
+        }
+        if($request->department){
+            $flag = 'department';
+        }
+        if($flag){
+            switch ($flag) {
+                case 'college':
+                    $college = College::find($request->college);
+                    
+                    foreach ($college->departments as $department) {
+                        foreach ($department->staffs as $staff) {
+                            $staffs[] = $staff;
+                        }
+                    }
+                    $message = 'found in '.$college->name.' College';
+                    break;
+                default:
+                    $department = Department::find($request->department);
+                    foreach ($department->staffs as $staff) {
+                        $staffs[] = $staff;
+                    }
+                    $message = 'found in '.$department->name.' Department';
+                    break;
+            }
+        }else{
+            $message = 'found in the entire school';
+            foreach (admin()->colleges as $college) {
+                foreach ($college->departments as $department) {
+                    foreach ($department->staffs as $staff) {
+                        $staffs[] = $staff;
+                    }
+                }
+            }
+        }
+        $result = 'Staff';
+        if(count($staffs) > 1){
+            $result = 'Staffs';
+        }
+        session()->flash('message',count($staffs).' '.$result.' '.$message);
+        session(['staffs'=>$staffs]);
+        return redirect()->route('admin.college.department.staff.staff');
+    }
 
-
+    public function staff()
+    {
+        return view('admin::college.department.staff.staff');
+    }
     function import(Request $request)
     {
      $this->validate($request, [
