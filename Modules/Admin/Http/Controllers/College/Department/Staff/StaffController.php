@@ -79,9 +79,31 @@ class StaffController extends AdminBaseController
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $staff_id)
     {
-        //
+        $staff = Staff::find($staff_id);
+        $data = $request->all();
+        $staff->update([
+            'first_name'=>$data['first_name'],
+            'last_name'=>$data['last_name'],
+            'phone'=>$data['phone'],
+            'email'=>$data['email'],
+            'staffID'=>$data['staffID'],
+            'password'=>Hash::make($data['staffID']),
+            'department_id' => $data['department']
+        ]);
+
+        $staff->profile()->update([
+            'gender_id' => $data['gender'],
+            'religion_id' => $data['religion'],
+            'tribe_id' => $data['tribe'],
+            'address' => $data['address'],
+            'biography' => 'staff biography',
+        ]);
+
+        session()->flash('message','Congratulation the staff information is updated successfully the staff can login and update his documents and other information using '.$data['email'].' as email and '.$data['staffID'].' as password ');
+        return redirect()->route('admin.college.department.staff.show',[$staff->id]);
+
     }
 
     /**
@@ -89,9 +111,24 @@ class StaffController extends AdminBaseController
      * @param int $id
      * @return Response
      */
-    public function delete($id)
+    public function delete($staff_id)
     {
-        
+        $errors = [];
+        $staff = Staff::find($staff_id);
+        if($staff->lecturer){
+            $errors[] = 'Action denied because staff is lecturer you have to delete his lecturer record';
+        }
+        if($staff->directer){
+            $errors[] = 'Action denied because staff is directer you have to delete his directer record';
+        }
+        if(empty($errors)){
+            $staff->profile->delete();
+            $staff->delete();
+            session()->flash('message','Congratulation staff is deleted successfully');
+        }else{
+            session()->flash('error',$errors);
+        }
+        return back();
     }
 
     public function show($staff_id)
