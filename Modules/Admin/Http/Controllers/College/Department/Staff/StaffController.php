@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Modules\Staff\Entities\StaffType;
 use Modules\College\Entities\College;
 use Modules\Department\Entities\Department;
+use Modules\Staff\Http\Requests\NewStaffFormRequest
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 
 class StaffController extends AdminBaseController
@@ -37,7 +38,7 @@ class StaffController extends AdminBaseController
      * @param Request $request
      * @return Response
      */
-    public function register(Request $request)
+    public function register(NewStaffFormRequest $request)
     {
         $data = $request->all();
         $staff_type = StaffType::find($data['category']);
@@ -79,7 +80,7 @@ class StaffController extends AdminBaseController
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $staff_id)
+    public function update(NewStaffFormRequest $request, $staff_id)
     {
         $staff = Staff::find($staff_id);
         $data = $request->all();
@@ -115,7 +116,6 @@ class StaffController extends AdminBaseController
     {
         $errors = [];
         $staff = Staff::find($staff_id);
-        dd($staff);
         if($staff->lecturer){
             $errors[] = 'Action denied because staff is lecturer you have to delete his lecturer record';
         }
