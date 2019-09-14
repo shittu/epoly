@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Modules\Staff\Entities\StaffType;
 use Modules\College\Entities\College;
 use Modules\Department\Entities\Department;
-use Modules\Staff\Http\Requests\NewStaffFormRequest
+use Modules\Staff\Http\Requests\NewStaffFormRequest;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 
 class StaffController extends AdminBaseController
@@ -123,7 +123,13 @@ class StaffController extends AdminBaseController
             $errors[] = 'Action denied because staff is directer you have to delete his directer record';
         }
         if(empty($errors)){
-            unset(session('staffs')[$staff]);
+            $staffs = [];
+            foreach (session('staffs') as $staff_found) {
+                if($staff_found->id != $staff->id){
+                    $staffs[] = $staff_found;
+                }
+            }
+            session(['staffs'=>$staffs]);
             $staff->profile->delete();
             $staff->delete();
             session()->flash('message','Congratulation staff is deleted successfully');

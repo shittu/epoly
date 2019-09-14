@@ -56,7 +56,7 @@ Route::prefix('admin')->group(function() {
 			  	Route::get('/{staff_id}/edit-staff', 'StaffController@edit')->name('edit');
 			  	Route::get('/{staff_id}/delete-staff', 'StaffController@delete')->name('delete');
 			  	Route::get('/{staff_id}/show-staff', 'StaffController@show')->name('show');
-			  	Route::get('/staffs', 'StaffController@staff')->name('staff');
+			  	Route::get('/staff-found', 'StaffController@staff')->name('staff');
 		    }); 
 	    });
 	});
