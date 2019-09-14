@@ -24,11 +24,11 @@ Route::prefix('admin')->group(function() {
     ->name('admin.college.')
     ->group(function() {
   	Route::get('/', 'CollegeController@index')->name('index');
-  	Route::get('/create', 'CollegeController@create')->name('create');
-  	Route::post('/register', 'CollegeController@register')->name('register');
-  	Route::post('/{college}/{college_id}/update', 'CollegeController@update')->name('update');
-  	Route::get('/{college}/{college_id}/show', 'CollegeController@edit')->name('edit');
-  	Route::get('/{college}/{college_id}/delete', 'CollegeController@delete')->name('delete');
+  	Route::get('/create-college', 'CollegeController@create')->name('create');
+  	Route::post('/register-college', 'CollegeController@register')->name('register');
+  	Route::post('/{college}/{college_id}/update-college', 'CollegeController@update')->name('update');
+  	Route::get('/{college}/{college_id}/show-college', 'CollegeController@edit')->name('edit');
+  	Route::get('/{college}/{college_id}/delete-college', 'CollegeController@delete')->name('delete');
 
 	  	//department route group
 		Route::prefix('department')
@@ -36,11 +36,11 @@ Route::prefix('admin')->group(function() {
 		    ->name('department.')
 		    ->group(function() {
 		  	Route::get('/', 'DepartmentController@index')->name('index');
-		  	Route::get('/create', 'DepartmentController@create')->name('create');
-		  	Route::post('/register', 'DepartmentController@register')->name('register');
-		  	Route::post('/{department}/{department_id}/update', 'DepartmentController@update')->name('update');
-		  	Route::get('/{department}/{department_id}/edit', 'DepartmentController@edit')->name('edit');
-		  	Route::get('/{department}/{department_id}/delete', 'DepartmentController@delete')->name('delete');
+		  	Route::get('/create-department', 'DepartmentController@create')->name('create');
+		  	Route::post('/register-department', 'DepartmentController@register')->name('register');
+		  	Route::post('/{department}/{department_id}/update-department', 'DepartmentController@update')->name('update');
+		  	Route::get('/{department}/{department_id}/edit-department', 'DepartmentController@edit')->name('edit');
+		  	Route::get('/{department}/{department_id}/delete-department', 'DepartmentController@delete')->name('delete');
 		    
 
 		    //staff route group
@@ -49,13 +49,13 @@ Route::prefix('admin')->group(function() {
 			    ->name('staff.')
 			    ->group(function() {
 			  	Route::get('/', 'StaffController@index')->name('index');
-			  	Route::get('/create', 'StaffController@create')->name('create');
-			  	Route::post('/register', 'StaffController@register')->name('register');
-			  	Route::post('/register', 'StaffController@search')->name('search');
-			  	Route::post('/{staff}/{staff_id}/update', 'StaffController@update')->name('update');
-			  	Route::get('/{staff_id}/edit', 'StaffController@edit')->name('edit');
-			  	Route::get('/{staff_id}/delete', 'StaffController@delete')->name('delete');
-			  	Route::get('/{staff_id}/show', 'StaffController@show')->name('show');
+			  	Route::get('/create-staff', 'StaffController@create')->name('create');
+			  	Route::post('/register-staff', 'StaffController@register')->name('register');
+			  	Route::post('/search-staff', 'StaffController@search')->name('search');
+			  	Route::post('/{staff_id}/update-staff', 'StaffController@update')->name('update');
+			  	Route::get('/{staff_id}/edit-staff', 'StaffController@edit')->name('edit');
+			  	Route::get('/{staff_id}/delete-staff', 'StaffController@delete')->name('delete');
+			  	Route::get('/{staff_id}/show-staff', 'StaffController@show')->name('show');
 			  	Route::get('/staffs', 'StaffController@staff')->name('staff');
 		    }); 
 	    });

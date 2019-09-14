@@ -68,9 +68,9 @@ class StaffController extends AdminBaseController
      * @param int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($staff_id)
     {
-        return view('admin::edit');
+        return view('admin::college.department.staff.edit',['staff'=>Staff::find($staff_id)]);
     }
 
     /**
