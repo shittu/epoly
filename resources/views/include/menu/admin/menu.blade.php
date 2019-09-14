@@ -8,7 +8,13 @@
     </ul>
 </li>
 <li>
-    <a href="#">Directors</a>
+    <a href="#">Departments</a>
+    <!-- sub menu -->
+    <ul>
+        <li><a href="{{route('admin.college.department.create')}}">Register Department</a></li>
+        <li><a href="#">Upload Staffs</a></li>
+    </ul>
+    <!-- / sub menu -->
 </li>
 <li>
     <a href="#">H.O.Ds</a>
@@ -17,8 +23,8 @@
     <a href="#">Staffs</a>
     <!-- sub menu -->
     <ul>
-        <li><a href="#">Academics</a></li>
-        <li><a href="#">Non Academics</a></li>
+        <li><a href="#">Register Staff</a></li>
+        <li><a href="#">Upload Staffs</a></li>
     </ul>
     <!-- / sub menu -->
 </li>

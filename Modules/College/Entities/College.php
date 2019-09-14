@@ -10,4 +10,9 @@ class College extends BaseModel
     {
     	return $this->belongsTo('Modules\Admin\Entities\Admin');
     }
+
+    public function departments()
+    {
+    	return $this->hasMany('Modules\Department\Entities\Department');
+    }
 }

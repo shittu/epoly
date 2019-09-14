@@ -15,7 +15,7 @@ class CreateTribesTable extends Migration
     {
         Schema::create('tribes', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->string('name');
             $table->timestamps();
         });
     }

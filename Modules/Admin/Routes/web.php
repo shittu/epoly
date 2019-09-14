@@ -20,7 +20,7 @@ Route::prefix('admin')->group(function() {
   
   //college route group
   Route::prefix('college')
-    ->namespace('School')
+    ->namespace('College')
     ->name('admin.college.')
     ->group(function() {
   	Route::get('/', 'CollegeController@index')->name('index');
@@ -29,6 +29,21 @@ Route::prefix('admin')->group(function() {
   	Route::post('/{college}/{college_id}/update', 'CollegeController@update')->name('update');
   	Route::get('/{college}/{college_id}/show', 'CollegeController@edit')->name('edit');
   	Route::get('/{college}/{college_id}/delete', 'CollegeController@delete')->name('delete');
-  });
+
+  	//staff route group
+	Route::prefix('department')
+	    ->namespace('Department')
+	    ->name('department.')
+	    ->group(function() {
+	  	Route::get('/', 'DepartmentController@index')->name('index');
+	  	Route::get('/create', 'DepartmentController@create')->name('create');
+	  	Route::post('/register', 'DepartmentController@register')->name('register');
+	  	Route::post('/{department}/{department_id}/update', 'DepartmentController@update')->name('update');
+	  	Route::get('/{department}/{department_id}/show', 'DepartmentController@edit')->name('edit');
+	  	Route::get('/{department}/{department_id}/delete', 'DepartmentController@delete')->name('delete');
+	    }); 
+    });
+
+   
     
 });

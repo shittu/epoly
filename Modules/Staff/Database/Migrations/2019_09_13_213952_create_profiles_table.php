@@ -15,7 +15,39 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->integer('staff_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('staffs')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('gender_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('genders')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('religion_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('religions')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('tribe_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('tribes')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->text('biography',50000);
             $table->timestamps();
         });
     }

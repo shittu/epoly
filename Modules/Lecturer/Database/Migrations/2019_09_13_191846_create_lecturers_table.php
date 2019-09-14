@@ -15,7 +15,16 @@ class CreateLecturersTable extends Migration
     {
         Schema::create('lecturers', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->integer('staff_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('staffs')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->string('from');
+            $table->string('to')->nullable();
             $table->timestamps();
         });
     }

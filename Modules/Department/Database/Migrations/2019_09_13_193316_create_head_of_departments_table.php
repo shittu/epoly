@@ -15,7 +15,24 @@ class CreateHeadOfDepartmentsTable extends Migration
     {
         Schema::create('head_of_departments', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->integer('department_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('departments')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('lecturer_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('lecturers')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->string('from');
+            $table->string('to')->nullable();
             $table->timestamps();
         });
     }

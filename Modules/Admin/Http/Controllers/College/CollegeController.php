@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Admin\Http\Controllers\School;
+namespace Modules\Admin\Http\Controllers\College;
 
 use Illuminate\Http\Response;
 use Modules\College\Entities\College;
@@ -75,8 +75,13 @@ class CollegeController extends AdminBaseController
     public function delete($college,$college_id)
     {
         $college = College::find($college_id);
-        $college->delete();
-        session()->flash('message','College deleted successfully');
+        if($college->departments){
+            session()->flash('error',['Sorry you cannot delete this college because there are other departments references this college for you to delete it you have to delete all other departments under it']);
+        }else{
+            $college->delete();
+            session()->flash('message','College deleted successfully');
+        }
+        
         return redirect()->route('admin.college.index');
     }
 }

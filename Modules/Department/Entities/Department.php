@@ -2,9 +2,12 @@
 
 namespace Modules\Department\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class Department extends Model
+class Department extends BaseModel
 {
-    protected $fillable = [];
+    public function college()
+    {
+    	return $this->belongsTo('Modules\College\Entities\College');
+    }
 }

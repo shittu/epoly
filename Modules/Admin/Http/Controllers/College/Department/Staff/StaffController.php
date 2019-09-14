@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Admin\Http\Controllers\Department;
+namespace Modules\Admin\Http\Controllers\college\department\Staff;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
