@@ -85,6 +85,7 @@ class DepartmentController extends AdminBaseController
             session()->flash('error','[Sorry you can not delete this department at moment be cause there are staffs under it you have to delete them first]');
         }else{
             $department->delete();
+
             session()->flash('message','Department deleted successfully');
         }
         

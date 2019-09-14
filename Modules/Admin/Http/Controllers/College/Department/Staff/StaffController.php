@@ -1,12 +1,13 @@
 <?php
 
-namespace Modules\Admin\Http\Controllers\college\department\Staff;
+namespace Modules\Admin\Http\Controllers\College\Department\Staff;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 
-class StaffController extends Controller
+class StaffController extends AdminBaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class StaffController extends Controller
      */
     public function index()
     {
-        return view('admin::index');
+        return view('admin::college.department.staff.index');
     }
 
     /**
@@ -23,7 +24,7 @@ class StaffController extends Controller
      */
     public function create()
     {
-        return view('admin::create');
+        return view('admin::college.department.staff.create');
     }
 
     /**
@@ -34,16 +35,6 @@ class StaffController extends Controller
     public function store(Request $request)
     {
         //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('admin::show');
     }
 
     /**
@@ -75,5 +66,43 @@ class StaffController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+
+
+    function import(Request $request)
+    {
+     $this->validate($request, [
+      'select_file'  => 'required|mimes:xls,xlsx'
+     ]);
+
+     $path = $request->file('select_file')->getRealPath();
+
+     $data = Excel::load($path)->get();
+
+     if($data->count() > 0)
+     {
+      foreach($data->toArray() as $key => $value)
+      {
+       foreach($value as $row)
+       {
+        $insert_data[] = array(
+         'CustomerName'  => $row['customer_name'],
+         'Gender'   => $row['gender'],
+         'Address'   => $row['address'],
+         'City'    => $row['city'],
+         'PostalCode'  => $row['postal_code'],
+         'Country'   => $row['country']
+        );
+       }
+      }
+
+      if(!empty($insert_data))
+      {
+       DB::table('tbl_customer')->insert($insert_data);
+      }
+     }
+     return back()->with('success', 'Excel Data Imported successfully.');
     }
 }

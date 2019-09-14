@@ -48,6 +48,8 @@ class CreateProfilesTable extends Migration
             ->delete('restrict')
             ->update('cascade');
             $table->text('biography',50000);
+            $table->text('image');
+            $table->string('address');
             $table->timestamps();
         });
     }
