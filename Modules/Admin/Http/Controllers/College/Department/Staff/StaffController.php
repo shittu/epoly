@@ -115,6 +115,7 @@ class StaffController extends AdminBaseController
     {
         $errors = [];
         $staff = Staff::find($staff_id);
+        dd($staff);
         if($staff->lecturer){
             $errors[] = 'Action denied because staff is lecturer you have to delete his lecturer record';
         }
@@ -122,6 +123,7 @@ class StaffController extends AdminBaseController
             $errors[] = 'Action denied because staff is directer you have to delete his directer record';
         }
         if(empty($errors)){
+            unset(session('staffs')[$staff]);
             $staff->profile->delete();
             $staff->delete();
             session()->flash('message','Congratulation staff is deleted successfully');

@@ -29,7 +29,7 @@
 	     			<td>{{$staff->staffType->name}}</td>
 	     			<td>
 	     				<button class="btn btn-primary"><a href="{{route('admin.college.department.staff.show',['staff_id'=>$staff->id])}}" style="color: white">View</a></i></button>
-	     				<button class="btn btn-danger" onclick="confirm('Are you sure you want to delete this staff')">Delete</i></button>
+	     				<button class="btn btn-danger" onclick="confirm('Are you sure you want to delete this staff')"><a href="{{route('admin.college.department.staff.delete',[$staff->id])}}" style="color: white">Delete</a> </i></button>
 	     				<button class="btn btn-info"><a href="{{route('admin.college.department.staff.edit',['staff_id'=>$staff->id])}}" style="color: white">Edit</a></i></button>
 	     			</td>
 	     		</tr>
