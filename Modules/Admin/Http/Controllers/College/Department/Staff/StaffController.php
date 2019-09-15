@@ -195,7 +195,10 @@ class StaffController extends AdminBaseController
 
     public function staff()
     {
-        return view('admin::college.department.staff.staff');
+        if(!session('staffs')){
+            session(['staff'=>[]]);
+        }
+        return view('admin::college.department.staff.staff');   
     }
     function import(Request $request)
     {
