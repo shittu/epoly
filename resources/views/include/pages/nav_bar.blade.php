@@ -55,10 +55,11 @@
                             </li>
                             @endif
                             <li>
-                                <a href="events-single-item.html">Events</a>
+                                <a href="events-single-item.html">Calendar</a>
                                 <!-- sub menu -->
                                 <ul>
-                                    <li><a href="">Events Calendar</a></li>
+                                    <li><a href="">Semester</a></li>
+                                    <li><a href="">{{date('Y')}}/{{date('Y')+1}} Session</a></li>
                                 </ul>
                                 <!-- / sub menu -->
                             </li>

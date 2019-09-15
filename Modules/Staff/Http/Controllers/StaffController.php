@@ -5,9 +5,14 @@ namespace Modules\Staff\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Core\Http\Controllers\Staff\StaffBaseController;
 
-class StaffController extends Controller
+class StaffController extends StaffBaseController
 {
+    public function verify()
+    {
+        return redirect()->route('staff.dashboard');
+    }
     /**
      * Display a listing of the resource.
      * @return Response

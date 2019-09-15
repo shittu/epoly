@@ -56,10 +56,15 @@ class Handler extends ExceptionHandler
         $guard = $exception->guards();
 
         switch ($guard[0]) {
+            
             case 'admin':
                 $login = 'admin.auth.login';
             break;
-                
+
+            case 'staff':
+                $login = 'staff.auth.login';
+            break;
+
             default:
                 $login = 'student.login';
             break;

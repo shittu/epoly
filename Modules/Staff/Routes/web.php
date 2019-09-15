@@ -11,6 +11,14 @@
 |
 */
 
-Route::prefix('staff')->group(function() {
-    Route::get('/', 'StaffController@index');
+Route::prefix('staff')
+->name('staff.')
+->prefix('staff')
+->group(function() {
+	//authentication routes
+    Route::get('/', 'StaffController@verify');
+	Route::get('/dashboard', 'StaffController@index')->name('dashboard');
+	Route::get('/login', 'Auth\StaffLoginController@showLoginForm')->name('auth.login');
+	Route::post('/login', 'Auth\StaffLoginController@login')->name('login');
+	Route::post('logout', 'Auth\StaffLoginController@logout')->name('auth.logout');
 });

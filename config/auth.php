@@ -57,6 +57,17 @@ return [
             'provider' => 'admins',
             'hash' => false,
         ],
+
+        'staff' => [
+            'driver' => 'session',
+            'provider' => 'staff',
+        ],
+
+        'staff_api' => [
+            'driver' => 'token',
+            'provider' => 'staff',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -84,6 +95,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => Modules\Admin\Entities\Admin::class,
+        ],
+
+        'staff' => [
+            'driver' => 'eloquent',
+            'model' => Modules\Staff\Entities\Staff::class,
         ],
 
         // 'users' => [
@@ -115,6 +131,11 @@ return [
         ],
         'admins' => [
             'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'staff' => [
+            'provider' => 'staff',
             'table' => 'password_resets',
             'expire' => 60,
         ],

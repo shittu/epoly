@@ -1,6 +1,6 @@
 @extends('staff::layouts.master')
 
-@section('content')
+@section('page-content')
     <h1>Hello World</h1>
 
     <p>

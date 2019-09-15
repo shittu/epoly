@@ -1,6 +1,7 @@
 <?php
 
 namespace Modules\Admin\Entities;
+
 use Modules\Staff\Entities\Tribe;
 use Modules\Staff\Entities\Gender;
 use Modules\Staff\Entities\Religion;
@@ -57,8 +58,14 @@ class Admin extends Authenticatable
     {
         return Religion::all();
     }
+
     public function tribes()
     {
         return Tribe::all();
+    }
+
+    public function staffs()
+    {
+        return $this->hasMany('Modules\Staff\Entities\Staff');
     }
 }

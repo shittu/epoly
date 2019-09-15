@@ -17,3 +17,14 @@ if (!function_exists('admin')) {
         return $admin;
     }
 }
+
+if (!function_exists('staff')) {
+    function staff()
+    {
+        $staff = null;
+        if(auth()->guard('staff')->check()){
+            $staff = auth()->guard('staff')->user();
+        }
+        return $staff;
+    }
+}
