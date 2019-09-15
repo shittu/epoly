@@ -10,9 +10,12 @@ class Department extends BaseModel
     {
     	return $this->belongsTo('Modules\College\Entities\College');
     }
-
-    public function staffs()
+    public function staffPositions()
     {
-    	return $this->hasMany('Modules\Staff\Entities\Staff');
+    	return $this->hasMany('Modules\Staff\Entities\StaffPosition');
+    }
+    public function admin()
+    {
+    	return $this->belongsTo('Modules\Admin\Entities\Admin');
     }
 }

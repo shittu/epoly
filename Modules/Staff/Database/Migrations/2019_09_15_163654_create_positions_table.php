@@ -15,7 +15,15 @@ class CreatePositionsTable extends Migration
     {
         Schema::create('positions', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->string('name');
+            $table->integer('staff_category_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('staff_categories')
+            ->delete('restrict')
+            ->update('cascade');
             $table->timestamps();
         });
     }

@@ -43,6 +43,11 @@ class Admin extends Authenticatable
     {
         return $this->hasMany('Modules\College\Entities\College');
     }
+    
+    public function colleges()
+    {
+        return $this->hasMany('Modules\Department\Entities\Department');
+    }
 
     public function staffTypes()
     {

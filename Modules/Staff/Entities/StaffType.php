@@ -6,8 +6,8 @@ use Modules\Core\Entities\BaseModel;
 
 class StaffType extends BaseModel
 {
-    public function staffs()
+    public function staffCategory()
     {
-    	return $this->hasMany(Staff::class);
+    	return $this->belongsTo(StaffCategory::class);
     }
 }

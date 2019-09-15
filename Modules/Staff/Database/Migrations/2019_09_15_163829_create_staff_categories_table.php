@@ -15,7 +15,7 @@ class CreateStaffCategoriesTable extends Migration
     {
         Schema::create('staff_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->string('name');
             $table->timestamps();
         });
     }

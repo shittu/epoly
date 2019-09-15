@@ -41,8 +41,7 @@ class StaffController extends AdminBaseController
     public function register(NewStaffFormRequest $request)
     {
         $data = $request->all();
-        $staff_type = StaffType::find($data['category']);
-        $staff = $staff_type->staffs()->create([
+        $staff = admin()->staffs->create([
            'first_name'=>$data['first_name'],
            'last_name'=>$data['last_name'],
            'phone'=>$data['phone'],
@@ -50,6 +49,7 @@ class StaffController extends AdminBaseController
            'staffID'=>$data['staffID'],
            'password'=>Hash::make($data['staffID']),
            'department_id' => $data['department']
+           'staff_category_id' => $data['category']
         ]);
 
         $staff->profile()->create([

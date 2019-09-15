@@ -2,9 +2,17 @@
 
 namespace Modules\Staff\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class StaffCategory extends Model
+class StaffCategory extends BaseModel
 {
-    protected $fillable = [];
+    public function staffs()
+    {
+    	return $this->hasMany(Staff::class);
+    }
+
+    public function positions()
+    {
+    	return $this->hasMany(Position::class);
+    }
 }

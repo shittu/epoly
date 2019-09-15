@@ -39,6 +39,7 @@ class DepartmentController extends AdminBaseController
             'established_date'=>$request->established_date,
             'name'=>$request->name,
             'description'=>$request->description,
+            'admin_id' => admin()->id
         ]);
         session()->flash('message','Department created successfully');
         return redirect()->route('admin.college.department.index');

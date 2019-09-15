@@ -23,7 +23,7 @@ class CreateStaffTable extends Migration
             ->on('admins')
             ->delete('restrict')
             ->update('cascade');
-            $table->integer('staff_type_id')
+            $table->integer('staff_category_id')
             ->unsigned()
             ->nullable()
             ->foreign()

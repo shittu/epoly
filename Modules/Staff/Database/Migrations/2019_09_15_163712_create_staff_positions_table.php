@@ -15,7 +15,40 @@ class CreateStaffPositionsTable extends Migration
     {
         Schema::create('staff_positions', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->integer('department_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('departments')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('college_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('colleges')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('position_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('positions')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('staff_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('staff')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->string('from')
+            $table->string('to')->nullable();
             $table->timestamps();
         });
     }

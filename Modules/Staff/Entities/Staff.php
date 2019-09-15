@@ -46,9 +46,9 @@ class Staff extends Authenticatable
     {
         return $this->belongsTo('Modules\Admin\Entities\Admin');
     }
-    public function staffType()
+    public function staffCategory()
     {
-    	return $this->belongsTo(StaffType::class);
+    	return $this->belongsTo(StaffCategory::class);
     }
 
     public function profile()
