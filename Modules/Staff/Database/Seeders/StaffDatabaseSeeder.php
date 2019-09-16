@@ -18,6 +18,7 @@ class StaffDatabaseSeeder extends Seeder
         $this->call(GenderTableSeeder::class);
         $this->call(ReligionTableSeeder::class);
         $this->call(StaffCategoriesTableSeeder::class);
+        $this->call(PositionsTableSeeder::class);
         $this->call(StaffTypesTableSeeder::class);
         $this->call(TribeTableSeeder::class);
     }
