@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Leecturer\Http\Controllers\Auth;
+namespace Modules\College\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Password;
 use Auth;
 
-class LecturerResetPasswordController extends Controller
+class CollegeResetPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ class LecturerResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/staff';
+    protected $redirectTo = '/college/directer';
 
     /**
      * Create a new controller instance.
@@ -37,17 +37,17 @@ class LecturerResetPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:staff');
+        $this->middleware('guest:directer');
     }
 
     protected function guard()
     {
-      return Auth::guard('lecturer');
+      return Auth::guard('directer');
     }
 
     protected function broker()
     {
-      return Password::broker('staff');
+      return Password::broker('directer');
     }
 
     public function showResetForm(Request $request, $token = null)

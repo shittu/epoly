@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Password;
 
-class LecturerForgotPasswordController extends Controller
+class DepartmentForgotPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Lecturer\Http\Controllers\Auth;
+namespace Modules\College\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
@@ -28,7 +28,7 @@ class LecturerForgotPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:lecturer');
+        $this->middleware('guest:directer');
     }
 
     protected function broker()
@@ -38,6 +38,6 @@ class LecturerForgotPasswordController extends Controller
 
     public function showLinkRequestForm()
     {
-        return view('auth.passwords.email-lecturer');
+        return view('college::auth.passwords.email-lecturer');
     }
 }

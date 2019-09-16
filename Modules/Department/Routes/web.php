@@ -11,6 +11,19 @@
 |
 */
 
-Route::prefix('department')->group(function() {
-    Route::get('/', 'DepartmentController@index');
+Route::prefix('department')
+->name('department.')
+->group(function() {
+	//hod authentication routes
+	Route::prefix('hod')
+		->name('hod.')
+		->group(function() {
+			Route::get('/', 'DepartmentController@verify');
+			Route::get('/dashboard', 'DepartmentController@index')->name('dashboard');
+			Route::get('/login', 'Auth\DepartmentLoginController@showLoginForm')->name('auth.login');
+			Route::get('/unauthorize-staff', 'Auth\DepartmentLoginController@unauthorize')->name('auth.unauthorize');
+			Route::post('/login', 'Auth\DepartmentLoginController@login')->name('login');
+			Route::post('logout', 'Auth\DepartmentLoginController@logout')->name('auth.logout');
+		});
+    
 });

@@ -71,12 +71,12 @@ return [
 
         'lecturer' => [
             'driver' => 'session',
-            'provider' => 'staff',
+            'provider' => 'lecturers',
         ],
 
         'lecturer_api' => [
             'driver' => 'token',
-            'provider' => 'staff',
+            'provider' => 'lecturers',
             'hash' => false,
         ],
     ],
@@ -113,6 +113,11 @@ return [
             'model' => Modules\Staff\Entities\Staff::class,
         ],
 
+        'lecturers' => [
+            'driver' => 'eloquent',
+            'model' => Modules\Lecturer\Entities\Lecturer::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -147,6 +152,11 @@ return [
         ],
         'staff' => [
             'provider' => 'staff',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'lecturers' => [
+            'provider' => 'lecturers',
             'table' => 'password_resets',
             'expire' => 60,
         ],
