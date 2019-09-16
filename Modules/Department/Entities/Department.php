@@ -14,8 +14,8 @@ class Department extends BaseModel
     {
     	return $this->hasMany('Modules\Staff\Entities\StaffPosition');
     }
-    public function admin()
+    public function staffs()
     {
-    	return $this->belongsTo('Modules\Admin\Entities\Admin');
+    	return $this->hasMany('Modules\Staff\Entities\Staff');
     }
 }

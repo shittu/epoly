@@ -14,6 +14,7 @@
 	     			<th>Email</th>
 	     			<th>Phone</th>
 	     			<th>Department</th>
+	     			<th>Staff Category</th>
 	     			<th>Staff Type</th>
 	     			<th></th>
 	     		</tr>
@@ -26,7 +27,8 @@
 	     			<td>{{$staff->email}}</td>
 	     			<td>{{$staff->phone}}</td>
 	     			<td>{{$staff->department->name}}</td>
-	     			<td>{{$staff->staffType->name}}</td>
+	     			<td>{{$staff->staffCategory ? $staff->staffCategory->name : 'not updated'}}</td>
+	     			<td>{{$staff->staffType ? $staff->staffType->name : 'not updated'}}</td>
 	     			<td>
 	     				<button class="btn btn-primary"><a href="{{route('admin.college.department.staff.show',['staff_id'=>$staff->id])}}" style="color: white">View</a></i></button>
 	     				<button class="btn btn-danger" onclick="confirm('Are you sure you want to delete this staff')"><a href="{{route('admin.college.department.staff.delete',[$staff->id])}}" style="color: white">Delete</a> </i></button>

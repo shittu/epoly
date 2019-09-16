@@ -41,14 +41,14 @@ class StaffController extends AdminBaseController
     public function register(NewStaffFormRequest $request)
     {
         $data = $request->all();
-        $staff = admin()->staffs->create([
+        $staff = admin()->staffs()->create([
            'first_name'=>$data['first_name'],
            'last_name'=>$data['last_name'],
            'phone'=>$data['phone'],
            'email'=>$data['email'],
            'staffID'=>$data['staffID'],
            'password'=>Hash::make($data['staffID']),
-           'department_id' => $data['department']
+           'department_id' => $data['department'],
            'staff_category_id' => $data['category']
         ]);
 
@@ -60,8 +60,8 @@ class StaffController extends AdminBaseController
             'biography' => 'staff biography',
         ]);
 
-        session()->flash('message','Congratulation the new staff has been register successfully the staff can login and update his documents and other information using '.$data['email'].' as email and '.$data['staffID'].' as password ');
-        return redirect()->route('admin.college.department.staff.show',[$staff->id]);
+        session()->flash('message','Congratulation you have successfully completed first step of the staff registration please specify the type of staff to complete this registration and staff appointment in any');
+        return redirect()->route('admin.college.department.staff.register.complete',[$staff->id]);
     }
 
     /**
@@ -73,7 +73,10 @@ class StaffController extends AdminBaseController
     {
         return view('admin::college.department.staff.edit',['staff'=>Staff::find($staff_id)]);
     }
-
+    public function registerComplete($staff_id)
+    {
+        return view('admin::college.department.staff.complete_registration',['staff'=>Staff::find($staff_id)]);
+    }
     /**
      * Update the specified resource in storage.
      * @param Request $request
@@ -91,7 +94,9 @@ class StaffController extends AdminBaseController
             'email'=>$data['email'],
             'staffID'=>$data['staffID'],
             'password'=>Hash::make($data['staffID']),
-            'department_id' => $data['department']
+            'department_id' => $data['department'],
+            'staff_category_id' => $data['staff_category'],
+            'staff_type_id' => $data['staff_type']
         ]);
 
         $staff->profile()->update([
@@ -102,11 +107,27 @@ class StaffController extends AdminBaseController
             'biography' => 'staff biography',
         ]);
 
-        session()->flash('message','Congratulation the staff information is updated successfully the staff can login and update his documents and other information using '.$data['email'].' as email and '.$data['staffID'].' as password ');
+        session()->flash('message','Congratulation the staff information is updated successfully');
         return redirect()->route('admin.college.department.staff.show',[$staff->id]);
 
     }
+    public function registerUpdate(Request $request, $staff_id)
+    {
+        $request->validate(['staff_type'=>'required']);
+        $staff = Staff::find($staff_id);
+        $staff->update(['staff_type_id'=>$request->staff_type]);
 
+        if($request->staff_position){
+            $request->validate(['appointment-date'=>'required']);
+            $staff->staffPositions()->create([
+                'position_id'=>$request->staff_position,
+                'from'=>$request->appointment_date,
+            ]);
+        }
+        session()->flash('message','Congratulation the staff registration is comlpleted successfully the staff can login and update his documents and other information using '.$staff->email.' as email and '.$staff->staffID.' as password ');
+        return redirect()->route('admin.college.department.staff.show',[$staff->id]);
+
+    }
     /**
      * Remove the specified resource from storage.
      * @param int $id

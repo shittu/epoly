@@ -10,7 +10,10 @@ class StaffCategory extends BaseModel
     {
     	return $this->hasMany(Staff::class);
     }
-
+    public function staffTypes()
+    {
+    	return $this->hasMany(StaffType::class);
+    }
     public function positions()
     {
     	return $this->hasMany(Position::class);

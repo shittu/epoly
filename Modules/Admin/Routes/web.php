@@ -57,6 +57,8 @@ Route::prefix('admin')->group(function() {
 			  	Route::get('/{staff_id}/delete-staff', 'StaffController@delete')->name('delete');
 			  	Route::get('/{staff_id}/show-staff', 'StaffController@show')->name('show');
 			  	Route::get('/staff-found', 'StaffController@staff')->name('staff');
+			  	Route::get('/{staff_id}/register-complete', 'StaffController@registerComplete')->name('register.complete');
+			  	Route::post('/{staff_id}/register-update', 'StaffController@registerUpdate')->name('register.update');
 		    }); 
 	    });
 	});

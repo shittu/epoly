@@ -13,18 +13,21 @@ class NewStaffFormRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'gender'=>'required',
             'religion'=>'required',
             'tribe'=>'required',
             'address'=>'required',
             'first_name'=>'required|string',
             'last_name'=>'required|string',
-            'phone'=>'required|unique:staff',
-            'email'=>'required|email|unique:staff',
-            'staffID'=>'required|unique:staff',
             'department'=>'required'
         ];
+        if(!$this->has('update')){
+            $rules['phone'] = 'required|unique:staff';
+            $rules['email'] = 'required|unique:staff';
+            $rules['staffID'] = 'required|unique:staff';
+        }
+        return $rules;
     }
 
     /**

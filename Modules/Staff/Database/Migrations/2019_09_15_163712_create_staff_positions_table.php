@@ -47,7 +47,7 @@ class CreateStaffPositionsTable extends Migration
             ->on('staff')
             ->delete('restrict')
             ->update('cascade');
-            $table->string('from')
+            $table->string('from');
             $table->string('to')->nullable();
             $table->timestamps();
         });

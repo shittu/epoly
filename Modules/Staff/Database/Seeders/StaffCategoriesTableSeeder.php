@@ -4,9 +4,9 @@ namespace Modules\Staff\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Staff\Entities\StaffType;
+use Modules\Staff\Entities\StaffCategory;
 
-class StaffTypeTableSeeder extends Seeder
+class StaffCategoriesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,9 +17,9 @@ class StaffTypeTableSeeder extends Seeder
     {
         Model::unguard();
 
-        $staffs = ['Academic','Non Academic'];
-        foreach ($staffs as $staff) {
-            StaffType::firstOrCreate(['name'=>$staff]);
+        $categories = ['Academic','Non Academic'];
+        foreach ($categories as $category) {
+            StaffCategory::firstOrCreate(['name'=>$category]);
         }
     }
 }

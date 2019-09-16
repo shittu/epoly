@@ -5,7 +5,7 @@ namespace Modules\Admin\Entities;
 use Modules\Staff\Entities\Tribe;
 use Modules\Staff\Entities\Gender;
 use Modules\Staff\Entities\Religion;
-use Modules\Staff\Entities\StaffType;
+use Modules\Staff\Entities\StaffCategory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -44,14 +44,14 @@ class Admin extends Authenticatable
         return $this->hasMany('Modules\College\Entities\College');
     }
     
-    public function colleges()
+    public function departments()
     {
         return $this->hasMany('Modules\Department\Entities\Department');
     }
 
-    public function staffTypes()
+    public function staffCategories()
     {
-        return StaffType::all();
+        return StaffCategory::all();
     }
 
     public function genders()

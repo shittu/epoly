@@ -28,6 +28,14 @@ class CreateStaffTable extends Migration
             ->nullable()
             ->foreign()
             ->references('id')
+            ->on('staff_categories')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('staff_type_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
             ->on('staff_types')
             ->delete('restrict')
             ->update('cascade');

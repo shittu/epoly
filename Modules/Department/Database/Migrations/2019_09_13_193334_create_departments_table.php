@@ -15,6 +15,14 @@ class CreateDepartmentsTable extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('admin_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('admins')
+            ->delete('restrict')
+            ->update('cascade');
             $table->integer('college_id')
             ->unsigned()
             ->nullable()

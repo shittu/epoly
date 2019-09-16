@@ -17,7 +17,8 @@ class StaffDatabaseSeeder extends Seeder
         Model::unguard();
         $this->call(GenderTableSeeder::class);
         $this->call(ReligionTableSeeder::class);
-        $this->call(StaffTypeTableSeeder::class);
+        $this->call(StaffCategoriesTableSeeder::class);
+        $this->call(StaffTypesTableSeeder::class);
         $this->call(TribeTableSeeder::class);
     }
 }

@@ -19,6 +19,7 @@ class Staff extends Authenticatable
         'admin_id',
         'staffID',
         'staff_type_id',
+        'staff_category_id'
     ];
 
     /**
@@ -38,10 +39,7 @@ class Staff extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function lecturer()
-    {
-    	return $this->hasOne('Modules\Lecturer\Entities\Lecturer');
-    }
+    
     public function admin()
     {
         return $this->belongsTo('Modules\Admin\Entities\Admin');
@@ -50,7 +48,10 @@ class Staff extends Authenticatable
     {
     	return $this->belongsTo(StaffCategory::class);
     }
-
+    public function staffType()
+    {
+        return $this->belongsTo(StaffType::class);
+    }
     public function profile()
     {
     	return $this->hasOne(Profile::class);

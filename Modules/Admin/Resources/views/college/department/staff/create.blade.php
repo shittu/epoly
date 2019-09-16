@@ -101,9 +101,9 @@
 		        	<label>Staff Category</label>
 		            <select class="form-control" name="category">
 		            	<option value="">Category</option>
-		            	@foreach(admin()->staffTypes() as $staff)
-                            <option value="{{$staff->id}}">
-                            	{{$staff->name}}
+		            	@foreach(admin()->staffCategories() as $category)
+                            <option value="{{$category->id}}">
+                            	{{$category->name}}
                             </option>
 		            	@endforeach
 		            </select>

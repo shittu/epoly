@@ -18,6 +18,7 @@
 		    <br><br>
 		    <form class="login-form" action="{{route('admin.college.department.staff.update',[$staff->id])}}" method="post">
 		        @csrf
+		        <input type="hidden" name="update">
 		        <div class="form-group">
 		        	<label>Staff First Name</label>
 		            <input type="text" name="first_name" class="form-control" value="{{$staff->first_name}}">
@@ -110,15 +111,44 @@
 		        </div>
 		        <div class="form-group">
 		        	<label>Staff Category</label>
-		            <select class="form-control" name="category">
-		            	<option value="{{$staff->staffType->id}}">{{$staff->staffType->name}}</option>
-		            	@foreach(admin()->staffTypes() as $staff_type)
-		            	    @if($staff->staffType->id != $staff_type->id)
-	                            <option value="{{$staff_type->id}}">
-	                            	{{$staff_type->name}}
+		            <select class="form-control" name="staff_category">
+		            	<option value="{{$staff->staffCategory->id}}">{{$staff->staffCategory->name}}</option>
+		            	@foreach(admin()->staffCategories() as $staff_category)
+		            	    @if($staff->staffCategory->id != $staff_category->id)
+	                            <option value="{{$staff_category->id}}">
+	                            	{{$staff_category->name}}
 	                            </option>
                             @endif
 		            	@endforeach
+		            </select>
+		            @error('category')
+		                <span class="invalid-feedback" role="alert">
+		                    <strong>{{ $message }}</strong>
+		                </span>
+		            @enderror
+		        </div>
+		        <div class="form-group">
+		        	<label>Staff Type</label>
+		            <select class="form-control" name="staff_type">
+		            	<option value="{{$staff->staffType ? $staff->staffType->id : '' }}">
+		            		{{$staff->staffType ? $staff->staffType->name : ''}}
+		            	</option>
+		            	@if($staff->staffType)
+                            @foreach($staff->staffCategory->staffTypes() as $staff_type)
+			            	    @if($staff->staffType->id != $staff_type->id)
+		                            <option value="{{$staff_type->id}}">
+		                            	{{$staff_type->name}}
+		                            </option>
+	                            @endif
+			            	@endforeach
+		            	@else
+                            @foreach($staff->staffCategory->staffTypes as $staff_type)
+	                            <option value="{{$staff_type->id}}">
+	                            	{{$staff_type->name}}
+	                            </option>
+			            	@endforeach
+		            	@endif
+		            	
 		            </select>
 		            @error('category')
 		                <span class="invalid-feedback" role="alert">
