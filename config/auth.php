@@ -68,6 +68,17 @@ return [
             'provider' => 'staff',
             'hash' => false,
         ],
+
+        'lecturer' => [
+            'driver' => 'session',
+            'provider' => 'staff',
+        ],
+
+        'lecturer_api' => [
+            'driver' => 'token',
+            'provider' => 'staff',
+            'hash' => false,
+        ],
     ],
 
     /*

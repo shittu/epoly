@@ -169,7 +169,6 @@ class StaffController extends AdminBaseController
     {
         $staff = Staff::find($staff_id);
         if($staff->staffType){
-            
             return view('admin::college.department.staff.show',['staff'=>$staff]);
         }
         session()->flash('message','Sorry you cant edit or View this staff informations because his registration is on process please complete it here');

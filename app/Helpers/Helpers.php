@@ -28,3 +28,14 @@ if (!function_exists('staff')) {
         return $staff;
     }
 }
+
+if (!function_exists('lecturer')) {
+    function lecturer()
+    {
+        $lecturer = null;
+        if(auth()->guard('lecturer')->check()){
+            $lecturer = auth()->guard('lecturer')->user();
+        }
+        return $lecturer;
+    }
+}

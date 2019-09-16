@@ -11,6 +11,12 @@
 |
 */
 
-Route::prefix('lecturer')->group(function() {
-    Route::get('/', 'LecturerController@index');
+Route::prefix('lecturer')
+->name('lecturer.')
+->group(function() {
+    Route::get('/', 'LecturerController@verify')->name('verify');
+    Route::get('/dashboard', 'LecturerController@index')->name('dashboard');
+    Route::get('/login', 'Auth\LecturerLoginController@showLoginForm')->name('auth.login');
+    Route::post('/login', 'Auth\LecturerLoginController@login')->name('login');
+    Route::post('logout', 'Auth\LecturerLoginController@logout')->name('auth.logout');
 });

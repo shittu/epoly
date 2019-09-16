@@ -4,10 +4,14 @@ namespace Modules\Lecturer\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use Modules\Core\Http\Controllers\Lecturer\LecturerBaseController;
 
-class LecturerController extends Controller
+class LecturerController extends LecturerBaseController
 {
+    public function verify()
+    {
+        return redirect()->route('lecturer.dashboard');
+    }
     /**
      * Display a listing of the resource.
      * @return Response

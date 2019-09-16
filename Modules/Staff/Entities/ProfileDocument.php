@@ -2,9 +2,9 @@
 
 namespace Modules\Staff\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class ProfileDocument extends Model
+class ProfileDocument extends BaseModel
 {
     public function profile()
     {
