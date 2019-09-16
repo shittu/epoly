@@ -71,7 +71,12 @@ class StaffController extends AdminBaseController
      */
     public function edit($staff_id)
     {
-        return view('admin::college.department.staff.edit',['staff'=>Staff::find($staff_id)]);
+        $staff = Staff::find($staff_id);
+        if($staff->staffType){
+            return view('admin::college.department.staff.edit',['staff'=>$staff]);
+        }
+        session()->flash('message','Sorry you cant edit or View this staff informations because his registration is on process please complete it here');
+        return redirect()->route('admin.college.department.staff.register.complete',$staff->id);
     }
     public function registerComplete($staff_id)
     {
@@ -118,7 +123,7 @@ class StaffController extends AdminBaseController
         $staff->update(['staff_type_id'=>$request->staff_type]);
 
         if($request->staff_position){
-            $request->validate(['appointment-date'=>'required']);
+            $request->validate(['appointment_date'=>'required']);
             $staff->staffPositions()->create([
                 'position_id'=>$request->staff_position,
                 'from'=>$request->appointment_date,
@@ -162,7 +167,13 @@ class StaffController extends AdminBaseController
 
     public function show($staff_id)
     {
-        return view('admin::college.department.staff.show',['staff'=>Staff::find($staff_id)]);
+        $staff = Staff::find($staff_id);
+        if($staff->staffType){
+            
+            return view('admin::college.department.staff.show',['staff'=>$staff]);
+        }
+        session()->flash('message','Sorry you cant edit or View this staff informations because his registration is on process please complete it here');
+        return redirect()->route('admin.college.department.staff.register.complete',$staff->id);
     }
 
     public function search(Request $request)

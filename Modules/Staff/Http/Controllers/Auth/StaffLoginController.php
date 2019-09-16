@@ -30,7 +30,10 @@ class StaffLoginController extends Controller
       // if unsuccessful, then redirect back to the login with the form data
       return redirect()->back()->withInput($request->only('email', 'remember'));
     }
-
+    public function unauthorize()
+    {
+      return view('staff::auth.auth');
+    }
     public function logout()
     {
         Auth::guard('staff')->logout();

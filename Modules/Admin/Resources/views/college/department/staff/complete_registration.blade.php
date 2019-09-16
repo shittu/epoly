@@ -64,8 +64,8 @@
 			            	@endforeach
 		            	@else
 	                        @foreach($staff->staffCategory->positions as $position)
-	                            <option value="{{$staff_type->id}}">
-	                            	{{$staff_type->name}}
+	                            <option value="{{$position->id}}">
+	                            	{{$position->name}}
 	                            </option>
 			            	@endforeach
                         @endif

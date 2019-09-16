@@ -61,4 +61,9 @@ class Staff extends Authenticatable
     {
         return $this->belongsTo('Modules\Department\Entities\Department');
     }
+
+    public function staffPositions()
+    {
+        return $this->hasMany(StaffPosition::class);
+    }
 }
