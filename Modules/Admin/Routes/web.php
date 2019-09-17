@@ -24,6 +24,8 @@ Route::prefix('admin')->group(function() {
     ->name('admin.college.')
     ->group(function() {
   	Route::get('/', 'CollegeController@index')->name('index');
+  	Route::get('/department/hod/appointment/create', 'AppointmentController@createHeadOfDepartment')->name('department.appointment.create');
+  	Route::get('/directer/appointment/create', 'AppointmentController@createCollegeDirecter')->name('appointment.create');
   	Route::get('/create-college', 'CollegeController@create')->name('create');
   	Route::post('/register-college', 'CollegeController@register')->name('register');
   	Route::post('/{college}/{college_id}/update-college', 'CollegeController@update')->name('update');

@@ -35,3 +35,21 @@
     </ul>
     <!-- / sub menu -->
 </li>
+
+<li>
+    <a href="#">Appointments</a>
+    <!-- sub menu -->
+    <ul>
+        
+        <li>
+            <a href="{{route('admin.college.department.appointment.create')}}">Head Of Department</a>
+        </li>
+        <li>
+            <a href="{{route('admin.college.appointment.create')}}">College Directer</a>
+        </li>
+        <li>
+            <a href="#">Upload Staffs</a>
+        </li>
+    </ul>
+    <!-- / sub menu -->
+</li>
