@@ -60,7 +60,7 @@ class StaffController extends AdminBaseController
             'biography' => 'staff biography',
         ]);
 
-        session()->flash('message','Congratulation you have successfully completed first step of the staff registration please specify the type of staff to complete this registration and staff appointment if any');
+        session()->flash('message','Congratulation you have successfully completed first step of the staff registration please specify the type of staff to complete this registration');
         return redirect()->route('admin.college.department.staff.register.complete',[$staff->id]);
     }
 
@@ -121,12 +121,11 @@ class StaffController extends AdminBaseController
         $request->validate(['staff_type'=>'required']);
         $staff = Staff::find($staff_id);
         $staff->update(['staff_type_id'=>$request->staff_type]);
-
-        if($request->staff_position){
-            $request->validate(['appointment_date'=>'required']);
-            $staff->staffPositions()->create([
-                'position_id'=>$request->staff_position,
-                'from'=>$request->appointment_date,
+        if($staff->staffType->name == 'Lecturer'){
+            $staff->lecturer->firstOrCreate([
+                'email'=>$staff->email,
+                'password'=>$staff->password,
+                'admin_id'=>admin()->id
             ]);
         }
         session()->flash('message','Congratulation the staff registration is comlpleted successfully the staff can login and update his documents and other information using '.$staff->email.' as email and '.$staff->staffID.' as password ');

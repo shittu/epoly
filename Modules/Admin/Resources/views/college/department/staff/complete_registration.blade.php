@@ -48,43 +48,6 @@
 		                </span>
 		            @enderror
 		        </div>
-		        <div class="form-group">
-		        	<label>Staff Appointment if any</label>
-		            <select class="form-control" name="staff_position">
-		            	<option value="{{$staff->staffPosition ? $staff->staffPosition->position->id : '' }}">
-		            		{{$staff->staffPosition ? $staff->staffPosition->position->name : ''}}
-		            	</option>
-		            	@if($staff->staffPosition)
-                            @foreach($staff->staffCategory->positions as $position)
-                                @if($staff->staffPosition->position->id != $position->id)
-		                            <option value="{{$position->id}}">
-		                            	{{$position->name}}
-		                            </option>
-	                            @endif
-			            	@endforeach
-		            	@else
-	                        @foreach($staff->staffCategory->positions as $position)
-	                            <option value="{{$position->id}}">
-	                            	{{$position->name}}
-	                            </option>
-			            	@endforeach
-                        @endif
-		            </select>
-		            @error('category')
-		                <span class="invalid-feedback" role="alert">
-		                    <strong>{{ $message }}</strong>
-		                </span>
-		            @enderror
-		        </div>
-		        <div class="form-group">
-		        	<label>Appointment Date</label>
-		            <input type="date" class="form-control" name="appointment_date" />
-		            @error('appointment_date')
-		                <span class="invalid-feedback" role="alert">
-		                    <strong>{{ $message }}</strong>
-		                </span>
-		            @enderror
-		        </div>
 		        <button class="button-fullwidth cws-button bt-color-3">Complete Registration</button>
 		    </form><br><br>
 		</div>

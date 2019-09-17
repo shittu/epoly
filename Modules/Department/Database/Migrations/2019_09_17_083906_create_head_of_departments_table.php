@@ -15,21 +15,36 @@ class CreateHeadOfDepartmentsTable extends Migration
     {
         Schema::create('head_of_departments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('staff_position_id')
+            $table->integer('admin_id')
             ->unsigned()
             ->nullable()
             ->foreign()
             ->references('id')
-            ->on('staff_positions')
+            ->on('admins')
             ->delete('restrict')
             ->update('cascade');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->integer('department_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('departments')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('staff_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('staffs')
+            ->delete('restrict')
+            ->update('cascade');
             $table->string('email');
-            $table->string('phone');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('is_active');
+            $table->string('from');
+            $table->string('to');
+            $table->integer('is_active')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

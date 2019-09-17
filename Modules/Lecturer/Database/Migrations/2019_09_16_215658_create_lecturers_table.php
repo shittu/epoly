@@ -15,21 +15,26 @@ class CreateLecturersTable extends Migration
     {
         Schema::create('lecturers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('staff_position_id')
+            $table->integer('staff_id')
             ->unsigned()
             ->nullable()
             ->foreign()
             ->references('id')
-            ->on('staff_positions')
+            ->on('staff')
             ->delete('restrict')
             ->update('cascade');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->integer('admin_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('admins')
+            ->delete('restrict')
+            ->update('cascade');
             $table->string('email');
-            $table->string('phone');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('is_active');
+            $table->integer('is_active')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

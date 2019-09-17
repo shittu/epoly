@@ -15,21 +15,36 @@ class CreateDirectersTable extends Migration
     {
         Schema::create('directers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('staff_position_id')
+            $table->integer('admin_id')
             ->unsigned()
             ->nullable()
             ->foreign()
             ->references('id')
-            ->on('staff_positions')
+            ->on('admins')
             ->delete('restrict')
             ->update('cascade');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->integer('college_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('colleges')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('staff_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('staff')
+            ->delete('restrict')
+            ->update('cascade');
             $table->string('email');
-            $table->string('phone');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('is_active');
+            $table->integer('is_active')->deafult(1);
+            $table->string('from');
+            $table->string('to');
             $table->rememberToken();
             $table->timestamps();
         });
