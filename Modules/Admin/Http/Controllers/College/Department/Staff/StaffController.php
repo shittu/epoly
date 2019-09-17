@@ -49,7 +49,8 @@ class StaffController extends AdminBaseController
            'staffID'=>$data['staffID'],
            'password'=>Hash::make($data['staffID']),
            'department_id' => $data['department'],
-           'staff_category_id' => $data['category']
+           'staff_category_id' => $data['category'],
+           'employed_at' => $data['employed_at']
         ]);
 
         $staff->profile()->create([
@@ -57,6 +58,7 @@ class StaffController extends AdminBaseController
             'religion_id' => $data['religion'],
             'tribe_id' => $data['tribe'],
             'address' => $data['address'],
+            'date_of_birth' => $data['date_of_birth'],
             'biography' => 'staff biography',
         ]);
 
@@ -122,7 +124,7 @@ class StaffController extends AdminBaseController
         $staff = Staff::find($staff_id);
         $staff->update(['staff_type_id'=>$request->staff_type]);
         if($staff->staffType->name == 'Lecturer'){
-            $staff->lecturer->firstOrCreate([
+            $staff->lecturer()->firstOrCreate([
                 'email'=>$staff->email,
                 'password'=>$staff->password,
                 'admin_id'=>admin()->id

@@ -19,7 +19,8 @@ class Staff extends Authenticatable
         'admin_id',
         'staffID',
         'staff_type_id',
-        'staff_category_id'
+        'staff_category_id',
+        'employed_at'
     ];
 
     /**
@@ -79,6 +80,6 @@ class Staff extends Authenticatable
 
     public function headOfDepartment()
     {
-        return $this->belongsTo('Modules\Department\Entities\HeadOfDepartment');
+        return $this->hasOne('Modules\Department\Entities\HeadOfDepartment');
     }
 }

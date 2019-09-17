@@ -50,6 +50,7 @@ class CreateProfilesTable extends Migration
             $table->text('biography',50000);
             $table->text('image')->nullable();
             $table->string('address');
+            $table->string('date_of_birth');
             $table->timestamps();
         });
     }

@@ -13,11 +13,11 @@
     	</div>
     </div>
     <br><br>
-    <form class="login-form" action="#" method="post">
+    <form class="login-form" action="{{route('admin.college.department.appointment.register')}}" method="post">
         @csrf
         <div class="form-group">
         	<label>New HOD Staff ID</label>
-            <input type="text" name="staffID" class="form-control" placeholder="Staff ID">
+            <input type="text"  value"{{session('staffID')}}" name="staffID" class="form-control" placeholder="Staff ID">
             @error('staffID')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -26,14 +26,14 @@
         </div>
         <div class="form-group">
         	<label>Appointment Date</label>
-            <input type="date" name="appointment_date" class="form-control" placeholder="college name">
+            <input type="date" value"{{session('appointment_date')}}" name="appointment_date" class="form-control" placeholder="college name">
             @error('name')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
         </div>
-        <button class="button-fullwidth cws-button bt-color-3">Create Appointment</button>
+        <button class="button-fullwidth cws-button bt-color-3">{{session('appointment_date') ? 'Create Appointment' : 'Confirm Appointment'}}</button>
     </form>
 </div>
 @endsection

@@ -18,4 +18,8 @@ class Department extends BaseModel
     {
     	return $this->hasMany('Modules\Staff\Entities\Staff');
     }
+    public function headOfDepartments($value='')
+    {
+        return $this->hasMany(HeadOfDepartment::class);
+    }
 }

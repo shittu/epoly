@@ -123,6 +123,24 @@
 		            @enderror
 		        </div>
 		        <div class="form-group">
+		        	<label>Employed At</label>
+		            <input type="date" name="employed_at" class="form-control" >
+		            @error('employed_at')
+		                <span class="invalid-feedback" role="alert">
+		                    <strong>{{ $message }}</strong>
+		                </span>
+		            @enderror
+		        </div>
+		        <div class="form-group">
+		        	<label>Date of Birth</label>
+		            <input type="date" name="date_of_birth" class="form-control">
+		            @error('date_of_birth')
+		                <span class="invalid-feedback" role="alert">
+		                    <strong>{{ $message }}</strong>
+		                </span>
+		            @enderror
+		        </div>
+		        <div class="form-group">
 		        	<label>Staff Phone Number</label>
 		            <input type="text" name="phone" class="form-control" placeholder="staff phone number">
 		            @error('phone')
