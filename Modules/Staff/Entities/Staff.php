@@ -66,4 +66,19 @@ class Staff extends Authenticatable
     {
         return $this->hasMany(StaffPosition::class);
     }
+
+    public function lecturer()
+    {
+        return $this->hasOne('Modules\Lecturer\Entities\Lecturer');
+    }
+
+    public function directer()
+    {
+        return $this->belongsTo('Modules\College\Entities\Directer');
+    }
+
+    public function headOfDepartment()
+    {
+        return $this->belongsTo('Modules\Department\Entities\HeadOfDepartment');
+    }
 }

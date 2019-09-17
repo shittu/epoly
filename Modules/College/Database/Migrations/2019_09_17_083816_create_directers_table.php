@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLecturersTable extends Migration
+class CreateDirectersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLecturersTable extends Migration
      */
     public function up()
     {
-        Schema::create('lecturers', function (Blueprint $table) {
+        Schema::create('directers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('staff_position_id')
             ->unsigned()
@@ -42,6 +42,6 @@ class CreateLecturersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lecturers');
+        Schema::dropIfExists('directers');
     }
 }

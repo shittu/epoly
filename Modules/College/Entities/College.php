@@ -15,5 +15,10 @@ class College extends BaseModel
     {
     	return $this->hasMany('Modules\Staff\Entities\StaffPosition');
     }
+
+    public function departments()
+    {
+    	return $this->hasMany('Modules\Department\Entities\Department');
+    }
     
 }

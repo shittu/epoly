@@ -60,7 +60,7 @@ class StaffController extends AdminBaseController
             'biography' => 'staff biography',
         ]);
 
-        session()->flash('message','Congratulation you have successfully completed first step of the staff registration please specify the type of staff to complete this registration and staff appointment in any');
+        session()->flash('message','Congratulation you have successfully completed first step of the staff registration please specify the type of staff to complete this registration and staff appointment if any');
         return redirect()->route('admin.college.department.staff.register.complete',[$staff->id]);
     }
 
