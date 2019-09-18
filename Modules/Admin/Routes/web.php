@@ -17,6 +17,8 @@ Route::prefix('admin')->group(function() {
   Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.auth.login');
   Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login');
   Route::post('logout', 'Auth\AdminLoginController@logout')->name('admin.auth.logout');
+
+  //appointment routes
   Route::prefix('college')
     ->namespace('Appointment')
     ->name('admin.college.')
@@ -24,19 +26,23 @@ Route::prefix('admin')->group(function() {
   	Route::get('/manage/appointment/staff/display', 'AppointmentController@displayStaff')->name('appointment.manage.display.staff');
   	Route::get('/manage/appointment', 'AppointmentController@index')->name('appointment.manage.index');
   	Route::post('/manage/appointment/search', 'AppointmentController@searchStaff')->name('appointment.manage.search');
-    });
+
+  	//department hod appointment routes
+  	Route::get('/department/staff/{staff_id}/appointment/head-of-department/create', 'DepartmentalAppointmentController@createHeadOfDepartment')->name('department.appointment.hod.create');
+  	Route::post('/department/appointment/hod/register', 'DepartmentalAppointmentController@registerHeadOfDepartment')->name('department.appointment.hod.register');
+
+  	//college directer appointment routes
+  	Route::get('/directer/appointment/create', 'AppointmentController@createCollegeDirecter')->name('appointment.create');
+  	Route::post('/directer/appointment/register', 'AppointmentController@registerCollegeDirecter')->name('appointment.register');
+
+  });
   //college route group
   Route::prefix('college')
     ->namespace('College')
     ->name('admin.college.')
     ->group(function() {
   	Route::get('/', 'CollegeController@index')->name('index');
-  	//department hod appointment routes
-  	Route::get('/department/hod/appointment/create', 'AppointmentController@createHeadOfDepartment')->name('department.appointment.create');
-  	Route::post('/department/hod/appointment/register', 'AppointmentController@registerHeadOfDepartment')->name('department.appointment.register');
-  	//college directer appointment routes
-  	Route::get('/directer/appointment/create', 'AppointmentController@createCollegeDirecter')->name('appointment.create');
-  	Route::post('/directer/appointment/register', 'AppointmentController@registerCollegeDirecter')->name('appointment.register');
+  	
 
   	Route::get('/create-college', 'CollegeController@create')->name('create');
   	Route::post('/register-college', 'CollegeController@register')->name('register');
