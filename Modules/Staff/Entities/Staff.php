@@ -75,7 +75,7 @@ class Staff extends Authenticatable
 
     public function directer()
     {
-        return $this->belongsTo('Modules\College\Entities\Directer');
+        return $this->hasOne('Modules\College\Entities\Directer');
     }
 
     public function headOfDepartment()

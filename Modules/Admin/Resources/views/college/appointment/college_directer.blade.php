@@ -13,7 +13,7 @@
     	</div>
     </div>
     <br><br>
-    <form class="login-form" action="#" method="post">
+    <form class="login-form" action="{{route('admin.college.appointment.register')}}" method="post">
         @csrf
         <div class="form-group">
         	<label>New Directer Staff ID</label>

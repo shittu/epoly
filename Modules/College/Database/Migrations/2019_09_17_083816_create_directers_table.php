@@ -42,9 +42,9 @@ class CreateDirectersTable extends Migration
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('is_active')->deafult(1);
+            $table->integer('is_active')->default(1);
             $table->string('from');
-            $table->string('to');
+            $table->string('to')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

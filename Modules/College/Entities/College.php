@@ -20,5 +20,10 @@ class College extends BaseModel
     {
     	return $this->hasMany('Modules\Department\Entities\Department');
     }
+
+    public function directers()
+    {
+        return $this->hasMany(Directer::class);
+    }
     
 }
