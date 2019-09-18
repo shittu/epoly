@@ -17,7 +17,14 @@ Route::prefix('admin')->group(function() {
   Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.auth.login');
   Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login');
   Route::post('logout', 'Auth\AdminLoginController@logout')->name('admin.auth.logout');
-
+  Route::prefix('college')
+    ->namespace('Appointment')
+    ->name('admin.college.')
+    ->group(function() {
+  	Route::get('/manage/appointment/staff/display', 'AppointmentController@displayStaff')->name('appointment.manage.display.staff');
+  	Route::get('/manage/appointment', 'AppointmentController@index')->name('appointment.manage.index');
+  	Route::post('/manage/appointment/search', 'AppointmentController@searchStaff')->name('appointment.manage.search');
+    });
   //college route group
   Route::prefix('college')
     ->namespace('College')

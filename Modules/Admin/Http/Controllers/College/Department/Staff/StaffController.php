@@ -12,9 +12,10 @@ use Modules\College\Entities\College;
 use Modules\Department\Entities\Department;
 use Modules\Staff\Http\Requests\NewStaffFormRequest;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
-
+use Modules\Admin\Services\Staff\SearchStaff as Searchable;
 class StaffController extends AdminBaseController
 {
+    use Searchable;
     /**
      * Display a listing of the resource.
      * @return Response
@@ -178,50 +179,7 @@ class StaffController extends AdminBaseController
 
     public function search(Request $request)
     {
-        $flag = null;
-        $staffs = [];
-        if($request->college){
-            $flag = 'college';
-        }
-        if($request->department){
-            $flag = 'department';
-        }
-        if($flag){
-            switch ($flag) {
-                case 'college':
-                    $college = College::find($request->college);
-                    
-                    foreach ($college->departments as $department) {
-                        foreach ($department->staffs as $staff) {
-                            $staffs[] = $staff;
-                        }
-                    }
-                    $message = 'found in '.$college->name.' College';
-                    break;
-                default:
-                    $department = Department::find($request->department);
-                    foreach ($department->staffs as $staff) {
-                        $staffs[] = $staff;
-                    }
-                    $message = 'found in '.$department->name.' Department';
-                    break;
-            }
-        }else{
-            $message = 'found in the entire school';
-            foreach (admin()->colleges as $college) {
-                foreach ($college->departments as $department) {
-                    foreach ($department->staffs as $staff) {
-                        $staffs[] = $staff;
-                    }
-                }
-            }
-        }
-        $result = 'Staff';
-        if(count($staffs) > 1){
-            $result = 'Staffs';
-        }
-        session()->flash('message',count($staffs).' '.$result.' '.$message);
-        session(['staffs'=>$staffs]);
+        $this->searchAvailableStaffs($request->all());
         return redirect()->route('admin.college.department.staff.staff');
     }
 

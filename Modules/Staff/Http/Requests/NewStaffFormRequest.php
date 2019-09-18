@@ -20,7 +20,8 @@ class NewStaffFormRequest extends FormRequest
             'address'=>'required',
             'first_name'=>'required|string',
             'last_name'=>'required|string',
-            'department'=>'required'
+            'department'=>'required',
+            'category'=>'required',
         ];
         if(!$this->has('update')){
             $rules['phone'] = 'required|unique:staff';

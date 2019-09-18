@@ -42,13 +42,10 @@
     <ul>
         
         <li>
-            <a href="{{route('admin.college.department.appointment.create')}}">Head Of Department</a>
+            <a href="{{route('admin.college.appointment.manage.index')}}">Academic</a>
         </li>
         <li>
-            <a href="{{route('admin.college.appointment.create')}}">College Directer</a>
-        </li>
-        <li>
-            <a href="#">Upload Staffs</a>
+            <a href="#">Non Academic</a>
         </li>
     </ul>
     <!-- / sub menu -->

@@ -58,8 +58,14 @@
                                 <a href="events-single-item.html">Calendar</a>
                                 <!-- sub menu -->
                                 <ul>
-                                    <li><a href="">Semester</a></li>
-                                    <li><a href="">{{date('Y')}}/{{date('Y')+1}} Session</a></li>
+                                    <li>
+                                        <a href="">View {{date('Y')}}/{{date('Y')+1}} Calendar</a>
+                                    </li>
+                                    @if(admin())
+                                    <li>
+                                        <a href="">Manage {{date('Y')}}/{{date('Y')+1}} Calendar</a>
+                                    </li>
+                                    @endif
                                 </ul>
                                 <!-- / sub menu -->
                             </li>
