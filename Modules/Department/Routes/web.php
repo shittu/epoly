@@ -28,5 +28,17 @@ Route::prefix('department')
 			Route::post('/login', 'Auth\DepartmentLoginController@login')->name('login');
 			Route::post('logout', 'Auth\DepartmentLoginController@logout')->name('auth.logout');
 		});
+		Route::prefix('course')
+		->name('course.')
+		->namespace('Course')
+		->group(function() {
+
+			Route::get('/', 'CourseController@index')->name('index');
+			Route::get('/create-course', 'CourseController@create')->name('create');
+			Route::post('/update-course', 'CourseController@update')->name('update');
+			Route::post('/register-course', 'CourseController@register')->name('register');
+			Route::get('/delete-course', 'CourseController@delete')->name('delete');
+			
+		});
     
 });

@@ -129,7 +129,7 @@ class StaffController extends AdminBaseController
                 'email'=>$staff->email,
                 'password'=>$staff->password,
                 'admin_id'=>admin()->id,
-                'from' =>$staff->employyed_at
+                'from' =>$staff->employed_at
             ]);
         }
         session()->flash('message','Congratulation the staff registration is comlpleted successfully the staff can login and update his documents and other information using '.$staff->email.' as email and '.$staff->staffID.' as password ');

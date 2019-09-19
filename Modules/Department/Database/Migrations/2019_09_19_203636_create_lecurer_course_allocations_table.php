@@ -23,12 +23,12 @@ class CreateLecurerCourseAllocationsTable extends Migration
             ->on('lecturers')
             ->delete('restrict')
             ->update('cascade');
-            $table->integer('lecturer_id')
+            $table->integer('course_id')
             ->unsigned()
             ->nullable()
             ->foreign()
             ->references('id')
-            ->on('lecturers')
+            ->on('courses')
             ->delete('restrict')
             ->update('cascade');
             $table->integer('department_id')

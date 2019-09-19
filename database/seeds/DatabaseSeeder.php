@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Modules\Admin\Database\Seeders\AdminDatabaseSeeder;
 use Modules\Staff\Database\Seeders\StaffDatabaseSeeder;
+use Modules\Department\Database\Seeders\DepartmentDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,5 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(AdminDatabaseSeeder::class);
         $this->call(staffDatabaseSeeder::class);
+        $this->call(DepartmentDatabaseSeeder::class);
     }
 }

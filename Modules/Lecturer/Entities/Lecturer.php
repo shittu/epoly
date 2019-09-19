@@ -11,12 +11,9 @@ class Lecturer extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'phone',
+        'from',
         'email',
         'password',
-        'is_active',
         'staff_id',
         'admin_id'
     ];
