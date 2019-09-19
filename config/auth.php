@@ -90,6 +90,17 @@ return [
             'provider' => 'head_of_departments',
             'hash' => false,
         ],
+
+        'directer' => [
+            'driver' => 'session',
+            'provider' => 'directers',
+        ],
+
+        'directer_api' => [
+            'driver' => 'token',
+            'provider' => 'directers',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -132,6 +143,11 @@ return [
         'head_of_departments' => [
             'driver' => 'eloquent',
             'model' => Modules\Department\Entities\HeadOfDepartment::class,
+        ],
+
+        'directers' => [
+            'driver' => 'eloquent',
+            'model' => Modules\College\Entities\Directer::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

@@ -2,10 +2,14 @@
 
 namespace Modules\College\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Directer extends Model
+class Directer extends Authenticatable
 {
+    use Notifiable;
+    
     protected $fillable = [
     	'email',
     	'password',
@@ -29,5 +33,14 @@ class Directer extends Model
     public function college()
     {
         return $this->belongsTo(College::class);
+    }
+
+    public function duration()
+    {
+        $date = strtotime($this->from) - time();
+        if($this->to){
+            $date = strtotime($this->to) - strtotime($this->from);
+        }
+        return Carbon::create(date('Y',$date), date('m',$date), date('d',$date), date('H',$date), date('i',$date), date('s',$date))->diffForHumans();
     }
 }

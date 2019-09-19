@@ -30,10 +30,12 @@ class CollegeLoginController extends Controller
       // if unsuccessful, then redirect back to the login with the form data
       return redirect()->back()->withInput($request->only('email', 'remember'));
     }
+
     public function unauthorize()
     {
       return view('college::auth.auth');
     }
+    
     public function logout()
     {
         Auth::guard('lecturer')->logout();

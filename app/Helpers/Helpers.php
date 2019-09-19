@@ -40,7 +40,7 @@ if (!function_exists('lecturer')) {
     }
 }
 
-if (!function_exists('headOfDepartment')) {
+if (!function_exists('directer')) {
     function headOfDepartment()
     {
         $headOfDepartment = null;
@@ -48,5 +48,16 @@ if (!function_exists('headOfDepartment')) {
             $headOfDepartment = auth()->guard('head_of_department')->user();
         }
         return $headOfDepartment;
+    }
+}
+
+if (!function_exists('directer')) {
+    function directer()
+    {
+        $directer = null;
+        if(auth()->guard('directer')->check()){
+            $directer = auth()->guard('directer')->user();
+        }
+        return $directer;
     }
 }

@@ -15,6 +15,14 @@
 </li>
 <li>
     <a href="#">Results</a>
+    <ul>
+        <li>
+            <a href="#">Results Statistics</a>
+        </li>
+        <li>
+            <a href="#">View Result</a>
+        </li>
+    </ul>
 </li>
 
 
