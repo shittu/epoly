@@ -69,7 +69,7 @@ class Handler extends ExceptionHandler
             break;
 
             case 'head_of_department':
-                $login = 'hod.auth.login';
+                $login = 'department.hod.auth.login';
             break;
 
             default:

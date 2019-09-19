@@ -22,9 +22,9 @@ class DepartmentLoginController extends Controller
       ]);
 
       // Attempt to log the user in
-      if (Auth::guard('hod')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+      if (Auth::guard('head_of_department')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
         // if successful, then redirect to their intended location
-        return redirect()->intended(route('hod.dashboard'));
+        return redirect()->intended(route('department.hod.dashboard'));
       }
 
       // if unsuccessful, then redirect back to the login with the form data
@@ -36,7 +36,7 @@ class DepartmentLoginController extends Controller
     }
     public function logout()
     {
-        Auth::guard('hod')->logout();
+        Auth::guard('head_of_department')->logout();
         return redirect('/hod/login');
     }
 }

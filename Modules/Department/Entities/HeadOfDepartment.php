@@ -3,10 +3,13 @@
 namespace Modules\Department\Entities;
 
 use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class HeadOfDepartment extends Model
+class HeadOfDepartment extends Authenticatable
 {
+    use Notifiable;
+    
     protected $fillable = [
     	'email',
     	'password',
