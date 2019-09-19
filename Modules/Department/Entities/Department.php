@@ -22,4 +22,8 @@ class Department extends BaseModel
     {
         return $this->hasMany(HeadOfDepartment::class);
     }
+    public function departmentCourses()
+    {
+        return $this->hasMany(DepartmentCourse::class);
+    }
 }

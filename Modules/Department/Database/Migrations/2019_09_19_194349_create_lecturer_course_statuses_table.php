@@ -15,7 +15,7 @@ class CreateLecturerCourseStatusesTable extends Migration
     {
         Schema::create('lecturer_course_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->string('name');
             $table->timestamps();
         });
     }

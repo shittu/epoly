@@ -6,5 +6,8 @@ use Modules\Core\Entities\BaseModel;
 
 class DepartmentCourseStatus extends BaseModel
 {
-    
+    public function departmentCourses()
+    {
+    	return $this->hasMany(DepartmentCourse::class);
+    }
 }

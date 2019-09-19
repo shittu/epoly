@@ -15,7 +15,7 @@ class CreateDepartmentCourseStatusesTable extends Migration
     {
         Schema::create('department_course_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->string('name');
             $table->timestamps();
         });
     }

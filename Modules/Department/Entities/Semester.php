@@ -2,9 +2,12 @@
 
 namespace Modules\Department\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
 class Semester extends Model
 {
-    protected $fillable = [];
+    public function courese()
+    {
+    	return $this->hasMany(Course::class);
+    }
 }
