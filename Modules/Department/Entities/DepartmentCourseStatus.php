@@ -4,7 +4,7 @@ namespace Modules\Department\Entities;
 
 use Modules\Core\Entities\BaseModel;
 
-class LecturerCourseStatus extends BaseModel
+class DepartmentCourseStatus extends BaseModel
 {
     
 }
