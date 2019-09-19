@@ -12,7 +12,7 @@
     	</div>
     </div>
     
-    <form class="login-form" action="{{route('department.course.update')}}" method="post">
+    <form class="login-form" action="{{route('department.course.update',['course_id'=>$course->id])}}" method="post">
         @csrf
         <div class="form-group">
         	<label>Couser Title</label>

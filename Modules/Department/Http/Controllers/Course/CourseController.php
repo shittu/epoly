@@ -64,7 +64,16 @@ class CourseController extends Controller
      */
     public function update(Request $request, $course_id)
     {
-        //
+        $course = Course::find($course_id);
+        $course->update([
+            'code'=>$request->code,
+            'title'=>$request->title,
+            'level_id'=>$request->level,
+            'semester_id'=>$request->semester,
+            'description'=>$request->description
+        ]);
+        session()->flash('message','Course is update successfully');
+        return redirect()->route('department.course.index');
     }
 
     /**
