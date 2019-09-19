@@ -87,7 +87,7 @@
 			     				</button><br>
 
 		                        <!-- if the staff is not appointed to directer -->
-			     				<button class="btn btn-info"><a href="{{route('admin.college.department.staff.edit',['staff_id'=>$staff->id])}}" style="color: white">Appointed To Directer</a></i></button>
+			     				<button class="btn btn-info"><a href="{{route('admin.college.appointment.directer.create',['staff_id'=>$staff->id])}}" style="color: white" onclick="confirm('Are you sure you want appoint this staff College Directer')">Appointed To Directer</a></i></button>
 		                    @endif
 		     			</td>
 		     		</tr>

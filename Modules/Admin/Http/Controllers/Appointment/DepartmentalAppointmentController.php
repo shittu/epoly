@@ -13,11 +13,8 @@ class DepartmentalAppointmentController extends AdminBaseController
     public function createHeadOfDepartment($staff_id)
     {
         $staff = Staff::find($staff_id);
-        if(session('error')){
-
-        }
         session()->flash('error',['Please note that','This staff of Biodata in the form bellow is going to be appointed as the Head of '.$staff->department->name.' Department','And after this registration the existed head of department is going to be revoke from been the head of the department','As such all of his previllages access to his HOD Account are going to be restricted','If you aggree insert the appointment date and click Confirm Appointment Or Click Back']);
-        return view('admin::college.appointment.headof_department',['staff'=>$staff]);
+        return view('admin::college.appointment.head_of_department',['staff'=>$staff]);
     }
 
     public function registerHeadOfDepartment(Request $request)
@@ -50,7 +47,7 @@ class DepartmentalAppointmentController extends AdminBaseController
                 'email'=>$staff->email,
                 'password'=>$staff->password,
                 'admin_id'=>admin()->id,
-                'department_id' => $staff->department->college->id,
+                'department_id' => $staff->department->id,
                 'staff_id' => $staff->id,
                 'from'=> $request->appointment_date
             ]);

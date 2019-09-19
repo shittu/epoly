@@ -32,10 +32,10 @@ Route::prefix('admin')->group(function() {
   	Route::post('/department/appointment/hod/register', 'DepartmentalAppointmentController@registerHeadOfDepartment')->name('department.appointment.hod.register');
 
   	//college directer appointment routes
-  	Route::get('/directer/appointment/create', 'AppointmentController@createCollegeDirecter')->name('appointment.create');
-  	Route::post('/directer/appointment/register', 'AppointmentController@registerCollegeDirecter')->name('appointment.register');
+  	Route::get('/directer/staff/{staff_id}/appointment/create', 'CollegeAppointmentController@createCollegeDirecter')->name('appointment.directer.create');
+  	Route::post('/directer/appointment/register', 'CollegeAppointmentController@registerCollegeDirecter')->name('appointment.directer.register');
+    });
 
-  });
   //college route group
   Route::prefix('college')
     ->namespace('College')
