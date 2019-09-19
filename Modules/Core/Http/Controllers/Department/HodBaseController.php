@@ -11,5 +11,6 @@ class HodBaseController extends Controller
     public function __construct()
     {
         $this->middleware('auth:head_of_department');
+        $this->middleware('active_hod');
     }
 }

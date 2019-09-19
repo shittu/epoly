@@ -11,6 +11,6 @@ class StaffBaseController extends Controller
     public function __construct()
     {
         $this->middleware('auth:staff');
-        $this->middleware('validStaff');
+        $this->middleware('valid_staff');
     }
 }

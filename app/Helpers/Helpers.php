@@ -39,3 +39,14 @@ if (!function_exists('lecturer')) {
         return $lecturer;
     }
 }
+
+if (!function_exists('headOfDepartment')) {
+    function headOfDepartment()
+    {
+        $headOfDepartment = null;
+        if(auth()->guard('head_of_department')->check()){
+            $headOfDepartment = auth()->guard('head_of_department')->user();
+        }
+        return $headOfDepartment;
+    }
+}

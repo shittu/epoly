@@ -22,6 +22,8 @@ Route::prefix('department')
 		->group(function() {
 			Route::get('/dashboard', 'DepartmentController@index')->name('dashboard');
 			Route::get('/login', 'Auth\DepartmentLoginController@showLoginForm')->name('auth.login');
+			Route::get('/Authorisation/fail', 'Auth\DepartmentLoginController@unauthorize')->name('auth.auth');
+
 			Route::get('/unauthorize-staff', 'Auth\DepartmentLoginController@unauthorize')->name('auth.unauthorize');
 			Route::post('/login', 'Auth\DepartmentLoginController@login')->name('login');
 			Route::post('logout', 'Auth\DepartmentLoginController@logout')->name('auth.logout');

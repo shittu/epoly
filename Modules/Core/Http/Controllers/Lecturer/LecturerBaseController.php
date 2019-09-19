@@ -11,5 +11,6 @@ class LecturerBaseController extends Controller
     public function __construct()
     {
         $this->middleware('auth:lecturer');
+        $this->middleware('active_lecturer');
     }
 }
