@@ -53,7 +53,7 @@ class CourseController extends Controller
      */
     public function edit($course_id)
     {
-        return view('department::department.course.edit');
+        return view('department::department.course.edit',['course'=>Course::find($course_id)]);
     }
 
     /**

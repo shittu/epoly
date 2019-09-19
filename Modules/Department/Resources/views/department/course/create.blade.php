@@ -1,6 +1,6 @@
 @extends('department::layouts.master')
 @section('title')
-    department create new couse page
+    department create new course page
 @endsection
 @section('page-content')
 <div class="col-md-4"></div>

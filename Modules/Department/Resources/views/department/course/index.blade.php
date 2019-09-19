@@ -28,8 +28,8 @@
 	     			<td>{{$departmentCourse->course->semester->name}}</td>
 	     			<td>{{$departmentCourse->course->level->name}}</td>
 	     			<td>
-	     				<button class="btn btn-danger" onclick="confirm('Are you sure you want to delete this staff')"><a href="{{route('department.course.delete',[$departmentCourse->course->id])}}" style="color: white">Delete</a> </i></button>
-	     				<button class="btn btn-info"><a href="{{route('department.course.edit',['staff_id'=>$departmentCourse->course->id])}}" style="color: white">Edit</a></i></button>
+	     				<button class="btn btn-danger" onclick="confirm('Are you sure you want to delete this staff')"><a href="{{route('department.course.delete',['course_id'=>$departmentCourse->course->id])}}" style="color: white">Delete</a> </i></button>
+	     				<button class="btn btn-info"><a href="{{route('department.course.edit',['course_id'=>$departmentCourse->course->id])}}" style="color: white">Edit</a></i></button>
 	     			</td>
 	     		</tr>
 	     		@endforeach

@@ -35,10 +35,10 @@ Route::prefix('department')
 
 			Route::get('/', 'CourseController@index')->name('index');
 			Route::get('/create-course', 'CourseController@create')->name('create');
-			Route::post('/update-course', 'CourseController@update')->name('update');
-			Route::get('/edit-course', 'CourseController@edit')->name('edit');
+			Route::post('{course_id}/update-course', 'CourseController@update')->name('update');
+			Route::get('{course_id}/edit-course', 'CourseController@edit')->name('edit');
 			Route::post('/register-course', 'CourseController@register')->name('register');
-			Route::get('/delete-course', 'CourseController@delete')->name('delete');
+			Route::get('{course_id}/delete-course', 'CourseController@delete')->name('delete');
 			
 		});
     
