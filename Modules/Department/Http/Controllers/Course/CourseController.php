@@ -4,10 +4,10 @@ namespace Modules\Department\Http\Controllers\Course;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Modules\Department\Entities\Course;
+use Modules\Core\Http\Controllers\Department\HodBaseController;
 
-class CourseController extends Controller
+class CourseController extends HodBaseController
 {
     /**
      * Display a listing of the resource.
@@ -72,7 +72,7 @@ class CourseController extends Controller
             'semester_id'=>$request->semester,
             'description'=>$request->description
         ]);
-        session()->flash('message','Course is update successfully');
+        session()->flash('message','Course is updated successfully');
         return redirect()->route('department.course.index');
     }
 
@@ -83,6 +83,21 @@ class CourseController extends Controller
      */
     public function delete($course_id)
     {
-        //
+        $errors = [];
+        $course = Course::find($course_id);
+        //check if this course is not allocated to any lecturer
+        if($course->lecturerCourseAllocation){
+            $errors[] = 'Sorry this course is already been allocated to some lecturer to delete it you have to delete the allocation';
+        }
+        if($course->departmentCourses){
+            $errors[] = 'Sorry this course is already been assigned to some department to delete it you have to delete the department course assignment';
+        }
+        if(empty($errors)){
+            $course->delete();
+            session()->flash('message','Course is deleted successfully');
+        }else{
+            session()->flash('error',$errors);
+        }
+        return redirect()->route('department.course.index');
     }
 }

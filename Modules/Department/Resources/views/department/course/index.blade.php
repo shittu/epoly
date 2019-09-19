@@ -28,7 +28,7 @@
 	     			<td>{{$departmentCourse->course->semester->name}}</td>
 	     			<td>{{$departmentCourse->course->level->name}}</td>
 	     			<td>
-	     				<button class="btn btn-danger" onclick="confirm('Are you sure you want to delete this staff')"><a href="{{route('department.course.delete',['course_id'=>$departmentCourse->course->id])}}" style="color: white">Delete</a> </i></button>
+	     				<button class="btn btn-danger" onclick="confirm('Are you sure you want to delete this course from the list of courses in this department')"><a href="{{route('department.course.delete',['course_id'=>$departmentCourse->course->id])}}" style="color: white">Delete</a> </i></button>
 	     				<button class="btn btn-info"><a href="{{route('department.course.edit',['course_id'=>$departmentCourse->course->id])}}" style="color: white">Edit</a></i></button>
 	     			</td>
 	     		</tr>
@@ -36,6 +36,9 @@
 	     	</tbody>
 	    </table>
 	@else
-		<div class="alert alert-danger">No staff record found for this search</div>
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<div class="alert alert-danger">No course record found for this department</div>
+	</div>
 	@endif   
 @endsection
