@@ -25,4 +25,9 @@ class Course extends BaseModel
     {
     	return $this->belongsTo(Semester::class);
     }
+
+    public function lecturerCourseAllocations()
+    {
+    	return $this->hasMany(LecturerCourseAllocation::class);
+    }
 }

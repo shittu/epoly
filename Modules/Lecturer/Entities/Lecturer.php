@@ -44,6 +44,11 @@ class Lecturer extends Authenticatable
         return $this->belongsTo('Modules\Staff\Entities\Staff');
     }
 
+    public function lecturerCourseAllocations()
+    {
+        return $this->hasMany('Modules\Department\Entities\LecturerCourseAllocation');
+    }
+
     public function duration()
     {
         $date = strtotime($this->from) - time();
