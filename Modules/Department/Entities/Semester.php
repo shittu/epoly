@@ -4,9 +4,9 @@ namespace Modules\Department\Entities;
 
 use Modules\Core\Entities\BaseModel;
 
-class Semester extends Model
+class Semester extends BaseModel
 {
-    public function courese()
+    public function courses()
     {
     	return $this->hasMany(Course::class);
     }

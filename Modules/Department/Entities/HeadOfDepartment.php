@@ -5,6 +5,8 @@ namespace Modules\Department\Entities;
 use Illuminate\Support\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\Department\Entities\Semester;
+use Modules\Department\Entities\Level;
 
 class HeadOfDepartment extends Authenticatable
 {
@@ -42,5 +44,15 @@ class HeadOfDepartment extends Authenticatable
             $date = strtotime($this->to) - strtotime($this->from);
         }
         return Carbon::create(date('Y',$date), date('m',$date), date('d',$date), date('H',$date), date('i',$date), date('s',$date))->diffForHumans();
+    }
+
+    public function levels()
+    {
+        return Level::all();
+    }
+
+    public function semesters()
+    {
+        return Semester::all();
     }
 }

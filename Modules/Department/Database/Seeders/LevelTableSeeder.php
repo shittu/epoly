@@ -4,7 +4,7 @@ namespace Modules\Department\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Department\Entities\Semester;
+use Modules\Department\Entities\Level;
 
 class LevelTableSeeder extends Seeder
 {

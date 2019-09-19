@@ -5,6 +5,7 @@ namespace Modules\Department\Http\Controllers\Course;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Department\Entities\Course;
 
 class CourseController extends Controller
 {
@@ -31,9 +32,18 @@ class CourseController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function register(Request $request)
     {
-        //
+        $course = Course::create([
+            'code'=>$request->code,
+            'title'=>$request->title,
+            'level_id'=>$request->level,
+            'semester_id'=>$request->semester,
+            'description'=>$request->description
+        ]);
+        headOfDepartment()->department->departmentCourses()->create(['course_id'=>$course->id]);
+        session()->flash('message','Course is created successfully');
+        return redirect()->route('department.course.index');
     }
 
     /**
