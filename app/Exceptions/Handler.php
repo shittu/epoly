@@ -54,7 +54,6 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
         $guard = $exception->guards();
-
         switch ($guard[0]) {
             
             case 'admin':
@@ -67,6 +66,10 @@ class Handler extends ExceptionHandler
             
             case 'lecturer':
                 $login = 'lecturer.auth.login';
+            break;
+
+            case 'head_of_department':
+                $login = 'hod.auth.login';
             break;
 
             default:

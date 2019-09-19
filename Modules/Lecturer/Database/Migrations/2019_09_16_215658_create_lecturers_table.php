@@ -34,6 +34,8 @@ class CreateLecturersTable extends Migration
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('from');
+            $table->string('to')->nullable();
             $table->integer('is_active')->default(1);
             $table->rememberToken();
             $table->timestamps();

@@ -79,6 +79,17 @@ return [
             'provider' => 'lecturers',
             'hash' => false,
         ],
+
+        'head_of_department' => [
+            'driver' => 'session',
+            'provider' => 'head_of_departments',
+        ],
+
+        'head_of_department_api' => [
+            'driver' => 'token',
+            'provider' => 'head_of_departments',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -117,7 +128,11 @@ return [
             'driver' => 'eloquent',
             'model' => Modules\Lecturer\Entities\Lecturer::class,
         ],
-
+        
+        'head_of_departments' => [
+            'driver' => 'eloquent',
+            'model' => Modules\Department\Entities\HeadOfDepartment::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -161,6 +176,11 @@ return [
 
         'lecturers' => [
             'provider' => 'lecturers',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'head_of_departments' => [
+            'provider' => 'head_of_departments',
             'table' => 'password_resets',
             'expire' => 60,
         ],

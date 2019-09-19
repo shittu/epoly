@@ -2,6 +2,7 @@
 
 namespace Modules\Lecturer\Entities;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -16,7 +17,8 @@ class Lecturer extends Authenticatable
         'email',
         'password',
         'is_active',
-        'staff_position_id'
+        'staff_id',
+        'admin_id'
     ];
 
     /**
@@ -37,8 +39,17 @@ class Lecturer extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-    public function staffPosition()
+    public function staff()
     {
-        return $this->belongsTo('Modules\Staff\Entities\StaffPosition');
+        return $this->belongsTo('Modules\Staff\Entities\Staff');
+    }
+
+    public function duration()
+    {
+        $date = strtotime($this->from) - time();
+        if($this->to){
+            $date = strtotime($this->to) - strtotime($this->from);
+        }
+        return Carbon::create(date('Y',$date), date('m',$date), date('d',$date), date('H',$date), date('i',$date), date('s',$date))->diffForHumans();
     }
 }

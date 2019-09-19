@@ -36,7 +36,7 @@ class HeadOfDepartment extends Model
     {
         $date = strtotime($this->from) - time();
         if($this->to){
-            $date = strtotime($this->from) - strtotime($this->to) ;
+            $date = strtotime($this->to) - strtotime($this->from);
         }
         return Carbon::create(date('Y',$date), date('m',$date), date('d',$date), date('H',$date), date('i',$date), date('s',$date))->diffForHumans();
     }

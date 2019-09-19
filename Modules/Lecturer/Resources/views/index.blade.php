@@ -1,9 +1,5 @@
 @extends('lecturer::layouts.master')
 
-@section('content')
-    <h1>Hello World</h1>
-
-    <p>
-        This view is loaded from module: {!! config('lecturer.name') !!}
-    </p>
+@section('page-content')
+    <h1>Welcome to lecturer activities section</h1>
 @endsection
