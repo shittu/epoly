@@ -5,10 +5,10 @@
     <a href="#">Admission</a>
     <ul>
         <li>
-            <a href="#">New Admission</a>
+            <a href="{{route('department.admission.create')}}">New Admission</a>
         </li>
         <li>
-            <a href="#">View Admission</a>
+            <a href="{{route('department.admission.index')}}">View Admission</a>
         </li>
     </ul>
 </li>
