@@ -2,10 +2,30 @@
 
 namespace Modules\Student\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Student extends Model
+class Student extends Authenticatable
 {
+	use Notifiable;
+	
+	protected $fillable = [
+        'first_name',
+        'last_name',
+        'phone',
+        'email',
+        'password',
+        'student_type_id'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
     public function admission()
     {
     	return $this->belongsTo('Modules\Department\Entities\Admission');
