@@ -18,9 +18,8 @@ class StudentLoginController extends Controller
       // Validate the form data
       $this->validate($request, [
         'email'   => 'required|email',
-        'password' => 'required|min:6'
+        'password' => 'required'
       ]);
-
       // Attempt to log the user in
       if (Auth::guard('student')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
         // if successful, then redirect to their intended location
@@ -35,5 +34,10 @@ class StudentLoginController extends Controller
     {
         Auth::guard('student')->logout();
         return redirect('/student/login');
+    }
+
+    public function unauthorize()
+    {
+      return view('student::auth.auth');
     }
 }

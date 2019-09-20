@@ -61,3 +61,39 @@ if (!function_exists('directer')) {
         return $directer;
     }
 }
+
+if (!function_exists('logout_route')) {
+    function logout_route()
+    {
+        switch (auth()->guard()) {
+            
+            case 'admin':
+                $route = 'admin.auth.logout';
+            break;
+
+            case 'staff':
+                $route = 'staff.auth.logout';
+            break;
+            
+            case 'lecturer':
+                $route = 'lecturer.auth.logout';
+            break;
+
+            case 'head_of_department':
+                $route = 'department.hod.auth.logout';
+            break;
+
+            case 'directer':
+                $route = 'college.directer.auth.logout';
+            break;
+
+            default:
+                $route = 'student.auth.logout';
+            break;
+        }
+        
+        return $route;
+    }
+}
+
+        

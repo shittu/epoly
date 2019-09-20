@@ -75,7 +75,7 @@
                                 <a href="{{route('student.login')}}">Sign In</a>
                             </li>
                             @else
-                                <li><a href="{{ route('logout') }}"
+                                <li><a href="{{ route(logout_route()) }}"
                                     onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();"><i class="ti-power-off m-r-5"></i> Logout</a>
                                 </li>
