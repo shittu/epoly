@@ -4,8 +4,9 @@ namespace Modules\Department\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Department\Entities\StudentType;
 
-class DepartmentDatabaseSeeder extends Seeder
+class StudentTypeTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,8 +17,9 @@ class DepartmentDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(SemesterTableSeeder::class);
-        $this->call(LevelTableSeeder::class);
-        $this->call(StudentTypeTableSeeder::class);
+        $types = ['Morning','Evening'];
+        foreach ($types as $type) {
+            StudentType::firstOrCreate(['name'=>$type]);
+        }
     }
 }
