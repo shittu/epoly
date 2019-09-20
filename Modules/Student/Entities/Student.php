@@ -26,7 +26,7 @@ class Student extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
+
     public function admission()
     {
     	return $this->belongsTo('Modules\Department\Entities\Admission');
@@ -35,5 +35,10 @@ class Student extends Authenticatable
     public function studentAccount()
     {
     	return $this->hasOne(StudentAccount::class);
+    }
+
+    public function studentType()
+    {
+    	return $this->hasOne(StudentType::class);
     }
 }
