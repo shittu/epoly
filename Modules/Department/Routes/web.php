@@ -41,5 +41,26 @@ Route::prefix('department')
 			Route::get('{course_id}/delete-course', 'CourseController@delete')->name('delete');
 			
 		});
+
+		Route::prefix('admission')
+		->name('admission.')
+		->namespace('Admission')
+		->group(function() {
+
+			Route::get('/', 'AdmissionController@index')->name('index');
+
+			Route::get('/create-admission', 'AdmissionController@create')->name('create');
+
+			Route::post('{admission_id}/update-admission', 'AdmissionController@update')->name('update');
+
+			Route::get('{admission_id}/edit-admission', 'AdmissionController@edit')->name('edit');
+
+			Route::get('{admission_id}/show-admission', 'AdmissionController@show')->name('show');
+
+			Route::post('/register-admission', 'AdmissionController@register')->name('register');
+			
+			Route::get('{admission_id}/delete-admission', 'AdmissionController@delete')->name('delete');
+			
+		});
     
 });
