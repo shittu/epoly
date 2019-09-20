@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Student extends Authenticatable
 {
 	use Notifiable;
-	
+
 	protected $fillable = [
         'first_name',
         'last_name',
@@ -26,6 +26,7 @@ class Student extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
     public function admission()
     {
     	return $this->belongsTo('Modules\Department\Entities\Admission');
