@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Modules\Student\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Password;
 
-class AdminForgotPasswordController extends Controller
+class StudentForgotPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
