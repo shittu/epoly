@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class StudentAccount extends Model
 {
-    protected $fillable = [];
+    public function student()
+    {
+    	return $this->belongsTo(Student::class);
+    }
 }

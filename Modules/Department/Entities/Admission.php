@@ -2,9 +2,12 @@
 
 namespace Modules\Department\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class Admission extends Model
+class Admission extends BaseModel
 {
-    protected $fillable = [];
+    public function student()
+    {
+    	return $this->hasOne('Modules\Student\Entities\Student');
+    }
 }
