@@ -58,9 +58,21 @@ class AdmissionController extends HodBaseController
      * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function revokeAdmission($admission_id)
     {
-        return view('department::department.admission.show');
+        $admission = Admission::find($admission_id);
+        if($admission->student->is_active == 1){
+            $admission->student->is_active = 0;
+        }else{
+            $admission->student->is_active = 1;
+        }
+        $admission->student->save();
+        
+        $admission->student->update(['is_active'=>0]);
+
+        session()->flash('message','Congratulation this admission is revoked successfully');
+
+        return redirect()->route('department.admission.index');
     }
 
     /**

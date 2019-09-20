@@ -55,10 +55,10 @@ Route::prefix('department')
 
 			Route::get('{admission_id}/edit-admission', 'AdmissionController@edit')->name('edit');
 
-			Route::get('{admission_id}/show-admission', 'AdmissionController@show')->name('show');
+			Route::get('{admission_id}/revoke-admission', 'AdmissionController@revokeAdmission')->name('revoke');
 
 			Route::post('/register-admission', 'AdmissionController@register')->name('register');
-			
+
 			Route::get('{admission_id}/delete-admission', 'AdmissionController@delete')->name('delete');
 			
 		});
