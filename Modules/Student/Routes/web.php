@@ -11,8 +11,9 @@
 |
 */
 
-Route::prefix('student')->group(function() {
-	->name('student.')
+Route::prefix('student')
+->name('student.')
+->group(function() {
     Route::get('/', 'StudentController@verify');
 	Route::get('/dashboard', 'StudentController@index')->name('dashboard');
 	Route::get('/login', 'Auth\StudentLoginController@showLoginForm')->name('auth.login');

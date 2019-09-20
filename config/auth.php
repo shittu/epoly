@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'student',
+        'passwords' => 'students',
     ],
 
     /*
@@ -36,14 +36,14 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'student' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'students',
         ],
 
-        'api' => [
+        'sudent_api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'students',
             'hash' => false,
         ],
 
@@ -149,6 +149,10 @@ return [
             'driver' => 'eloquent',
             'model' => Modules\College\Entities\Directer::class,
         ],
+
+        'students' => [
+            'driver' => 'eloquent',
+            'model' => Modules\Student\Entities\Student::class,
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -195,11 +199,19 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
+
         'head_of_departments' => [
             'provider' => 'head_of_departments',
             'table' => 'password_resets',
             'expire' => 60,
         ],
+
+        'students' => [
+            'provider' => 'students',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
     ],
 
 ];
