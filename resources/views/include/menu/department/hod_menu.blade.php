@@ -2,6 +2,17 @@
     <a href="#">Lecturers</a>
 </li>
 <li>
+    <a href="#">Admission</a>
+    <ul>
+        <li>
+            <a href="#">New Admission</a>
+        </li>
+        <li>
+            <a href="#">View Admission</a>
+        </li>
+    </ul>
+</li>
+<li>
     <a href="#">Courses</a>
     <ul>
         <li>
