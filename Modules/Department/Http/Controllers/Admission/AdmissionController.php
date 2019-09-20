@@ -4,6 +4,7 @@ namespace Modules\Department\Http\Controllers\Admission;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Modules\Core\Http\Controllers\Department\HodBaseController;
 
 class AdmissionController extends HodBaseController
@@ -31,9 +32,24 @@ class AdmissionController extends HodBaseController
      * @param Request $request
      * @return Response
      */
-    public function admit(Request $request)
+    public function register(Request $request)
     {
-        //
+        $admission = headOfDepartment()->admissions()->create(['admission_no'=>$request->admission_no]);
+
+        $student = $admission->student()->create([
+            'first_name'=>'default',
+            'last_name'=>'default',
+            'phone'=>'default',
+            'email'=>$admission->admission_no.'@poly.com',
+            'password'=>Hash::make($admission->admission_no),
+            'student_type_id' => $request->student_type
+        ]);
+
+        $student->studentAccount()->create([]);
+
+        session()->flash('message','Congratulation this admission is registered successfully and this student can logged in as student using '.$admission->admission_no.'@poly.com as his email and '.$admission->admission_no.' as his password');
+
+        return redirect()->route('department.admission.index');
     }
 
     /**

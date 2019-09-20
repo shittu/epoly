@@ -4,7 +4,7 @@ namespace Modules\Student\Entities;
 
 use Modules\Core\Entities\BaseModel;
 
-class StudentType extends Model
+class StudentType extends BaseModel
 {
     public function students()
     {

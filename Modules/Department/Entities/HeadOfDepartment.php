@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\Department\Entities\Semester;
 use Modules\Department\Entities\Level;
+use Modules\Student\Entities\StudentType;
 
 class HeadOfDepartment extends Authenticatable
 {
@@ -31,7 +32,11 @@ class HeadOfDepartment extends Authenticatable
     {
         return $this->belongsTo('Modules\Admin\Entities\Admin');
     }
-
+    
+    public function admissions()
+    {
+        return $this->hasMany('Modules\Department\Entities\Admission');
+    }
     public function department()
     {
         return $this->belongsTo(Department::class);
@@ -54,5 +59,10 @@ class HeadOfDepartment extends Authenticatable
     public function semesters()
     {
         return Semester::all();
+    }
+
+    public function studentTypes()
+    {
+        return StudentType::all();
     }
 }
