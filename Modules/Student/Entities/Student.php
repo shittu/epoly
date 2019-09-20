@@ -39,6 +39,6 @@ class Student extends Authenticatable
 
     public function studentType()
     {
-    	return $this->hasOne(StudentType::class);
+    	return $this->belongsTo(StudentType::class);
     }
 }

@@ -5,6 +5,7 @@ namespace Modules\Department\Http\Controllers\Admission;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Modules\Department\Entities\Admission;
 use Modules\Core\Http\Controllers\Department\HodBaseController;
 
 class AdmissionController extends HodBaseController
@@ -67,9 +68,9 @@ class AdmissionController extends HodBaseController
      * @param int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($admission_id)
     {
-        return view('department::department.admission.edit');
+        return view('department::department.admission.edit',['admission'=>Admission::find($admission_id)]);
     }
 
     /**
