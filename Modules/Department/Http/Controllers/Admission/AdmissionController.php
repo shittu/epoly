@@ -79,9 +79,24 @@ class AdmissionController extends HodBaseController
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $admission_id)
     {
-        //
+        $admission = Admission::find($admission_id);
+        $admission->update(['admission_no'=>$request->admission_no]);
+
+        $student = $admission->student->update([
+            'first_name'=>'default',
+            'last_name'=>'default',
+            'phone'=>'default',
+            'email'=>$admission->admission_no.'@poly.com',
+            'password'=>Hash::make($admission->admission_no),
+            'student_type_id' => $request->student_type
+        ]);
+
+        session()->flash('message','Congratulation this admission is updated successfully and this student can logged in as student using '.$admission->admission_no.'@poly.com as his email and '.$admission->admission_no.' as his password');
+
+        return redirect()->route('department.admission.index');
+
     }
 
     /**
