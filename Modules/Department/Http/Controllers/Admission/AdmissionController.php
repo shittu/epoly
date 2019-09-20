@@ -104,8 +104,15 @@ class AdmissionController extends HodBaseController
      * @param int $id
      * @return Response
      */
-    public function delete($id)
+    public function delete($admission_id)
     {
-        //
+        $admission = Admission::find($admission_id);
+        $admission->student->studentAccount->delete();
+        $admission->student->delete();
+        $admission->delete();
+
+        session()->flash('message','Congratulation this admission is deleted successfully');
+
+        return redirect()->route('department.admission.index');
     }
 }
