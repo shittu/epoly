@@ -15,7 +15,38 @@ class CreateStudentAccountsTable extends Migration
     {
         Schema::create('student_accounts', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->integer('student_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('students')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('gender_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('genders')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('tribe_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('tribes')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('religion_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('religions')
+            ->delete('restrict')
+            ->update('cascade');
             $table->timestamps();
         });
     }
