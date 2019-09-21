@@ -17,7 +17,7 @@
                             </li>
                             @if(!auth()->check())
                             <li>
-                                <a href="courses-grid.html">Collages</a>
+                                <a href="#">Collages</a>
                                 <!-- sub menu -->
                                 <ul>
                                     <li><a href="courses-grid.html">Science And Technology</a></li>
@@ -27,7 +27,7 @@
                             </li>
 
                             <li class="megamenu">
-                                <a href="content-elements.html">Departments</a>
+                                <a href="">Departments</a>
                                 <!-- sub mega menu -->
                                 <ul class="clear-fix">
                                     <li><div class="header-megamenu">College</div>
@@ -35,7 +35,7 @@
                                             <li><a href="page-about-us.html">Department</a></li>
                                         </ul>
                                     </li>
-                                    <li><div class="header-megamenu">College</div>
+                                    <li><div class="header-megamenu">Colleges</div>
                                         <ul>
                                             <li><a href="page-about-us.html">Department</a></li>
                                         </ul>
@@ -43,27 +43,18 @@
                                 </ul>
                                 <!-- / sub mega menu -->
                             </li>
-                            <li>
-                                <a href="shop-product-list.html">Programmes</a>
-                                <!-- sub menu -->
-                                <ul>
-                                    <li><a href="shop-product-list.html">Computer Science</a></li>
-                                    <li><a href="shop-single-product.html">Statistics</a></li>
-                                    <li><a href="shop-checkout.html">Mathematics</a></li>
-                                </ul>
-                                <!-- / sub menu -->
-                            </li>
+                            
                             @endif
                             <li>
                                 <a href="events-single-item.html">Calendar</a>
                                 <!-- sub menu -->
                                 <ul>
                                     <li>
-                                        <a href="">View {{date('Y')}}/{{date('Y')+1}} Calendar</a>
+                                        <a href="{{route('admin.calender.create')}}">New {{date('Y')}}/{{date('Y')+1}} Calendar</a>
                                     </li>
                                     @if(admin())
                                     <li>
-                                        <a href="">Manage {{date('Y')}}/{{date('Y')+1}} Calendar</a>
+                                        <a href="{{route('admin.calender.view')}}">View {{date('Y')}}/{{date('Y')+1}} Calendar</a>
                                     </li>
                                     @endif
                                 </ul>
