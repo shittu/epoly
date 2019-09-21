@@ -163,6 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Akaunting\Firewall\Provider::class,
+        \Wnx\LaravelStats\StatsServiceProvider::class,
 
         /*
          * Package Service Providers...

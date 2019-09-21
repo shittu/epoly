@@ -29,6 +29,17 @@ if (!function_exists('staff')) {
     }
 }
 
+if (!function_exists('student')) {
+    function student()
+    {
+        $student = null;
+        if(auth()->guard('student')->check()){
+            $student = auth()->guard('student')->user();
+        }
+        return $student;
+    }
+}
+
 if (!function_exists('lecturer')) {
     function lecturer()
     {
