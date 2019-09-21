@@ -10,4 +10,9 @@ class Semester extends BaseModel
     {
     	return $this->hasMany(Course::class);
     }
+
+    public function calenders()
+    {
+    	return $this->hasMany('Modules\Admin\Entities\Calender');
+    }
 }
