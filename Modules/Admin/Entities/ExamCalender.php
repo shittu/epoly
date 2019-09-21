@@ -2,9 +2,12 @@
 
 namespace Modules\Admin\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class ExamCalender extends Model
+class ExamCalender extends BaseModel
 {
-    protected $fillable = [];
+    public function calender()
+    {
+    	return $this->hasOne(Calender::class);
+    }
 }

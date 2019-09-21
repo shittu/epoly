@@ -2,9 +2,12 @@
 
 namespace Modules\Admin\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class Session extends Model
+class Session extends BaseModel
 {
-    protected $fillable = [];
+    public function calenders()
+    {
+    	return $this->hasMany(Calender::class);
+    }
 }

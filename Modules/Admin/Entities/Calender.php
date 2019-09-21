@@ -2,9 +2,38 @@
 
 namespace Modules\Admin\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class Calender extends Model
+class Calender extends BaseModel
 {
-    protected $fillable = [];
+    public function courseAllocationCalender()
+    {
+    	return $this->belongsTo(CourseAllocationCalender::class);
+    }
+
+    public function examCalender()
+    {
+    	return $this->belongsTo(ExamCalender::class);
+    }
+
+    public function lectureCalender()
+    {
+    	return $this->belongsTo(LectureCalender::class);
+    }
+
+    public function markingCalender()
+    {
+    	return $this->belongsTo(MarkingCalender::class);
+    }
+
+    public function uploadResultCalender()
+    {
+    	return $this->belongsTo(UploadResultCalender::class);
+    }
+
+    public function admin()
+    {
+    	return $this->belongsTo(Admin::class);
+    }
+
 }
