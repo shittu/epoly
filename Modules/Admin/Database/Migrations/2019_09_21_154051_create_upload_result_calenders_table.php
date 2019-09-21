@@ -15,7 +15,8 @@ class CreateUploadResultCalendersTable extends Migration
     {
         Schema::create('upload_result_calenders', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->string('start');
+            $table->string('end');
             $table->timestamps();
         });
     }

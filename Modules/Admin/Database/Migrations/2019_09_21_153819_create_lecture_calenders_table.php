@@ -15,7 +15,8 @@ class CreateLectureCalendersTable extends Migration
     {
         Schema::create('lecture_calenders', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->string('start');
+            $table->string('end');
             $table->timestamps();
         });
     }

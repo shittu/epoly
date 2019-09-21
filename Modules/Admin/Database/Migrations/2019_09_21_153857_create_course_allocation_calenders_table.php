@@ -15,7 +15,8 @@ class CreateCourseAllocationCalendersTable extends Migration
     {
         Schema::create('course_allocation_calenders', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->string('start');
+            $table->string('end');
             $table->timestamps();
         });
     }
