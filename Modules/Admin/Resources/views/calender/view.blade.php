@@ -74,6 +74,29 @@
 			</div>
 		</div>
 		<br>
+		<!-- lecture calender -->
+		<div class="card">
+			<div class="card-header button-fullwidth cws-button bt-color-3">
+			    {{$calender->semester->name}} Lecture  Calender 
+		    </div>
+			<div class="card-body">
+				<table>
+					<tr>
+						<td>{{$calender->semester->name}} Lecture Start Date</td>
+						<td>{{$calender->lectureCalender->start}}</td>
+					</tr>
+					<tr>
+						<td>{{$calender->semester->name}} Lecture End Date</td>
+						<td>{{$calender->lectureCalender->end}}</td>
+					</tr>
+					<tr>
+						<td>{{$calender->semester->name}} Lecture Count Down</td>
+						<td>{{$calender->lectureCalender->countDown()}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<br>
 	@endforeach
 </div>
 @endsection
