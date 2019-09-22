@@ -97,6 +97,54 @@
 			</div>
 		</div>
 		<br>
+
+		<!-- examination calender -->
+		<div class="card">
+			<div class="card-header button-fullwidth cws-button bt-color-3">
+			    {{$calender->semester->name}} Examination  Calender 
+		    </div>
+			<div class="card-body">
+				<table>
+					<tr>
+						<td>{{$calender->semester->name}} Examination Start Date</td>
+						<td>{{$calender->examCalender->start}}</td>
+					</tr>
+					<tr>
+						<td>{{$calender->semester->name}} Examination End Date</td>
+						<td>{{$calender->examCalender->end}}</td>
+					</tr>
+					<tr>
+						<td>{{$calender->semester->name}} Examination Count Down</td>
+						<td>{{$calender->examCalender->countDown()}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<br>
+
+		<!-- exam marking calender -->
+		<div class="card">
+			<div class="card-header button-fullwidth cws-button bt-color-3">
+			    {{$calender->semester->name}} Exam Marking  Calender 
+		    </div>
+			<div class="card-body">
+				<table>
+					<tr>
+						<td>{{$calender->semester->name}} Exam Marking Start Date</td>
+						<td>{{$calender->markingCalender->start}}</td>
+					</tr>
+					<tr>
+						<td>{{$calender->semester->name}} Exam Marking End Date</td>
+						<td>{{$calender->markingCalender->end}}</td>
+					</tr>
+					<tr>
+						<td>{{$calender->semester->name}} Exam Marking Count Down</td>
+						<td>{{$calender->markingCalender->countDown()}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<br>
 	@endforeach
 </div>
 @endsection
