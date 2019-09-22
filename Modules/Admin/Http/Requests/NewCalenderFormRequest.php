@@ -15,7 +15,7 @@ class NewCalenderFormRequest extends FormRequest
     {
         return [
             'session_start' => 'required',
-            'seession_end' => 'required',
+            'session_end' => 'required',
             'first_semester_start' => 'required',
             'first_semester_end' => 'required',
             'first_semester_course_allocatiion_start' => 'required',

@@ -13,7 +13,7 @@
 	 	<div class="card-body">
 	 	    <label>Session</label><input type="text" name="session" class="form-control" value="{{date('Y')}}/{{date('Y')+1}}" disabled="">
 	 	    <label>session start at</label><input type="date" name="session_start" class="form-control">
-	 	    <label>session end at</label><input type="date" name="seession_end" class="form-control">
+	 	    <label>session end at</label><input type="date" name="session_end" class="form-control">
 	 	</div>
 	</div><br>
 	<div class="card">

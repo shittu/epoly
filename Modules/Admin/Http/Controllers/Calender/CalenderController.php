@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Admin\Http\Requests\NewCalenderFormRequest;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
-
+use Modules\Admin\Services\Calender\NewCalender as RegisterNewAcademicCalender;
+use Modules\Admin\Events\NewAcademicCalenderEvent;
 class CalenderController extends AdminBaseController
 {
 
@@ -26,7 +27,9 @@ class CalenderController extends AdminBaseController
      */
     public function registerCalender(NewCalenderFormRequest $request)
     {
-        dd($request->all());
+        new RegisterNewAcademicCalender($request->all());
+        event(new NewAcademicCalenderEvent());
+        return back();
     }
 
     /**
