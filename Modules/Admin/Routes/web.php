@@ -17,7 +17,17 @@ Route::prefix('admin')->group(function() {
   Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.auth.login');
   Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login');
   Route::post('logout', 'Auth\AdminLoginController@logout')->name('admin.auth.logout');
-
+   
+  Route::prefix('calender')
+    ->namespace('Calender')
+    ->name('admin.calender.')
+    ->group(function() {
+    Route::get('/create', 'CalenderController@createCalender')->name('create');
+    Route::post('/register', 'CalenderController@registerCalender')->name('register');
+    Route::post('/calender/{calender_id}/update', 'calenderController@updateCalender')->name('update');
+    Route::get('/{calender_id}/view', 'CalenderController@editCalender')->name('view');
+    Route::get('/calender/{calender_id}/delete', 'CalenderController@deleteCalender')->name('delete');
+    }); 
   //appointment routes
   Route::prefix('college')
     ->namespace('Appointment')

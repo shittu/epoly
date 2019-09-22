@@ -54,7 +54,7 @@
                                     </li>
                                     @if(admin())
                                     <li>
-                                        <a href="{{route('admin.calender.view')}}">View {{date('Y')}}/{{date('Y')+1}} Calendar</a>
+                                        <a href="{{route('admin.calender.view',[1])}}">View {{date('Y')}}/{{date('Y')+1}} Calendar</a>
                                     </li>
                                     @endif
                                 </ul>
@@ -81,7 +81,6 @@
                     </nav>
                 </div>
             </div>
-        </div>
-        
+        </div> 
     </header>
     

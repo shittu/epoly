@@ -4,26 +4,19 @@ namespace Modules\Admin\Http\Controllers\Calender;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use Modules\Admin\Http\Requests\NewCalenderFormRequest;
+use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 
-class CalenderController extends Controller
+class CalenderController extends AdminBaseController
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-    public function index()
-    {
-        return view('admin::index');
-    }
 
     /**
      * Show the form for creating a new resource.
      * @return Response
      */
-    public function create()
+    public function createCalender()
     {
-        return view('admin::create');
+        return view('admin::calender.create');
     }
 
     /**
@@ -31,9 +24,9 @@ class CalenderController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function registerCalender(NewCalenderFormRequest $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -41,9 +34,9 @@ class CalenderController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function showCalender($calender_id)
     {
-        return view('admin::show');
+        return view('admin::calender.view');
     }
 
     /**
@@ -51,9 +44,9 @@ class CalenderController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit($id)
+    public function editCalender($calender_id)
     {
-        return view('admin::edit');
+        return view('admin::calender.edit');
     }
 
     /**
@@ -62,7 +55,7 @@ class CalenderController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function updateCalender(NewCalenderFormRequest $request, $calender_id)
     {
         //
     }
@@ -72,7 +65,7 @@ class CalenderController extends Controller
      * @param int $id
      * @return Response
      */
-    public function destroy($id)
+    public function delete($calender_id)
     {
         //
     }
