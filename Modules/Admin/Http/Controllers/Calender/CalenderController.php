@@ -75,7 +75,7 @@ class CalenderController extends AdminBaseController
 
     public function getThisSession($session)
     {
-        foreach (Session::where('name',$session)->get() as $session) {
+        foreach (Session::where('name',str_replace('-','/',$session))->get() as $session) {
             return $session;
         }
     }

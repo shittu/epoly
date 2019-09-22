@@ -37,7 +37,7 @@ class RegisterSemesterCalenders
     public function registerSemestersCalender()
     {
     	foreach ($this->semesters as $semester) {
-    		$this->session->calenders()->firstOrCreate([
+    		$calender = $this->session->calenders()->firstOrCreate([
                 'upload_result_calender_id' => $this->registerNewSemseterResultUploadCalender($semester)->id,
                 'semester_id' => $semester,
                 'lecture_calender_id' => $this->registerNewSemesterLectureCalender($semester)->id,
@@ -46,6 +46,17 @@ class RegisterSemesterCalenders
                 'exam_calender_id' => $this->registerNewSemesterExamCalender($semester)->id,
                 'admin_id' => admin()->id,
     		]);
+            if($semester == 1){
+                $calender->update([
+                    'start'=>$this->data['first_semester_start'],
+                    'end'=>$this->data['first_semester_end'],
+                ]);
+            }else{
+                $calender->update([
+                    'start'=>$this->data['second_semester_start'],
+                    'end'=>$this->data['second_semester_end'],
+                ]);
+            }
     	}
     }
 

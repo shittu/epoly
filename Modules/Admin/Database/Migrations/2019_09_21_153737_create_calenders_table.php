@@ -79,6 +79,8 @@ class CreateCalendersTable extends Migration
             ->on('marking_calenders')
             ->delete('restrict')
             ->update('cascade');
+            $table->string('start')->nullable();
+            $table->string('end')->nullable();
             $table->timestamps();
         });
     }
