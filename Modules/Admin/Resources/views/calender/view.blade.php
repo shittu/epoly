@@ -1,12 +1,16 @@
 @extends('admin::layouts.master')
 @section('title')
-    admin create calender page
+    admin view calender page
 @endsection
 @section('page-content')
-
 <div class="col-md-3">
 </div>
 <div class="col-md-6">
+	@if(admin())
+	<button class="card-header button-fullwidth cws-button bt-color-3"><a href="{{route('admin.calender.edit',[$session->id])}}">{{$session->name}} Edit Calender</a></button>
+    <button class="card-header button-fullwidth cws-button bt-color-3">{{$session->name}} Delete Calender</button><br>
+    @endif
+    <br>
 	<div class="card">
 		<div class="card-header button-fullwidth cws-button bt-color-3">
 		    {{$session->name}} Session Calender 

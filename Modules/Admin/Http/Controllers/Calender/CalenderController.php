@@ -47,9 +47,9 @@ class CalenderController extends AdminBaseController
      * @param int $id
      * @return Response
      */
-    public function editCalender($calender_id)
+    public function editCalender($session_id)
     {
-        return view('admin::calender.edit');
+        return view('admin::calender.edit', ['session'=>Session::find($session_id)]);
     }
 
     /**
