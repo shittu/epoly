@@ -15,6 +15,14 @@ class CreateCalendersTable extends Migration
     {
         Schema::create('calenders', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('admin_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('admins')
+            ->delete('restrict')
+            ->update('cascade');
             $table->integer('session_id')
             ->unsigned()
             ->nullable()

@@ -15,7 +15,8 @@ class CreateExamCalendersTable extends Migration
     {
         Schema::create('exam_calenders', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->string('start');
+            $table->string('end');
             $table->timestamps();
         });
     }

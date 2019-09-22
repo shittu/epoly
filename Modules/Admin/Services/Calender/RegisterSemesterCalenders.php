@@ -22,11 +22,12 @@ class RegisterSemesterCalenders
 		$this->semesters = $semesters;
 		$this->data = $data;
 		$this->session = $this->registerCurrentSession();
+        $this->registerSemestersCalender();
 	}
 
 	public function registerCurrentSession()
 	{
-		Session::firstOrCreate([
+		return Session::firstOrCreate([
 			'name'=>$this->data['session'],
 			'start'=>$this->data['session_start'],
 			'end'=>$this->data['session_end'],
@@ -41,9 +42,9 @@ class RegisterSemesterCalenders
                 'semester_id' => $semester,
                 'lecture_calender_id' => $this->registerNewSemesterLectureCalender($semester)->id,
                 'course_allocation_calender_id'=>$this->registerNewSemseterCourseAllocationCalender($semester)->id,
-                'marking_calender_id',
+                'marking_calender_id'=>$this->registerNewSemesterExamMarkingCalender($semester)->id,
                 'exam_calender_id' => $this->registerNewSemesterExamCalender($semester)->id,
-                'admin_id' =>admin()->id,
+                'admin_id' => admin()->id,
     		]);
     	}
     }

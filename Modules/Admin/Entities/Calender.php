@@ -36,9 +36,14 @@ class Calender extends BaseModel
     	return $this->belongsTo(Admin::class);
     }
 
+    public function session()
+    {
+    	return $this->belongsTo(Session::class);
+    }
+
     public function semester()
     {
-    	return $this->belongsTo('Modules\College\Entities\Semester');
+    	return $this->belongsTo('Modules\Department\Entities\Semester');
     }
 
 }

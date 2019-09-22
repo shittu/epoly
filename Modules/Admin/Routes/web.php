@@ -25,7 +25,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/create', 'CalenderController@createCalender')->name('create');
     Route::post('/register', 'CalenderController@registerCalender')->name('register');
     Route::post('/calender/{calender_id}/update', 'calenderController@updateCalender')->name('update');
-    Route::get('/{calender_id}/view', 'CalenderController@editCalender')->name('view');
+    Route::get('/{session}/view', 'CalenderController@viewCalender')->name('view');
     Route::get('/calender/{calender_id}/delete', 'CalenderController@deleteCalender')->name('delete');
     }); 
   //appointment routes

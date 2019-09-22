@@ -4,13 +4,13 @@ namespace Modules\Admin\Http\Controllers\Calender;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Admin\Entities\Session;
+use Modules\Admin\Events\NewAcademicCalenderEvent;
 use Modules\Admin\Http\Requests\NewCalenderFormRequest;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 use Modules\Admin\Services\Calender\NewCalender as RegisterNewAcademicCalender;
-use Modules\Admin\Events\NewAcademicCalenderEvent;
 class CalenderController extends AdminBaseController
 {
-
     /**
      * Show the form for creating a new resource.
      * @return Response
@@ -27,9 +27,9 @@ class CalenderController extends AdminBaseController
      */
     public function registerCalender(NewCalenderFormRequest $request)
     {
-        new RegisterNewAcademicCalender($request->all());
-        event(new NewAcademicCalenderEvent());
-        return back();
+        $calender = new RegisterNewAcademicCalender($request->all());
+        event(new NewAcademicCalenderEvent($calender->session));
+        return redirect()->route('admin.calender.view',[str_replace('/','-',$calender->session)]);
     }
 
     /**
@@ -37,9 +37,9 @@ class CalenderController extends AdminBaseController
      * @param int $id
      * @return Response
      */
-    public function showCalender($calender_id)
-    {
-        return view('admin::calender.view');
+    public function viewCalender($session)
+    {   
+        return view('admin::calender.view',['session'=>$this->getThisSession($session)]);
     }
 
     /**
@@ -71,5 +71,12 @@ class CalenderController extends AdminBaseController
     public function delete($calender_id)
     {
         //
+    }
+
+    public function getThisSession($session)
+    {
+        foreach (Session::where('name',$session)->get() as $session) {
+            return $session;
+        }
     }
 }
