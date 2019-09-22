@@ -145,6 +145,29 @@
 			</div>
 		</div>
 		<br>
+		<!-- result upload calender -->
+		<div class="card">
+			<div class="card-header button-fullwidth cws-button bt-color-3">
+			    {{$calender->semester->name}} Result Upload  Calender 
+		    </div>
+			<div class="card-body">
+				<table>
+					<tr>
+						<td>{{$calender->semester->name}} Result Upload Start Date</td>
+						<td>{{$calender->uploadResultCalender->start}}</td>
+					</tr>
+					<tr>
+						<td>{{$calender->semester->name}} Result Upload End Date</td>
+						<td>{{$calender->uploadResultCalender->end}}</td>
+					</tr>
+					<tr>
+						<td>{{$calender->semester->name}} Result Upload Count Down</td>
+						<td>{{$calender->uploadResultCalender->countDown()}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<br>
 	@endforeach
 </div>
 @endsection
