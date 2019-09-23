@@ -7,8 +7,8 @@
 </div>
 <div class="col-md-6">
 	@if(admin())
-	<button class="card-header button-fullwidth cws-button bt-color-3"><a href="{{route('admin.calender.edit',[$session->id])}}">{{$session->name}} Edit Calender</a></button>
-    <button class="card-header button-fullwidth cws-button bt-color-3">{{$session->name}} Delete Calender</button><br>
+	<button class="card-header button-fullwidth cws-button bt-color-3"><a href="{{route('admin.calender.edit',[$session->id])}}" style="color: white">{{$session->name}} Edit Calender</a></button>
+    <button class="card-header button-fullwidth cws-button bt-color-3"><a href="{{route('admin.calender.delete',[$session->id])}}" style="color: white" onclick="confirm('Are you sure you want to delete this school calender')">{{$session->name}} Delete Calender</a></button><br>
     @endif
     <br>
 	<div class="card">

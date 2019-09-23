@@ -3,7 +3,7 @@
     admin create calender page
 @endsection
 @section('page-content')
-
+@if(admin())
 <div class="col-md-3"></div>
 <div class="col-md-6">
 	<form action="{{route('admin.calender.register')}}" method="post">
@@ -106,4 +106,5 @@
 		<br><br>
     </form>
 </div>
+@endif
 @endsection

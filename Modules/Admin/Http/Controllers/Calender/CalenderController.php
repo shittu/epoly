@@ -7,10 +7,12 @@ use Illuminate\Http\Response;
 use Modules\Admin\Entities\Session;
 use Modules\Admin\Events\NewAcademicCalenderEvent;
 use Modules\Admin\Events\UpdateAcademicCalenderEvent;
+use Modules\Admin\Events\AcademicCalenderDeletedEvent;
 use Modules\Admin\Http\Requests\NewCalenderFormRequest;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 use Modules\Admin\Services\Calender\NewCalender as RegisterNewAcademicCalender;
 use Modules\Admin\Services\Calender\UpdateCalender as UpdateNewAcademicCalender;
+use Modules\Admin\Services\Calender\DeleteAcademicCalender;
 class CalenderController extends AdminBaseController
 {
     /**
@@ -41,7 +43,12 @@ class CalenderController extends AdminBaseController
      */
     public function viewCalender($session)
     {   
-        return view('admin::calender.view',['session'=>$this->getThisSession($session)]);
+        $current_session = $this->getThisSession($session);
+        if(!$current_session){
+            session()->flash('error',['sorry no calender register for '.$session]);
+            return back();
+        }
+        return view('admin::calender.view',['session'=>$current_session]);
     }
 
     /**
@@ -73,9 +80,12 @@ class CalenderController extends AdminBaseController
      * @param int $id
      * @return Response
      */
-    public function delete($calender_id)
+    public function deleteCalender($session_id)
     {
-        //
+        $session = Session::find($session_id);
+        new DeleteAcademicCalender($session);
+        event(new AcademicCalenderDeletedEvent($session));
+        return redirect()->route('admin.calender.create');
     }
 
     public function getThisSession($session)
