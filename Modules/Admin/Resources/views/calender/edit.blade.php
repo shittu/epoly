@@ -6,7 +6,7 @@
 
 <div class="col-md-3"></div>
 <div class="col-md-6">
-	<form action="{{route('admin.calender.update')}}" method="post">
+	<form action="{{route('admin.calender.update',[$session->id])}}" method="post">
 		@csrf
 		<div class="card">
 			<div class="card-header button-fullwidth cws-button bt-color-3">Session Calender </div>

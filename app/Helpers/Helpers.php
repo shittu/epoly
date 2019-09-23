@@ -73,6 +73,15 @@ if (!function_exists('directer')) {
     }
 }
 
+if (!function_exists('currentSession')) {
+    function currentSession()
+    { 
+        $start = date('Y');
+        $end = date('Y')+1;
+        return $start.'/'.$end;
+    }
+}
+
 if (!function_exists('logout_route')) {
     function logout_route()
     {
