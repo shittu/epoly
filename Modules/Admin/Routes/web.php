@@ -24,7 +24,7 @@ Route::prefix('admin')->group(function() {
     ->group(function() {
     Route::get('/create', 'CalenderController@createCalender')->name('create');
     Route::post('/register', 'CalenderController@registerCalender')->name('register');
-    Route::post('/calender/{calender_id}/update', 'calenderController@updateCalender')->name('update');
+    Route::post('/calender/{calender_id}/update', 'CalenderController@updateCalender')->name('update');
     Route::get('/{session}/view', 'CalenderController@viewCalender')->name('view');
     Route::get('/session/{session_id}/edit', 'CalenderController@editCalender')->name('edit');
     Route::get('/calender/{calender_id}/delete', 'CalenderController@deleteCalender')->name('delete');

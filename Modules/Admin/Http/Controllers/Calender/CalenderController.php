@@ -9,6 +9,7 @@ use Modules\Admin\Events\NewAcademicCalenderEvent;
 use Modules\Admin\Http\Requests\NewCalenderFormRequest;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 use Modules\Admin\Services\Calender\NewCalender as RegisterNewAcademicCalender;
+use Modules\Admin\Services\Calender\UpdateCalender as UpdateNewAcademicCalender;
 class CalenderController extends AdminBaseController
 {
     /**
@@ -58,9 +59,12 @@ class CalenderController extends AdminBaseController
      * @param int $id
      * @return Response
      */
-    public function updateCalender(NewCalenderFormRequest $request, $calender_id)
+    public function updateCalender(NewCalenderFormRequest $request, $session_id)
     {
-        //
+        $session = Session::find($session_id);
+        new UpdateNewAcademicCalender($session, $request->all());
+        event(new UpdateAcademicCalenderEvent($session));
+        return redirect()->route('admin.calender.view',[str_replace('/','-',$session->name)]);
     }
 
     /**
