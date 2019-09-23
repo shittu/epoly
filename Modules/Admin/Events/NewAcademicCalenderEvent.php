@@ -18,7 +18,7 @@ class NewAcademicCalenderEvent
     public function __construct($session)
     {
         $this->session = $session;
-        $this->setCalenderSuccessMessage();
+        $this->setCalenderRegisterSuccessMessage();
     }
 
     /**
@@ -31,7 +31,7 @@ class NewAcademicCalenderEvent
         return [];
     }
     
-    public function setCalenderSuccessMessage()
+    public function setCalenderRegisterSuccessMessage()
     {
         session()->flash('message','Congratulation the new '.$this->session.' academic calender is registered successfully');
     }

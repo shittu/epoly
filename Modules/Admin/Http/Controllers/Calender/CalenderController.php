@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Admin\Entities\Session;
 use Modules\Admin\Events\NewAcademicCalenderEvent;
+use Modules\Admin\Events\UpdateAcademicCalenderEvent;
 use Modules\Admin\Http\Requests\NewCalenderFormRequest;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 use Modules\Admin\Services\Calender\NewCalender as RegisterNewAcademicCalender;

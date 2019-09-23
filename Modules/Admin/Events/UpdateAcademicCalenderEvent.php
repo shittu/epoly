@@ -19,7 +19,7 @@ class UpdateAcademicCalenderEvent
     public function __construct(Session $session)
     {
         $this->session = $session->name;
-        $this->setCalenderSuccessMessage();
+        $this->setCalenderUpdateSuccessMessage();
     }
 
     /**
