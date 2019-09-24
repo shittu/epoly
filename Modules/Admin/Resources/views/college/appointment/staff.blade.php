@@ -69,26 +69,8 @@
 		     				@endif
 		     			</td>
 		     			<td>
-			     			@if($staff->headOfDepartment || $staff->directer)
-			     				<!-- if staff is appinted -->
-			     				<button class="btn btn-primary"><a href="{{route('admin.college.department.staff.show',['staff_id'=>$staff->id])}}" style="color: white">Revoke Appointmnet</a></i>
-			     				</button><br>
-
-			     				<!-- edit appointment -->
-			     				<button class="btn btn-info"><a href="{{route('admin.college.department.staff.edit',['staff_id'=>$staff->id])}}" style="color: white">Edit Appointment</a></i>
-			     				</button><br>
-		                        
-		                        <!-- delete appointment -->
-			     				<button class="btn btn-info"><a href="{{route('admin.college.department.staff.edit',['staff_id'=>$staff->id])}}" style="color: white">Delete Appointment</a></i>
-			     				</button><br>
-		                        @else
-		                        <!-- if the staff is not appinted to hod -->
-			     				<button class="btn btn-info" onclick="confirm('Are you sure you want appoint this staff as Head of department')"><a href="{{route('admin.college.department.appointment.hod.create',[$staff->id])}}" style="color: white">Appointed To HOD</a> </i>
-			     				</button><br>
-
-		                        <!-- if the staff is not appointed to directer -->
-			     				<button class="btn btn-info"><a href="{{route('admin.college.appointment.directer.create',['staff_id'=>$staff->id])}}" style="color: white" onclick="confirm('Are you sure you want appoint this staff College Directer')">Appointed To Directer</a></i></button>
-		                    @endif
+			     			<button class="btn btn-info" data-toggle="modal" data-target="#staff_{{$staff->id}}_appointment">Make Appointment</button>
+			     			@include('admin::college.appointment.appointment')
 		     			</td>
 		     		</tr>
 		     		@endif

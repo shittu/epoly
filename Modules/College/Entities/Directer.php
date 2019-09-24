@@ -37,10 +37,15 @@ class Directer extends Authenticatable
 
     public function duration()
     {
-        $date = strtotime($this->from) - time();
+        $start = Carbon::now();
         if($this->to){
-            $date = strtotime($this->to) - strtotime($this->from);
+            $start = Carbon::parse($this->to);
         }
-        return Carbon::create(date('Y',$date), date('m',$date), date('d',$date), date('H',$date), date('i',$date), date('s',$date))->diffForHumans();
+        $count = Carbon::parse($this->from)->diffInMonths($start);
+        $month = 'Month';
+        if($count > 1){
+            $month = 'Months';
+        }
+        return $count.' '.$month;
     }
 }

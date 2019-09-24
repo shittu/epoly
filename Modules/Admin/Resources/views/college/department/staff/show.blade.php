@@ -16,7 +16,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<h2>Biodata</h2>
+						<h2>Biodata</h2><hr>
 	    				<table>
 	    					<tr>
 	    						<td>Name</td>
@@ -42,10 +42,11 @@
 	    						<td>Tribe</td>
 	    						<td>{{$staff->profile->tribe->name}}</td>
 	    					</tr>
+	    					
 	    				</table>
 					</div>
 					<div class="col-md-6">
-						<h2>Qualification</h2>
+						<h2>Qualification</h2><hr>
 	    				<table>
 	    					<tr>
 	    						<td></td>
@@ -54,9 +55,10 @@
 	    				</table>
 					</div>
 					<div class="col-md-6">
-						<h2>Appointments</h2>
+						<h2>Appointments</h2><hr>
+	    				
+	    				@if($staff->headOfDepartment)
 	    				<table>
-	    					@if($staff->headOfDepartment)
 	    					<tr>
 	    						<td>Position</td>
 	    						<td>Head Of Department</td>
@@ -73,8 +75,15 @@
 	    						<td>To</td>
 	    						<td>{{$staff->headOfDepartment->to}}</td>
 	    					</tr>
-	    					@endif
-	    					@if($staff->directer)
+	    					<tr>
+	    						<td>Duration</td>
+	    						<td>{{$staff->headOfDepartment->duration()}}</td>
+	    					</tr>
+                        </table><hr>
+	    				@endif
+
+	    				@if($staff->directer)
+	    				<table>
 	    					<tr>
 	    						<td>Position</td>
 	    						<td>College Directer</td>
@@ -91,11 +100,15 @@
 	    						<td>To</td>
 	    						<td>{{$staff->directer->to}}</td>
 	    					</tr>
-	    					@endif
-	    				</table>
+	    					<tr>
+	    						<td>Duration</td>
+	    						<td>{{$staff->directer->duration()}}</td>
+	    					</tr>
+	    				</table><br>
+	    				@endif
 					</div>
 					<div class="col-md-6">
-						<h2>Promotions</h2>
+						<h2>Promotions</h2><hr>
 	    				<table>
 	    					<tr>
 	    						<td></td>
