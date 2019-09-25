@@ -42,6 +42,17 @@ Route::prefix('department')
 			
 		});
 
+		Route::prefix('course/allocation')
+		->name('course.allocation.')
+		->namespace('Course')
+		->group(function() {
+
+			Route::get('/', 'CourseAllocationController@index')->name('index');
+			Route::post('{course_id}/update-course', 'CourseAllocationController@update')->name('update');
+			Route::post('/register-course', 'CourseAllocationController@register')->name('register');
+			
+		});
+
 		Route::prefix('admission')
 		->name('admission.')
 		->namespace('Admission')

@@ -4,9 +4,9 @@ namespace Modules\Department\Http\Controllers\Course;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use Modules\Core\Http\Controllers\Department\HodBaseController;
 
-class CourseAllocationController extends Controller
+class CourseAllocationController extends HodBaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CourseAllocationController extends Controller
      */
     public function index()
     {
-        return view('department::index');
+        return view('department::department.course.courseAllocation.index');
     }
 
     /**

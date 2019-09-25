@@ -28,7 +28,9 @@
     </ul>
 </li>
 <li>
-    <a href="#">Course Allocation</a>
+    <a href="{{route('department.course.allocation.index')}}">
+    Course Allocation
+    </a>
 </li>
 <li>
     <a href="#">Results</a>

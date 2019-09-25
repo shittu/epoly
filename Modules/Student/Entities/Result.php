@@ -17,9 +17,9 @@ class Result extends BaseModel
     	return $this->hasMany(ResultRemark::class);
     }
 
-    public function point()
+    public function computePoints($grade)
     {
-    	switch ($this->grade) {
+    	switch ($grade) {
     		case 'A':
     			$point = 4.00;
     			break;
@@ -52,7 +52,33 @@ class Result extends BaseModel
     			$point = 0.00;
     			break;
     	}
-    	return $point;
+    	$this->grade = $grade;
+    	$this->points = $point/$this->studentCourse->course->unit;
+    	$this->save();
+    }
+
+    public function computeGrade()
+    {
+    	$score = $this->ca + $this->exam;
+    	$grade = 'F';
+    	if($score >= 75){
+    		$grade = 'A';
+    	}elseif($score >= 70){
+            $grade = 'AB';
+    	}elseif($score >= 65){
+            $grade = 'B';
+    	}elseif($score >= 60){
+            $grade = 'BC';
+    	}elseif($score >= 55){
+            $grade = 'C';
+    	}elseif($score >= 50){
+            $grade = 'CD';
+    	}elseif($score >= 45){
+            $grade = 'D';
+    	}elseif($score >= 40){
+            $grade = 'E';
+    	}
+    	$this->computePoints($grade)
     }
 
 }

@@ -85,34 +85,19 @@ if (!function_exists('currentSession')) {
 if (!function_exists('logout_route')) {
     function logout_route()
     {
-    
-        switch (auth()->guard()) {
-            
-            case 'admin':
-                $route = 'admin.auth.logout';
-            break;
-
-            case 'staff':
-                $route = 'staff.auth.logout';
-            break;
-            
-            case 'lecturer':
-                $route = 'lecturer.auth.logout';
-            break;
-
-            case 'head_of_department':
-                $route = 'department.hod.auth.logout';
-            break;
-
-            case 'directer':
-                $route = 'college.directer.auth.logout';
-            break;
-
-            default:
-                $route = 'student.auth.logout';
-            break;
+        if(auth()->guard('admin')->check()){
+            $route = 'admin.auth.logout';
+        }elseif (auth()->guard('staff')->check()) {
+            $route = 'staff.auth.logout';
+        }elseif (auth()->guard('lecturer')->check()) {
+            $route = 'lecturer.auth.logout';
+        }elseif (auth()->guard('lecturer')->check()) {
+            $route = 'department.hod.auth.logout';
+        }elseif (auth()->guard('directer')->check()) {
+            $route = 'college.directer.auth.logout';
+        }else{
+            $route = 'student.auth.logout';
         }
-        
         return $route;
     }
 }
