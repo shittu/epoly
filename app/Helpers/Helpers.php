@@ -85,6 +85,7 @@ if (!function_exists('currentSession')) {
 if (!function_exists('logout_route')) {
     function logout_route()
     {
+    
         switch (auth()->guard()) {
             
             case 'admin':

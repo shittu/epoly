@@ -68,10 +68,10 @@
                             @else
                                 <li><a href="{{ route(logout_route()) }}"
                                     onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();"><i class="ti-power-off m-r-5"></i> Logout</a>
+                                        document.getElementById('logout-form').submit();"><i class="ti-power-off m-r-5"></i> Logout</a>
                                 </li>
 
-                                <form id="logout-form" action="{{ route('logout') }}"    method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route(logout_route()) }}"    method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             @endif
