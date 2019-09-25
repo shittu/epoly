@@ -2,9 +2,19 @@
 
 namespace Modules\Student\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class Result extends Model
+class Result extends BaseModel
 {
-    protected $fillable = [];
+	
+    public function studentCourse()
+    {
+    	return $this->belongsTo(StudentCourse::class);
+    }
+
+    public function resultRemarks()
+    {
+    	return $this->hasMany(ResultRemark::class);
+    }
+
 }

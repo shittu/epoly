@@ -2,9 +2,17 @@
 
 namespace Modules\Student\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class Remark extends Model
+class Remark extends BaseModel
 {
-    protected $fillable = [];
+    public function resultRemarks()
+    {
+    	return $this->hasMany(ResultRemark::class);
+    }
+
+    public function remarkType()
+    {
+    	return $this->belongsTo(RemarkType::class);
+    }
 }

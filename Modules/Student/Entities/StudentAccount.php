@@ -2,9 +2,9 @@
 
 namespace Modules\Student\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class StudentAccount extends Model
+class StudentAccount extends BaseModel
 {
     public function student()
     {
