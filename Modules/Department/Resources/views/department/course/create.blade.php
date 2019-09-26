@@ -33,8 +33,13 @@
             @enderror
         </div>
         <div class="form-group">
-        	<label>Couse Description if any</label>
-            <textarea rows="5" name="description" class="form-control"></textarea>
+        	<label>Couse Unit</label>
+            <select name="unit" class="form-control">
+                <option value="">Course Unit</option>
+                @foreach([1,2,3,4,5,6] as $unit)
+                    <option value="{{$unit}}">{{$unit}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
         	<label>Level</label>

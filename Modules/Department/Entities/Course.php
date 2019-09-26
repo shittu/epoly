@@ -11,6 +11,11 @@ class Course extends BaseModel
     	return $this->hasMany(DepartmentCourse::class);
     }
 
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
     public function studentCourses()
     {
         return $this->hasMany('Modules\Student\Entities\StudentCourse');
@@ -35,4 +40,5 @@ class Course extends BaseModel
     {
     	return $this->hasMany(LecturerCourseAllocation::class);
     }
+
 }

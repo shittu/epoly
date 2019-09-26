@@ -17,6 +17,11 @@ class Department extends BaseModel
     	return $this->hasMany('Modules\Staff\Entities\StaffPosition');
     }
 
+    public function courses()
+    {
+        return $this->hasMAny(Course::class);
+    }
+    
     public function staffs()
     {
     	return $this->hasMany('Modules\Staff\Entities\Staff');

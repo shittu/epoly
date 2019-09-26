@@ -15,6 +15,14 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('department_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('departments')
+            ->delete('restrict')
+            ->update('cascade');
             $table->integer('semester_id')
             ->unsigned()
             ->nullable()

@@ -34,12 +34,12 @@ class CourseController extends HodBaseController
      */
     public function register(Request $request)
     {
-        $course = Course::create([
+        $course = headOfDepartment()->department()->create([
             'code'=>$request->code,
             'title'=>$request->title,
             'level_id'=>$request->level,
             'semester_id'=>$request->semester,
-            'description'=>$request->description
+            'unit'=>$request->unit
         ]);
         headOfDepartment()->department->departmentCourses()->create(['course_id'=>$course->id]);
         session()->flash('message','Course is created successfully');
@@ -70,7 +70,7 @@ class CourseController extends HodBaseController
             'title'=>$request->title,
             'level_id'=>$request->level,
             'semester_id'=>$request->semester,
-            'description'=>$request->description
+            'unit'=>$request->unit
         ]);
         session()->flash('message','Course is updated successfully');
         return redirect()->route('department.course.index');
