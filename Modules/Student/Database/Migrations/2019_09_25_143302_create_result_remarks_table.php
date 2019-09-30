@@ -15,7 +15,22 @@ class CreateResultRemarksTable extends Migration
     {
         Schema::create('result_remarks', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->integer('result_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('results')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('remark_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('remarks')
+            ->delete('restrict')
+            ->update('cascade');
             $table->timestamps();
         });
     }

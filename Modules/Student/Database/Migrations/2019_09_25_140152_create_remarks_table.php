@@ -15,7 +15,15 @@ class CreateRemarksTable extends Migration
     {
         Schema::create('remarks', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->integer('remark_type_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('remark_types')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->string('name');
             $table->timestamps();
         });
     }

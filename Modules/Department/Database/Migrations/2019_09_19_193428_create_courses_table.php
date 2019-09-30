@@ -41,6 +41,7 @@ class CreateCoursesTable extends Migration
             ->update('cascade');
             $table->string('title');
             $table->string('code');
+            $table->string('unit');
             $table->string('description')->nullable();
             $table->timestamps();
         });

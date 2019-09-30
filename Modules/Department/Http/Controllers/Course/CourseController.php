@@ -34,7 +34,7 @@ class CourseController extends HodBaseController
      */
     public function register(Request $request)
     {
-        $course = headOfDepartment()->department()->create([
+        $course = headOfDepartment()->department->courses()->create([
             'code'=>$request->code,
             'title'=>$request->title,
             'level_id'=>$request->level,

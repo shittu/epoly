@@ -15,7 +15,18 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->integer('student_course_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('student_courses')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->string('ca');
+            $table->string('exam');
+            $table->string('grade');
+            $table->float('points');
             $table->timestamps();
         });
     }
