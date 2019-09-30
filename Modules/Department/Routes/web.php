@@ -17,7 +17,7 @@ Route::prefix('department')
 	Route::get('/', 'DepartmentController@verify')->name('verify');
 	Route::get('/hod', 'DepartmentController@verify')->name('verify');
 	//hod authentication routes
-	Route::prefix('hod')
+	    Route::prefix('hod')
 		->name('hod.')
 		->group(function() {
 			Route::get('/dashboard', 'DepartmentController@index')->name('dashboard');
@@ -39,19 +39,18 @@ Route::prefix('department')
 			Route::get('{course_id}/edit-course', 'CourseController@edit')->name('edit');
 			Route::post('/register-course', 'CourseController@register')->name('register');
 			Route::get('{course_id}/delete-course', 'CourseController@delete')->name('delete');
+
+			Route::prefix('allocation')
+			->name('allocation.')
+			->group(function() {
+				Route::get('/', 'CourseAllocationController@index')->name('index');
+				Route::post('/register', 'CourseAllocationController@register')->name('register');
+				
+			});
 			
 		});
 
-		Route::prefix('course/allocation')
-		->name('course.allocation.')
-		->namespace('Course')
-		->group(function() {
-
-			Route::get('/', 'CourseAllocationController@index')->name('index');
-			Route::post('{course_id}/update-course', 'CourseAllocationController@update')->name('update');
-			Route::post('/register-course', 'CourseAllocationController@register')->name('register');
-			
-		});
+		
 
 		Route::prefix('admission')
 		->name('admission.')

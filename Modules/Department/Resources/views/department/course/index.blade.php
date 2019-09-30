@@ -12,7 +12,7 @@
 	     			<th>S/N</th>
 	     			<th>Couse Title</th>
 	     			<th>Course Code</th>
-	     			<th>Description</th>
+	     			<th>Course Units</th>
 	     			<th>Semester</th>
 	     			<th>Level</th>
 	     			<th></th>
@@ -24,7 +24,7 @@
 	     			<td>{{$loop->index+1}}</td>
 	     			<td>{{$departmentCourse->course->title}}</td>
 	     			<td>{{$departmentCourse->course->code}}</td>
-	     			<td>{{$departmentCourse->course->description}}</td>
+	     			<td>{{$departmentCourse->course->unit}}</td>
 	     			<td>{{$departmentCourse->course->semester->name}}</td>
 	     			<td>{{$departmentCourse->course->level->name}}</td>
 	     			<td>

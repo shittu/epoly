@@ -17,63 +17,43 @@ class CourseAllocationController extends HodBaseController
         return view('department::department.course.courseAllocation.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
+    public function register(Request $request)
     {
-        return view('department::create');
+        foreach ($this->preparedAllocationDatas($request->all()) as $data) {
+            //check if the data has course lecturer allocation
+            dd($data);
+            if($data['allocation']['course_master_lecturer_id']){
+                $lecturer = Lecturer::find($data['allocation']['course_master_lecturer_id']);
+                $lecturer->lecturerCourseAllocations()->create([
+                    'lecturer_course_status_id'=>1,
+                    'course_id'=>$data['allocation']['course_id'],
+                    'departemnt_id'=>$data['allocation']['departemnt_id'],
+                    'from'=>time()
+                ]);
+            }
+            //check if the course has lecturer assistance
+            if($data['allocation']['course_assistance_lecturer_id']){
+                $lecturer = Lecturer::find($data['allocation']['course_assistance_lecturer_id']);
+                $lecturer->lecturerCourseAllocations()->create([
+                    'lecturer_course_status_id'=>2,
+                    'course_id'=>$data['allocation']['course_id'],
+                    'departemnt_id'=>$data['allocation']['departemnt_id'],
+                    'from'=>time()
+                ]);
+            }
+        }
+        session()->flash('message','The course alocation is updated successfully');
+        return redirect()->route('department.course.allocation.index');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
+    
+    public function preparedAllocationDatas(array $inputs)
     {
-        //
+        $datas = [];
+        $number_of_allocation_data = count($inputs) - 1;
+        for ($i=0; $i < $number_of_allocation_data; $i++) { 
+            $datas[] = $inputs[$i];
+        }
+        return $datas;
     }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('department::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('department::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }
