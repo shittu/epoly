@@ -31,6 +31,14 @@ class CreateLecturerCoursesTable extends Migration
             ->on('courses')
             ->delete('restrict')
             ->update('cascade');
+             $table->integer('department_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('departments')
+            ->delete('restrict')
+            ->update('cascade');
             $table->integer('lecturer_course_status_id')
             ->unsigned()
             ->nullable()
@@ -39,7 +47,11 @@ class CreateLecturerCoursesTable extends Migration
             ->on('lecturer_course_statuses')
             ->delete('restrict')
             ->update('cascade');
+            $table->string('from');
+            $table->integer('is_active')->default(1);
+            $table->string('to')->nullable();
             $table->timestamps();
+
         });
     }
 

@@ -45,6 +45,12 @@ class Lecturer extends Authenticatable
     {
         return $this->hasMany('Modules\Department\Entities\LecturerCourseAllocation');
     }
+    
+
+    public function lecturerCourses()
+    {
+        return $this->hasMany('Modules\Department\Entities\LecturerCourse');
+    }
 
     public function duration()
     {

@@ -41,4 +41,26 @@ class Course extends BaseModel
     	return $this->hasMany(LecturerCourseAllocation::class);
     }
 
+    public function currentCourseMaster()
+    {
+        $lecturer = null;
+        foreach($this->lecturerCourses as $allocation){
+            if($allocation->is_active == 1 && $allocation->lecturer_course_status_id == 2){
+                $lecturer = $allocation->lecturer;
+            }
+        }
+        return $lecturer;
+    }
+
+    public function currentCourseAssistance()
+    {
+        $lecturer = null;
+        foreach($this->lecturerCourses as $allocation){
+            if($allocation->is_active == 1 && $allocation->lecturer_course_status_id == 1){
+                $lecturer = $allocation->lecturer;
+            }
+        }
+        return $lecturer;
+    }
+
 }

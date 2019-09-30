@@ -12,6 +12,7 @@
     	<div class="card">
         	<div class="card-body">
     			@csrf
+    			<input type="hidden" name="{{$loop->index}}[allocation][course_id]]" value="{{$course->id}}">
     			<label>Course Title</label>
     			<select class="form-control" name="{{$loop->index}}[allocation][course_title]]">
     				<option value="{{$course->title}}">{{$course->title}}</option>
@@ -21,31 +22,35 @@
     				<option value="{{$course->code}}">{{$course->code}}</option>
     			</select>
     			<label>Department</label>
-    			<select class="form-control" name="{{$loop->index}}[allocation][course_department_id]]">
+    			<select class="form-control" name="{{$loop->index}}[allocation][department_id]]">
     				<option value="{{$course->department->id}}">{{$course->department->name}}</option>
     			</select>
     			<label>Course Master</label>
     			<select class="form-control" name="{{$loop->index}}[allocation][course_master_lecturer_id]]">
-    				<option value="">Lecturer</option>
+    				<option value="{{$course->currentCourseMaster() ? $course->currentCourseMaster()->id : ''}}">{{$course->currentCourseMaster() ? $course->currentCourseMaster()->staff->first_name.' '.$course->currentCourseMaster()->staff->last_name.' '.$course->currentCourseMaster()->staff->staffID : 'Lecturer'}}</option>
     				@foreach(headOfDepartment()->department->staffs as $staff)
                         @if($staff->staffType->name == 'Lecturer')
-                            <option value="{{$staff->lecturer->id}}">{{$staff->first_name}} {{$staff->first_name}} {{$staff->staffID}}</option>
+                            @if($course->currentCourseMaster() && $staff->lecturer->id != $course->currentCourseMaster()->id )
+                                <option value="{{$staff->lecturer->id}}">{{$staff->first_name}} {{$staff->first_name}} {{$staff->staffID}}</option>
+                            @endif
                         @endif
     				@endforeach
     			</select>
     			<label>Course Assistance</label>
     			<select class="form-control" name="{{$loop->index}}[allocation][course_assistance_lecturer_id]]">
-    				<option value="">Lecturer</option>
+    				<option value="{{$course->currentCourseAssistance() ? $course->currentCourseAssistance()->id : ''}}">{{$course->currentCourseAssistance() ? $course->currentCourseAssistance()->staff->first_name.' '.$course->currentCourseAssistance()->staff->last_name.' '.$course->currentCourseAssistance()->staff->staffID : 'Lecturer'}}</option>
     				@foreach(headOfDepartment()->department->staffs as $staff)
                         @if($staff->staffType->name == 'Lecturer')
-                            <option value="{{$staff->lecturer->id}}">{{$staff->first_name}} {{$staff->first_name}} {{$staff->staffID}}</option>
+                            @if($course->currentCourseMaster() && $staff->lecturer->id != $course->currentCourseMaster()->id )
+                                <option value="{{$staff->lecturer->id}}">{{$staff->first_name}} {{$staff->first_name}} {{$staff->staffID}}</option>
+                            @endif
                         @endif
     				@endforeach
     			</select><br>
         	</div>
         </div><br>
 	@endforeach
-	<button class="btn btn-info">Make Allocation</button>
+	<button class="btn btn-info">Update Course Allocations</button>
     </form>
 	</div> 
 @endsection
