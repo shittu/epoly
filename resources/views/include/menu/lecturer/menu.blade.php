@@ -5,9 +5,14 @@
     <a href="#">Results</a>
     <ul>
         <li>
-        	<a href="#">Upload Result</a>
+        	<a href="#">Download Result Templete</a>
         </li>
-        <li><a href="#">View Result</a></li>
+        <li>
+            <a href="{{route('lecturer.result.upload.index')}}">Upload Result</a>
+        </li>
+        <li>
+            <a href="#">View Result</a>
+        </li>
     </ul>
 </li>
 <li>

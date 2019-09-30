@@ -19,4 +19,12 @@ Route::prefix('lecturer')
     Route::get('/login', 'Auth\LecturerLoginController@showLoginForm')->name('auth.login');
     Route::post('/login', 'Auth\LecturerLoginController@login')->name('login');
     Route::post('logout', 'Auth\LecturerLoginController@logout')->name('auth.logout');
+
+    Route::prefix('result')
+	->name('result.')
+	->namespace('Result')
+	->group(function() {
+        Route::get('/upload/index', 'ResultUploadController@index')->name('upload.index');
+        Route::post('/upload', 'ResultUploadController@upload')->name('upload.upload');
+	});
 });
