@@ -4,6 +4,7 @@ namespace Modules\Department\Http\Controllers\Course;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Lecturer\Entities\Lecturer;
 use Modules\Core\Http\Controllers\Department\HodBaseController;
 
 class CourseAllocationController extends HodBaseController
@@ -21,7 +22,6 @@ class CourseAllocationController extends HodBaseController
     {
         foreach ($this->preparedAllocationDatas($request->all()) as $data) {
             //check if the data has course lecturer allocation
-            dd($data);
             if($data['allocation']['course_master_lecturer_id']){
                 $lecturer = Lecturer::find($data['allocation']['course_master_lecturer_id']);
                 $lecturer->lecturerCourseAllocations()->create([

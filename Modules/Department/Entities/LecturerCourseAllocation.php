@@ -4,7 +4,7 @@ namespace Modules\Department\Entities;
 
 use Modules\Core\Entities\BaseModel;
 
-class LecurerCourseAllocation extends BaseModel
+class LecturerCourseAllocation extends BaseModel
 {
     public function department()
     {
