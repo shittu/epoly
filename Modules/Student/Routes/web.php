@@ -20,4 +20,18 @@ Route::prefix('student')
 	Route::get('/unauthorize-student', 'Auth\StudentLoginController@unauthorize')->name('auth.auth');
 	Route::post('/login', 'Auth\StudentLoginController@login')->name('login');
 	Route::post('logout', 'Auth\StudentLoginController@logout')->name('auth.logout');
+
+	Route::prefix('course')
+	->name('course.')
+	->namespace('Course')
+	->group(function() {
+
+        Route::prefix('registration')
+		->name('registration.')
+		->group(function() {
+	        Route::get('/', 'CourseRegistrationController@index')->name('index');
+             
+		});
+		
+	});
 });

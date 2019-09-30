@@ -5,6 +5,6 @@
     <a href="#">Results History</a>
 </li>
 <li>
-    <a href="#">Course Registraion</a>
+    <a href="{{route('student.course.registration.index')}}">Course Registraion</a>
 </li>
 
