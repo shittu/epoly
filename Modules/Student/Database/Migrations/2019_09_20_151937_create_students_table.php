@@ -23,6 +23,14 @@ class CreateStudentsTable extends Migration
             ->on('student_types')
             ->delete('restrict')
             ->update('cascade');
+            $table->integer('student_session_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('student_sessions')
+            ->delete('restrict')
+            ->update('cascade');
             $table->integer('admission_id')
             ->unsigned()
             ->nullable()

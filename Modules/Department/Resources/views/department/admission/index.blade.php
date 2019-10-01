@@ -13,6 +13,8 @@
 	     			<th>Fisrt Name</th>
 	     			<th>Last Name</th>
 	     			<th>Admission No</th>
+	     			<th>Session</th>
+	     			<th>Student Type</th>
 	     			<th>E-mail</th>
 	     			<th>Phone</th>
 	     			<th>Status</th>
@@ -26,6 +28,8 @@
 	     			<td>{{$admission->student->first_name}}</td>
 	     			<td>{{$admission->student->last_name}}</td>
 	     			<td>{{$admission->admission_no}}</td>
+	     			<td>{{$admission->student->studentSession->name}}</td>
+	     			<td>{{$admission->student->studentType->name}}</td>
 	     			<td>{{$admission->student->email}}</td>
 	     			<td>{{$admission->student->phone}}</td>
 	     			<td>{{$admission->student->is_active == 1 ? 'Active' : 'Revoked'}}</td>

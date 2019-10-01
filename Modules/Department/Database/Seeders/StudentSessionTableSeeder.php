@@ -4,9 +4,9 @@ namespace Modules\Department\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Student\Entities\StudentType;
+use Modules\Student\Entities\StudentSession;
 
-class StudentTypeTableSeeder extends Seeder
+class StudentSessionTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,9 +17,9 @@ class StudentTypeTableSeeder extends Seeder
     {
         Model::unguard();
 
-        $types = ['ND','HND'];
-        foreach ($types as $type) {
-            StudentType::firstOrCreate(['name'=>$type]);
+        $sessions = ['MORNING','EVENING'];
+        foreach ($sessions as $session) {
+            StudentSession::firstOrCreate(['name'=>$session]);
         }
     }
 }

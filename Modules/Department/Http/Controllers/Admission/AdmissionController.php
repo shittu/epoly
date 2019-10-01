@@ -35,15 +35,20 @@ class AdmissionController extends HodBaseController
      */
     public function register(Request $request)
     {
+        $request->validate([
+            'student_session'=>'required',
+            'student_type'=>'required',
+            'admission_no'=>'required'
+        ]);
         $admission = headOfDepartment()->admissions()->create(['admission_no'=>$request->admission_no]);
-
         $student = $admission->student()->create([
             'first_name'=>'default',
             'last_name'=>'default',
             'phone'=>'default',
             'email'=>$admission->admission_no.'@poly.com',
             'password'=>Hash::make($admission->admission_no),
-            'student_type_id' => $request->student_type
+            'student_type_id' => $request->student_type,
+            'student_session_id' => $request->student_session
         ]);
 
         $student->studentAccount()->create([]);

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\Department\Entities\Semester;
 use Modules\Department\Entities\Level;
 use Modules\Student\Entities\StudentType;
+use Modules\Student\Entities\StudentSession;
 
 class HeadOfDepartment extends Authenticatable
 {
@@ -69,5 +70,10 @@ class HeadOfDepartment extends Authenticatable
     public function studentTypes()
     {
         return StudentType::all();
+    }
+
+    public function studentSessions()
+    {
+        return StudentSession::all();
     }
 }
