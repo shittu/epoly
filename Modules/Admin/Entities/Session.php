@@ -12,6 +12,11 @@ class Session extends BaseModel
     	return $this->hasMany(Calender::class);
     }
 
+    public function studentCourses()
+    {
+        return $this->hasMany('Modules\Student\Entities\StudentCourse');
+    }
+
     public function countDown()
     {
     	$count = Carbon::parse($this->end)->diffInMonths(Carbon::now());

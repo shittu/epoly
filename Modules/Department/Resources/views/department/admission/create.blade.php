@@ -37,6 +37,20 @@
                 </span>
             @enderror
         </div>
+        <div class="form-group">
+            <label>Student Session</label>
+            <select name="student_session" class="form-control">
+                <option value=""></option>
+                @foreach(headOfDepartment()->studentSessions() as $student_session)
+                    <option value="{{$student_session->id}}">{{$student_session->name}}</option>
+                @endforeach
+            </select>
+            @error('student_session')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
         <button class="button-fullwidth cws-button bt-color-3">Register</button>
     </form><br><br>
 </div>

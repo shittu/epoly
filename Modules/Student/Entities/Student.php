@@ -3,11 +3,13 @@
 namespace Modules\Student\Entities;
 
 use Illuminate\Notifications\Notifiable;
+use Modules\Department\Entities\Level;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\Student\Services\Traits\HasLevelAndSemester;
 
 class Student extends Authenticatable
 {
-	use Notifiable;
+	use Notifiable, HasLevelAndSemester;
 
 	protected $fillable = [
         'first_name',
@@ -15,7 +17,8 @@ class Student extends Authenticatable
         'phone',
         'email',
         'password',
-        'student_type_id'
+        'student_type_id',
+        'student_session_id'
     ];
 
     /**
@@ -50,6 +53,16 @@ class Student extends Authenticatable
     public function studentCourses()
     {
         return $this->hasMany(StudentCourse::class);
+    }
+
+    public function currentRegisteredCourses()
+    {
+        $courses = [];
+        $level = Level::where('name',$this->level())->first();
+        foreach ($this->studentCourses()->where('level_id',$level->id)->get() as $student_course) {
+            $courses[] = $student_course->course;
+        }
+        return $courses;
     }
     
 }

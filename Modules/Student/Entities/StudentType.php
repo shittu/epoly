@@ -12,4 +12,9 @@ class StudentType extends BaseModel
     	return $this->hasMany(Student::class);
     }
 
+    public function levels()
+    {
+    	return $this->hasMany('Modules\Department\Entities\Level');
+    }
+
 }

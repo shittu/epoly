@@ -27,4 +27,14 @@ class StudentCourse extends BaseModel
     	return $this->hasMany(Remark::class);
     }
 
+    public function level()
+    {
+        return $this->belongsTo('Modules\Department\Entities\Level');
+    }
+
+    public function session()
+    {
+        return $this->belongsTo('Modules\Admin\Entities\Session');
+    }
+
 }

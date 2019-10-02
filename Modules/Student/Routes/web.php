@@ -29,8 +29,9 @@ Route::prefix('student')
         Route::prefix('registration')
 		->name('registration.')
 		->group(function() {
-	        Route::get('/', 'CourseRegistrationController@index')->name('index');
-             
+	        Route::get('/courses', 'CourseRegistrationController@availableCourses')->name('courses');
+	        Route::post('/courses/register', 'CourseRegistrationController@registerCourses')->name('courses.register');
+	        Route::get('/courses/registered/show', 'CourseRegistrationController@showCourses')->name('courses.register.show');
 		});
 		
 	});

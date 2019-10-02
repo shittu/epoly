@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="{{ asset('css/animate.css')}}">
     <!--styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([

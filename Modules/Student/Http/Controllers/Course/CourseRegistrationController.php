@@ -4,8 +4,9 @@ namespace Modules\Student\Http\Controllers\Course;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Department\Entities\Level;
+use Modules\Admin\Entities\Session;
 use Modules\Core\Http\Controllers\Student\StudentBaseController;
-
 
 class CourseRegistrationController extends StudentBaseController
 {
@@ -13,9 +14,10 @@ class CourseRegistrationController extends StudentBaseController
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function availableCourses()
     {
-        return view('student::course.registration.index');
+        $level = Level::where('name',student()->level())->first();
+        return view('student::course.registration.create',['courses'=>$level->courses]);
     }
 
     /**
@@ -32,19 +34,18 @@ class CourseRegistrationController extends StudentBaseController
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function registerCourses(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('student::show');
+        $courses = $request->course;
+        foreach ($courses as $course_id) {
+            student()->studentCourses()->firstOrCreate([
+                'course_id'=>$course_id,
+                'level_id'=>Level::where('name',student()->level())->first()->id,
+                'session_id'=> Session::where('name',currentSession())->first()->id
+            ]);
+        }
+        session()->flash('message', 'Congratulation all courses has been registered success fully');
+        return redirect()->route('student.course.registration.courses.register.show');
     }
 
     /**
@@ -63,9 +64,9 @@ class CourseRegistrationController extends StudentBaseController
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function showCourses()
     {
-        //
+        return view('student::course.registration.show',['courses'=>student()->currentRegisteredCourses()]);
     }
 
     /**
