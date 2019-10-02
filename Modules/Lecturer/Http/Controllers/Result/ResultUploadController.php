@@ -5,6 +5,7 @@ namespace Modules\Lecturer\Http\Controllers\Result;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Maatwebsite\Excel\Facades\Excel;
+use Modules\Lecturer\Imports\UploadResult;
 use Modules\Core\Http\Controllers\Lecturer\LecturerBaseController;
 
 class ResultUploadController extends LecturerBaseController
@@ -27,27 +28,26 @@ class ResultUploadController extends LecturerBaseController
     {
         $request->validate([
         'course_id' =>'required',
-        'result'  => 'required|mimes:xls,xlsx'
+        'result'  => 'required'
         ]);
+        Excel::import(new UploadResult, $request->file('result'));
+        
+        // $data = Excel::load($request->file('result')->getRealPath())->get();
+        // dd($data);
+        // if($data->count() > 0){
+        //     foreach($data->toArray() as $key => $value){
 
-        $path = $request->file('result')->getRealPath();
-        dd($path);
-        $data = Excel::load($path)->get();
-
-        if($data->count() > 0){
-            foreach($data->toArray() as $key => $value){
-
-            }
-        }
-        foreach($value as $row){
-            $insert_data[] = array(
-            'CustomerName'  => $row['customer_name'],
-            'Gender'   => $row['gender'],
-            'Address'   => $row['address'],
-            'City'    => $row['city'],
-            'PostalCode'  => $row['postal_code'],
-            'Country'   => $row['country']);
-        }
+        //     }
+        // }
+        // foreach($value as $row){
+        //     $insert_data[] = array(
+        //     'CustomerName'  => $row['customer_name'],
+        //     'Gender'   => $row['gender'],
+        //     'Address'   => $row['address'],
+        //     'City'    => $row['city'],
+        //     'PostalCode'  => $row['postal_code'],
+        //     'Country'   => $row['country']);
+        // }
 
         return back()->with('success', 'Excel Data Imported successfully.');
 

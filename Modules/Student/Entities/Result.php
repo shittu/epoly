@@ -52,8 +52,14 @@ class Result extends BaseModel
     			$point = 0.00;
     			break;
     	}
+        
     	$this->grade = $grade;
     	$this->points = $point/$this->studentCourse->course->unit;
+        if($point >= 2){
+            $this->remark = 'Pass';
+        }else{
+            $this->remark = 'Fail';
+        }
     	$this->save();
     }
 

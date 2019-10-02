@@ -25,19 +25,12 @@ class ResultTempleteController extends LecturerBaseController
         $request->validate(['course_id'=>'required']);
         $course = Course::find($request->course_id);
         $datas = [];
-        $datas[] = [
-            'S/N',
-            'ADMISSION NO',
-            'REGISTRATION KEY',
-            'CONTENUE ACCESSMENT',
-            'EXAMINATION'
-        ];
         $headers = [
             'S/N',
             'ADMISSION NO',
             'REGISTRATION KEY',
-            'CONTENUE ACCESSMENT',
-            'EXAMINATION'
+            'CA SCORE',
+            'EXAM SCORE'
         ];
         foreach ($course->studentCourses as $student_course) {
             $counter = 1;
