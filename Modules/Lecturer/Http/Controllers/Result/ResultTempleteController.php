@@ -32,6 +32,13 @@ class ResultTempleteController extends LecturerBaseController
             'CA SCORE',
             'EXAM SCORE'
         ];
+        $datas[] = [
+            'S/N',
+            'ADMISSION NO',
+            'REGISTRATION KEY',
+            'CA SCORE',
+            'EXAM SCORE'
+        ];
         foreach ($course->studentCourses as $student_course) {
             $counter = 1;
             //lets compare student department and lecturer allocated department

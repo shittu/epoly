@@ -31,7 +31,11 @@ Route::prefix('lecturer')
 	->name('result.')
 	->namespace('Result')
 	->group(function() {
-        
+
+        Route::get('/', 'ResultController@index')->name('index');
+        Route::get('/show', 'ResultController@showResult')->name('show');
+        Route::post('/search', 'ResultController@searchResult')->name('search');
+
         Route::prefix('templete')
         ->name('templete.')
         ->group(function() {

@@ -3,6 +3,7 @@
 namespace Modules\Lecturer\Entities;
 
 use Illuminate\Support\Carbon;
+use Modules\Admin\Entities\Session;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -60,4 +61,10 @@ class Lecturer extends Authenticatable
         }
         return Carbon::create(date('Y',$date), date('m',$date), date('d',$date), date('H',$date), date('i',$date), date('s',$date))->diffForHumans();
     }
+
+    public function sessions()
+    {
+        return Session::all();
+    }
+
 }

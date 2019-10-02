@@ -11,7 +11,7 @@
             <a href="{{route('lecturer.result.upload.index')}}">Upload Result</a>
         </li>
         <li>
-            <a href="#">View Result</a>
+            <a href="{{route('lecturer.result.index')}}">Search Result</a>
         </li>
     </ul>
 </li>

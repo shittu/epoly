@@ -31,26 +31,8 @@ class ResultUploadController extends LecturerBaseController
         'result'  => 'required'
         ]);
         Excel::import(new UploadResult, $request->file('result'));
-        
-        // $data = Excel::load($request->file('result')->getRealPath())->get();
-        // dd($data);
-        // if($data->count() > 0){
-        //     foreach($data->toArray() as $key => $value){
-
-        //     }
-        // }
-        // foreach($value as $row){
-        //     $insert_data[] = array(
-        //     'CustomerName'  => $row['customer_name'],
-        //     'Gender'   => $row['gender'],
-        //     'Address'   => $row['address'],
-        //     'City'    => $row['city'],
-        //     'PostalCode'  => $row['postal_code'],
-        //     'Country'   => $row['country']);
-        // }
-
-        return back()->with('success', 'Excel Data Imported successfully.');
-
+        session()->flash('message','Congratulation the result of all registered students is successfully uploaded');
+        return back();
     }
 
     /**
