@@ -5,7 +5,7 @@
     <a href="#">Results</a>
     <ul>
         <li>
-        	<a href="#">Download Result Templete</a>
+        	<a href="{{route('lecturer.result.templete.index')}}">Download Result Templete</a>
         </li>
         <li>
             <a href="{{route('lecturer.result.upload.index')}}">Upload Result</a>

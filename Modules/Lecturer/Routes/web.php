@@ -24,7 +24,19 @@ Route::prefix('lecturer')
 	->name('result.')
 	->namespace('Result')
 	->group(function() {
-        Route::get('/upload/index', 'ResultUploadController@index')->name('upload.index');
-        Route::post('/upload', 'ResultUploadController@upload')->name('upload.upload');
+        
+        Route::prefix('templete')
+        ->name('templete.')
+        ->group(function() {
+            Route::get('/', 'ResultTempleteController@index')->name('index');
+            Route::post('/download', 'ResultTempleteController@upload')->name('download');
+        });
+
+        Route::prefix('upload')
+        ->name('upload.')
+        ->group(function() {
+            Route::get('/upload/index', 'ResultUploadController@index')->name('index');
+            Route::post('/upload', 'ResultUploadController@upload')->name('upload');
+        });
 	});
 });

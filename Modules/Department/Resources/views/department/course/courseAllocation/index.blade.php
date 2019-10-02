@@ -30,7 +30,7 @@
     				<option value="{{$course->currentCourseMaster() ? $course->currentCourseMaster()->id : ''}}">{{$course->currentCourseMaster() ? $course->currentCourseMaster()->staff->first_name.' '.$course->currentCourseMaster()->staff->last_name.' '.$course->currentCourseMaster()->staff->staffID : 'Lecturer'}}</option>
     				@foreach(headOfDepartment()->department->staffs as $staff)
                         @if($staff->staffType->name == 'Lecturer')
-                            @if($course->currentCourseMaster() && $staff->lecturer->id != $course->currentCourseMaster()->id )
+                            @if(!$course->currentCourseMaster() || $course->currentCourseMaster() && $staff->lecturer->id != $course->currentCourseMaster()->id )
                                 <option value="{{$staff->lecturer->id}}">{{$staff->first_name}} {{$staff->first_name}} {{$staff->staffID}}</option>
                             @endif
                         @endif
@@ -41,7 +41,7 @@
     				<option value="{{$course->currentCourseAssistance() ? $course->currentCourseAssistance()->id : ''}}">{{$course->currentCourseAssistance() ? $course->currentCourseAssistance()->staff->first_name.' '.$course->currentCourseAssistance()->staff->last_name.' '.$course->currentCourseAssistance()->staff->staffID : 'Lecturer'}}</option>
     				@foreach(headOfDepartment()->department->staffs as $staff)
                         @if($staff->staffType->name == 'Lecturer')
-                            @if($course->currentCourseMaster() && $staff->lecturer->id != $course->currentCourseMaster()->id )
+                            @if(!$course->currentCourseAssistance() || $course->currentCourseAssistance() && $staff->lecturer->id != $course->currentCourseAssistance()->id )
                                 <option value="{{$staff->lecturer->id}}">{{$staff->first_name}} {{$staff->first_name}} {{$staff->staffID}}</option>
                             @endif
                         @endif
