@@ -78,7 +78,7 @@ class Result extends BaseModel
     	}elseif($score >= 40){
             $grade = 'E';
     	}
-    	$this->computePoints($grade)
+    	$this->computePoints($grade);
     }
 
 }

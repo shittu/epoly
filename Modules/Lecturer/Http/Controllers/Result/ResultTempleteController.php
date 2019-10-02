@@ -4,9 +4,12 @@ namespace Modules\Lecturer\Http\Controllers\Result;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use Modules\Lecturer\Exports\ResultTemplete;
+use Modules\Department\Entities\Course;
+use Modules\Core\Http\Controllers\Lecturer\LecturerBaseController;
 
-class ResultTempleteController extends Controller
+class ResultTempleteController extends LecturerBaseController
 {
     /**
      * Display a listing of the resource.
@@ -17,63 +20,39 @@ class ResultTempleteController extends Controller
         return view('lecturer::result.templete.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
+    public function downloadTemplete(Request $request) 
     {
-        return view('lecturer::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('lecturer::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('lecturer::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        $request->validate(['course_id'=>'required']);
+        $course = Course::find($request->course_id);
+        $datas = [];
+        $datas[] = [
+            'S/N',
+            'ADMISSION NO',
+            'REGISTRATION KEY',
+            'CONTENUE ACCESSMENT',
+            'EXAMINATION'
+        ];
+        $headers = [
+            'S/N',
+            'ADMISSION NO',
+            'REGISTRATION KEY',
+            'CONTENUE ACCESSMENT',
+            'EXAMINATION'
+        ];
+        foreach ($course->studentCourses as $student_course) {
+            $counter = 1;
+            //lets compare student department and lecturer allocated department
+            if($student_course->course->department->id == $course->department->id){
+                $datas[] = [
+                    'serial_no' => $counter,
+                    'admission_no' => $student_course->student->admission->admission_no,
+                    'registration_id' => $student_course->id,
+                    'contenue_accessment'=> '--',
+                    'examination'=> '--',
+                ];
+                $counter++;
+            }
+        }
+        return Excel::download(new ResultTemplete($datas), $course->code.'_Result_Sheet_Templete.xlsx','Xlsx',$headers);
     }
 }

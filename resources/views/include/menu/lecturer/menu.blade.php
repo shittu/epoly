@@ -1,5 +1,5 @@
 <li>
-    <a href="#">My Courses</a>
+    <a href="{{route('lecturer.courses.index')}}">My Courses</a>
 </li>
 <li>
     <a href="#">Results</a>

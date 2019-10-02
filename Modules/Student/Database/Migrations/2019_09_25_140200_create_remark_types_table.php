@@ -15,7 +15,7 @@ class CreateRemarkTypesTable extends Migration
     {
         Schema::create('remark_types', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->string('name');
             $table->timestamps();
         });
     }

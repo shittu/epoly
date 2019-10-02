@@ -6,7 +6,7 @@
 	<div class="card">
 		<div class="card-header button-fullwidth cws-button bt-color-3">Download Result Templete Here</div>
 		<div class="card-body">
-			<form action="{{route('lecturer.result.upload.upload')}}" method="post">
+			<form action="{{route('lecturer.result.templete.download')}}" method="post">
 				@csrf
 		    	<select class="form-control" name="course_id">
 		    		<option value="">Course</option>

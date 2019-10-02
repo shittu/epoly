@@ -21,17 +21,20 @@ Route::prefix('student')
 	Route::post('/login', 'Auth\StudentLoginController@login')->name('login');
 	Route::post('logout', 'Auth\StudentLoginController@logout')->name('auth.logout');
 
-	Route::prefix('course')
+	Route::prefix('courses')
 	->name('course.')
 	->namespace('Course')
 	->group(function() {
 
+	    Route::get('registered/result/show', 'CourseRegistrationController@results')->name('results.show');
+	    Route::get('registered/show', 'CourseRegistrationController@registeredCourses')->name('registered.show');
+  
         Route::prefix('registration')
 		->name('registration.')
 		->group(function() {
-	        Route::get('/courses', 'CourseRegistrationController@availableCourses')->name('courses');
-	        Route::post('/courses/register', 'CourseRegistrationController@registerCourses')->name('courses.register');
-	        Route::get('/courses/registered/show', 'CourseRegistrationController@showCourses')->name('courses.register.show');
+	        Route::get('/', 'CourseRegistrationController@availableCourses')->name('courses');
+	        Route::post('/register', 'CourseRegistrationController@registerCourses')->name('courses.register');
+	        Route::get('/registered/show', 'CourseRegistrationController@showCourses')->name('courses.register.show');
 		});
 		
 	});

@@ -20,6 +20,13 @@ Route::prefix('lecturer')
     Route::post('/login', 'Auth\LecturerLoginController@login')->name('login');
     Route::post('logout', 'Auth\LecturerLoginController@logout')->name('auth.logout');
 
+    Route::prefix('courses')
+    ->name('courses.')
+    ->namespace('Course')
+    ->group(function() {
+        Route::get('/', 'CourseController@index')->name('index');
+    });
+
     Route::prefix('result')
 	->name('result.')
 	->namespace('Result')
@@ -29,13 +36,13 @@ Route::prefix('lecturer')
         ->name('templete.')
         ->group(function() {
             Route::get('/', 'ResultTempleteController@index')->name('index');
-            Route::post('/download', 'ResultTempleteController@upload')->name('download');
+            Route::post('/download', 'ResultTempleteController@downloadTemplete')->name('download');
         });
 
         Route::prefix('upload')
         ->name('upload.')
         ->group(function() {
-            Route::get('/upload/index', 'ResultUploadController@index')->name('index');
+            Route::get('/', 'ResultUploadController@index')->name('index');
             Route::post('/upload', 'ResultUploadController@upload')->name('upload');
         });
 	});

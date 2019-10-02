@@ -38,11 +38,12 @@ class CourseRegistrationController extends StudentBaseController
     {
         $courses = $request->course;
         foreach ($courses as $course_id) {
-            student()->studentCourses()->firstOrCreate([
+            $student_course = student()->studentCourses()->firstOrCreate([
                 'course_id'=>$course_id,
                 'level_id'=>Level::where('name',student()->level())->first()->id,
                 'session_id'=> Session::where('name',currentSession())->first()->id
             ]);
+            $student_course->result()->firstOrCreate([]);
         }
         session()->flash('message', 'Congratulation all courses has been registered success fully');
         return redirect()->route('student.course.registration.courses.register.show');
@@ -74,8 +75,13 @@ class CourseRegistrationController extends StudentBaseController
      * @param int $id
      * @return Response
      */
-    public function destroy($id)
+    public function results()
     {
-        //
+        return view('student::course.result.result');
+    }
+
+    public function registeredCourses()
+    {
+        return view('student::course.result.courses');
     }
 }

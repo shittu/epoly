@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateResultsTable extends Migration
 {
+    protected $hidden = ['grade','points','remark'];
     /**
      * Run the migrations.
      *
@@ -23,10 +24,11 @@ class CreateResultsTable extends Migration
             ->on('student_courses')
             ->delete('restrict')
             ->update('cascade');
-            $table->string('ca');
-            $table->string('exam');
-            $table->string('grade');
-            $table->float('points');
+            $table->string('ca')->default('--');
+            $table->string('exam')->default('--');
+            $table->string('grade')->default('--');
+            $table->string('points')->default('--');
+            $table->string('remark')->default('--');
             $table->timestamps();
         });
     }
