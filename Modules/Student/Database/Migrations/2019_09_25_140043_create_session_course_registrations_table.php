@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStudentCoursesTable extends Migration
+class CreateSessionCourseRegistrationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateStudentCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('student_courses', function (Blueprint $table) {
+        Schema::create('session_course_registrations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('student_id')
+            $table->integer('session_registration_id')
             ->unsigned()
             ->nullable()
             ->foreign()
             ->references('id')
-            ->on('students')
+            ->on('session_registrations')
             ->delete('restrict')
             ->update('cascade');
             $table->integer('course_id')
@@ -29,22 +29,6 @@ class CreateStudentCoursesTable extends Migration
             ->foreign()
             ->references('id')
             ->on('courses')
-            ->delete('restrict')
-            ->update('cascade');
-            $table->integer('level_id')
-            ->unsigned()
-            ->nullable()
-            ->foreign()
-            ->references('id')
-            ->on('levels')
-            ->delete('restrict')
-            ->update('cascade');
-            $table->integer('session_id')
-            ->unsigned()
-            ->nullable()
-            ->foreign()
-            ->references('id')
-            ->on('sessions')
             ->delete('restrict')
             ->update('cascade');
             $table->timestamps();
@@ -58,6 +42,6 @@ class CreateStudentCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student_courses');
+        Schema::dropIfExists('session_course_registrations');
     }
 }

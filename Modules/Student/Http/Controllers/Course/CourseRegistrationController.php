@@ -37,13 +37,15 @@ class CourseRegistrationController extends StudentBaseController
     public function registerCourses(Request $request)
     {
         $courses = $request->course;
-        foreach ($courses as $course_id) {
-            $student_course = student()->studentCourses()->firstOrCreate([
-                'course_id'=>$course_id,
-                'level_id'=>Level::where('name',student()->level())->first()->id,
-                'session_id'=> Session::where('name',currentSession())->first()->id
+        $session_registration = student()->sessionRegistrations()->firstOrCreate([
+            'level_id'=>Level::where('name',student()->level())->first()->id,
+            'session_id'=> Session::where('name',currentSession())->first()->id
             ]);
-            $student_course->result()->firstOrCreate([]);
+        foreach ($courses as $course_id) {
+            $course_registration = $session_registration->sessionCourseRegistrations()->firstOrCreate([
+                'course_id'=>$course_id,
+            ]);
+            $course_registration->result()->firstOrCreate([]);
         }
         session()->flash('message', 'Congratulation all courses has been registered success fully');
         return redirect()->route('student.course.registration.courses.register.show');

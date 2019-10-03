@@ -16,12 +16,12 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('student_course_id')
+            $table->integer('session_course_registration_id')
             ->unsigned()
             ->nullable()
             ->foreign()
             ->references('id')
-            ->on('student_courses')
+            ->on('session_course_registrations')
             ->delete('restrict')
             ->update('cascade');
             $table->integer('remark_id')

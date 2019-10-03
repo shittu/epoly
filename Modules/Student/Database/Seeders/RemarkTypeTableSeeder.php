@@ -4,8 +4,9 @@ namespace Modules\Student\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Student\Entities\RemarkType;
 
-class StudentDatabaseSeeder extends Seeder
+class RemarkTypeTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,7 +17,9 @@ class StudentDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(RemarkTypeTableSeeder::class);
-        $this->call(RemarkTableSeeder::class);
+        $types = ['Result','Exam'];
+        foreach ($types as $type) {
+            RemarkType::firstOrCreate(['name'=>$type]);
+        }
     }
 }

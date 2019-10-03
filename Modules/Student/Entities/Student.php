@@ -59,8 +59,11 @@ class Student extends Authenticatable
     {
         $courses = [];
         $level = Level::where('name',$this->level())->first();
-        foreach ($this->studentCourses()->where('level_id',$level->id)->get() as $student_course) {
-            $courses[] = $student_course->course;
+        foreach ($this->sessionRegistrations()->where('level_id',$level->id)->get() as $session_registration) {
+            foreach ($session_registration->sessionCourseRegistrations as $course_registraion) {
+                $courses[] = $course_registraion->course;
+            }
+            
         }
         return $courses;
     }
