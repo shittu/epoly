@@ -4,7 +4,7 @@ namespace Modules\Student\Entities;
 
 use Modules\Core\Entities\BaseModel;
 
-class StudentCourse extends BaseModel
+class SessionCourseRegistration extends BaseModel
 {
 
     public function student()
@@ -22,19 +22,14 @@ class StudentCourse extends BaseModel
     	return $this->hasOne(Result::class);
     }
 
-    public function remarks()
+    public function remark()
     {
-    	return $this->hasMany(Remark::class);
+    	return $this->belongsTo(Remark::class);
     }
 
-    public function level()
+    public function sessionRegistration()
     {
-        return $this->belongsTo('Modules\Department\Entities\Level');
-    }
-
-    public function session()
-    {
-        return $this->belongsTo('Modules\Admin\Entities\Session');
+        return $this->belongsTo(SessionRegistration::class);
     }
 
 }

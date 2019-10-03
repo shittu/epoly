@@ -12,9 +12,9 @@ class Session extends BaseModel
     	return $this->hasMany(Calender::class);
     }
 
-    public function studentCourses()
+    public function sessionRegistrations()
     {
-        return $this->hasMany('Modules\Student\Entities\StudentCourse');
+        return $this->hasMany('Modules\Student\Entities\SessionRegistration');
     }
 
     public function countDown()

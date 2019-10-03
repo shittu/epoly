@@ -15,4 +15,9 @@ class Remark extends BaseModel
     {
     	return $this->belongsTo(RemarkType::class);
     }
+
+    public function sessionRegistrationRemarks()
+    {
+    	return $this->hasMany(SessionRegistrationRemark::class);
+    }
 }

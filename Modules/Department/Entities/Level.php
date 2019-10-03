@@ -17,9 +17,9 @@ class Level extends BaseModel
     	return $this->belongsTo('Modules\Student\Entities\StudentType');
     }
 
-    public function studentCourses()
+    public function sessionRegistrations()
     {
-        return $this->hasMany('Modules\Student\Entities\StudentCourse');
+        return $this->hasMany('Modules\Student\Entities\SessionRegistration');
     }
 
 }

@@ -50,9 +50,9 @@ class Student extends Authenticatable
         return $this->belongsTo(StudentSession::class);
     }
 
-    public function studentCourses()
+    public function sessionRegistrations()
     {
-        return $this->hasMany(StudentCourse::class);
+        return $this->hasMany(SessionRegistration::class);
     }
 
     public function currentRegisteredCourses()
