@@ -15,7 +15,31 @@ class CreateSessionRegistrationsTable extends Migration
     {
         Schema::create('session_registrations', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->integer('student_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('students')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('level_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('levels')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('session_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('sessions')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->string('points')->default(0.00);
             $table->timestamps();
         });
     }

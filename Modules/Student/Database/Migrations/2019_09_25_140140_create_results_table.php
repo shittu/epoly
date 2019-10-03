@@ -24,11 +24,18 @@ class CreateResultsTable extends Migration
             ->on('student_courses')
             ->delete('restrict')
             ->update('cascade');
+            $table->integer('remark_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('remarks')
+            ->delete('restrict')
+            ->update('cascade');
             $table->string('ca')->default('--');
             $table->string('exam')->default('--');
             $table->string('grade')->default('--');
-            $table->string('points')->default('--');
-            $table->string('remark')->default('--');
+            $table->string('points')->default(0.00);
             $table->timestamps();
         });
     }
