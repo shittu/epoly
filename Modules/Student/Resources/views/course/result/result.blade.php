@@ -4,9 +4,9 @@
 <input type="checkbox" name="">
 <div class="col-md-1"></div>
 <div class="col-md-10">
-	@foreach(student()->studentType->levels as $level)
+	@foreach(student()->sessionRegistrations as $session_registration)
 	<div class="card">
-		<div class="card-header button-fullwidth cws-button bt-color-3">{{$level->name}} Courses Result</div>
+		<div class="card-header button-fullwidth cws-button bt-color-3">{{$session_registration->level->name}} Courses Result</div>
 		<div class="card-body">
 			<table class="table">
 				<head>
@@ -27,36 +27,32 @@
 						    $point = 0;
 						}
 					@endphp
-					@foreach(student()->studentCourses()->where('level_id',$level->id)->get() as $student_course)
+					@foreach($session_registration->sessionCourseRegistrations as $course_registration)
 					<tr>
 						<td>{{$loop->index+1}}</td>
-						<td>{{$student_course->course->code}}</td>
+						<td>{{$course_registration->course->code}}</td>
 						<td>
-							{{$student_course->result->ca}}
+							{{$course_registration->result->ca}}
 						</td>
 						<td>
-							{{$student_course->result->exam}}
+							{{$course_registration->result->exam}}
 						</td>
 						<td>
-							@if($student_course->result->points != '--')
-							   {{$student_course->result->ca + $student_course->result->exam}}
+							@if($course_registration->result->points != '0.00')
+							   {{$course_registration->result->ca + $course_registration->result->exam}}
 						    @endif					
 						</td>
 						<td>
-							{{$student_course->result->grade}}
+							{{$course_registration->result->grade}}
 						</td>
 						<td>
-							{{$student_course->result->points}}
+							{{$course_registration->result->points}}
 						</td>
 						<td>
-							{{$student_course->result->remark}}
+							{{$course_registration->result->remark ? $course_registration->result->remark->name : ' '}}
 						</td>
 					</tr>
-					@php
-					    if($student_course->result->points != '--'){
-                            $point += $student_course->result->points;
-					    }
-					@endphp
+					
 					@endforeach
                     <tr>
                     	<td></td>
@@ -66,7 +62,7 @@
                     	<td></td>
                     	<td></td>
                     	<td><b>Grant Points</b></td>
-                    	<td><b>{{$point > 0 ? $point : 0.00}}</b></td>
+                    	<td><b>{{$session_registration->points}}</b></td>
                     </tr>
 				</tbody>
 			</table>	

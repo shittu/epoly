@@ -58,9 +58,9 @@ class CourseStudentController extends LecturerBaseController
             
             default:
                 //get all the registered students for this course
-                foreach ($course->studentCourses as $student_course) {
-                    if(substr($student_course->created_at,0,4) == substr($request->session,0,4) || substr($student_course->created_at,0,4) == substr($request->session,5,4)){
-                        $students[] = $student_course;
+                foreach ($course->sessionCourseRegistrations as $course_registration) {
+                    if(substr($course_registration->created_at,0,4) == substr($request->session,0,4) || substr($course_registration->created_at,0,4) == substr($request->session,5,4)){
+                        $students[] = $course_registration;
                     }
                 }
                 $route = "lecturer.courses.students.registered";

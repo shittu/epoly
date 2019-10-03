@@ -7,14 +7,14 @@ use Modules\Core\Entities\BaseModel;
 class Result extends BaseModel
 {
 	
-    public function studentCourse()
+    public function sessionCourseRegistration()
     {
-    	return $this->belongsTo(StudentCourse::class);
+    	return $this->belongsTo(SessionCourseRegistration::class);
     }
 
-    public function resultRemarks()
+    public function remark()
     {
-    	return $this->hasMany(ResultRemark::class);
+    	return $this->belongsTo(Remark::class);
     }
 
     public function computePoints($grade)
@@ -54,11 +54,11 @@ class Result extends BaseModel
     	}
         
     	$this->grade = $grade;
-    	$this->points = $point/$this->studentCourse->course->unit;
+    	$this->points = $point.'.00';
         if($point >= 2){
-            $this->remark = 'Pass';
+            $this->remark_id = 5;
         }else{
-            $this->remark = 'Fail';
+            $this->remark_id = 6;
         }
     	$this->save();
     }

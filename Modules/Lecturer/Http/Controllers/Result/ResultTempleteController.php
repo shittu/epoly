@@ -27,6 +27,7 @@ class ResultTempleteController extends LecturerBaseController
         $datas = [];
         $headers = [
             'S/N',
+            'NAME',
             'ADMISSION NO',
             'REGISTRATION KEY',
             'CA SCORE',
@@ -34,19 +35,21 @@ class ResultTempleteController extends LecturerBaseController
         ];
         $datas[] = [
             'S/N',
+            'NAME',
             'ADMISSION NO',
             'REGISTRATION KEY',
             'CA SCORE',
             'EXAM SCORE'
         ];
-        foreach ($course->studentCourses as $student_course) {
+        foreach ($course->sessionCourseRegistrations as $course_registration) {
             $counter = 1;
             //lets compare student department and lecturer allocated department
-            if($student_course->course->department->id == $course->department->id){
+            if($course_registration->course->department->id == $course->department->id){
                 $datas[] = [
                     'serial_no' => $counter,
-                    'admission_no' => $student_course->student->admission->admission_no,
-                    'registration_id' => $student_course->id,
+                    'name'=>$course_registration->sessionRegistration->student->first_name.' '.$course_registration->sessionRegistration->student->last_name,
+                    'admission_no' => $course_registration->sessionRegistration->student->admission->admission_no,
+                    'registration_id' => $course_registration->id,
                     'contenue_accessment'=> '--',
                     'examination'=> '--',
                 ];

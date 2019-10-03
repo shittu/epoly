@@ -28,13 +28,13 @@
 							{{$loop->index+1}}
 						</td>
 						<td>
-							{{$result->studentCourse->student->first_name}} {{$result->studentCourse->student->last_name}}
+							{{$result->sessionCourseRegistration->sessionRegistration->student->first_name}} {{$result->sessionCourseRegistration->sessionRegistration->student->last_name}}
 						</td>
 						<td>
-							{{$result->studentCourse->student->admission->admission_no}}
+							{{$result->sessionCourseRegistration->sessionRegistration->student->admission->admission_no}}
 						</td>
 						<td>
-							{{$result->studentCourse->course->code}}
+							{{$result->sessionCourseRegistration->course->code}}
 						</td>
 						<td>
 							{{$result->ca}}
@@ -43,7 +43,7 @@
 							{{$result->exam}}
 						</td>
 						<td>
-							@if($result->points != '--')
+							@if($result->points != '0.00')
 							   {{$result->ca + $result->exam}}
 						    @endif					
 						</td>
@@ -54,7 +54,7 @@
 							{{$result->points}}
 						</td>
 						<td>
-							{{$result->remark}}
+							{{$result->remark ? $result->remark->name : ' '}}
 						</td>
 					</tr>
 					@endforeach

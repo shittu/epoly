@@ -15,9 +15,9 @@ class UploadResult implements ToModel
     public function model(array $results)
     {
 
-        $result = Result::find($results[2]);
+        $result = Result::find($results[3]);
         if($result){
-        	$result->update(['ca'=>$results[3],'exam'=>$results[4]]);
+        	$result->update(['ca'=>$results[4],'exam'=>$results[5]]);
             $result->computeGrade();
         }
        
