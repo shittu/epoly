@@ -1,10 +1,11 @@
 @extends('lecturer::layouts.master')
 
 @section('page-content')
-
+<div class="col-md-1"></div> 
+<div class="col-md-10">
 	<div class="card">
 		<div class="card-body">
-			<table class="table table-responsive">
+			<table class="table table-default">
 				<thead>
 					<tr>
 						<td>S/N</td>
@@ -24,8 +25,16 @@
 						<td>{{$lecture_course->course->unit}}</td>
 						<td>{{$lecture_course->course->semester->name}}</td>
 						<td>
-							<button class="btn btn-info" style="color: white">Result Templete</button>
-							<button class="btn btn-info" style="color: white">Uplaod Result</button>
+							<form action="{{route('lecturer.result.templete.download')}}" method="post">
+								@csrf
+								<input type="hidden" name="course_id" value="{{$lecture_course->course->id}}">
+								<button class="btn btn-info" style="color: white"><i class="fa fa-download"></i>Result Templete</button>
+							</form>
+
+							<button data-toggle="modal" data-target="#result_{{$lecture_course->course->id}}" class="btn btn-info" style="color: white">
+								<i class="fa fa-upload"></i>Uplaod Result
+							</button>
+							@include('lecturer::course.upload')
 						</td>
 					</tr>
 					@endforeach
@@ -33,4 +42,5 @@
 			</table>
 		</div>
 	</div>
+</div> 
 @endsection
