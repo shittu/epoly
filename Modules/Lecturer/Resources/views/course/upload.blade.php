@@ -10,8 +10,9 @@
             	<form action="{{route('lecturer.result.upload.upload')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="course_id" value="{{$lecture_course->course->id}}">
+                    <label>Choose the result sheet you have dowloaded and filled for the course</label>
                     <input type="file" name="result" class="form-control"><br>
-                    <button class="btn-block button-fullwidth cws-button bt-color-3">Upload</button>
+                    <button class="btn-block button-fullwidth cws-button bt-color-3">Upload Result</button>
                 </form>
             </div>
             <div class="modal-footer">

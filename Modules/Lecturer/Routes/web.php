@@ -25,6 +25,14 @@ Route::prefix('lecturer')
     ->namespace('Course')
     ->group(function() {
         Route::get('/', 'CourseController@index')->name('index');
+        Route::prefix('students')
+        ->name('students.')
+        ->group(function() {
+            Route::get('/', 'CourseStudentController@index')->name('index');
+            Route::post('/search', 'CourseStudentController@search')->name('search');
+            Route::get('/registered', 'CourseStudentController@registeredStudents')->name('registered');
+            Route::get('/available', 'CourseStudentController@availableStudents')->name('available');
+        });
     });
 
     Route::prefix('result')

@@ -28,7 +28,7 @@
 							<form action="{{route('lecturer.result.templete.download')}}" method="post">
 								@csrf
 								<input type="hidden" name="course_id" value="{{$lecture_course->course->id}}">
-								<button class="btn btn-info" style="color: white"><i class="fa fa-download"></i>Result Templete</button>
+								<button class="btn btn-info" style="color: white"><i class="fa fa-download"></i>Download Result Sheet</button>
 							</form>
 
 							<button data-toggle="modal" data-target="#result_{{$lecture_course->course->id}}" class="btn btn-info" style="color: white">

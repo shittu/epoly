@@ -25,7 +25,11 @@ class ResultController extends LecturerBaseController
      */
     public function searchResult(Request $request)
     {
-       $results = [];
+        $request->validate([
+           'session'=>'required',
+           'course'=>'required'
+        ]); 
+        $results = [];
         $course = Course::find($request->course);
         foreach ($course->studentCourses as $student_course) {
             if(substr($student_course->created_at,0,4) == substr($request->session, 0,4) || substr($student_course->created_at,0,4) == substr($request->session, 5,4)){

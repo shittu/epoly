@@ -16,12 +16,6 @@
     </ul>
 </li>
 <li>
-    <a href="#">Students</a>
-    <ul>
-        <li>
-        	<a href="#">Available Students</a>
-        </li>
-        <li><a href="#">Registered Students</a></li>
-    </ul>
+    <a href="{{route('lecturer.courses.students.index')}}">Students</a>
 </li>
 
