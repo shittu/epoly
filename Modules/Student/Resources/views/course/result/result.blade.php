@@ -62,7 +62,7 @@
                     	<td></td>
                     	<td></td>
                     	<td><b>Grant Points</b></td>
-                    	<td><b>{{$session_registration->points}}</b></td>
+                    	<td><b>{{$session_registration->sessionGrandPoints()}}</b></td>
                     </tr>
 				</tbody>
 			</table>	
