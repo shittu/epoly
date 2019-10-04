@@ -15,7 +15,6 @@ class StudentDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
         $this->call(RemarkTypeTableSeeder::class);
         $this->call(RemarkTableSeeder::class);
     }

@@ -21,5 +21,6 @@ class StaffDatabaseSeeder extends Seeder
         $this->call(PositionsTableSeeder::class);
         $this->call(StaffTypesTableSeeder::class);
         $this->call(TribeTableSeeder::class);
+        $this->call(AcademicStaffTableSeeder::class);
     }
 }

@@ -19,6 +19,7 @@ class DepartmentDatabaseSeeder extends Seeder
         $this->call(LevelTableSeeder::class);
         $this->call(StudentTypeTableSeeder::class);
         $this->call(StudentSessionTableSeeder::class);
-        $this->call(DepartmentSessionTableSeeder::class);
+        $this->call(DepartmentTableSeeder::class);
+        $this->call(CourseTableSeeder::class);
     }
 }
