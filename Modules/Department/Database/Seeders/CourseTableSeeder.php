@@ -20,7 +20,7 @@ class CourseTableSeeder extends Seeder
         //create 10 NDI courses
         for ($i = 1; $i <= 10 ; $i++) {
             $i = '0'.$i;
-            if($i > 9){
+            if($i == 10){
                 $i = $i;
             }
             $unit = 1;
@@ -30,7 +30,7 @@ class CourseTableSeeder extends Seeder
                 $unit++;
             }
             $semester_id = 1;
-            if($semester_id >= 2){
+            if($semester_id > 1){
                 $semester_id = 1;
             }else{
                 $semester_id++;
@@ -47,7 +47,7 @@ class CourseTableSeeder extends Seeder
         //create 10 NDII courses
         for ($i = 1; $i <= 10 ; $i++) {
             $i = '0'.$i;
-            if($i > 9){
+            if($i == 10){
                 $i = $i;
             }
             $unit = 1;
@@ -57,7 +57,7 @@ class CourseTableSeeder extends Seeder
                 $unit++;
             }
             $semester_id = 1;
-            if($semester_id >= 2){
+            if($semester_id > 1){
                 $semester_id = 1;
             }else{
                 $semester_id++;
@@ -74,7 +74,7 @@ class CourseTableSeeder extends Seeder
         //create 10 HNDI courses
         for ($i = 1; $i <= 10 ; $i++) {
             $i = '0'.$i;
-            if($i > 9){
+            if($i == 10){
                 $i = $i;
             }
             $unit = 1;
@@ -84,7 +84,7 @@ class CourseTableSeeder extends Seeder
                 $unit++;
             }
             $semester_id = 1;
-            if($semester_id >= 2){
+            if($semester_id > 1){
                 $semester_id = 1;
             }else{
                 $semester_id++;
@@ -101,7 +101,7 @@ class CourseTableSeeder extends Seeder
         //create 10 HNDII courses
         for ($i = 1; $i <= 10 ; $i++) {
             $i = '0'.$i;
-            if($i > 9){
+            if($i == 10){
                 $i = $i;
             }
             $unit = 1;
@@ -111,7 +111,7 @@ class CourseTableSeeder extends Seeder
                 $unit++;
             }
             $semester_id = 1;
-            if($semester_id >= 2){
+            if($semester_id > 1){
                 $semester_id = 1;
             }else{
                 $semester_id++;

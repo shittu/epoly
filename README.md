@@ -10,4 +10,4 @@ by isah labbo 0f so/19A/2432
 
 https://itsolutionstuff.com/post/laravel-57-import-export-excel-to-database-exampleexample.html
 
-`php artisan migrate:fresh --seed; php artisan sospoly:calender-generate; php artisan sospoly:student-generate; php artisan sospoly:student-courses-registration`
+`php artisan migrate:fresh --seed; php artisan sospoly:calender-generate; php artisan sospoly:student-generate; php artisan sospoly:student-courses-registration; php artisan sospoly:make-course-allocation`

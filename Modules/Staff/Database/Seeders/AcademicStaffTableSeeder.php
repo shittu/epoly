@@ -3,6 +3,7 @@
 namespace Modules\Staff\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Staff\Entities\Staff;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,7 +18,7 @@ class AcademicStaffTableSeeder extends Seeder
     {
         Model::unguard();
         for ($i=1; $i <=10 ; $i++) { 
-            $this->registerThisStaff($this->getStaffSerialNumber($i))
+            $this->registerThisStaff($this->getStaffSerialNumber($i));
         }
         
     }

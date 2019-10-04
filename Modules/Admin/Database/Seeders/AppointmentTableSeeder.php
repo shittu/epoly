@@ -22,19 +22,19 @@ class AppointmentTableSeeder extends Seeder
         $staff->department->headOfDepartments()->create([
             'email'=>$staff->email,
             'password'=>$staff->password,
-            'admin_id'=>admin()->id,
+            'admin_id'=>1,
             'department_id' => $staff->department->id,
             'staff_id' => $staff->id,
-            'from'=> $request->appointment_date
+            'from'=> '2019-10-03 18:52:00'
         ]);
         $staff = Staff::find(1);
         $staff->department->college->directers()->create([
                 'email'=>$staff->email,
                 'password'=>$staff->password,
-                'admin_id'=>admin()->id,
+                'admin_id'=>1,
                 'college_id' => $staff->department->college->id,
                 'staff_id' => $staff->id,
-                'from'=> $request->appointment_date
+                'from'=> '2019-10-03 18:52:00'
             ]);
     }
 }

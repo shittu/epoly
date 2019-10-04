@@ -17,5 +17,6 @@ class AdminDatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(AdminTableSeeder::class);
+        $this->call(AppointmentTableSeeder::class);
     }
 }
