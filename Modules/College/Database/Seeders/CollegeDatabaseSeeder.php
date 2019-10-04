@@ -16,6 +16,6 @@ class CollegeDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        $this->call(CollegeTableSeeder::class);
     }
 }

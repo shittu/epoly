@@ -15,10 +15,10 @@ class DepartmentDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
         $this->call(SemesterTableSeeder::class);
         $this->call(LevelTableSeeder::class);
         $this->call(StudentTypeTableSeeder::class);
         $this->call(StudentSessionTableSeeder::class);
+        $this->call(DepartmentSessionTableSeeder::class);
     }
 }
