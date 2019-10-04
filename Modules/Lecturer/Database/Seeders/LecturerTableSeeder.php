@@ -3,9 +3,10 @@
 namespace Modules\Lecturer\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Staff\Entities\Staff;
 use Illuminate\Database\Eloquent\Model;
 
-class LecturerDatabaseSeeder extends Seeder
+class LecturerTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,6 +17,8 @@ class LecturerDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(LecturerTableSeeder::class);
+        foreach(Staff::where('staff_category_id',1)->get() as $staff){
+            $staff->update(['staff_type_id'=>1]);
+        }
     }
 }
