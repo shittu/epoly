@@ -41,6 +41,8 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 $app->register(\Wnx\LaravelStats\StatsServiceProvider::class);
+
+$app->register(Barryvdh\Debugbar\LumenServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Return The Application
