@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "18ba39fce0c18526ff3e7bb77aa28df3",
+    "content-hash": "348e056e6210dcc314e76ee4524b4f22",
     "packages": [
         {
             "name": "akaunting/firewall",
@@ -1783,16 +1783,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.25.0",
+            "version": "2.25.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "b70da677101cca7b584c7489770d2677c2733593"
+                "reference": "d59c6cea9c4a3547bb6c0dfec451319abdaa4fb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/b70da677101cca7b584c7489770d2677c2733593",
-                "reference": "b70da677101cca7b584c7489770d2677c2733593",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/d59c6cea9c4a3547bb6c0dfec451319abdaa4fb1",
+                "reference": "d59c6cea9c4a3547bb6c0dfec451319abdaa4fb1",
                 "shasum": ""
             },
             "require": {
@@ -1846,7 +1846,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2019-09-30T16:22:22+00:00"
+            "time": "2019-10-05T15:52:23+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -1901,26 +1901,27 @@
         },
         {
             "name": "nwidart/laravel-modules",
-            "version": "5.1.0",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nWidart/laravel-modules.git",
-                "reference": "d4edc3465d471644ca44b1b303803492609957cd"
+                "reference": "6545cafed22eb4b071b1821140b0ba2366a02940"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nWidart/laravel-modules/zipball/d4edc3465d471644ca44b1b303803492609957cd",
-                "reference": "d4edc3465d471644ca44b1b303803492609957cd",
+                "url": "https://api.github.com/repos/nWidart/laravel-modules/zipball/6545cafed22eb4b071b1821140b0ba2366a02940",
+                "reference": "6545cafed22eb4b071b1821140b0ba2366a02940",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "php": ">=7.2"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.14",
-                "laravel/framework": "5.8.*",
+                "friendsofphp/php-cs-fixer": "^2.15",
+                "laravel/framework": "6.0.*",
                 "mockery/mockery": "~1.0",
-                "orchestra/testbench": "^3.8",
+                "orchestra/testbench": "^4.0",
                 "phpstan/phpstan": "^0.9.2",
                 "phpunit/phpunit": "~7.0|~8.0",
                 "spatie/phpunit-snapshot-assertions": "^2.1.0"
@@ -1936,7 +1937,7 @@
                     }
                 },
                 "branch-alias": {
-                    "dev-master": "5.0-dev"
+                    "dev-master": "6.0-dev"
                 }
             },
             "autoload": {
@@ -1967,7 +1968,7 @@
                 "nwidart",
                 "rad"
             ],
-            "time": "2019-09-05T09:41:08+00:00"
+            "time": "2019-09-19T08:32:47+00:00"
         },
         {
             "name": "opis/closure",
@@ -2651,18 +2652,18 @@
             "authors": [
                 {
                     "name": "Geert Bergman",
-                    "role": "Project Author",
-                    "homepage": "http://www.scrivo.org/"
+                    "homepage": "http://www.scrivo.org/",
+                    "role": "Project Author"
                 },
                 {
                     "name": "Vladimir Jimenez",
-                    "role": "Contributor",
-                    "homepage": "https://allejo.io"
+                    "homepage": "https://allejo.io",
+                    "role": "Contributor"
                 },
                 {
                     "name": "Martin Folkers",
-                    "role": "Contributor",
-                    "homepage": "https://twobrain.io"
+                    "homepage": "https://twobrain.io",
+                    "role": "Contributor"
                 }
             ],
             "description": "Server side syntax highlighter that supports 185 languages. It's a PHP port of highlight.js",
@@ -5882,8 +5883,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "lead",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "lead"
                 }
             ],
             "description": "The classes contained within this repository extend the standard DOM to use exceptions at all occasions of errors instead of PHP warnings or notices. They also add various custom methods and shortcuts for convenience and to simplify the usage of DOM.",
@@ -5923,8 +5924,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
