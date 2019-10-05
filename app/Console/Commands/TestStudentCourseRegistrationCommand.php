@@ -40,7 +40,7 @@ class TestStudentCourseRegistrationCommand extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(2000);
+        $bar = $this->output->createProgressBar(50000);
 
         $bar->setBarWidth(100);
 
@@ -56,8 +56,8 @@ class TestStudentCourseRegistrationCommand extends Command
                     'course_id'=>$course->id,
                 ]);
                 $course_registration->result()->firstOrCreate([]);
+                $bar->advance();
             }
-            $bar->advance();
         }
         $bar->finish();
     }

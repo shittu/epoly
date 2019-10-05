@@ -13,117 +13,65 @@ class CourseTableSeeder extends Seeder
      *
      * @return void
      */
+    public $unit = null;
+    public $semester = null;
+
     public function run()
     {
         Model::unguard();
-
-        //create 10 NDI courses
-        for ($i = 1; $i <= 10 ; $i++) {
-            $i = '0'.$i;
-            if($i == 10){
-                $i = $i;
+        //lets create five level courses each level 20 course = 100
+        for ($i=1; $i <=5 ; $i++) { 
+            for ($j=1; $j <= 20 ; $j++) { 
+                $this->updateUnit();
+                $this->updatSemester();
+                $this->createCourses($i,$j);
             }
-            $unit = 1;
-            if($unit >= 4){
-                $unit = 1;
-            }else{
-                $unit++;
-            }
-            $semester_id = 1;
-            if($semester_id > 1){
-                $semester_id = 1;
-            }else{
-                $semester_id++;
-            }  
-            Course::firstOrCreate([
-                'code'=>'COM 1'.$i,
-                'title'=>'course title here',
-                'unit'=> $unit,
-                'department_id' => 1,
-                'semester_id'=> $semester_id,
-                'level_id' => 1
-            ]);
-        }
-        //create 10 NDII courses
-        for ($i = 1; $i <= 10 ; $i++) {
-            $i = '0'.$i;
-            if($i == 10){
-                $i = $i;
-            }
-            $unit = 1;
-            if($unit >= 4){
-                $unit = 1;
-            }else{
-                $unit++;
-            }
-            $semester_id = 1;
-            if($semester_id > 1){
-                $semester_id = 1;
-            }else{
-                $semester_id++;
-            }  
-            Course::firstOrCreate([
-                'code'=>'COM 2'.$i,
-                'title'=>'course title here',
-                'unit'=> $unit,
-                'department_id' => 1,
-                'semester_id'=> $semester_id,
-                'level_id' => 2
-            ]);
-        }
-        //create 10 HNDI courses
-        for ($i = 1; $i <= 10 ; $i++) {
-            $i = '0'.$i;
-            if($i == 10){
-                $i = $i;
-            }
-            $unit = 1;
-            if($unit >= 4){
-                $unit = 1;
-            }else{
-                $unit++;
-            }
-            $semester_id = 1;
-            if($semester_id > 1){
-                $semester_id = 1;
-            }else{
-                $semester_id++;
-            }  
-            Course::firstOrCreate([
-                'code'=>'COM 3'.$i,
-                'title'=>'course title here',
-                'unit'=> $unit,
-                'department_id' => 1,
-                'semester_id'=> $semester_id,
-                'level_id' => 4
-            ]);
-        }
-        //create 10 HNDII courses
-        for ($i = 1; $i <= 10 ; $i++) {
-            $i = '0'.$i;
-            if($i == 10){
-                $i = $i;
-            }
-            $unit = 1;
-            if($unit >= 4){
-                $unit = 1;
-            }else{
-                $unit++;
-            }
-            $semester_id = 1;
-            if($semester_id > 1){
-                $semester_id = 1;
-            }else{
-                $semester_id++;
-            }  
-            Course::firstOrCreate([
-                'code'=>'COM 4'.$i,
-                'title'=>'course title here',
-                'unit'=> $unit,
-                'department_id' => 1,
-                'semester_id'=> $semester_id,
-                'level_id' => 5
-            ]);
         }   
+    }
+    public function updateUnit()
+    {
+        if(!$this->unit){
+            $this->unit = 1;
+        }
+        if($this->unit >= 4){
+            $this->unit = 1;
+        }else{
+            $this->unit++;
+        }
+    }
+
+    public function updatSemester()
+    {
+        if(!$this->semester){
+            $this->semseter = 1;
+        }
+
+        if($this->semester > 1){
+            $this->semester = 1;
+        }else{
+            $this->semester++;
+        }
+    }
+
+    public function createCourses($i,$j)
+    {
+        Course::firstOrCreate([
+                'code'=>'COM '.$i.$this->getCourseSerialNumber($j),
+                'title'=>'course title here',
+                'unit'=> $this->unit,
+                'department_id' => 1,
+                'semester_id'=> $this->semester,
+                'level_id' => $i
+            ]);
+    }
+
+    public function getCourseSerialNumber($i)
+    {
+        if($i > 9){
+            $i = $i;
+        }else{
+            $i = '0'.$i;
+        }
+        return $i;
     }
 }
