@@ -24,6 +24,14 @@ Route::prefix('lecturer')
     ->name('courses.')
     ->namespace('Course')
     ->group(function() {
+
+    Route::prefix('result/statistics')
+        ->name('results.statistics.')
+        ->group(function() {
+        Route::get('/', 'ResultChartController@index')->name('index');
+        Route::post('/chart/search', 'ResultChartController@search')->name('chart.search');
+    });
+
         Route::get('/', 'CourseController@index')->name('index');
         Route::prefix('students')
         ->name('students.')

@@ -13,6 +13,9 @@
         <li>
             <a href="{{route('lecturer.result.index')}}">Search Result</a>
         </li>
+        <li>
+            <a href="{{route('lecturer.courses.results.statistics.index')}}">Result Statistics</a>
+        </li>
     </ul>
 </li>
 <li>
