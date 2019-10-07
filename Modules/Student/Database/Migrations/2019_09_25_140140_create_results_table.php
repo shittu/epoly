@@ -32,6 +32,14 @@ class CreateResultsTable extends Migration
             ->on('remarks')
             ->delete('restrict')
             ->update('cascade');
+            $table->integer('lecturer_course_result_upload_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('lecturer_course_result_uploads')
+            ->delete('restrict')
+            ->update('cascade');
             $table->string('ca')->default('--');
             $table->string('exam')->default('--');
             $table->string('grade')->default('--');

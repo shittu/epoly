@@ -17,6 +17,11 @@ class Session extends BaseModel
         return $this->hasMany('Modules\Student\Entities\SessionRegistration');
     }
 
+    public function lecturerCourseResultUploads()
+    {
+        return $this->hasMany('Modules\Lecturer\Entities\LecturerCourseResultUpload');
+    }
+
     public function countDown()
     {
     	$count = Carbon::parse($this->end)->diffInMonths(Carbon::now());
