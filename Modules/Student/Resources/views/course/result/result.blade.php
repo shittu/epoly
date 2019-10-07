@@ -38,7 +38,7 @@
 							{{$course_registration->result->exam}}
 						</td>
 						<td>
-							@if($course_registration->result->points != '0.00')
+							@if($course_registration->result->grade != '--')
 							   {{$course_registration->result->ca + $course_registration->result->exam}}
 						    @endif					
 						</td>

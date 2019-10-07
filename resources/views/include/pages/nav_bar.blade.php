@@ -15,6 +15,7 @@
                             <li>
                                 <a href="{{route('welcome')}}" class="active">Home</a>
                             </li>
+                            
                             @if(!auth()->check())
                             <li>
                                 <a href="#">Collages</a>

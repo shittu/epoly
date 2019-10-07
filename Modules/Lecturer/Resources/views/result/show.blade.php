@@ -43,7 +43,7 @@
 							{{$result->exam}}
 						</td>
 						<td>
-							@if($result->points != '0.00')
+							@if($result->ca != '--'||$result->exam != '--')
 							   {{$result->ca + $result->exam}}
 						    @endif					
 						</td>

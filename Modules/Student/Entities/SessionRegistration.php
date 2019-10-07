@@ -35,7 +35,7 @@ class SessionRegistration extends BaseModel
     {
         $units = 0;
         foreach ($this->sessionCourseRegistrations as $course_registration) {
-            if($course_registration->result->grade != '--'){
+            if($course_registration->result->grade != '--'|| $course_registration->result->grade != ''){
                 $units = $course_registration->course->unit + $units;
             }
         }
@@ -46,8 +46,8 @@ class SessionRegistration extends BaseModel
     {
         $points = 0;
         foreach ($this->sessionCourseRegistrations as $course_registration) {
-            if($course_registration->result->grade != '--'){
-                $points = $course_registration->result->points + $points;
+            if($course_registration->result->points != '--'|| $course_registration->result->points != ''){
+                //$points = $course_registration->result->points + $points;
             }
         }
         return $points;

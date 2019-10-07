@@ -1,6 +1,32 @@
 <!-- footer -->
+<br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     <footer class="footer">
-        <!-- <div class="grid-row">
+
+        <div class="grid-row">
             <div class="grid-col-row clear-fix">
                 <section class="grid-col grid-col-4 footer-about">
                     <h2 class="corner-radius">About Us</h2>
@@ -61,7 +87,7 @@
                     </form>
                 </section>
             </div>
-        </div> -->
+        </div>
         <!-- <div class="footer-bottom">
             <div class="grid-row clear-fix">
                 <div class="">sosPoly<span></span> {{date('Y')}} . All Rights Reserved</div>

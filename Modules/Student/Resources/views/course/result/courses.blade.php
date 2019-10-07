@@ -28,7 +28,7 @@
 							{{$course_registration->course->code}}
 						</td>
 						<td>
-							{{$course_registration->course->code}}
+							{{$course_registration->course->unit}}
 						</td>
 						<td>
 							{{$course_registration->sessionRegistration->level->name}}
