@@ -30,6 +30,7 @@ Route::prefix('lecturer')
         ->group(function() {
         Route::get('/', 'ResultChartController@index')->name('index');
         Route::post('/chart/search', 'ResultChartController@search')->name('chart.search');
+        Route::get('/chart/view', 'ResultChartController@view')->name('chart.view');
     });
 
         Route::get('/', 'CourseController@index')->name('index');
