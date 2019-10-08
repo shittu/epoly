@@ -7,7 +7,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Modules\Lecturer\Imports\UploadResult;
 use Maatwebsite\Excel\Facades\Excel;
-use Modules\Lecturer\Jobs\Result\UploadResultJob;
+use Modules\Department\Entities\Course;
+use Modules\Lecturer\Entities\LecturerCourseResultUpload;
 use Modules\Core\Http\Controllers\Lecturer\LecturerBaseController;
 
 class ResultUploadController extends LecturerBaseController
@@ -30,10 +31,17 @@ class ResultUploadController extends LecturerBaseController
     {
         $request->validate([
         'course_id' =>'required',
-        'result'  => 'required'
+        'result'  => 'required',
+        'session'  => 'required'
         ]);
-        Excel::import(new UploadResult, $request->file('result'));
+
+        $course_lecturer = Course::find($request->course_id)->currentCourseLecturer();
+        $course_upload_by = LecturerCourseResultUpload::firstOrCreate(['session_id'=>$request->session]);
+
+        Excel::import(new UploadResult($course_upload_by), $request->file('result'));
+
         session()->flash('message','Congratulation the result of all registered students is successfully uploaded');
+
         return back();
     }
 

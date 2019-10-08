@@ -63,7 +63,11 @@ class Result extends BaseModel
     	}
         
     	$this->grade = $grade;
-        $this->points = $point.'.00';
+        if($point >= 2){
+            $this->points = $point.'.00';
+        }else{
+            $this->points = 0.00;
+        }
         if($point >= 2){
             $this->remark_id = 5;
         }elseif($point == 0){
@@ -127,6 +131,13 @@ class Result extends BaseModel
     {
         if(is_numeric($this->ca)){
             return $this->ca;
+        }
+        return 0;
+    }
+    public function examination()
+    {
+        if(is_numeric($this->exam)){
+            return $this->exam;
         }
         return 0;
     }

@@ -52,6 +52,17 @@ class Course extends BaseModel
         return $lecturer;
     }
 
+    public function currentCourseLecturer()
+    {
+        $lecturer = null;
+        foreach($this->lecturerCourses as $allocation){
+            if($allocation->is_active == 1 && $allocation->lecturer_course_status_id == 2){
+                $lecturer = $allocation;
+            }
+        }
+        return $lecturer;
+    }
+
     public function currentCourseAssistance()
     {
         $lecturer = null;

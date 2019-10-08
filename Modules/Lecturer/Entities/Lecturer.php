@@ -47,7 +47,7 @@ class Lecturer extends Authenticatable
         return $this->hasMany('Modules\Department\Entities\LecturerCourseAllocation');
     }
     
-
+    
     public function lecturerCourses()
     {
         return $this->hasMany('Modules\Department\Entities\LecturerCourse');
@@ -65,6 +65,17 @@ class Lecturer extends Authenticatable
     public function sessions()
     {
         return Session::all();
+    }
+
+    public function lecturerAvailableCourses()
+    {
+        $courses = [];
+        foreach ($this->lecturerCourses as $lecturer_course) {
+            if($lecturer_course->is_active == 1 && $lecturer_course->lecturer_course_status_id == 1){
+                $courses[] = $lecturer_course;
+            }
+        }
+        return $courses;
     }
 
 }

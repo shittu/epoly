@@ -43,9 +43,7 @@
 							{{$result->exam}}
 						</td>
 						<td>
-							@if($result->ca != '--'||$result->exam != '--')
-							   {{$result->ca + $result->exam}}
-						    @endif					
+							{{$result->accessment() + $result->examination()}}			
 						</td>
 						<td>
 							{{$result->grade}}
