@@ -24,6 +24,9 @@ class RemarkTableSeeder extends Seeder
             ['name'=>'Cancelation of Exam','remark_type_id'=>2],
             ['name'=>'Pass','remark_type_id'=>1],
             ['name'=>'Fail','remark_type_id'=>1],
+            ['name'=>'Sick','remark_type_id'=>1],
+            ['name'=>'Incomplete Project','remark_type_id'=>1],
+            ['name'=>'Absent','remark_type_id'=>1],
         ];
         foreach ($remarks as $remark) {
             Remark::firstOrCreate($remark);
