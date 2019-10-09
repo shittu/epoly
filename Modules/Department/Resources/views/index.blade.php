@@ -9,7 +9,7 @@
          		</div>
          		<div class="card-body">
          			
-     				<button class="button-fullwidth cws-button bt-color-3 btn-block">Review This Result</button>
+     				<button class="button-fullwidth cws-button bt-color-3 btn-block"><a href="{{route('department.result.review',[$result->id])}}" style="color: white">Review This Result</a></button>
      			
      				<button class="button-fullwidth cws-button bt-color-3 btn-block">Edit This Result</button>
 			         			

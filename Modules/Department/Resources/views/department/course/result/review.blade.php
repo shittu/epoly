@@ -1,13 +1,13 @@
 @extends('department::layouts.master')
 
 @section('page-content')
-    <div class="col-md-4">
+    <div class="col-md-12"><br>
      	<div class="card">
-     		<div class="card-header">
-     			{{$result->session->name}} {{$result->lecturerCourse->course->code}} Results Uploaded at {{$result->created_at}}
+     		<div class="card-header button-fullwidth cws-button bt-color-3">
+     			The brief overview of {{$result->lecturerCourse->course->code}} Results Uploaded at {{$result->created_at}} at {{$result->session->name}} 
      		</div>
      		<div class="card-body">
-     			<table>
+     			<table class="table">
      				<tr>
      					<td>Registered Students</td>
      					<td>{{count($result->results)}}</td>
@@ -63,12 +63,12 @@
      				<tr>
      					<td>
      						<form>
-		         				<button>Amend This Result</button>
+		         				<button class="button-fullwidth cws-button bt-color-3"><a href="{{route('department.result.amend')}}"></a> Amend This Result</button>
 		         			</form>
 		         		</td>
      					<td>
      						<form>
-		         				<button>Approve This Result</button>
+		         				<button class="button-fullwidth cws-button bt-color-3"><a href="{{route('department.result.approve')}}">Approve This Result</a></button>
 		         			</form>
 		         		</td>
      				</tr>

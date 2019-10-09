@@ -14,6 +14,18 @@
 Route::prefix('department')
 ->name('department.')
 ->group(function() {
+
+
+	//result routes
+	Route::prefix('result')
+	->name('result.')
+	->namespace('Course')
+	->group(function() {
+		Route::get('{result_id}/review', 'AmendResultController@review')->name('review');
+		Route::get('{result_id}/amend', 'AmendResultController@amend')->name('amend');
+	});
+
+
 	Route::get('/', 'DepartmentController@verify')->name('verify');
 	Route::get('/hod', 'DepartmentController@verify')->name('verify');
 	//hod authentication routes
