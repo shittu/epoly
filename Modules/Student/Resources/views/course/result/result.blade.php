@@ -13,6 +13,7 @@
 					<tr>
 						<td>S/N</td>
 						<td>Course Code</td>
+						<td>Course Unit</td>
 						<td>CA Score</td>
 						<td>Exam Score</td>
 						<td>Total Score</td>
@@ -31,6 +32,7 @@
 					<tr>
 						<td>{{$loop->index+1}}</td>
 						<td>{{$course_registration->course->code}}</td>
+						<td>{{$course_registration->course->unit}}</td>
 						<td>
 							{{$course_registration->result->ca}}
 						</td>
@@ -38,9 +40,9 @@
 							{{$course_registration->result->exam}}
 						</td>
 						<td>
-							@if($course_registration->result->grade != '--')
-							   {{$course_registration->result->ca + $course_registration->result->exam}}
-						    @endif					
+							
+							   {{$course_registration->result->accessment() + $course_registration->result->examination()}}
+						    				
 						</td>
 						<td>
 							{{$course_registration->result->grade}}

@@ -34,8 +34,9 @@ class SessionRegistration extends BaseModel
     public function totalNumberOfUnits()
     {
         $units = 0;
+        $grades = ['A','AB','B','BC','C','CD','D','E','F'];
         foreach ($this->sessionCourseRegistrations as $course_registration) {
-            if($course_registration->result->grade != '--'|| $course_registration->result->grade != ''){
+            if(in_array($course_registration->result->grade, $grades)){
                 $units = $course_registration->course->unit + $units;
             }
         }
@@ -46,8 +47,8 @@ class SessionRegistration extends BaseModel
     {
         $points = 0;
         foreach ($this->sessionCourseRegistrations as $course_registration) {
-            if($course_registration->result->points != '--'|| $course_registration->result->points != ''){
-                //$points = $course_registration->result->points + $points;
+            if(is_numeric($course_registration->result->points)){
+                $points = $course_registration->result->points + $points;
             }
         }
         return $points;

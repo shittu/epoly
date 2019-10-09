@@ -36,7 +36,7 @@ class ResultUploadController extends LecturerBaseController
         ]);
 
         $course_lecturer = Course::find($request->course_id)->currentCourseLecturer();
-        $course_upload_by = LecturerCourseResultUpload::firstOrCreate(['session_id'=>$request->session]);
+        $course_upload_by = $course_lecturer->lecturerCourseResultUploads()->firstOrCreate(['session_id'=>$request->session]);
 
         Excel::import(new UploadResult($course_upload_by), $request->file('result'));
 

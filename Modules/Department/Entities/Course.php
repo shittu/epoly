@@ -56,7 +56,7 @@ class Course extends BaseModel
     {
         $lecturer = null;
         foreach($this->lecturerCourses as $allocation){
-            if($allocation->is_active == 1 && $allocation->lecturer_course_status_id == 2){
+            if($allocation->is_active == 1 && $allocation->lecturer_course_status_id == 1){
                 $lecturer = $allocation;
             }
         }

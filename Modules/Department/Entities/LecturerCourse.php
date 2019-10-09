@@ -21,5 +21,10 @@ class LecturerCourse extends BaseModel
     {
     	return $this->belongsTo(LecturerCourseStatus::class);
     }
+
+    public function lecturerCourseResultUploads()
+    {
+        return $this->hasMany('Modules\Lecturer\Entities\LecturerCourseResultUpload');
+    }
     
 }

@@ -55,7 +55,7 @@ class CourseTableSeeder extends Seeder
 
     public function createCourses($i,$j)
     {
-        Course::firstOrCreate([
+        $course = Course::firstOrCreate([
                 'code'=>'COM '.$i.$this->getCourseSerialNumber($j),
                 'title'=>'course title here',
                 'unit'=> $this->unit,
@@ -63,6 +63,7 @@ class CourseTableSeeder extends Seeder
                 'semester_id'=> $this->semester,
                 'level_id' => $i
             ]);
+        $course->departmentCourses()->firstOrCreate(['department_id'=>1,'department_course_status_id'=>1]);
     }
 
     public function getCourseSerialNumber($i)

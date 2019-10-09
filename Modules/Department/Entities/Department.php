@@ -42,4 +42,19 @@ class Department extends BaseModel
         return $this->hasMany(LecturerCourseAllocation::class);
     }
 
+    public function unverifiedResults()
+    {
+        $results = [];
+        foreach ($this->departmentCourses as $department_course) {
+            if($department_course->course->currentCourseLecturer() && $department_course->course->currentCourseLecturer()->lecturerCourseResultUploads){
+                foreach($department_course->course->currentCourseLecturer()->lecturerCourseResultUploads as $result){
+                    if($result->verification_status == 0){
+                        $results[] = $result;
+                    }
+                }
+            }
+        }
+        return $results;
+    }
+
 }

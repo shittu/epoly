@@ -31,6 +31,7 @@ class CreateLecturerCourseResultUploadsTable extends Migration
             ->on('sessions')
             ->delete('restrict')
             ->update('cascade');
+            $table->integer('verification_status')->default(0);
             $table->timestamps();
         });
     }
