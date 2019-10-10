@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Modules\Lecturer\Entities\LecturerCourseResultUpload;
 use Modules\Core\Http\Controllers\Department\HodBaseController;
 
-class AmendResultController extends HodBaseController
+class CourseResultController extends HodBaseController
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,10 @@ class AmendResultController extends HodBaseController
     {
         return view('department::department.course.result.review',['result'=>LecturerCourseResultUpload::find($result_id)]);
     }
-
+    public function editCourseResult($result_id)
+    {
+        return view('department::department.course.result.edit',['upload'=>LecturerCourseResultUpload::find($result_id)]);
+    }
     /**
      * Show the form for creating a new resource.
      * @return Response

@@ -17,14 +17,33 @@ Route::prefix('department')
 
 
 	//result routes
-	Route::prefix('result')
+	Route::prefix('result/{result_id}')
 	->name('result.')
 	->namespace('Course')
 	->group(function() {
-		Route::get('{result_id}/review', 'AmendResultController@review')->name('review');
-		Route::get('{result_id}/amend', 'AmendResultController@amend')->name('amend');
-		Route::post('{result_id}/approve', 'AmendResultController@amend')->name('approve');
-		Route::post('{result_id}/amend/register', 'AmendResultController@amendResult')->name('amend.register');
+
+		//course result routes
+		Route::prefix('course')
+		->name('course.')
+		->group(function() {
+			Route::get('/review', 'CourseResultController@review')->name('review');
+			Route::get('/amend', 'CourseResultController@amend')->name('amend');
+			Route::post('/approve', 'CourseResultController@amend')->name('approve');
+			Route::post('/amend/register', 'CourseResultController@amendResult')->name('amend.register');
+			Route::get('/edit', 'CourseResultController@editCourseResult')->name('edit');
+
+		});
+
+		//students result routes
+		Route::prefix('student')
+		->name('student.')
+		->group(function() {
+		    Route::get('/edit', 'StudentResultController@edit')->name('edit');
+		});
+		
+
+
+		
 	});
 
 

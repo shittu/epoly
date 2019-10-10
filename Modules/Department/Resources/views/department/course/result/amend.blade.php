@@ -8,7 +8,7 @@
      			You can amend {{$result->lecturerCourse->course->code}} Results by adding or removing some marks using positive or negative number. 
      		</div>
      		<div class="card-body">
-     			<form method="post" action="{{route('department.result.amend.register',[$result->id])}}">
+     			<form method="post" action="{{route('department.result.course.amend.register',[$result->id])}}">
      				@csrf
      				<label>Marks</label>
 	     			<input type="number" name="marks" class="form-control">

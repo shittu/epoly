@@ -62,10 +62,10 @@
      				</tr>
      				<tr>
      					<td>
-		         		    <button class="button-fullwidth cws-button bt-color-3"><a href="{{route('department.result.amend',[$result->id])}}" style="color: white">Amend This Result</a> </button>
+		         		    <button class="button-fullwidth cws-button bt-color-3"><a href="{{route('department.result.course.amend',[$result->id])}}" style="color: white">Amend This Result</a> </button>
 		         		</td>
      					<td>
-     						<form method="post" action="{{route('department.result.approve',[$result->id])}}">
+     						<form method="post" action="{{route('department.result.course.approve',[$result->id])}}">
 		         				<button class="button-fullwidth cws-button bt-color-3">Approve This Result</button>
 		         			</form>
 		         		</td>
