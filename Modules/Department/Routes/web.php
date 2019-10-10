@@ -20,13 +20,14 @@ Route::prefix('department')
 	->group(function() {
 	    Route::get('/', 'CourseResultController@index')->name('index');
 		Route::post('/search', 'CourseResultController@search')->name('search');
+		Route::get('/bating', 'BatingResultController@index')->name('bating.index');
+		Route::post('/bating/search', 'BatingResultController@search')->name('bating.search');
     });
 	//result routes
 	Route::prefix('result/{result_id}')
 	->name('result.')
 	->namespace('Course')
 	->group(function() {
-
 		//course result routes
 		Route::prefix('course')
 		->name('course.')

@@ -3,12 +3,13 @@
 namespace Modules\Department\Entities;
 
 use Illuminate\Support\Carbon;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Modules\Department\Entities\Semester;
+use Modules\Admin\Entities\Session;
 use Modules\Department\Entities\Level;
+use Illuminate\Notifications\Notifiable;
+use Modules\Department\Entities\Semester;
 use Modules\Student\Entities\StudentType;
 use Modules\Student\Entities\StudentSession;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class HeadOfDepartment extends Authenticatable
 {
@@ -60,6 +61,11 @@ class HeadOfDepartment extends Authenticatable
     public function levels()
     {
         return Level::all();
+    }
+
+    public function sessions()
+    {
+        return Session::all();
     }
 
     public function semesters()
