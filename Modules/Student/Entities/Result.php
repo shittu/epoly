@@ -85,7 +85,7 @@ class Result extends BaseModel
     public function computeGrade()
     {
         if(is_numeric($this->exam)){
-            $score = $this->accessment() + $this->exam;
+            $score = $this->accessment() + $this->exam + $this->amended_by;
             if($score >= 75){
                 $grade = 'A';
             }elseif($score >= 70){

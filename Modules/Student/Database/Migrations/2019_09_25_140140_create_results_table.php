@@ -44,6 +44,7 @@ class CreateResultsTable extends Migration
             $table->string('exam')->default('--');
             $table->string('grade')->default('--');
             $table->string('points')->default(0.00);
+            $table->string('amended_by')->default(0.00);
             $table->timestamps();
         });
     }
