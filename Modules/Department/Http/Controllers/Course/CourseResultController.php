@@ -33,7 +33,7 @@ class CourseResultController extends HodBaseController
             return back();
         }
         session()->flash('message','The result of '.$course->code.' at '.$session->name);
-        return redirect()->route('department.result.course.edit',[$uploaded_result->id]);
+        return redirect()->route('department.result.course.review',[$uploaded_result->id]);
     }
 
 
@@ -74,5 +74,20 @@ class CourseResultController extends HodBaseController
         session()->flash('message','All the result is updated successfully');
         return back();
         
+    }
+
+    public function approve($result_id)
+    {
+        $upload = LecturerCourseResultUpload::find($result_id);
+        if($upload->verification_status == 1){
+            //dis approve the result
+            $upload->update(['verification_status'=>0]);
+            $message = 'Result is dis approved successfully as such student will not be able to see this result in their account to make it available you need to approve the result again';
+        }else{
+            $upload->update(['verification_status'=>1]);
+            $message = 'Result is approved successfully as such this result is now avaialable to all students that register the course '.$upload->session->name.'  session';
+        }
+        session()->flash('message',$message);
+        return back();
     }
 }

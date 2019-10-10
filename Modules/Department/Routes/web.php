@@ -33,7 +33,7 @@ Route::prefix('department')
 		->group(function() {
 			Route::get('/review', 'CourseResultController@review')->name('review');
 			Route::get('/amend', 'CourseResultController@amend')->name('amend');
-			Route::post('/approve', 'CourseResultController@amend')->name('approve');
+			Route::post('/approve', 'CourseResultController@approve')->name('approve');
 			Route::post('/amend/register', 'CourseResultController@amendResult')->name('amend.register');
 			Route::get('/edit', 'CourseResultController@editCourseResult')->name('edit');
 			

@@ -66,8 +66,13 @@
 		         		</td>
      					<td>
      						<form method="post" action="{{route('department.result.course.approve',[$result->id])}}">
-		         				<button class="button-fullwidth cws-button bt-color-3">Approve This Result</button>
+     							@csrf
+
+		         				<button class="button-fullwidth cws-button bt-color-3">{{$result->verification_status == 0 ? 'Approve This Result' : 'Dis Approve This Result'}}</button>
 		         			</form>
+		         		</td>
+		         		<td>
+		         			<button class="button-fullwidth cws-button bt-color-3 btn-block"><a href="{{route('department.result.course.edit',[$result->id])}}" style="color: white">Edit This Result</a></button>
 		         		</td>
      				</tr>
      			</table>
