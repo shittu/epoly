@@ -9,6 +9,17 @@ use Modules\Core\Http\Controllers\Department\HodBaseController;
 
 class CourseResultController extends HodBaseController
 {
+    public function index()
+    {
+        return 'hello';
+    }
+
+    public function search()
+    {
+        return 'hello';
+    }
+
+
     /**
      * Display a listing of the resource.
      * @return Response

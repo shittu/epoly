@@ -29,8 +29,12 @@ class StudentResultController extends HodBaseController
      */
     public function update(Request $request, $result_id)
     {
+        $data = $request->all();
+        if(!$data['marks']){
+            $data['marks'] = 0;
+        }
         $result = Result::find($result_id);
-        $result->update(['amended_by'=>$request->marks]);
+        $result->update(['amended_by'=>$data['marks']]);
         $result->computeGrade();
         session()->flash('message','Result amended successfully');
         return back();

@@ -14,8 +14,13 @@
 Route::prefix('department')
 ->name('department.')
 ->group(function() {
-
-
+    Route::prefix('result/course')
+	->name('result.course.')
+	->namespace('Course')
+	->group(function() {
+	    Route::get('/', 'CourseResultController@index')->name('index');
+		Route::post('/search', 'CourseResultController@search')->name('search');
+    });
 	//result routes
 	Route::prefix('result/{result_id}')
 	->name('result.')
@@ -31,6 +36,7 @@ Route::prefix('department')
 			Route::post('/approve', 'CourseResultController@amend')->name('approve');
 			Route::post('/amend/register', 'CourseResultController@amendResult')->name('amend.register');
 			Route::get('/edit', 'CourseResultController@editCourseResult')->name('edit');
+			
 
 		});
 

@@ -39,7 +39,7 @@
             <a href="#">Results Statistics</a>
         </li>
         <li>
-            <a href="#">View Result</a>
+            <a href="{{route('department.result.course.index')}}">View Result</a>
         </li>
     </ul>
 </li>
