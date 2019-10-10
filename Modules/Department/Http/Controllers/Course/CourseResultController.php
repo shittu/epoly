@@ -4,6 +4,8 @@ namespace Modules\Department\Http\Controllers\Course;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Admin\Entities\Session;
+use Modules\Department\Entities\Course;
 use Modules\Lecturer\Entities\LecturerCourseResultUpload;
 use Modules\Core\Http\Controllers\Department\HodBaseController;
 
@@ -11,12 +13,27 @@ class CourseResultController extends HodBaseController
 {
     public function index()
     {
-        return 'hello';
+        return view('department::department.course.result.index');
     }
 
-    public function search()
+    public function search(Request $request)
     {
-        return 'hello';
+        $request->validate([
+            'session'=>'required',
+            'course'=>'required'
+        ]);
+        $course = Course::find($request->course);
+        $session = Session::find($request->session);
+        $uploaded_result = LecturerCourseResultUpload::where([
+            'lecturer_course_id'=>$course->currentCourseLecturer()->id,
+            'session_id'=>$request->session,
+        ])->first();
+        if(blank($uploaded_result)){
+            session()->flash('error',['The result of '.$course->code.' at '.$session->name.' is not yet uploaded']);
+            return back();
+        }
+        session()->flash('message','The result of '.$course->code.' at '.$session->name);
+        return redirect()->route('department.result.course.edit',[$uploaded_result->id]);
     }
 
 
