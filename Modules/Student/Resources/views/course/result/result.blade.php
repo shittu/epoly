@@ -18,7 +18,6 @@
 						<td>Exam Score</td>
 						<td>Total Score</td>
 						<td>Grade</td>
-						<td>Points</td>
 						<td>Remark</td>
 					</tr>
 				</head>
@@ -28,7 +27,8 @@
 						    $point = 0;
 						}
 					@endphp
-					@foreach($session_registration->sessionCourseRegistrations as $course_registration)
+					@foreach($session_registration->sessionCourseRegistrations as $course_registration)    				
+					@if($course_registration->result->approved())
 					<tr>
 						<td>{{$loop->index+1}}</td>
 						<td>{{$course_registration->course->code}}</td>
@@ -48,13 +48,10 @@
 							{{$course_registration->result->grade}}
 						</td>
 						<td>
-							{{$course_registration->result->points}}
-						</td>
-						<td>
 							{{$course_registration->result->remark ? $course_registration->result->remark->name : ' '}}
 						</td>
 					</tr>
-					
+					@endif
 					@endforeach
                     <tr>
                     	<td></td>
@@ -62,9 +59,8 @@
                     	<td></td>
                     	<td></td>
                     	<td></td>
-                    	<td></td>
-                    	<td><b>Grant Points</b></td>
-                    	<td><b>{{$session_registration->sessionGrandPoints()}}</b></td>
+                    	<td><b>G P</b></td>
+                    	<td><b>{{number_format($session_registration->sessionGrandPoints(),2)}}</b></td>
                     </tr>
 				</tbody>
 			</table>	

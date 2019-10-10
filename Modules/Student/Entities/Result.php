@@ -17,6 +17,19 @@ class Result extends BaseModel
     	return $this->belongsTo(Remark::class);
     }
 
+    public function lecturerCourseResultUpload()
+    {
+        return $this->belongsTo('Modules\Lecturer\Entities\LecturerCourseResultUpload');
+    }
+    
+    public function approved()
+    {
+        if($this->lecturerCourseResultUpload && $this->lecturerCourseResultUpload->verification_status == 1){
+            return true;
+        }
+        return false;
+    }
+
     public function computePoints($grade)
     {
     	switch ($grade) {
