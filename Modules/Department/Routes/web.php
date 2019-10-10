@@ -39,6 +39,7 @@ Route::prefix('department')
 		->name('student.')
 		->group(function() {
 		    Route::get('/edit', 'StudentResultController@edit')->name('edit');
+		    Route::post('/update', 'StudentResultController@update')->name('update');
 		});
 		
 
