@@ -55,6 +55,7 @@ class TestStudentCourseRegistrationCommand extends Command
             foreach($level->courses as $course){
                 $course_registration = $session_registration->sessionCourseRegistrations()->firstOrCreate([
                     'course_id'=>$course->id,
+                    'semester_id'=>$course->semester->id
                 ]);
                 $course_registration->result()->firstOrCreate([]);
                 $bar->advance();

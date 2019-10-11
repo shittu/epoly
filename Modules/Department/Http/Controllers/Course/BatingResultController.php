@@ -25,12 +25,18 @@ class BatingResultController extends HodBaseController
      */
     public function search(Request $request)
     {
-        $request->validate(['session'=>'required','level'=>'required']);
+        $request->validate([
+            'session'=>'required',
+            'level'=>'required',
+            'semester'=>'required'
+        ]);
         $course_registrations = [];
         foreach(SessionRegistration::where(['department_id'=>headOfDepartment()->department->id,'session_id'=>$request->session,'level_id'=>$request->level])->get() as $session_registration){
             $course_registrations[] = $session_registration;
         }
-        return view('department::department.course.result.bating.print',['registrations'=>$course_registrations]);
+        session(['course_registrations'=>$course_registrations]);
+        return redirect()->route('department.result.course.bating.view',[$request->semester]);
+        
     }
 
     /**
@@ -47,5 +53,14 @@ class BatingResultController extends HodBaseController
     public function edit($registration_id)
     {
         # code...
+    }
+
+    public function view()
+    {
+        if(session('course_registrations')){
+            return view('department::department.course.result.bating.print',['registrations'=>session('course_registrations')]);
+        }
+        return redirect()->route('department.result.course.bating.index');
+        
     }
 }

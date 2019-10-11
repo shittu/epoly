@@ -19,6 +19,11 @@
      					    <option value="{{$level->id}}">{{$level->name}}</option>
      					@endforeach
      				</select><br>
+     				<select class="form-control" name="semester">
+     					<option value="">Semester</option>
+     					<option value="1">First Semester</option>
+     					<option value="2">Second Semester</option>
+     				</select><br>
      				<button class="btn btn-info btn-block">Search Result</button>
      			</form>
      		</div>

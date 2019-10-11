@@ -31,45 +31,46 @@
                             		{{$registration->student->admission->admission_no}}
                             	</td>
                             	<td>
-                            		@foreach($registration->sessionCourseRegistrations as $course_registration)
+                            		@foreach($registration->sessionCourseRegistrations->where('semester_id',request()->route('semester_id')) as $course_registration)
 
                             		{{$course_registration->course->code}}<br>
                             		
                             		@endforeach
                             	</td>
                             	<td>
-                            		@foreach($registration->sessionCourseRegistrations as $course_registration)
+                            		@foreach($registration->sessionCourseRegistrations->where('semester_id',request()->route('semester_id')) as $course_registration)
 
                             		{{$course_registration->course->unit}}<br>
                             		
                             		@endforeach
                             	</td>
                             	<td>
-                            		@foreach($registration->sessionCourseRegistrations as $course_registration)
+                            		@foreach($registration->sessionCourseRegistrations->where('semester_id',request()->route('semester_id')) as $course_registration)
 
                             		{{$course_registration->result->grade}}<br>
                             		
                             		@endforeach
                             	</td>
                             	<td>
-                            		@foreach($registration->sessionCourseRegistrations as $course_registration)
+                            		@foreach($registration->sessionCourseRegistrations->where('semester_id',request()->route('semester_id')) as $course_registration)
 
                             		{{$course_registration->result->points}}<br>
                             		
                             		@endforeach
                             	</td>
-                            	<td>{{$registration->sessionGrandPoints()}}</td>
+                            	<td>{{$registration->sessionGrandPoints(request()->route('semester_id'))}}</td>
                             	<td>
-                            		@if(empty($registration->failedResults()))
-                                        Pass <br>
-                            		@elseif($registration->passedResults() == 0)
-                                        Fail <br>
-                            		@else
-                                        @foreach($registration->failedResults() as $course)
-                                            Repeat {{$course->code}}<br>
-                                        @endforeach
-                            		@endif
-                            		
+                            		@if($registration->hasUpload(request()->route('semester_id')))
+	                            		@if(empty($registration->failedResults(request()->route('semester_id'))))
+	                                        Pass <br>
+	                            		@elseif($registration->passedResults(request()->route('semester_id')) == 0)
+	                                        Fail <br>
+	                            		@else
+	                                        @foreach($registration->failedResults(request()->route('semester_id')) as $course)
+	                                            Repeat {{$course->code}}<br>
+	                                        @endforeach
+	                            		@endif
+	                            	@endif
                             	</td>
                             	
                             </tr>

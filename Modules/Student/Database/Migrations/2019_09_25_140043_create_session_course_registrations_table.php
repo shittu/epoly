@@ -23,6 +23,14 @@ class CreateSessionCourseRegistrationsTable extends Migration
             ->on('session_registrations')
             ->delete('restrict')
             ->update('cascade');
+            $table->integer('semester_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('semesters')
+            ->delete('restrict')
+            ->update('cascade');
             $table->integer('course_id')
             ->unsigned()
             ->nullable()
