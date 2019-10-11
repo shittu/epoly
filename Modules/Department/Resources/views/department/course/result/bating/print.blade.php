@@ -59,8 +59,19 @@
                             		@endforeach
                             	</td>
                             	<td>{{$registration->sessionGrandPoints()}}</td>
-                            	<td></td>
-                            	<td></td>
+                            	<td>
+                            		@if(empty($registration->failedResults()))
+                                        Pass <br>
+                            		@elseif($registration->passedResults() == 0)
+                                        Fail <br>
+                            		@else
+                                        @foreach($registration->failedResults() as $course)
+                                            Repeat {{$course->code}}<br>
+                                        @endforeach
+                            		@endif
+                            		
+                            	</td>
+                            	
                             </tr>
      					@endforeach
      				</tbody>
