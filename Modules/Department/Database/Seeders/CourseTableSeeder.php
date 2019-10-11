@@ -21,7 +21,7 @@ class CourseTableSeeder extends Seeder
         Model::unguard();
         //lets create five level courses each level 20 course = 100
         for ($i=1; $i <=5 ; $i++) { 
-            for ($j=1; $j <= 20 ; $j++) { 
+            for ($j=1; $j <= 5 ; $j++) { 
                 $this->updateUnit();
                 $this->updatSemester();
                 $this->createCourses($i,$j);

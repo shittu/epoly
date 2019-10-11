@@ -23,6 +23,14 @@ class CreateAdmissionsTable extends Migration
             ->on('head_of_departments')
             ->delete('restrict')
             ->update('cascade');
+            $table->integer('department_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('departments')
+            ->delete('restrict')
+            ->update('cascade');
             $table->string('year')->default(date('Y'));
             $table->string('admission_no');
             $table->timestamps();

@@ -67,8 +67,9 @@ class CourseResultController extends HodBaseController
     {
         $request->validate(['marks'=>'required']);
         $upload = LecturerCourseResultUpload::find($result_id);
-        $upload->update(['amended_by'=>$request->marks]);
+        
         foreach($upload->results as $result){
+            $result->update(['amended_by'=>$request->marks]);
             $result->computeGrade();
         }
         session()->flash('message','All the result is updated successfully');

@@ -40,6 +40,9 @@ class SessionRegistration extends BaseModel
                 $units = $course_registration->course->unit + $units;
             }
         }
+        if($units == 0){
+            $units++;
+        }
         return $units;
     }
 

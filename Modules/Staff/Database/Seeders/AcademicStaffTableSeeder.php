@@ -17,7 +17,7 @@ class AcademicStaffTableSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        for ($i=1; $i <=10 ; $i++) { 
+        for ($i=1; $i <=5 ; $i++) { 
             $this->registerThisStaff($this->getStaffSerialNumber($i));
         }
         

@@ -77,7 +77,7 @@ class Result extends BaseModel
         
     	$this->grade = $grade;
         if($point >= 2){
-            $this->points = $point.'.00';
+            $this->points = number_format($point,2);
         }else{
             $this->points = 0.00;
         }

@@ -40,15 +40,16 @@ class TestStudentCourseRegistrationCommand extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(50000);
+        $bar = $this->output->createProgressBar(2500);
 
         $bar->setBarWidth(100);
 
         $bar->start();
-        foreach(Student::all() as $student){
+        foreach(Student::cursor() as $student){
             $level = Level::where('name',$student->level())->first();
             $session_registration = $student->sessionRegistrations()->firstOrCreate([
             'level_id'=>$level->id,
+            'department_id'=>$student->admission->department_id,
             'session_id'=> Session::where('name',currentSession())->first()->id
             ]);
             foreach($level->courses as $course){

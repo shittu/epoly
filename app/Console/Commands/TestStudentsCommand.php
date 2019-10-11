@@ -39,7 +39,7 @@ class TestStudentsCommand extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(2500);
+        $bar = $this->output->createProgressBar(500);
 
         $bar->setBarWidth(100);
 
@@ -48,32 +48,32 @@ class TestStudentsCommand extends Command
         for ($i=1; $i <= 5 ; $i++) { 
             switch ($i) {
                 case '1':
-                    //create 500 NDI student
-                    for ($j=1; $j <=500 ; $j++) { 
+                    //create 100 NDI student
+                    for ($j=1; $j <=100 ; $j++) { 
                         $number = '191'.$this->getSerialNumber($j);
                         $this->registerThisStudent($number);
                         $bar->advance(); 
                     }
                     break;
                 case '2':
-                    //create 500 NDII student
-                    for ($k=1; $k <=500 ; $k++) { 
+                    //create 100 NDII student
+                    for ($k=1; $k <=100 ; $k++) { 
                         $number = '181'.$this->getSerialNumber($k);
                         $this->registerThisStudent($number);
                         $bar->advance(); 
                     }
                     break;
                 case '3':
-                    //create 500 HNDI student
-                    for ($l=1; $l <=500 ; $l++) { 
+                    //create 100 HNDI student
+                    for ($l=1; $l <=100 ; $l++) { 
                         $number = '190'.$this->getSerialNumber($l);
                         $this->registerThisStudent($number);
                         $bar->advance(); 
                     }
                     break;
                 case '4':
-                    //create 500 HNDII student
-                    for ($m=1; $m <=500 ; $m++) {
+                    //create 100 HNDII student
+                    for ($m=1; $m <=100 ; $m++) {
                         $number = '181'.$this->getSerialNumber($m);
                         $this->registerThisStudent($number);
                         $bar->advance();
@@ -81,7 +81,7 @@ class TestStudentsCommand extends Command
                     break;
                 
                 default:
-                    for ($n=1; $n <=500 ; $n++) {
+                    for ($n=1; $n <=100 ; $n++) {
                         $number = '182'.$this->getSerialNumber($n);
                         $this->registerThisStudent($number);
                         $bar->advance();
@@ -108,7 +108,8 @@ class TestStudentsCommand extends Command
     {
         $admission = Admission::firstOrCreate([
             'admission_no'=>$number,
-            'head_of_department_id'=>1
+            'head_of_department_id'=>1,
+            'department_id'=>1
         ]);
         $student = $admission->student()->firstOrCreate([
             'first_name'=> 'first name',

@@ -22,6 +22,7 @@ Route::prefix('department')
 		Route::post('/search', 'CourseResultController@search')->name('search');
 		Route::get('/bating', 'BatingResultController@index')->name('bating.index');
 		Route::post('/bating/search', 'BatingResultController@search')->name('bating.search');
+		Route::post('/bating/view', 'BatingResultController@view')->name('bating.view');
     });
 	//result routes
 	Route::prefix('result/{result_id}')
