@@ -34,7 +34,7 @@ class RemarkController extends HodBaseController
      */
     public function register(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

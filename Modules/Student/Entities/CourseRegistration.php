@@ -4,13 +4,8 @@ namespace Modules\Student\Entities;
 
 use Modules\Core\Entities\BaseModel;
 
-class SessionCourseRegistration extends BaseModel
+class CourseRegistration extends BaseModel
 {
-
-    public function student()
-    {
-    	return $this->belongsTo(Student::class);
-    }
 
     public function course()
     {
@@ -27,9 +22,9 @@ class SessionCourseRegistration extends BaseModel
     	return $this->belongsTo(Remark::class);
     }
 
-    public function sessionRegistration()
+    public function semesterRegistration()
     {
-        return $this->belongsTo(SessionRegistration::class);
+        return $this->belongsTo(SemesterRegistration::class);
     }
 
 }
