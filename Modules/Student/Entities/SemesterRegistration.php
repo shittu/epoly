@@ -15,4 +15,9 @@ class SemesterRegistration extends BaseModel
     {
     	return $this->hasMany(CourseRegistration::class);
     }
+
+    public function semester()
+    {
+    	return $this->belongsTo('Modules\Admin\Entities\Session');
+    }
 }

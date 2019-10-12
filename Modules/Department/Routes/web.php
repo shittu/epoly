@@ -30,7 +30,7 @@ Route::prefix('department')
 	->namespace('Course')
 	->group(function() {
 	    Route::get('/', 'RemarkController@index')->name('index');
-	    Route::post('/register', 'RemarkController@register')->name('register');
+	    Route::post('semester/{semester_id}/register', 'RemarkController@register')->name('register');
 	    Route::post('/registration/search', 'RemarkController@searchRegistration')->name('registration.search');
 	    Route::get('semester/{semester_id}/registration/view', 'RemarkController@viewRegistration')->name('registration.view');
 	});

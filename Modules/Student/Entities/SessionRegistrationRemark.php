@@ -6,6 +6,7 @@ use Modules\Core\Entities\BaseModel;
 
 class SessionRegistrationRemark extends BaseModel
 {
+	
     public function sessionRegistration()
     {
     	return $this->belongsTo(SessionRegistration::class);
@@ -15,4 +16,10 @@ class SessionRegistrationRemark extends BaseModel
     {
     	return $this->belongsTo(Remark::class);
     }
+
+    public function semester()
+    {
+    	return $this->belongsTo('Modules\Admin\Entities\Session');
+    }
+
 }

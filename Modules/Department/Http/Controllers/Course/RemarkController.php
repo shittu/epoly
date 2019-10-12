@@ -34,7 +34,44 @@ class RemarkController extends HodBaseController
      */
     public function register(Request $request)
     {
-        dd($request->all());
+        $registration = SessionRegistration::find($request->registration_id);
+        $request->validate(['remark'=>'required']);
+        switch ($request->remark) {
+            case '1':
+                # semester cancelation
+                foreach ($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration) {
+                    $semester_registration->update(['cancelation_status'=>1]);
+                }
+                break;
+            
+            case '2':
+                # with draw
+                $registration->student->update(['is_active'=>0]);
+                break;
+            
+            case '3':
+                # session ccancelation
+                $registration->update(['cancelation_status'=>1]);
+                break;
+            
+            case '4':
+                # exam cancelation
+                $request->validate(['course'=>'required']);
+                foreach($registration->semesterRegistrations->where('semester_id',$request->semster_id) as $semester_registration){
+                    $course_registration = $semester_registration->courseRegistrations->where('course_id',$request->course)->first();
+                    $course_registration->update(['cancelation_status'=>1]);
+                }
+                break;
+            default:
+                //
+                break;
+        }
+        $registration->sessionRegistrationRemarks()->firstOrCreate([
+            'remark_id'=>$request->remark,
+            'semester_id'=>request()->route('semester_id')
+        ]);
+        session()->flash('message','The exam monitoring committee verdict is registered successfully');
+        return back();
     }
 
     /**
