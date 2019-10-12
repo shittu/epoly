@@ -52,10 +52,11 @@ class TestStudentCourseRegistrationCommand extends Command
             'department_id'=>$student->admission->department_id,
             'session_id'=> Session::where('name',currentSession())->first()->id
             ]);
+
             foreach($level->courses as $course){
-                $course_registration = $session_registration->sessionCourseRegistrations()->firstOrCreate([
+                $semester_registration = $session_registration->semesterRegistrations()->firstOrCreate(['semester_id'=>$course->semester->id]);
+                $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
                     'course_id'=>$course->id,
-                    'semester_id'=>$course->semester->id
                 ]);
                 $course_registration->result()->firstOrCreate([]);
                 $bar->advance();

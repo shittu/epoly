@@ -17,8 +17,10 @@
 	            	</select><br>
 	            	<select class="form-control" name="course">
 	            		<option value="">Course</option>
-	            		@foreach($registration->sessionCourseRegistrations as $course_registration)
-	                        <option value="{{$course_registration->course->id}}">{{$course_registration->course->code}}</option>
+	            		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration)
+	            		    @foreach($semester_registration->courseRegistrations as $course_registration)
+		                        <option value="{{$course_registration->course->id}}">{{$course_registration->course->code}}</option>
+		            		@endforeach
 	            		@endforeach
 	            	</select><br>
 	            	<button class="button-fullwidth cws-button bt-color-3 btn-block">

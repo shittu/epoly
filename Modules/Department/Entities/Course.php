@@ -16,9 +16,9 @@ class Course extends BaseModel
         return $this->belongsTo(Department::class);
     }
 
-    public function sessionCourseRegistrations()
+    public function courseRegistrations()
     {
-        return $this->hasMany('Modules\Student\Entities\SessionCourseRegistration');
+        return $this->hasMany('Modules\Student\Entities\CourseRegistration');
     }
     
     public function lecturerCourses()

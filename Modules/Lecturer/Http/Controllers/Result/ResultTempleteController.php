@@ -26,7 +26,6 @@ class ResultTempleteController extends LecturerBaseController
     {
         $request->validate(['course_id'=>'required']);
         $course = Course::find($request->course_id);
-        session()->flash('message','Your request of downloading '.$course->code.' for '.currentSession().' session '.$course->semester->name.' is recieved and its on processing you will see the sheet in your download folder in the next 60 seconds thanks');
         $datas = [];
         $headers = [
             'S/N',
@@ -44,14 +43,14 @@ class ResultTempleteController extends LecturerBaseController
             'CA SCORE',
             'EXAM SCORE'
         ];
-        foreach ($course->sessionCourseRegistrations as $course_registration) {
+        foreach ($course->courseRegistrations as $course_registration) {
             $counter = 0;
             //lets compare student department and lecturer allocated department
             if($course_registration->course->department->id == $course->department->id){
                 $datas[] = [
                     'serial_no' => $counter++,
-                    'name'=>$course_registration->sessionRegistration->student->first_name.' '.$course_registration->sessionRegistration->student->last_name,
-                    'admission_no' => $course_registration->sessionRegistration->student->admission->admission_no,
+                    'name'=>$course_registration->semesterRegistration->sessionRegistration->student->first_name.' '.$course_registration->semesterRegistration->sessionRegistration->student->last_name,
+                    'admission_no' => $course_registration->semesterRegistration->sessionRegistration->student->admission->admission_no,
                     'registration_id' => $course_registration->id,
                     'contenue_accessment'=> rand(1,40),
                     'examination'=> rand(1,60),

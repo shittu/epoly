@@ -26,9 +26,9 @@ class SessionRegistration extends BaseModel
     	return $this->hasMany(SessionRegistrationRemark::class);
     }
 
-    public function sessionCourseRegistrations()
+    public function semesterRegistrations()
     {
-    	return $this->hasMany(SessionCourseRegistration::class);
+    	return $this->hasMany(SemesterRegistration::class);
     }
     
     public function sessionGrandPoints($semester)
@@ -36,19 +36,23 @@ class SessionRegistration extends BaseModel
         $units = 0;
         $points = 0;
         if($semester == 1){
-            foreach ($this->sessionCourseRegistrations->where('semester_id',$semester) as $course_registration) {
-                if($course_registration->result->lecturerCourseResultUpload){
-                    $course_unit = $course_registration->course->unit;
-                    $units = $course_unit + $units;
-                    $points = ($course_registration->result->points * $course_unit) + $points;
+            foreach ($this->semesterRegistrations->where('semester_id',$semester) as $semester_registration) {
+                foreach ($semester_registration->courseRegistrations as $course_registration) {
+                    if($course_registration->result->lecturerCourseResultUpload){
+                        $course_unit = $course_registration->course->unit;
+                        $units = $course_unit + $units;
+                        $points = ($course_registration->result->points * $course_unit) + $points;
+                    }
                 }
             }
         }else{
-            foreach ($this->sessionCourseRegistrations as $course_registration) {
-                if($course_registration->result->lecturerCourseResultUpload){
-                    $course_unit = $course_registration->course->unit;
-                    $units = $course_unit + $units;
-                    $points = ($course_registration->result->points * $course_unit) + $points;
+            foreach ($this->semesterRegistrations as $semester_registration) {
+                foreach ($semester_registration->courseRegistrations as $course_registration) {
+                    if($course_registration->result->lecturerCourseResultUpload){
+                        $course_unit = $course_registration->course->unit;
+                        $units = $course_unit + $units;
+                        $points = ($course_registration->result->points * $course_unit) + $points;
+                    }
                 }
             }
         }
