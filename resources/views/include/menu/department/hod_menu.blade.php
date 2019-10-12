@@ -45,7 +45,7 @@
             <a href="{{route('department.result.course.bating.index')}}">Bating Result</a>
         </li>
         <li>
-            <a href="">Remarks</a>
+            <a href="{{route('department.result.remark.index')}}">Remarks</a>
         </li>
     </ul>
 </li>

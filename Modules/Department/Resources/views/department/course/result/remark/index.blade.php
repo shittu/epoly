@@ -5,7 +5,8 @@
     <div class="col-md-6"><br>
      	<div class="card">
      		<div class="card-body">
-     			<form action="{{route('department.result.course.bating.search')}}" method="post">
+     			<p><h3>Search course registrations to remark on</h3></p>
+     			<form action="{{route('department.result.remark.registration.search')}}" method="post">
      				@csrf
      				<select class="form-control" name="session">
      					<option value="">Session</option>
@@ -24,7 +25,7 @@
      					<option value="1">First Semester</option>
      					<option value="2">Second Semester</option>
      				</select><br>
-     				<button class="button-fullwidth cws-button bt-color-3 btn-block">Search Result</button>
+     				<button class="button-fullwidth cws-button bt-color-3 btn-block">Search Registration</button>
      			</form>
      		</div>
      	</div>
