@@ -118,4 +118,13 @@ class SessionRegistration extends BaseModel
         return $upload;
     }
 
+    public function remarks()
+    {
+        $remarks = [];
+        foreach (Remark::where('remark_type_id',2)->get() as $remark) {
+            $remarks[] = $remark;
+        }
+        return $remarks;
+    }
+
 }

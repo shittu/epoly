@@ -52,10 +52,11 @@
                             	</td>
                             	<td>{{$registration->sessionGrandPoints(request()->route('semester_id'))}}</td>
                             	<td>
-                            		<button class="btn btn-info">Remark</button>
+                            		<button class="btn btn-info" data-toggle="modal" data-target="#registration_{{$registration->id}}_remark">Remark</button>
                             	</td>
                             	
                             </tr>
+                            @include('department::department.course.result.remark.remark')
      					@endforeach
      				</tbody>
      			</table>

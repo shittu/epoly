@@ -17,7 +17,7 @@ class RemarkTypeTableSeeder extends Seeder
     {
         Model::unguard();
 
-        $types = ['Result','Exam'];
+        $types = ['Result','Exam Monitoring Committee'];
         foreach ($types as $type) {
             RemarkType::firstOrCreate(['name'=>$type]);
         }
