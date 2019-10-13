@@ -18,9 +18,30 @@ class DepartmentTableSeeder extends Seeder
         Model::unguard();
 
         $departments = [
-            ['name'=>'Computer Science','description'=>'college description','established_date'=>'2019-10-03 18:52:00','college_id'=>1],
-            ['name'=>'Mathematics','description'=>'college description','established_date'=>'2019-10-03 18:52:00','college_id'=>1],
-            ['name'=>'Statistics','description'=>'college description','established_date'=>'2019-10-03 18:52:00','college_id'=>1],
+            [
+                'name'=>'Computer Science',
+                'description'=>'college description',
+                'established_date'=>'2019-10-03 18:52:00',
+                'college_id'=>1,
+                'admin_id'=>1,
+                'code'=>7
+            ],
+            [
+                'name'=>'Mathematics',
+                'description'=>'college description',
+                'established_date'=>'2019-10-03 18:52:00',
+                'admin_id'=>1,
+                'college_id'=>1,
+                'code'=>4
+            ],
+            [
+                'name'=>'Statistics',
+                'description'=>'college description',
+                'established_date'=>'2019-10-03 18:52:00',
+                'college_id'=>1,
+                'admin_id'=>1,
+                'code'=>5
+            ],
         ];
         foreach($departments as $department){
             Department::firstOrCreate($department);

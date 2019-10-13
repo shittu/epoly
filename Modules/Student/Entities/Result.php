@@ -7,9 +7,9 @@ use Modules\Core\Entities\BaseModel;
 class Result extends BaseModel
 {
 	
-    public function sessionCourseRegistration()
+    public function courseRegistration()
     {
-    	return $this->belongsTo(SessionCourseRegistration::class);
+    	return $this->belongsTo(CourseRegistration::class);
     }
 
     public function remark()

@@ -28,13 +28,13 @@
 							{{$loop->index+1}}
 						</td>
 						<td>
-							{{$result->sessionCourseRegistration->sessionRegistration->student->first_name}} {{$result->sessionCourseRegistration->sessionRegistration->student->last_name}}
+							{{$result->courseRegistration->semesterRegistration->sessionRegistration->student->first_name}} {{$result->courseRegistration->semesterRegistration->sessionRegistration->student->last_name}}
 						</td>
 						<td>
-							{{$result->sessionCourseRegistration->sessionRegistration->student->admission->admission_no}}
+							{{$result->courseRegistration->semesterRegistration->sessionRegistration->student->admission->admission_no}}
 						</td>
 						<td>
-							{{$result->sessionCourseRegistration->course->code}}
+							{{$result->courseRegistration->course->code}}
 						</td>
 						<td>
 							{{$result->ca}}

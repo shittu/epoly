@@ -16,6 +16,7 @@ class CreateStudentSessionsTable extends Migration
         Schema::create('student_sessions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('code');
             $table->timestamps();
         });
     }

@@ -18,9 +18,27 @@ class CollegeTableSeeder extends Seeder
         Model::unguard();
 
         $colleges = [
-            ['name'=>'Science And Technology','description'=>'college description','established_date'=>'2019-10-03 18:52:00'],
-            ['name'=>'Engeneering','description'=>'college description','established_date'=>'2019-10-03 18:52:00'],
-            ['name'=>'Agriculture','description'=>'college description','established_date'=>'2019-10-03 18:52:00'],
+            [
+                'name'=>'Science And Technology',
+                'code'=>5,
+                'admin_id'=>1,
+                'description'=>'college description',
+                'established_date'=>'2019-10-03 18:52:00'
+            ],
+            [
+                'name'=>'Engeneering',
+                'code'=>7,
+                'admin_id'=>1,
+                'description'=>'college description',
+                'established_date'=>'2019-10-03 18:52:00'
+            ],
+            [
+                'name'=>'Agriculture',
+                'code'=>4,
+                'admin_id'=>1,
+                'description'=>'college description',
+                'established_date'=>'2019-10-03 18:52:00'
+            ],
         ];
         foreach($colleges as $college){
             College::firstOrCreate($college);

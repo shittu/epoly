@@ -31,7 +31,7 @@ class ResultController extends LecturerBaseController
         ]); 
         $results = [];
         $course = Course::find($request->course);
-        foreach ($course->sessionCourseRegistrations as $course_registration) {
+        foreach ($course->courseRegistrations as $course_registration) {
             if(substr($course_registration->created_at,0,4) == substr($request->session, 0,4) || substr($course_registration->created_at,0,4) == substr($request->session, 5,4)){
                 $results[] = $course_registration->result;
             }

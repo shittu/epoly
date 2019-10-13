@@ -24,6 +24,7 @@ class CreateCollegesTable extends Migration
             ->delete('restrict')
             ->update('cascade');
             $table->string('name');
+            $table->string('code');
             $table->string('established_date');
             $table->string('description');
             $table->timestamps();
