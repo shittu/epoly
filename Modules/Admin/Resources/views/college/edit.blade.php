@@ -37,6 +37,10 @@
                     	<label>College Description</label>
                         <textarea rows="5" name="description" class="form-control">{{$college->description}}</textarea>
                     </div>
+                    <div class="form-group">
+                        <label>College Code</label>
+                        <input type="number" name="code" class="form-control" value="{{$college->code}}"> 
+                    </div>
                     <button class="button-fullwidth cws-button bt-color-3">Save Changes</button>
                 </form>
             </div>

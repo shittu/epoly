@@ -38,6 +38,7 @@ class CollegeController extends AdminBaseController
             'name'=>$request->name,
             'established_date'=>$request->established_date,
             'description'=>$request->description
+            'code'=>$request->code
         ]);
         session()->flash('message','College created successfully');
         return redirect()->route('admin.college.index');
@@ -61,6 +62,7 @@ class CollegeController extends AdminBaseController
             'name'=>$request->name,
             'established_date'=>$request->established_date,
             'description'=>$request->description
+            'code'=>$request->code
         ]);
 
         session()->flash('message','College updated successfully');
