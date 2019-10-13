@@ -22,36 +22,33 @@
 					</tr>
 				</head>
 				<tbody>
-					@php
-                        if(!isset($point)){
-						    $point = 0;
-						}
-					@endphp
-					@foreach($session_registration->sessionCourseRegistrations as $course_registration)    				
-					@if($course_registration->result->approved())
-					<tr>
-						<td>{{$loop->index+1}}</td>
-						<td>{{$course_registration->course->code}}</td>
-						<td>{{$course_registration->course->unit}}</td>
-						<td>
-							{{$course_registration->result->ca}}
-						</td>
-						<td>
-							{{$course_registration->result->exam}}
-						</td>
-						<td>
-							
-							   {{$course_registration->result->accessment() + $course_registration->result->examination()}}
-						    				
-						</td>
-						<td>
-							{{$course_registration->result->grade}}
-						</td>
-						<td>
-							{{$course_registration->result->remark ? $course_registration->result->remark->name : ' '}}
-						</td>
-					</tr>
-					@endif
+					@foreach($session_registration->semesterRegistrations as $semester_registration)
+						@foreach($semester_registration->courseRegistrations as $course_registration)    				
+							@if($course_registration->result->approved())
+							<tr>
+								<td>{{$loop->index+1}}</td>
+								<td>{{$course_registration->course->code}}</td>
+								<td>{{$course_registration->course->unit}}</td>
+								<td>
+									{{$course_registration->result->ca}}
+								</td>
+								<td>
+									{{$course_registration->result->exam}}
+								</td>
+								<td>
+									
+									   {{$course_registration->result->accessment() + $course_registration->result->examination()}}
+								    				
+								</td>
+								<td>
+									{{$course_registration->result->grade}}
+								</td>
+								<td>
+									{{$course_registration->result->remark ? $course_registration->result->remark->name : ' '}}
+								</td>
+							</tr>
+							@endif
+						@endforeach
 					@endforeach
                     <tr>
                     	<td></td>
@@ -60,7 +57,7 @@
                     	<td></td>
                     	<td></td>
                     	<td><b>G P</b></td>
-                    	<td><b>{{number_format($session_registration->sessionGrandPoints(),2)}}</b></td>
+                    	<td><b>{{number_format($session_registration->sessionGrandPoints(2),2)}}</b></td>
                     </tr>
 				</tbody>
 			</table>	

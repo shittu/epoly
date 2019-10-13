@@ -18,6 +18,6 @@ class SemesterRegistration extends BaseModel
 
     public function semester()
     {
-    	return $this->belongsTo('Modules\Admin\Entities\Session');
+    	return $this->belongsTo('Modules\Department\Entities\Semester');
     }
 }

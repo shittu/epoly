@@ -32,44 +32,60 @@
                             	</td>
                             	@if(request()->route('semester_id') == 1)
                             	<td>
-                            		@foreach($registration->sessionCourseRegistrations->where('semester_id',request()->route('semester_id')) as $course_registration)
-                            		{{$course_registration->course->code}}<br>
+                            		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration)
+	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
+	                            		    {{$course_registration->course->code}}<br>
+	                            		@endforeach
                             		@endforeach
                             	</td>
                             	<td>
-                            		@foreach($registration->sessionCourseRegistrations->where('semester_id',request()->route('semester_id')) as $course_registration)
-                            		{{$course_registration->course->unit}}<br>
+                            		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration)
+	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
+	                            		{{$course_registration->course->unit}}<br>
+	                            		@endforeach
                             		@endforeach
                             	</td>
                             	<td>
-                            		@foreach($registration->sessionCourseRegistrations->where('semester_id',request()->route('semester_id')) as $course_registration)
-                            		{{$course_registration->result->grade}}<br>
+                            		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration)
+	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
+	                            		{{$course_registration->result->grade}}<br>
+	                            		@endforeach
                             		@endforeach
                             	</td>
                             	<td>
-                            		@foreach($registration->sessionCourseRegistrations->where('semester_id',request()->route('semester_id')) as $course_registration)
-                            		{{$course_registration->result->points}}<br>
+                            		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration)
+		                            	@foreach($semester_registration->courseRegistrations as $course_registration)
+	                            		{{$course_registration->result->points}}<br>
+	                            		@endforeach
                             		@endforeach
                             	</td>
                                 @else
                                 <td>
-                            		@foreach($registration->sessionCourseRegistrations as $course_registration)
-                            		{{$course_registration->course->code}}<br>
+                            		@foreach($registration->semesterRegistrations as $semester_registration)
+	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
+	                            		    {{$course_registration->course->code}}<br>
+	                            		@endforeach
                             		@endforeach
                             	</td>
                             	<td>
-                            		@foreach($registration->sessionCourseRegistrations as $course_registration)
-                            		{{$course_registration->course->unit}}<br>
+                            		@foreach($registration->semesterRegistrations as $semester_registration)
+	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
+	                            		{{$course_registration->course->unit}}<br>
+	                            		@endforeach
                             		@endforeach
                             	</td>
                             	<td>
-                            		@foreach($registration->sessionCourseRegistrations as $course_registration)
-                            		{{$course_registration->result->grade}}<br>
+                            		@foreach($registration->semesterRegistrations as $semester_registration)
+	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
+	                            		{{$course_registration->result->grade}}<br>
+	                            		@endforeach
                             		@endforeach
                             	</td>
                             	<td>
-                            		@foreach($registration->sessionCourseRegistrations as $course_registration)
-                            		{{$course_registration->result->points}}<br>
+                            		@foreach($registration->semesterRegistrations as $semester_registration)
+		                            	@foreach($semester_registration->courseRegistrations as $course_registration)
+	                            		{{$course_registration->result->points}}<br>
+	                            		@endforeach
                             		@endforeach
                             	</td>
                                 @endif

@@ -1,6 +1,9 @@
 @extends('student::layouts.master')
 
 @section('page-content')
+@php
+$count = 1;
+@endphp
 <input type="checkbox" name="">
 <div class="col-md-1"></div>
 <div class="col-md-10">
@@ -20,23 +23,25 @@
 					</tr>
 				</head>
 				<tbody>
-					@foreach($session_registration->sessionCourseRegistrations as $course_registration)
-					<tr>
-						<td>{{$loop->index+1}}</td>
-						<td>{{$course_registration->course->title}}</td>
-						<td>
-							{{$course_registration->course->code}}
-						</td>
-						<td>
-							{{$course_registration->course->unit}}
-						</td>
-						<td>
-							{{$course_registration->sessionRegistration->level->name}}
-						</td>
-						<td>
-							{{$course_registration->course->semester->name}}
-						</td>
-					</tr>
+					@foreach($session_registration->semesterRegistrations as $semester_registration)
+					    @foreach($semester_registration->courseRegistrations as $course_registration)
+							<tr>
+								<td>{{$count++}}</td>
+								<td>{{$course_registration->course->title}}</td>
+								<td>
+									{{$course_registration->course->code}}
+								</td>
+								<td>
+									{{$course_registration->course->unit}}
+								</td>
+								<td>
+									{{$course_registration->semesterRegistration->sessionRegistration->level->name}}
+								</td>
+								<td>
+									{{$course_registration->course->semester->name}}
+								</td>
+							</tr>
+					    @endforeach
 					@endforeach
 				</tbody>
 			</table>	

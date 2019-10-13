@@ -66,19 +66,22 @@ class SessionRegistration extends BaseModel
     {
         $courses = [];
         if($semester == 1){
-            foreach ($this->sessionCourseRegistrations->where('semester_id',$semester) as $course_registration) {
-                if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
-                    $courses[] = $course_registration->course;
+            foreach ($this->semesterRegistrations->where('semester_id',$semester) as $semester_registration) {
+                foreach ($semester_registration->courseRegistrations as $course_registration) {
+                    if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
+                        $courses[] = $course_registration->course;
+                    }
                 }
             }
         }else{
-            foreach ($this->sessionCourseRegistrations as $course_registration) {
-                if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
-                    $courses[] = $course_registration->course;
+            foreach ($this->semesterRegistrations as $semester_registration) {
+                foreach ($semester_registration->courseRegistrations as $course_registration) {
+                    if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
+                        $courses[] = $course_registration->course;
+                    }
                 }
             }
         }
-        
         return $courses;
     }
 
@@ -86,19 +89,22 @@ class SessionRegistration extends BaseModel
     {
         $course = 0;
         if($semester==1){
-            foreach ($this->sessionCourseRegistrations->where('semester_id',$semester) as $course_registration) {
-                if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->points > 2){
-                    $course++;
+            foreach ($this->semesterRegistrations->where('semester_id',$semester) as $semester_registration) {
+                foreach ($semester_registration->courseRegistrations as $course_registration) {
+                    if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->points > 2){
+                        $course++;
+                    }
                 }
             }
         }else{
-            foreach ($this->sessionCourseRegistrations as $course_registration) {
-                if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->points > 2){
-                    $course++;
+            foreach ($this->semesterRegistrations as $semester_registration) {
+                foreach ($semester_registration->courseRegistrations as $course_registration) {
+                    if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->points > 2){
+                        $course++;
+                    }
                 }
             }
         }
-        
         return $course;
     }
 
@@ -106,15 +112,19 @@ class SessionRegistration extends BaseModel
     {
         $upload = false;
         if($semester == 1){
-            foreach ($this->sessionCourseRegistrations->where('semester_id',$semester) as $course_registration) {
-                if($course_registration->result->lecturerCourseResultUpload){
-                    $upload = true;
+            foreach ($this->semesterRegistrations->where('semester_id',$semester) as $semester_registration) {
+                foreach ($semester_registration->courseRegistrations as $course_registration) {
+                    if($course_registration->result->lecturerCourseResultUpload){
+                        $upload = true;
+                    }
                 }
             }
         }else{
-            foreach ($this->sessionCourseRegistrations as $course_registration) {
-                if($course_registration->result->lecturerCourseResultUpload){
-                    $upload = true;
+            foreach ($this->semesterRegistrations as $semester_registration) {
+                foreach ($semester_registration->courseRegistrations as $course_registration) {
+                    if($course_registration->result->lecturerCourseResultUpload){
+                        $upload = true;
+                    }
                 }
             }
         }
