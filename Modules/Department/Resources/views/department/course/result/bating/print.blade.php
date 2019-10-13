@@ -107,8 +107,8 @@
 	                            		@endif
 	                            	@endif
 
-	                            	@foreach($registration->sessionRegistrationRemarks as $remark)
-                                        {{'EMC Verdict'}} {{$remark->name}} <br>
+	                            	@foreach($registration->sessionRegistrationRemarks as $emc_remark)
+                                        {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
 	                            	@endforeach
                             	</td>
                             	
