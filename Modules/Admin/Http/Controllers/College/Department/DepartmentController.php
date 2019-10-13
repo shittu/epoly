@@ -39,6 +39,7 @@ class DepartmentController extends AdminBaseController
             'established_date'=>$request->established_date,
             'name'=>$request->name,
             'description'=>$request->description,
+            'code'=>$request->code,
             'admin_id' => admin()->id
         ]);
         session()->flash('message','Department created successfully');
@@ -67,6 +68,7 @@ class DepartmentController extends AdminBaseController
         $department->update([
             'college_id'=>$request->college,
             'established_date'=>$request->established_date,
+            'code'=>$request->code,
             'name'=>$request->name,
             'description'=>$request->description,
         ]);
