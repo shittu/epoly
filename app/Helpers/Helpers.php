@@ -76,8 +76,8 @@ if (!function_exists('directer')) {
 if (!function_exists('currentSession')) {
     function currentSession()
     { 
-        $start = date('Y');
-        $end = date('Y')+1;
+        $start = date('Y')-1;
+        $end = date('Y');
         return $start.'/'.$end;
     }
 }
