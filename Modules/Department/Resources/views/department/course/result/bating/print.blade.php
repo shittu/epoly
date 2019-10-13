@@ -106,6 +106,10 @@
 	                                        @endforeach
 	                            		@endif
 	                            	@endif
+
+	                            	@foreach($registration->sessionRegistrationRemarks as $remark)
+                                        {{'EMC Verdict'}} {{$remark->name}} <br>
+	                            	@endforeach
                             	</td>
                             	
                             </tr>
