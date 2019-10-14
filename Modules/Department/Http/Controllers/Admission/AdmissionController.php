@@ -99,21 +99,38 @@ class AdmissionController extends HodBaseController
     public function update(Request $request, $admission_id)
     {
         $admission = Admission::find($admission_id);
-        dd($request->all());
-        $admission->update(['admission_no'=>$request->admission_no]);
-
+        $data = $request->all();
+        if($data['type'] != $admission->typeNo() || $data['session'] != $admission->sessionNo()){
+            //reserve the current admission number
+            headOfDepartment()->department->reservedDepartmentSessionAdmissions()->firstOrCreate([
+                    'session_id'=>$session->id,
+                    'student_session_id'=>$data['session'],
+                    'student_type_id'=>$data['type']->id,
+                    'admission_no' => $admission->admission_no
+                ]);
+            //generate another admission number and update admission with the new admission no
+            $admission->update([
+                'admission_no'=>headOfDepartment()->department->generateAdmissionNo($data)
+            ]);
+        }
+    
         $student = $admission->student->update([
-            'first_name'=>'default',
-            'last_name'=>'default',
-            'phone'=>'default',
+            'first_name'=>$data['first_name'],
+            'last_name'=>$data['last_name'],
+            'phone'=>$data['phone'],
             'email'=>$admission->admission_no.'@poly.com',
             'password'=>Hash::make($admission->admission_no),
-            'student_type_id' => $request->student_type
+            'student_type_id' => $data['type'],
+            'student_session_id' => $data['session'],
         ]);
-
+        $admission->student->studentAccount->update([
+            'gender_id'=>$data['gender'],
+            'tribe_id'=>$data['tribe'],
+            'religion_id'=>$data['religion'],
+        ]);
         session()->flash('message','Congratulation this admission is updated successfully and this student can logged in as student using '.$admission->admission_no.'@poly.com as his email and '.$admission->admission_no.' as his password');
 
-        return redirect()->route('department.admission.index');
+        return back();
 
     }
 
