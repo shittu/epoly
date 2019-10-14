@@ -10,4 +10,19 @@ class StudentAccount extends BaseModel
     {
     	return $this->belongsTo(Student::class);
     }
+
+    public function gender()
+    {
+    	return $this->belongsTo('Modules\Staff\Entities\Gender');
+    }
+
+    public function tribe()
+    {
+    	return $this->belongsTo('Modules\Staff\Entities\Tribe');
+    }
+
+    public function religion()
+    {
+    	return $this->belongsTo('Modules\Staff\Entities\Religion');
+    }
 }

@@ -34,7 +34,7 @@
         <div class="form-group">
             <label>Gender</label>
             <select name="gender" class="form-control">
-                <option value=""></option>
+                <option value="{{$admission->student->studentAccount->gender->id ?? ''}}">{{$admission->student->studentAccount->gender->name ?? ''}}</option>
                 @foreach($admission->genders() as $gender)
                     <option value="{{$gender->id}}">{{$gender->name}}</option>
                 @endforeach
@@ -48,7 +48,7 @@
         <div class="form-group">
             <label>Tribe</label>
             <select name="tribe" class="form-control">
-                <option value=""></option>
+                <option value="{{$admission->student->studentAccount->tribe->id ?? ''}}">{{$admission->student->studentAccount->tribe->name ?? ''}}</option>
                 @foreach($admission->tribes() as $tribe)
                     <option value="{{$tribe->id}}">{{$tribe->name}}</option>
                 @endforeach
@@ -62,7 +62,7 @@
         <div class="form-group">
             <label>Religion</label>
             <select name="religion" class="form-control">
-                <option value=""></option>
+                <option value="{{$admission->student->studentAccount->religion->id ?? ''}}">{{$admission->student->studentAccount->religion->name ?? ''}}</option>
                 @foreach($admission->religions() as $religion)
                     <option value="{{$religion->id}}">{{$religion->name}}</option>
                 @endforeach

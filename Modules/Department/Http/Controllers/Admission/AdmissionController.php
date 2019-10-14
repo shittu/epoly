@@ -4,6 +4,7 @@ namespace Modules\Department\Http\Controllers\Admission;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Admin\Entities\Session;
 use Illuminate\Support\Facades\Hash;
 use Modules\Department\Entities\Admission;
 use Modules\Core\Http\Controllers\Department\HodBaseController;
@@ -46,7 +47,7 @@ class AdmissionController extends HodBaseController
             'first_name'=>'default',
             'last_name'=>'default',
             'phone'=>'default',
-            'email'=>$admission->admission_no.'@poly.com',
+            'email'=>$admission->admission_no.'@sospoly.com',
             'password'=>Hash::make($admission->admission_no),
             'student_type_id' => $request->type,
             'student_session_id' => $request->session
@@ -99,13 +100,14 @@ class AdmissionController extends HodBaseController
     public function update(Request $request, $admission_id)
     {
         $admission = Admission::find($admission_id);
+        $session = Session::where('name',currentSession())->first();
         $data = $request->all();
         if($data['type'] != $admission->typeNo() || $data['session'] != $admission->sessionNo()){
             //reserve the current admission number
             headOfDepartment()->department->reservedDepartmentSessionAdmissions()->firstOrCreate([
                     'session_id'=>$session->id,
                     'student_session_id'=>$data['session'],
-                    'student_type_id'=>$data['type']->id,
+                    'student_type_id'=>$data['type'],
                     'admission_no' => $admission->admission_no
                 ]);
             //generate another admission number and update admission with the new admission no
@@ -118,7 +120,7 @@ class AdmissionController extends HodBaseController
             'first_name'=>$data['first_name'],
             'last_name'=>$data['last_name'],
             'phone'=>$data['phone'],
-            'email'=>$admission->admission_no.'@poly.com',
+            'email'=>$admission->admission_no.'@sospoly.com',
             'password'=>Hash::make($admission->admission_no),
             'student_type_id' => $data['type'],
             'student_session_id' => $data['session'],
