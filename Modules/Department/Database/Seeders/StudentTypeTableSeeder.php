@@ -18,8 +18,8 @@ class StudentTypeTableSeeder extends Seeder
         Model::unguard();
 
         $types = [
-            ['name'=>'ND','code'=>2],
-            ['name'=>'HND','code'=>5]
+            ['name'=>'ND','code'=>1],
+            ['name'=>'HND','code'=>2]
         ];
         foreach ($types as $type) {
             StudentType::firstOrCreate($type);

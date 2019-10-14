@@ -24,7 +24,7 @@ class DepartmentTableSeeder extends Seeder
                 'established_date'=>'2019-10-03 18:52:00',
                 'college_id'=>1,
                 'admin_id'=>1,
-                'code'=>7
+                'code'=>4
             ],
             [
                 'name'=>'Mathematics',

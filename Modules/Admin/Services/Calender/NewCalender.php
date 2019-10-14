@@ -19,8 +19,8 @@ class NewCalender
 
 	public function getCurrentSession()
 	{
-		$start = date('Y');
-		$end = date('Y')+1;
+		$start = date('Y')-1;
+		$end = date('Y');
 		return $start.'/'.$end;
 	}
 

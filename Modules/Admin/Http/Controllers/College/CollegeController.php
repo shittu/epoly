@@ -37,7 +37,7 @@ class CollegeController extends AdminBaseController
         admin()->colleges()->firstOrCreate([
             'name'=>$request->name,
             'established_date'=>$request->established_date,
-            'description'=>$request->description
+            'description'=>$request->description,
             'code'=>$request->code
         ]);
         session()->flash('message','College created successfully');
@@ -61,7 +61,7 @@ class CollegeController extends AdminBaseController
         $college->update([
             'name'=>$request->name,
             'established_date'=>$request->established_date,
-            'description'=>$request->description
+            'description'=>$request->description,
             'code'=>$request->code
         ]);
 

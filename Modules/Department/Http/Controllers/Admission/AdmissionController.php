@@ -52,7 +52,7 @@ class AdmissionController extends HodBaseController
             'student_session_id' => $request->session
         ]);
         $student->studentAccount()->create([]);
-        headOfDepartment()->department->updateDepartmentSessionAdmissionCounter();
+        headOfDepartment()->department->updateDepartmentSessionAdmissionCounter($request->all());
         session()->flash('message','Congratulation this admission is registered successfully and this student can logged in as student using '.$admission->admission_no.'@poly.com as his email and '.$admission->admission_no.' as his password');
 
         return redirect()->route('department.admission.edit',[$admission->id]);
