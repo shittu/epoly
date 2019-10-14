@@ -4,9 +4,8 @@ namespace Modules\Department\Entities;
 
 use Modules\Core\Entities\BaseModel;
 
-class DepartmentSessionAdmission extends BaseModel
+class ReservedDepartmentSessionAdmission extends BaseModel
 {
-
     public function department()
     {
     	return $this->belongsTo(Department::class);
@@ -21,5 +20,4 @@ class DepartmentSessionAdmission extends BaseModel
     {
     	return $this->belongsTo('Modules\Student\Entities\StudentType');
     }
-
 }
