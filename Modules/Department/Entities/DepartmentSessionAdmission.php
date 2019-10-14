@@ -2,9 +2,9 @@
 
 namespace Modules\Department\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class DepartmentSessionAdmission extends Model
+class DepartmentSessionAdmission extends BaseModel
 {
 
     public function department()

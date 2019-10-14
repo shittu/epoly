@@ -36,26 +36,26 @@ class AdmissionController extends HodBaseController
     public function register(Request $request)
     {
         $request->validate([
-            'student_session'=>'required',
-            'student_type'=>'required',
-            'admission_no'=>'required'
+            'session'=>'required',
+            'type'=>'required',
         ]);
-        $admission = headOfDepartment()->admissions()->create(['admission_no'=>$request->admission_no]);
+        
+        $admission = headOfDepartment()->admissions()->create([
+            'admission_no'=>headOfDepartment()->department->generateAdmissionNo($request->all())]);
         $student = $admission->student()->create([
             'first_name'=>'default',
             'last_name'=>'default',
             'phone'=>'default',
             'email'=>$admission->admission_no.'@poly.com',
             'password'=>Hash::make($admission->admission_no),
-            'student_type_id' => $request->student_type,
-            'student_session_id' => $request->student_session
+            'student_type_id' => $request->type,
+            'student_session_id' => $request->session
         ]);
-
         $student->studentAccount()->create([]);
-
+        headOfDepartment()->department->updateDepartmentSessionAdmissionCounter();
         session()->flash('message','Congratulation this admission is registered successfully and this student can logged in as student using '.$admission->admission_no.'@poly.com as his email and '.$admission->admission_no.' as his password');
 
-        return redirect()->route('department.admission.index');
+        return redirect()->route('department.admission.edit',[$admission->id]);
     }
 
     /**

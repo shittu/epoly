@@ -15,20 +15,11 @@
     <form class="login-form" action="{{route('department.admission.register')}}" method="post">
         @csrf
         <div class="form-group">
-        	<label>Admission No</label>
-            <input type="text" name="admission_no" class="form-control" placeholder="admission no">
-            @error('admission_no')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-        </div>
-        <div class="form-group">
         	<label>Student Type</label>
-            <select name="student_type" class="form-control">
+            <select name="type" class="form-control">
             	<option value=""></option>
             	@foreach(headOfDepartment()->studentTypes() as $student_type)
-                    <option value="{{$student_type->id}}">{{$student_type->name}}</option>
+                    <option value="{{$student_type->code}}">{{$student_type->name}}</option>
             	@endforeach
             </select>
             @error('student_type')
@@ -39,10 +30,10 @@
         </div>
         <div class="form-group">
             <label>Student Session</label>
-            <select name="student_session" class="form-control">
+            <select name="session" class="form-control">
                 <option value=""></option>
                 @foreach(headOfDepartment()->studentSessions() as $student_session)
-                    <option value="{{$student_session->id}}">{{$student_session->name}}</option>
+                    <option value="{{$student_session->code}}">{{$student_session->name}}</option>
                 @endforeach
             </select>
             @error('student_session')

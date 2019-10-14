@@ -6,7 +6,7 @@ use Modules\Department\Entities\DepartmentSessionAdmission;
 
 trait AdmissionNumberGenerator
 {
-	public function admissionNo(array $student)
+	public function generateAdmissionNo(array $student)
 	{
 		return  $this->yearExt().
 				$this->collegeCode().
@@ -18,7 +18,7 @@ trait AdmissionNumberGenerator
 
 	public function yearExt()
 	{
-		return substr(date('Y'),0,2);
+		return substr(date('Y'),2);
 	}
 
 	public function collegeCode()
@@ -31,11 +31,16 @@ trait AdmissionNumberGenerator
 		return $this->code;
 	}
 
+    public function getSession()
+    {
+    	return Session::where('name',currentSession())->first();
+    }
+
 	public function getAdmissionSerialNo()
 	{
-		$session = Session::where('name',curresntSession())->first();
+		
 		$current_serial_no = $this->departmentSessionAdmissions()->firstOrCreate([
-			'session_id'=>$session->id,
+			'session_id'=>$this->getSession()->id,
 		]);
 		return $this->validateThisSerialNo($current_serial_no->count + 1);
 	}
@@ -52,15 +57,15 @@ trait AdmissionNumberGenerator
 	public function validateThisSerialNo($no)
 	{
 		if($no < 9){
-			$valid_no = 000.$no,
+			$valid_no = '000'.$no;
 		}elseif ($no < 100) {
-			$valid_no = 00.$no;
+			$valid_no = '00'.$no;
 		}elseif ($no <1000) {
-			$valid_no = 0.$no;
+			$valid_no = '0'.$no;
 		}else{
 			$valid_no = $no;
 		}
 		return $valid_no;
 	}
-	
+
 }

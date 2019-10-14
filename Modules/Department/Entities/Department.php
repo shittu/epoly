@@ -3,9 +3,11 @@
 namespace Modules\Department\Entities;
 
 use Modules\Core\Entities\BaseModel;
+use Modules\Admission\Services\Traits\AdmissionNumberGenerator;
 
 class Department extends BaseModel
 {
+    use AdmissionNumberGenerator;
 
     public function college()
     {
@@ -35,6 +37,11 @@ class Department extends BaseModel
     public function departmentCourses()
     {
         return $this->hasMany(DepartmentCourse::class);
+    }
+    
+    public function departmentSessionAdmissions()
+    {
+        return $this->hasMany(DepartmentSessionAdmission::class);
     }
 
     public function lecturerCourseAllocations()
