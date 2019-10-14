@@ -50,13 +50,13 @@ trait AdmissionNumberGenerator
     	return Session::where('name',currentSession())->first();
     }
 
-    public function getStudentType($code)
+    public function getStudentType($id)
     {
-    	return StudentType::where('code',$code)->first();
+    	return StudentType::find($id);
     }
-    public function getStudentSession($code)
+    public function getStudentSession($id)
     {
-    	return StudentSession::where('code',$code)->first();
+    	return StudentSession::find($id);
     }
 	public function getAdmissionSerialNo(array $student)
 	{

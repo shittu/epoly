@@ -23,21 +23,21 @@ class CollegeTableSeeder extends Seeder
                 'code'=>5,
                 'admin_id'=>1,
                 'description'=>'college description',
-                'established_date'=>'2019-10-03 18:52:00'
+                'established_date'=>'2019-10-03'
             ],
             [
                 'name'=>'Engeneering',
                 'code'=>7,
                 'admin_id'=>1,
                 'description'=>'college description',
-                'established_date'=>'2019-10-03 18:52:00'
+                'established_date'=>'2019-10-03'
             ],
             [
                 'name'=>'Agriculture',
                 'code'=>4,
                 'admin_id'=>1,
                 'description'=>'college description',
-                'established_date'=>'2019-10-03 18:52:00'
+                'established_date'=>'2019-10-03'
             ],
         ];
         foreach($colleges as $college){

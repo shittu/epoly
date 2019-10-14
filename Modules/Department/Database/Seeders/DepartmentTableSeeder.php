@@ -21,7 +21,7 @@ class DepartmentTableSeeder extends Seeder
             [
                 'name'=>'Computer Science',
                 'description'=>'college description',
-                'established_date'=>'2019-10-03 18:52:00',
+                'established_date'=>'2019-10-03',
                 'college_id'=>1,
                 'admin_id'=>1,
                 'code'=>4
@@ -29,7 +29,7 @@ class DepartmentTableSeeder extends Seeder
             [
                 'name'=>'Mathematics',
                 'description'=>'college description',
-                'established_date'=>'2019-10-03 18:52:00',
+                'established_date'=>'2019-10-03',
                 'admin_id'=>1,
                 'college_id'=>1,
                 'code'=>4
@@ -37,7 +37,7 @@ class DepartmentTableSeeder extends Seeder
             [
                 'name'=>'Statistics',
                 'description'=>'college description',
-                'established_date'=>'2019-10-03 18:52:00',
+                'established_date'=>'2019-10-03',
                 'college_id'=>1,
                 'admin_id'=>1,
                 'code'=>5

@@ -99,6 +99,7 @@ class AdmissionController extends HodBaseController
     public function update(Request $request, $admission_id)
     {
         $admission = Admission::find($admission_id);
+        dd($request->all());
         $admission->update(['admission_no'=>$request->admission_no]);
 
         $student = $admission->student->update([
