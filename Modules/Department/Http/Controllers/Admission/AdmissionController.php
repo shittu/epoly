@@ -44,9 +44,9 @@ class AdmissionController extends HodBaseController
         $admission = headOfDepartment()->admissions()->create([
             'admission_no'=>headOfDepartment()->department->generateAdmissionNo($request->all())]);
         $student = $admission->student()->create([
-            'first_name'=>'default',
-            'last_name'=>'default',
-            'phone'=>'default',
+            'first_name'=>'',
+            'last_name'=>'',
+            'phone'=>'',
             'email'=>$admission->admission_no.'@sospoly.com',
             'password'=>Hash::make($admission->admission_no),
             'student_type_id' => $request->type,

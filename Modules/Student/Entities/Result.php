@@ -83,18 +83,28 @@ class Result extends BaseModel
         }
         if($point >= 2){
             $this->remark_id = 5;
+            if($this->courseRegistration->repeatCourseRegistration){
+                $this->courseRegistration->repeatCourseRegistration->update(['status'=>0]);
+            }
         }elseif($point == 0){
             $this->remark_id = 6;
+            $this->repeat();
         }elseif($point == -1){
             $this->remark_id = 7;
+            $this->repeat();
         }elseif($point == -2){
             $this->remark_id = 8;
+            $this->repeat();
         }elseif($point == -3){
             $this->remark_id = 9;
+            $this->repeat();
         }
     	$this->save();
     }
-
+    public function repeat()
+    {
+        $this->courseRegistration->repeatCourseRegistration()->firstOrCreate(['student_id'=>$this->courseRegistration->semesterRegistration->sessionRegistration->student->id]);
+    }
     public function computeGrade()
     {
         if(is_numeric($this->exam)){
