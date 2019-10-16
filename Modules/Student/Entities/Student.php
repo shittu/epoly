@@ -3,6 +3,7 @@
 namespace Modules\Student\Entities;
 
 use Illuminate\Notifications\Notifiable;
+use Modules\Admin\Entities\Session;
 use Modules\Department\Entities\Level;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\Student\Services\Traits\HasLevelAndSemester;
@@ -67,6 +68,15 @@ class Student extends Authenticatable
             } 
         }
         return $courses;
+    }
+
+    public function makeCurrentSessionRegistration()
+    {
+        $session = Session::where('name',currentSession())->first();
+        if($this->sessionRegistrations->where('session_id',$session->id)){
+            return true;
+        }
+        
     }
     
 }

@@ -5,6 +5,10 @@
     <a href="{{route('student.course.results.show')}}">Results History</a>
 </li>
 <li>
-    <a href="{{route('student.course.registration.courses')}}">Course Registraion</a>
+	@if(student()->makeCurrentSessionRegistration())
+        <a href="{{route('student.course.registration.courses')}}">Add Or Drop Coures</a>
+    @else
+        <a href="{{route('student.course.registration.courses')}}">Course Registraion</a>
+    @endif
 </li>
 
