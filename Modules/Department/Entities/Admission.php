@@ -18,6 +18,11 @@ class Admission extends BaseModel
     	return $this->hasOne('Modules\Student\Entities\Student');
     }
 
+    public function department()
+    {
+    	return $this->belongsTo('Modules\Department\Entities\Department');
+    }
+
     public function genders()
     {
         return Gender::all();
