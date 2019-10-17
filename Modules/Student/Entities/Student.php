@@ -55,7 +55,12 @@ class Student extends Authenticatable
     {
         return $this->hasMany(SessionRegistration::class);
     }
-
+    
+    public function repeatCourseRegistrations()
+    {
+        return $this->hasMany(RepeatCourseRegistration::class);
+    }
+    
     public function currentRegisteredCourses()
     {
         $courses = [];
@@ -76,7 +81,6 @@ class Student extends Authenticatable
         if($this->sessionRegistrations->where('session_id',$session->id)){
             return true;
         }
-        
     }
     
 }

@@ -6,9 +6,8 @@
 </li>
 <li>
 	@if(student()->makeCurrentSessionRegistration())
-        <a href="{{route('student.course.registration.courses')}}">Add Or Drop Coures</a>
+        <a href="{{route('student.course.registration.add.drop')}}">Add Or Drop Coures</a>
     @else
         <a href="{{route('student.course.registration.courses')}}">Course Registraion</a>
     @endif
 </li>
-

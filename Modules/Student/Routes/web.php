@@ -32,9 +32,12 @@ Route::prefix('student')
         Route::prefix('registration')
 		->name('registration.')
 		->group(function() {
+			//course registration routes
 	        Route::get('/', 'CourseRegistrationController@availableCourses')->name('courses');
 	        Route::post('/register', 'CourseRegistrationController@registerCourses')->name('courses.register');
 	        Route::get('/registered/show', 'CourseRegistrationController@showCourses')->name('courses.register.show');
+            //add and drop course registration routes
+	        Route::get('/add-or-drop-course', 'AddAndDropCourseController@showRegisredAndCarryOverCourses')->name('add.drop');
 		});
 		
 	});
