@@ -11,9 +11,9 @@
      			<form method="post" action="{{route('department.result.student.update',[$result->id])}}">
      				@csrf
      				<label>Name</label>
-	     			<input type="text" disabled="" value="{{$result->sessionCourseRegistration->sessionRegistration->student->first_name}} {{$result->sessionCourseRegistration->sessionRegistration->student->first_name}}" class="form-control">
+	     			<input type="text" disabled="" value="{{$result->courseRegistration->semesterRegistration->sessionRegistration->student->first_name}} {{$result->courseRegistration->semesterRegistration->sessionRegistration->student->first_name}}" class="form-control">
 	     			<label>Admission No</label>
-	     			<input type="text" disabled="" value="{{$result->sessionCourseRegistration->sessionRegistration->student->admission->admission_no}}" class="form-control">
+	     			<input type="text" disabled="" value="{{$result->courseRegistration->semesterRegistration->sessionRegistration->student->admission->admission_no}}" class="form-control">
      				<label>CA Score</label>
 	     			<input type="text" disabled="" value="{{$result->ca}}" class="form-control">
 	     			<label>Exam Score</label>

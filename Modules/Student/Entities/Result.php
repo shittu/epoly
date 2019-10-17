@@ -129,7 +129,7 @@ class Result extends BaseModel
                 $grade = 'F';
             }
         }else{
-            switch ($this->exam) {
+            switch (strtoupper($this->exam)) {
                 case 'S':
                     $grade = 'S';
                     break;

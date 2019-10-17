@@ -29,7 +29,7 @@ class CourseRegistration extends BaseModel
 
     public function repeatCourseRegistration()
     {
-        return $this->hasOne(CarryOverCourseRegistration::class);
+        return $this->hasOne(RepeatCourseRegistration::class);
     }
     
 }
