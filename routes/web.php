@@ -14,3 +14,4 @@
 Route::view('/','welcome')->name('welcome');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/calender/{session}/view', 'CalenderController@viewCalender')->name('admin.calender.view');

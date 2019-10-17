@@ -8,7 +8,7 @@
             <a href="{{route('department.admission.create')}}">New Admission</a>
         </li>
         <li>
-            <a href="{{route('department.admission.index')}}">View Admission</a>
+            <a href="{{route('department.admission.index')}}">View Student Detail</a>
         </li>
     </ul>
 </li>
@@ -42,7 +42,7 @@
             <a href="{{route('department.result.course.index')}}">View Result</a>
         </li>
         <li>
-            <a href="{{route('department.result.course.bating.index')}}">Bating Result</a>
+            <a href="{{route('department.result.course.bating.index')}}">AB Format</a>
         </li>
         <li>
             <a href="{{route('department.result.remark.index')}}">Remarks</a>

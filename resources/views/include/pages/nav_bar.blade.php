@@ -50,14 +50,15 @@
                                 <a href="events-single-item.html">Calendar</a>
                                 <!-- sub menu -->
                                 <ul>
-                                    <li>
-                                        <a href="{{route('admin.calender.create')}}">New {{date('Y')}}/{{date('Y')+1}} Calendar</a>
-                                    </li>
                                     @if(admin())
                                     <li>
-                                        <a href="{{route('admin.calender.view',[str_replace('/','-',currentSession())])}}">View {{date('Y')}}/{{date('Y')+1}} Calendar</a>
+                                        <a href="{{route('admin.calender.create')}}">New {{currentSession()}} Calendar</a>
                                     </li>
                                     @endif
+                                    <li>
+                                        <a href="{{route('admin.calender.view',[str_replace('/','-',currentSession())])}}">View {{currentSession()}} Calendar</a>
+                                    </li>
+                                    
                                 </ul>
                                 <!-- / sub menu -->
                             </li>

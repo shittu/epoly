@@ -13,6 +13,7 @@ use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 use Modules\Admin\Services\Calender\NewCalender as RegisterNewAcademicCalender;
 use Modules\Admin\Services\Calender\UpdateCalender as UpdateNewAcademicCalender;
 use Modules\Admin\Services\Calender\DeleteAcademicCalender;
+
 class CalenderController extends AdminBaseController
 {
     /**
@@ -41,15 +42,7 @@ class CalenderController extends AdminBaseController
      * @param int $id
      * @return Response
      */
-    public function viewCalender($session)
-    {   
-        $current_session = $this->getThisSession($session);
-        if(!$current_session){
-            session()->flash('error',['sorry no calender register for '.$session]);
-            return back();
-        }
-        return view('admin::calender.view',['session'=>$current_session]);
-    }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -77,7 +70,7 @@ class CalenderController extends AdminBaseController
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     * @param int $session_id
      * @return Response
      */
     public function deleteCalender($session_id)
@@ -88,10 +81,4 @@ class CalenderController extends AdminBaseController
         return redirect()->route('admin.calender.create');
     }
 
-    public function getThisSession($session)
-    {
-        foreach (Session::where('name',str_replace('-','/',$session))->get() as $session) {
-            return $session;
-        }
-    }
 }
