@@ -18,7 +18,8 @@ class StudentSessionTableSeeder extends Seeder
         Model::unguard();
 
         $sessions = [
-            ['name'=>'MORNING','code'=>9],['name'=>'EVENING','code'=>0]];
+            ['name'=>'MORNING','code'=>9],
+            ['name'=>'EVENING','code'=>0]];
         foreach ($sessions as $session) {
             StudentSession::firstOrCreate($session);
         }

@@ -39,10 +39,10 @@ class CreateStudentsTable extends Migration
             ->on('admissions')
             ->delete('restrict')
             ->update('cascade');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('email');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('is_active')->default(1);

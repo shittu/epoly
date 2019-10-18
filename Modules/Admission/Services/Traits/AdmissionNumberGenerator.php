@@ -11,13 +11,13 @@ trait AdmissionNumberGenerator
 	public function generateAdmissionNo(array $student)
 	{
 		$reserved_admission_no = null;
-
 		foreach ($this->reservedDepartmentSessionAdmissions->where([
-			'session_is' => $this->getSession()->id,
-			'student_type_id'=>$this->getStudentType($student['type'])->id,
-			'student_session_id'=>$this->getStudentSession($student['session'])->id
+			'session_id' => $this->getSession()->id,
+			'student_type_id'=>$student['type'],
+			'student_session_id'=>$student['session']
 		]) as $admission) {
 			$reserved_admission_no = $admission->admission_no;
+			$admission->delete();
 		}
 		if($reserved_admission_no){
 			return $reserved_admission_no;
@@ -25,8 +25,8 @@ trait AdmissionNumberGenerator
 		return  $this->yearExt().
 				$this->collegeCode().
 				$this->departmentCode().
-				$student['session'].
-				$student['type'].
+				$this->getStudentSession($student['session'])->code.
+				$this->getStudentType($student['type'])->code.
 				$this->getAdmissionSerialNo($student);
 	}
 
