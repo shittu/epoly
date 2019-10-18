@@ -40,4 +40,9 @@ class StudentResultController extends HodBaseController
         return back();
     }
 
+    public function index()
+    {
+        return view('department::department.course.result.student.index');
+    }
+
 }
