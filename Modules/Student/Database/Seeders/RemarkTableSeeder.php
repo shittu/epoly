@@ -18,7 +18,7 @@ class RemarkTableSeeder extends Seeder
         Model::unguard();
 
         $remarks = [
-            ['name'=>'Cancellation of Semester','remark_type_id'=>2],
+            ['name'=>'Cancelation of Semester','remark_type_id'=>2],
             ['name'=>'Withdraw','remark_type_id'=>2],
             ['name'=>'Cancelation of Session','remark_type_id'=>2],
             ['name'=>'Cancelation of Exam','remark_type_id'=>2],

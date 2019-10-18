@@ -104,7 +104,7 @@ class AdmissionController extends HodBaseController
         $data = $request->all();
         if($data['type'] != $admission->typeNo() || $data['session'] != $admission->sessionNo()){
             //reserve the current admission number
-            $reserved_admission = headOfDepartment()->department->reservedDepartmentSessionAdmissions()->firstOrCreate([
+            headOfDepartment()->department->reservedDepartmentSessionAdmissions()->firstOrCreate([
                     'session_id'=>$session->id,
                     'student_session_id'=>$data['session'],
                     'student_type_id'=>$data['type'],
@@ -114,8 +114,6 @@ class AdmissionController extends HodBaseController
             $admission->update([
                 'admission_no'=>headOfDepartment()->department->generateAdmissionNo($data)
             ]);
-            //delete reserved admission no;
-            $reserved_admission->destroy($reserved_admission->id);
         }
         //update student information
         $student = $admission->student->update([

@@ -54,6 +54,7 @@ trait AdmissionNumberGenerator
     {
     	return StudentType::find($id);
     }
+    
     public function getStudentSession($id)
     {
     	return StudentSession::find($id);

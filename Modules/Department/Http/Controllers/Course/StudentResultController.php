@@ -5,6 +5,7 @@ namespace Modules\Department\Http\Controllers\Course;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Student\Entities\Result;
+use Modules\Department\Entities\Admission;
 use Modules\Core\Http\Controllers\Department\HodBaseController;
 
 class StudentResultController extends HodBaseController
@@ -44,5 +45,42 @@ class StudentResultController extends HodBaseController
     {
         return view('department::department.course.result.student.index');
     }
+    public function searchResult(Request $request)
+    {
+        $admission = $this->getThisAdmission($request->admission_no);
+        if($admission){
+            $registration = null;
+            foreach ($admission->student->sessionRegistrations as $session_registration) {
+                if($session_registration->session_id == $request->session){
+                    $registration = $session_registration;
+                }
+            }
+            if($registration){
+                session(['registration'=>$registration]);
+                return redirect()->route('department.student.result.view',[$request->semester]);
+            }
+            
+            session()->flash('error',['Sorry there are not abailable result for '.$request->admission_no]);
+        }
+        session()->flash('error',['Sorry this admission number does not exist in our record '.$request->admission_no]);
+        return back();
+        
+    }
 
+    public function viewResult($semester_id)
+    {
+        if(session('registration')){
+            return view('department::department.course.result.student.result',['registration'=>session('registration')]);
+        }
+        return back();
+    }
+
+    public function getThisAdmission($number)
+    {
+        $admission = null;
+        foreach (Admission::where('admission_no',$number)->get() as $current_admission) {
+            $admission = $current_admission;
+        }
+        return $admission;
+    }
 }

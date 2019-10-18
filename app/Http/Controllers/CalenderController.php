@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Modules\Admin\Entities\Session;
 class CalenderController extends Controller
 {
-   public function getThisSession($session)
+    public function getThisSession($session)
     {
         foreach (Session::where('name',str_replace('-','/',$session))->get() as $session) {
             return $session;

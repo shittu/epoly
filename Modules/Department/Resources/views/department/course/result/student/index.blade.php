@@ -8,7 +8,7 @@
      			Ceck Student result here
      		</div>
      		<div class="card-body">
-     			<form method="post" action="{{route('department.result.course.search')}}">
+     			<form method="post" action="{{route('department.student.result.search')}}">
      				@csrf
      				<input type="text" name="admission_no" class="form-control" placeholder="Admission No">
      				<br>

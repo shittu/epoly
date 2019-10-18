@@ -14,6 +14,16 @@
 Route::prefix('department')
 ->name('department.')
 ->group(function() {
+
+    Route::prefix('student/result')
+		->name('student.result.')
+		->namespace('Course')
+		->group(function() {
+		Route::get('/', 'StudentResultController@index')->name('index');
+		Route::get('/semester/{semester_id}/display', 'StudentResultController@viewResult')->name('view');
+		Route::post('/search', 'StudentResultController@searchResult')->name('search');
+	});
+
     Route::prefix('result/course')
 	->name('result.course.')
 	->namespace('Course')
@@ -24,6 +34,7 @@ Route::prefix('department')
 		Route::post('/bating/search', 'BatingResultController@search')->name('bating.search');
 		Route::get('/bating/semester/{semester_id}/view', 'BatingResultController@view')->name('bating.view');
     });
+
     //remark routes
     Route::prefix('result/remark')
 	->name('result.remark.')
