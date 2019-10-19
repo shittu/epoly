@@ -20,4 +20,10 @@ class Remark extends BaseModel
     {
     	return $this->hasMany(SessionRegistrationRemark::class);
     }
+
+    public function semesterRegistrationRemarks()
+    {
+        return $this->hasMany(SemesterRegistrationRemark::class);
+    }
+    
 }

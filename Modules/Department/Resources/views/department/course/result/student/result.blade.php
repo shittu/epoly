@@ -88,23 +88,23 @@
                 	</td>
 
                 	<td>
-                		{{$registration->currentSemesterGradePoints() ?? ' '}}
+                		{{number_format($registration->currentSemesterGradePoints(),2) ?? ' '}}
                 	</td>
 
                 	<td>
-                		{{$registration->gradePointAsAtLastSemester() ?? ' '}}
+                		{{number_format($registration->gradePointAsAtLastSemester(),2) ?? ' '}}
                 	</td>
 
                 	<td>
-                		{{$registration->cummulativeGradePoints() ?? ' '}}
+                		{{number_format($registration->cummulativeGradePoints(),2) ?? ' '}}
                 	</td>
 
                 	<td>
-                		{{$registration->currentSemesterCummulativeGradePointsAverage() ?? ' '}}
+                		{{number_format($registration->currentSemesterCummulativeGradePointsAverage(),2) ?? ' '}}
                 	</td>
 
                 	<td>
-                		{{$registration->cummulativeGradePointsAverage() ?? ' '}}
+                		{{number_format($registration->cummulativeGradePointsAverage(),2) ?? ' '}}
                 	</td>
 
                 	<td>
@@ -113,22 +113,26 @@
                 		@endforeach
                 	</td>
                 	<td>
-                		@if($registration->sessionRegistration->hasUpload(request()->route('semester_id')))
-                    		@if(empty($registration->failedResults(request()->route('semester_id'))))
-                                Pass <br>
-                    		@elseif($registration->passedResults(request()->route('semester_id')) == 0)
-                                @if(request()->route('semester_id') == 2)
-                                    Withdraw
-                                @else
-                                    Fail <br>
-                                @endif
+                		<!-- if all the courses of the session has been uploaded and failed all of them -->
+                		@if($registration->sessionRegistration->allCoursesUploaded() && $registration->sessionRegistration->passedResults() == 0)
+                             With draw
+                		@else
+                		<!-- check if the student passed all his courses of the session -->
+                    		@if(empty($registration->failedResults()))
+                                Passed <br>
                     		@else
-                                @foreach($registration->failedResults(request()->route('semester_id')) as $course)
+                    		<!-- check if the student has any course to repeat -->
+                                @foreach($registration->failedResults() as $course)
                                     Repeat {{$course->code}}<br>
                                 @endforeach
                     		@endif
                     	@endif
+                    	<!-- check if the student has sessional EMC verdict -->
                     	@foreach($registration->sessionRegistration->sessionRegistrationRemarks as $emc_remark)
+                            {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
+                    	@endforeach
+                    	<!-- check if the student has Semester EMC verdict -->
+                    	@foreach($registration->semesterRegistrationRemarks as $emc_remark)
                             {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
                     	@endforeach
                 	</td>

@@ -31,28 +31,16 @@ class SessionRegistration extends BaseModel
     	return $this->hasMany(SemesterRegistration::class);
     }
     
-    public function sessionGrandPoints($semester)
+    public function sessionGrandPoints()
     {
         $units = 0;
         $points = 0;
-        if($semester == 1){
-            foreach ($this->semesterRegistrations->where('semester_id',$semester) as $semester_registration) {
-                foreach ($semester_registration->courseRegistrations as $course_registration) {
-                    if($course_registration->result->lecturerCourseResultUpload){
-                        $course_unit = $course_registration->course->unit;
-                        $units = $course_unit + $units;
-                        $points = ($course_registration->result->points * $course_unit) + $points;
-                    }
-                }
-            }
-        }else{
-            foreach ($this->semesterRegistrations as $semester_registration) {
-                foreach ($semester_registration->courseRegistrations as $course_registration) {
-                    if($course_registration->result->lecturerCourseResultUpload){
-                        $course_unit = $course_registration->course->unit;
-                        $units = $course_unit + $units;
-                        $points = ($course_registration->result->points * $course_unit) + $points;
-                    }
+        foreach ($this->semesterRegistrations as $semester_registration) {
+            foreach ($semester_registration->courseRegistrations as $course_registration) {
+                if($course_registration->result->lecturerCourseResultUpload){
+                    $course_unit = $course_registration->course->unit;
+                    $units = $course_unit + $units;
+                    $points = ($course_registration->result->points * $course_unit) + $points;
                 }
             }
         }
@@ -62,73 +50,42 @@ class SessionRegistration extends BaseModel
         return number_format($points/$units,2);
     }
 
-    public function failedResults($semester)
+    public function failedResults()
     {
         $courses = [];
-        if($semester == 1){
-            foreach ($this->semesterRegistrations->where('semester_id',$semester) as $semester_registration) {
-                foreach ($semester_registration->courseRegistrations as $course_registration) {
-                    if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
-                        $courses[] = $course_registration->course;
-                    }
-                }
-            }
-        }else{
-            foreach ($this->semesterRegistrations as $semester_registration) {
-                foreach ($semester_registration->courseRegistrations as $course_registration) {
-                    if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
-                        $courses[] = $course_registration->course;
-                    }
+        foreach ($this->semesterRegistrations as $semester_registration) {
+            foreach ($semester_registration->courseRegistrations as $course_registration) {
+                if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
+                    $courses[] = $course_registration->course;
                 }
             }
         }
         return $courses;
     }
 
-    public function passedResults($semester)
+    public function passedResults()
     {
         $course = 0;
-        if($semester==1){
-            foreach ($this->semesterRegistrations->where('semester_id',$semester) as $semester_registration) {
-                foreach ($semester_registration->courseRegistrations as $course_registration) {
-                    if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->points > 2){
-                        $course++;
-                    }
-                }
-            }
-        }else{
-            foreach ($this->semesterRegistrations as $semester_registration) {
-                foreach ($semester_registration->courseRegistrations as $course_registration) {
-                    if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->points > 2){
-                        $course++;
-                    }
+        foreach ($this->semesterRegistrations as $semester_registration) {
+            foreach ($semester_registration->courseRegistrations as $course_registration) {
+                if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->points > 2){
+                    $course++;
                 }
             }
         }
         return $course;
     }
 
-    public function hasUpload($semester)
+    public function allCoursesUploaded()
     {
-        $upload = false;
-        if($semester == 1){
-            foreach ($this->semesterRegistrations->where('semester_id',$semester) as $semester_registration) {
-                foreach ($semester_registration->courseRegistrations as $course_registration) {
-                    if($course_registration->result->lecturerCourseResultUpload){
-                        $upload = true;
-                    }
-                }
-            }
-        }else{
-            foreach ($this->semesterRegistrations as $semester_registration) {
-                foreach ($semester_registration->courseRegistrations as $course_registration) {
-                    if($course_registration->result->lecturerCourseResultUpload){
-                        $upload = true;
-                    }
+        $upload = true;
+        foreach ($this->semesterRegistrations as $semester_registration) {
+            foreach ($semester_registration->courseRegistrations as $course_registration) {
+                if(!$course_registration->result->lecturerCourseResultUpload){
+                    $upload = false;
                 }
             }
         }
-        
         return $upload;
     }
 

@@ -11,6 +11,11 @@ class SemesterRegistration extends BaseModel
     	return $this->belongsTo(SessionRegistration::class);
     }
 
+    public function semesterRegistrationRemarks()
+    {
+    	return $this->hasMany(SemesterRegistrationRemark::class);
+    }
+    
     public function courseRegistrations()
     {
     	return $this->hasMany(CourseRegistration::class);
@@ -95,7 +100,7 @@ class SemesterRegistration extends BaseModel
     	return $this->cummulativeGradePoints() / $units;
     }
 
-   public function failedResults($semester)
+   public function failedResults()
     {
         $courses = [];
         foreach ($this->courseRegistrations as $course_registration) {
@@ -106,7 +111,7 @@ class SemesterRegistration extends BaseModel
         return $courses;
     }
 
-    public function passedResults($semester)
+    public function passedResults()
     {
         $course = 0;
         foreach ($this->courseRegistrations as $course_registration) {
