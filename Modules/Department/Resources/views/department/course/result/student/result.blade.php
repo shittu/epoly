@@ -4,12 +4,12 @@
 <div class="card">
 	<div class="card-body table-responsive">
 	    <div class="col-md-12 text-center"><br><br>
-	    	UMARU ALI SHINKAFI POLYTECNIC SOKOTO<br>
-	    	COLLEGE OF SCIENCE AND TECHNOLOGY<br>
-	    	DEPARTMENT OF COMPUTER SCIENCE<br>
-	    	SECOND SEMESTER EXAMINATION RESULTS, 2017/2018 SESSION<br><br>
-	    	NATIONAL DIPLOMA IN COMPUTER SCIENCE II (MORNING)<br><br>
-	    	NDSC II (M)
+	    	UMARU ALI SHINKAFI POLYTECHNIC SOKOTO<br>
+	    	COLLEGE OF {{strtoupper($registration->student->admission->department->college->name)}}<br>
+	    	DEPARTMENT OF {{strtoupper($registration->student->admission->department->name)}}<br>
+	    	{{strtoupper($registration->semesterRegistrations->where('semester_id',request()->route('semester_id'))->first()->semester->name)}} EXAMINATION RESULTS, {{$registration->session->name}} SESSION<br><br>
+	    	NATIONAL DIPLOMA IN COMPUTER SCIENCE II ({{$registration->student->studentSession->name}})<br><br>
+	    	NDSC II ({{substr($registration->student->studentSession->name,0,1)}})
 	    </div>
 		<table class="table table-bordered table-striped" >
 			<thead>
@@ -68,17 +68,17 @@
                 		{{$course_registration->result->points}}<br>
                 		@endforeach
                 	</td>
-
+                        
                 	<td>
                 		
                 	</td>
-
+                        
                 	<td>
-                		
+                		{{$registration->previousUnits()}}
                 	</td>
 
                 	<td>
-                		
+                		{{$registration->currentUnits()}}
                 	</td>
 
                 	<td>

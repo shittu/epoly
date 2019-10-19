@@ -20,4 +20,29 @@ class SemesterRegistration extends BaseModel
     {
     	return $this->belongsTo('Modules\Department\Entities\Semester');
     }
+
+    public function currentUnits()
+    {  
+    	$units = 0;
+    	foreach ($this->courseRegistrations as $courseRegistration) {
+    		//if($courseRegistration->result->point >= 2){
+                $units = $courseRegistration->course->unit + $units;
+    		//}
+    	}
+    	return $units;
+    }
+
+    public function previousUnits()
+    {
+    	$units = 0;
+    	foreach ($this->sessionRegistration->semesterRegistrations as $semesterRegistration) {
+    		if($this->id != $semesterRegistration->id){
+    			$units = $units + $semesterRegistration->currentUnits();
+    		}
+    	}
+    	if($units == 0){
+            return '';
+    	}
+    	return $units;
+    }
 }
