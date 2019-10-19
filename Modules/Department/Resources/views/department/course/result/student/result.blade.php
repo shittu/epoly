@@ -14,21 +14,21 @@
 		<table class="table table-bordered table-striped" >
 			<thead>
 				<tr class="active">
-					<td>Name</td>
-					<td>ADMISSION NO</td>
+					<td>NAME</td>
+					<td>ADM NO</td>
 					<td>COURSE CODE</td>
-					<td>UNIT (S)</td>
+					<td>UNIT(S)</td>
 					<td>GRADE</td>
-					<td>POINTS</td>
+					<td>POINT(S)</td>
 					<td>GRADE POINT</td>
 					<td>PREV UNIT</td>
 					<td>CURR. SEM. UNITS</td>
-					<td>GP THIS SEM</td>
-					<td>GP AS AT LAST SEM</td>
-					<td>CUMM G.P</td>
+					<td>CUMM UNITS</td>
 					<td>G.P THIS SEM</td>
-					<td>C G.P A</td>
-					<td>CUMM G.P</td>
+					<td>G.P AS AT LAST SEM</td>
+					<td>CUMM.G.P</td>
+					<td>G.P.A THIS SEM</td>
+					<td>C.G.P.A</td>
 					<td>SEM. REMARKS</td>
 					<td>GEN. REMARKS</td>
 				</tr>
@@ -36,7 +36,6 @@
 			<tbody>
 				@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $registration)
                 <tr>
-                	
                 	<td>
                 		{{$registration->sessionRegistration->student->first_name}} {{$registration->sessionRegistration->student->last_name}}
                 	</td>
@@ -70,7 +69,10 @@
                 	</td>
                         
                 	<td>
-                		
+                		@foreach($registration->courseRegistrations as $course_registration)
+                		{{$course_registration->course->unit * $course_registration->result->points}}
+                		<br>
+                		@endforeach
                 	</td>
                         
                 	<td>
@@ -78,37 +80,38 @@
                 	</td>
 
                 	<td>
-                		{{$registration->currentUnits() > 0 ?? ' '}}
+                		{{$registration->currentUnits() ?? ' '}}
                 	</td>
 
                 	<td>
-                		{{$registration->currentSemesterGradePoints() > 0 ?? ' '}}
+                		{{$registration->cummulativeUnits() ?? ' '}}
                 	</td>
 
                 	<td>
-                		
+                		{{$registration->currentSemesterGradePoints() ?? ' '}}
                 	</td>
 
                 	<td>
-                		
+                		{{$registration->gradePointAsAtLastSemester() ?? ' '}}
                 	</td>
 
                 	<td>
-                		
+                		{{$registration->cummulativeGradePoints() ?? ' '}}
                 	</td>
 
                 	<td>
-                		
+                		{{$registration->currentSemesterCummulativeGradePointsAverage() ?? ' '}}
                 	</td>
 
                 	<td>
-                		
+                		{{$registration->cummulativeGradePointsAverage() ?? ' '}}
                 	</td>
 
                 	<td>
-                		
+                		@foreach($registration->courseRegistrations as $course_registration)
+                		{{$course_registration->result->remark->name ?? ' '}}<br>
+                		@endforeach
                 	</td>
-
                 	<td>
                 		@if($registration->sessionRegistration->hasUpload(request()->route('semester_id')))
                     		@if(empty($registration->failedResults(request()->route('semester_id'))))
@@ -129,7 +132,6 @@
                             {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
                     	@endforeach
                 	</td>
-
                 </tr>
 				@endforeach
 			</tbody>

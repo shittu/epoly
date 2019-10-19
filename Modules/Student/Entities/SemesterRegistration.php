@@ -25,11 +25,10 @@ class SemesterRegistration extends BaseModel
     {  
     	$units = 0;
     	foreach ($this->courseRegistrations as $courseRegistration) {
-    		if($courseRegistration->result->point >= 2){
+    		if($courseRegistration->result->lecturerCourseResultUpload){
                 $units = $courseRegistration->course->unit + $units;
     		}
     	}
-    	
     	return $units;
     }
 
@@ -37,12 +36,17 @@ class SemesterRegistration extends BaseModel
     {
     	$units = 0;
     	foreach ($this->sessionRegistration->semesterRegistrations as $semesterRegistration) {
-    		if($this->id != $semesterRegistration->id){
+    		if($this->id > $semesterRegistration->id){
     			$units = $units + $semesterRegistration->currentUnits();
     		}
     	}
     	
     	return $units;
+    }
+    
+    public function cummulativeUnits()
+    {
+    	return $this->previousUnits() + $this->currentUnits();
     }
 
     public function currentSemesterGradePoints()
@@ -55,6 +59,62 @@ class SemesterRegistration extends BaseModel
             }
         }
         return $points;
+    }
+
+    public function gradePointAsAtLastSemester()
+    {
+    	$points = 0;
+    	foreach ($this->sessionRegistration->semesterRegistrations as $semesterRegistration) {
+    		if($this->id > $semesterRegistration->id){
+    			$points = $points + $semesterRegistration->currentSemesterGradePoints();
+    		}
+    	}
+    	return $points;
+    }
+
+    public function cummulativeGradePoints()
+    {
+    	return $this->gradePointAsAtLastSemester() + $this->currentSemesterGradePoints();
+    }
+
+    public function currentSemesterCummulativeGradePointsAverage()
+    {
+    	$units = $this->currentUnits();
+    	if($units < 1){
+    		$units = 1;
+    	}
+    	return $this->currentSemesterGradePoints() / $units;
+    }
+
+    public function cummulativeGradePointsAverage()
+    {
+    	$units = $this->cummulativeUnits();
+    	if($units < 1){
+    		$units = 1;
+    	}
+    	return $this->cummulativeGradePoints() / $units;
+    }
+
+   public function failedResults($semester)
+    {
+        $courses = [];
+        foreach ($this->courseRegistrations as $course_registration) {
+            if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
+                $courses[] = $course_registration->course;
+            }
+        }
+        return $courses;
+    }
+
+    public function passedResults($semester)
+    {
+        $course = 0;
+        foreach ($this->courseRegistrations as $course_registration) {
+            if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->points > 2){
+                $course++;
+            }
+        }
+        return $course;
     }
 
 }
