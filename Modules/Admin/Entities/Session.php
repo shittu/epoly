@@ -31,4 +31,5 @@ class Session extends BaseModel
     	}
 		return $count.' '.$month.' Remain';
     }
+
 }

@@ -52,11 +52,11 @@
                                 <ul>
                                     @if(admin())
                                     <li>
-                                        <a href="{{route('admin.calender.create')}}">New {{currentSession()}} Calendar</a>
+                                        <a href="{{route('admin.calender.create')}}">New {{currentSession()->name}} Calendar</a>
                                     </li>
                                     @endif
                                     <li>
-                                        <a href="{{route('admin.calender.view',[str_replace('/','-',currentSession())])}}">View {{currentSession()}} Calendar</a>
+                                        <a href="{{route('admin.calender.view',[str_replace('/','-',currentSession()->name)])}}">View {{currentSession()->name}} Calendar</a>
                                     </li>
                                     
                                 </ul>

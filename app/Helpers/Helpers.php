@@ -1,5 +1,7 @@
 <?php
 
+use Modules\Admin\Entities\Session;
+
 if (!function_exists('storage_url')) {
     function storage_url($url)
     {
@@ -78,7 +80,25 @@ if (!function_exists('currentSession')) {
     { 
         $start = date('Y')-1;
         $end = date('Y');
-        return $start.'/'.$end;
+        $session = null;
+        foreach(Session::where('name',$start.'/'.$end)->get() as $current_session){
+            $session = $current_session;
+        }
+        return $session;
+    }
+}
+
+if (!function_exists('nextSession')) {
+    function nextSession(Session $session)
+    { 
+        return Session::find($session->id + 1);
+    }
+}
+
+if (!function_exists('previousSession')) {
+    function previousSession(Session $session)
+    { 
+        return Session::find($session->id - 1);
     }
 }
 

@@ -18,19 +18,20 @@
 				</thead>
 				<tbody>
 					@foreach($student_courses as $student_course)
+					{{dd($student_course)}}
 					<tr>
 						<td>{{$loop->index+1}}</td>
 						<td>
-							{{$student_course->student->first_name}} {{$student_course->student->last_name}}
+							{{$student_course->semesterRegistration->sessionRegistration->student->first_name}} {{$student_course->semesterRegistration->sessionRegistration->student->last_name}}
 						</td>
 						<td>
-							{{student_course->$student->admission->admission_no}}
+							{{student_course->semesterRegistration->sessionRegistration->student->admission->admission_no}}
 						</td>
 						<td>
-							{{$student_course->student->email}}
+							{{$student_course->semesterRegistration->sessionRegistration->student->email}}
 						</td>
 						<td>
-							{{$student_course->student->phone}}
+							{{$student_course->semesterRegistration->sessionRegistration->student->phone}}
 						</td>
 						<td>
 							<button class="btn btn-info" data-toggle="">Remark</button>

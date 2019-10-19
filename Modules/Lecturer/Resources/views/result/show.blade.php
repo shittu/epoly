@@ -17,7 +17,6 @@
 						<td>Exam Score</td>
 						<td>Total Score</td>
 						<td>Grade</td>
-						<td>Points</td>
 						<td>Remark</td>
 					</tr>
 				</head>
@@ -49,12 +48,10 @@
 							{{$result->grade}}
 						</td>
 						<td>
-							{{$result->points}}
-						</td>
-						<td>
-							{{$result->remark ? $result->remark->name : ' '}}
+							{{$result->remark->name ?? ' '}}
 						</td>
 					</tr>
+				
 					@endforeach
 				</tbody>
 			</table>	

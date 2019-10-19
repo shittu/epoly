@@ -77,8 +77,7 @@ class Student extends Authenticatable
 
     public function makeCurrentSessionRegistration()
     {
-        $session = Session::where('name',currentSession())->first();
-        if($this->sessionRegistrations->where('session_id',$session->id)){
+        if($this->sessionRegistrations->where('session_id',currentSession()->id)){
             return true;
         }
     }

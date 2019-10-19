@@ -4,7 +4,7 @@
 <div class="col-md-1"></div> 
 <div class="col-md-10">
 	<div class="card">
-		<div class="card-body">
+		<div class="card-body table-responsive">
 			<table class="table table-default">
 				<thead>
 					<tr>
@@ -13,7 +13,6 @@
 						<td>Admission No</td>
 						<td>Email</td>
 						<td>Phone</td>
-						<td></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -22,19 +21,16 @@
 						<tr>
 							<td>{{$loop->index+1}}</td>
 							<td>
-								{{$student_course->sessionRegistration->student->first_name}} {{$student_course->sessionRegistration->student->last_name}}
+								{{$student_course->semesterRegistration->sessionRegistration->student->first_name}} {{$student_course->semesterRegistration->sessionRegistration->student->last_name}}
 							</td>
 							<td>
-								{{$student_course->sessionRegistration->student->admission->admission_no}}
+								{{$student_course->semesterRegistration->sessionRegistration->student->admission->admission_no}}
 							</td>
 							<td>
-								{{$student_course->sessionRegistration->student->email}}
+								{{$student_course->semesterRegistration->sessionRegistration->student->email}}
 							</td>
 							<td>
-								{{$student_course->sessionRegistration->student->phone}}
-							</td>
-							<td>
-								<button class="btn btn-info" data-toggle="">Remark</button>
+								{{$student_course->semesterRegistration->sessionRegistration->student->phone}}
 							</td>
 						</tr>
 						@endforeach
