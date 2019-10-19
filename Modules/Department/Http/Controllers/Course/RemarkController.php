@@ -36,11 +36,15 @@ class RemarkController extends HodBaseController
     {
         $registration = SessionRegistration::find($request->registration_id);
         $request->validate(['remark'=>'required']);
+
         switch ($request->remark) {
             case '1':
                 # semester cancelation
                 foreach ($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration) {
                     $semester_registration->update(['cancelation_status'=>1]);
+                    $semester_registration->semesterRegistrationRemarks()->firstOrCreate([
+                        'remark_id' => $request->remark
+                    ]);
                 }
                 break;
             
@@ -60,17 +64,20 @@ class RemarkController extends HodBaseController
                 foreach($registration->semesterRegistrations->where('semester_id',$request->semster_id) as $semester_registration){
                     $course_registration = $semester_registration->courseRegistrations->where('course_id',$request->course)->first();
                     $course_registration->update(['cancelation_status'=>1]);
+                    $course_registration->repeatCourserRegistration(['student_id'=>$course_registration->semesterRegistration->sessionRegistration->student->id]);
                 }
                 break;
             default:
                 //
                 break;
         }
-        $registration->sessionRegistrationRemarks()->firstOrCreate([
-            'remark_id'=>$request->remark,
-            'semester_id'=>request()->route('semester_id')
-        ]);
-        session()->flash('message','The exam monitoring committee verdict is registered successfully');
+        if($request->remark != 1){
+            $registration->sessionRegistrationRemarks()->firstOrCreate([
+                'remark_id'=>$request->remark,
+                'semester_id'=>request()->route('semester_id')
+            ]);
+        }
+        session()->flash('message','The Exam Monitoring Committee Verdict is registered successfully');
         return back();
     }
 
