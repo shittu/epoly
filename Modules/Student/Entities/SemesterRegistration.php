@@ -25,10 +25,11 @@ class SemesterRegistration extends BaseModel
     {  
     	$units = 0;
     	foreach ($this->courseRegistrations as $courseRegistration) {
-    		//if($courseRegistration->result->point >= 2){
+    		if($courseRegistration->result->point >= 2){
                 $units = $courseRegistration->course->unit + $units;
-    		//}
+    		}
     	}
+    	
     	return $units;
     }
 
@@ -40,9 +41,20 @@ class SemesterRegistration extends BaseModel
     			$units = $units + $semesterRegistration->currentUnits();
     		}
     	}
-    	if($units == 0){
-            return '';
-    	}
+    	
     	return $units;
     }
+
+    public function currentSemesterGradePoints()
+    {
+    	$points = 0;
+    	foreach ($this->courseRegistrations as $course_registration) {
+            if($course_registration->result->lecturerCourseResultUpload){
+                $course_unit = $course_registration->course->unit;
+                $points = ($course_registration->result->points * $course_unit) + $points;
+            }
+        }
+        return $points;
+    }
+
 }

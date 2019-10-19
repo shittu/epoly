@@ -74,15 +74,15 @@
                 	</td>
                         
                 	<td>
-                		{{$registration->previousUnits()}}
+                		{{$registration->previousUnits() > 0 ?? ' '}}
                 	</td>
 
                 	<td>
-                		{{$registration->currentUnits()}}
+                		{{$registration->currentUnits() > 0 ?? ' '}}
                 	</td>
 
                 	<td>
-                		
+                		{{$registration->currentSemesterGradePoints() > 0 ?? ' '}}
                 	</td>
 
                 	<td>
