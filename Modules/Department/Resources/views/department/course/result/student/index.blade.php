@@ -5,7 +5,7 @@
     <div class="col-md-6"><br>
      	<div class="card">
      		<div class="card-header">
-     			Ceck Student result here
+     			Check Student result here
      		</div>
      		<div class="card-body">
      			<form method="post" action="{{route('department.student.result.search')}}">

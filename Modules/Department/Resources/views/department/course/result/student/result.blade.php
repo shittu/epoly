@@ -1,15 +1,14 @@
-@extends('department::layouts.master')
+@extends('layouts.result')
 
 @section('page-content')
-<div class="card">
-	<div class="card-body table-responsive">
+	<div class="table-responsive">
 	    <div class="col-md-12 text-center"><br><br>
 	    	UMARU ALI SHINKAFI POLYTECHNIC SOKOTO<br>
 	    	COLLEGE OF {{strtoupper($registration->student->admission->department->college->name)}}<br>
 	    	DEPARTMENT OF {{strtoupper($registration->student->admission->department->name)}}<br>
 	    	{{strtoupper($registration->semesterRegistrations->where('semester_id',request()->route('semester_id'))->first()->semester->name)}} EXAMINATION RESULTS, {{$registration->session->name}} SESSION<br><br>
 	    	NATIONAL DIPLOMA IN COMPUTER SCIENCE II ({{$registration->student->studentSession->name}})<br><br>
-	    	NDSC II ({{substr($registration->student->studentSession->name,0,1)}})
+	    	NDCS II ({{substr($registration->student->studentSession->name,0,1)}})
 	    </div>
 		<table class="table table-bordered table-striped" >
 			<thead>
@@ -118,7 +117,7 @@
                              With draw
                 		@else
                 		<!-- check if the student passed all his courses of the session -->
-                    		@if(empty($registration->failedResults()))
+                    		@if(empty($registration->failedResults()) && $registration->sessionRegistration->allCoursesUploaded())
                                 Passed <br>
                     		@else
                     		<!-- check if the student has any course to repeat -->
@@ -141,5 +140,4 @@
 			</tbody>
 		</table>
 	</div>
-</div>  
 @endsection

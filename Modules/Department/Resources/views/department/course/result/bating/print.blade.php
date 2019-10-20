@@ -124,7 +124,7 @@
                      With draw
         		@else
         		<!-- check if the student passed all his courses of the session -->
-            		@if(empty($registration->failedResults()))
+            		@if($registration->sessionRegistration->allCoursesUploaded() && empty($registration->failedResults()))
                         Passed <br>
             		@else
             		<!-- check if the student has any course to repeat -->

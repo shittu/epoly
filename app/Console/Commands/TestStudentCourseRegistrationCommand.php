@@ -50,7 +50,7 @@ class TestStudentCourseRegistrationCommand extends Command
             $session_registration = $student->sessionRegistrations()->firstOrCreate([
             'level_id'=>$level->id,
             'department_id'=>$student->admission->department_id,
-            'session_id'=> Session::where('name',currentSession())->first()->id
+            'session_id'=> currentSession()->id
             ]);
 
             foreach($level->courses as $course){
