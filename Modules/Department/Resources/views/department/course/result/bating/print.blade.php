@@ -1,122 +1,141 @@
 @extends('department::layouts.master')
 
 @section('page-content')
-    <div class="col-md-12"><br>
-     	<div class="card">
-     		<div class="card-body">
-     			<table class="table">
-     				<thead>
-     					<tr>
-     						<td>S/N</td>
-     						<td>Name</td>
-     						<td>ADMISSION NO</td>
-     						<td>COURSES</td>
-     						<td>UNITS</td>
-     						<td>GRADES</td>
-     						<td>POINTS</td>
-     						<td>GP</td>
-     						<td>REMARKS</td>
-     					</tr>
-     				</thead>
-     				<tbody>
-     					@foreach($registrations as $registration)
-                            <tr>
-                            	<td>
-                            		{{$loop->index+1}}
-                            	</td>
-                            	<td>
-                            		{{$registration->student->first_name}} {{$registration->student->last_name}}
-                            	</td>
-                            	<td>
-                            		{{$registration->student->admission->admission_no}}
-                            	</td>
-                            	@if(request()->route('semester_id') == 1)
-                            	<td>
-                            		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration)
-	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
-	                            		    {{$course_registration->course->code}}<br>
-	                            		@endforeach
-                            		@endforeach
-                            	</td>
-                            	<td>
-                            		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration)
-	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
-	                            		{{$course_registration->course->unit}}<br>
-	                            		@endforeach
-                            		@endforeach
-                            	</td>
-                            	<td>
-                            		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration)
-	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
-	                            		{{$course_registration->result->grade}}<br>
-	                            		@endforeach
-                            		@endforeach
-                            	</td>
-                            	<td>
-                            		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration)
-		                            	@foreach($semester_registration->courseRegistrations as $course_registration)
-	                            		{{$course_registration->result->points}}<br>
-	                            		@endforeach
-                            		@endforeach
-                            	</td>
-                                @else
-                                <td>
-                            		@foreach($registration->semesterRegistrations as $semester_registration)
-	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
-	                            		    {{$course_registration->course->code}}<br>
-	                            		@endforeach
-                            		@endforeach
-                            	</td>
-                            	<td>
-                            		@foreach($registration->semesterRegistrations as $semester_registration)
-	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
-	                            		{{$course_registration->course->unit}}<br>
-	                            		@endforeach
-                            		@endforeach
-                            	</td>
-                            	<td>
-                            		@foreach($registration->semesterRegistrations as $semester_registration)
-	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
-	                            		{{$course_registration->result->grade}}<br>
-	                            		@endforeach
-                            		@endforeach
-                            	</td>
-                            	<td>
-                            		@foreach($registration->semesterRegistrations as $semester_registration)
-		                            	@foreach($semester_registration->courseRegistrations as $course_registration)
-	                            		{{$course_registration->result->points}}<br>
-	                            		@endforeach
-                            		@endforeach
-                            	</td>
-                                @endif
-                            	<td>{{$registration->sessionGrandPoints(request()->route('semester_id'))}}</td>
-                            	<td>
-                            		@if($registration->hasUpload(request()->route('semester_id')))
-	                            		@if(empty($registration->failedResults(request()->route('semester_id'))))
-	                                        Pass <br>
-	                            		@elseif($registration->passedResults(request()->route('semester_id')) == 0)
-	                                        @if(request()->route('semester_id') == 2)
-                                                Withdraw
-	                                        @else
-	                                            Fail <br>
-	                                        @endif
-	                            		@else
-	                                        @foreach($registration->failedResults(request()->route('semester_id')) as $course)
-	                                            Repeat {{$course->code}}<br>
-	                                        @endforeach
-	                            		@endif
-	                            	@endif
+<div class="table-responsive">
+<table class="table table-bordered table-condenced">
+	<thead>
+		<tr>
+			<td>S/N</td>
+			<td>NAME</td>
+			<td>ADM NO</td>
+			<td>COURSE CODE</td>
+			<td>UNIT(S)</td>
+			<td>GRADE</td>
+			<td>POINT(S)</td>
+			<td>GRADE POINT</td>
+			<td>PREV UNIT</td>
+			<td>CURR. SEM. UNITS</td>
+			<td>CUMM UNITS</td>
+			<td>G.P THIS SEM</td>
+			<td>G.P AS AT LAST SEM</td>
+			<td>CUMM.G.P</td>
+			<td>G.P.A THIS SEM</td>
+			<td>C.G.P.A</td>
+			<td>SEM. REMARKS</td>
+			<td>GEN. REMARKS</td>
+		</tr>
+	</thead>
+	<tbody>
+	@foreach($registrations as $registration)
+        @foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $registration)
+        <tr>
+        	<td>
+        		{{$loop->parent->index+1}}
+        	</td>
+        	<td>
+        		{{$registration->sessionRegistration->student->first_name}} {{$registration->sessionRegistration->student->last_name}}
+        	</td>
 
-	                            	@foreach($registration->sessionRegistrationRemarks as $emc_remark)
-                                        {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
-	                            	@endforeach
-                            	</td>
-                            	
-                            </tr>
-     					@endforeach
-     				</tbody>
-     			</table>
-     		</div>
-     	</div>
-    </div>
+        	<td>
+        		{{$registration->sessionRegistration->student->admission->admission_no}}
+        	</td>
+
+        	<td >
+        		@foreach($registration->courseRegistrations as $course_registration)
+        		    {{$course_registration->course->code}}<br>
+        		@endforeach
+        	</td>
+
+        	<td>
+        		@foreach($registration->courseRegistrations as $course_registration)
+        		{{$course_registration->course->unit}}<br>
+        		@endforeach
+        	</td>
+
+        	<td>
+        		@foreach($registration->courseRegistrations as $course_registration)
+        		{{$course_registration->result->grade}}<br>
+        		@endforeach
+        	</td>
+
+        	<td>
+            	@foreach($registration->courseRegistrations as $course_registration)
+        		{{$course_registration->result->points}}<br>
+        		@endforeach
+        	</td>
+                
+        	<td>
+        		@foreach($registration->courseRegistrations as $course_registration)
+        		{{$course_registration->course->unit * $course_registration->result->points}}
+        		<br>
+        		@endforeach
+        	</td>
+                
+        	<td>
+        		{{$registration->previousUnits() > 0 ?? ' '}}
+        	</td>
+
+        	<td>
+        		{{$registration->currentUnits() ?? ' '}}
+        	</td>
+
+        	<td>
+        		{{$registration->cummulativeUnits() ?? ' '}}
+        	</td>
+
+        	<td>
+        		{{number_format($registration->currentSemesterGradePoints(),2) ?? ' '}}
+        	</td>
+
+        	<td>
+        		{{number_format($registration->gradePointAsAtLastSemester(),2) ?? ' '}}
+        	</td>
+
+        	<td>
+        		{{number_format($registration->cummulativeGradePoints(),2) ?? ' '}}
+        	</td>
+
+        	<td>
+        		{{number_format($registration->currentSemesterCummulativeGradePointsAverage(),2) ?? ' '}}
+        	</td>
+
+        	<td>
+        		{{number_format($registration->cummulativeGradePointsAverage(),2) ?? ' '}}
+        	</td>
+
+        	<td>
+        		@foreach($registration->courseRegistrations as $course_registration)
+        		{{$course_registration->result->remark->name ?? ' '}}<br>
+        		@endforeach
+        	</td>
+        	<td>
+        		<!-- if all the courses of the session has been uploaded and failed all of them -->
+        		@if($registration->sessionRegistration->allCoursesUploaded() && $registration->sessionRegistration->passedResults() == 0)
+                     With draw
+        		@else
+        		<!-- check if the student passed all his courses of the session -->
+            		@if(empty($registration->failedResults()))
+                        Passed <br>
+            		@else
+            		<!-- check if the student has any course to repeat -->
+                        @foreach($registration->failedResults() as $course)
+                            Repeat {{$course->code}}<br>
+                        @endforeach
+            		@endif
+            	@endif
+            	<!-- check if the student has sessional EMC verdict -->
+            	@foreach($registration->sessionRegistration->sessionRegistrationRemarks as $emc_remark)
+                    {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
+            	@endforeach
+            	<!-- check if the student has Semester EMC verdict -->
+            	@foreach($registration->semesterRegistrationRemarks as $emc_remark)
+                    {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
+            	@endforeach
+        	</td>
+        </tr>
+        @endforeach
+	@endforeach
+    </tbody>
+</table>
+</div>
 @endsection
