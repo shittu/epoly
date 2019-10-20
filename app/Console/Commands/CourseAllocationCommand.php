@@ -63,7 +63,7 @@ class CourseAllocationCommand extends Command
     {
         $courses = [];
         foreach (Course::all() as $course) {
-            if(substr($course->code, 6) == $lecturer->id){
+            if(substr($course->code, 5) == $lecturer->id){
                 $courses[] = $course;
             }
         }
