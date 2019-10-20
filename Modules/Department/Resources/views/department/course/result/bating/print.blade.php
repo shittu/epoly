@@ -1,6 +1,16 @@
-@extends('department::layouts.master')
+@extends('layouts.result')
 
 @section('page-content')
+<br>
+<br>
+<div class="text text-center">
+	UMARU ALI SHINKAFI POLYTECHNIC SOKOTO<br>
+	COLEEGE OF {{strtoupper(headOfDepartment()->department->college->name)}}<br>
+	DEPARTMENT OF {{strtoupper(headOfDepartment()->department->name)}} EXAMINATION RESULTS OF {{'2018/2019'}} SESSION<br><br>
+	NATIONAL DIPLOMA IN COMPUTER SCIENCE II (MORNING)<br><br>
+	NDSC II (M)
+
+</div>
 <div class="table-responsive">
 <table class="table table-bordered table-condenced">
 	<thead>
@@ -15,10 +25,10 @@
 			<td>GRADE POINT</td>
 			<td>PREV UNIT</td>
 			<td>CURR. SEM. UNITS</td>
-			<td>CUMM UNITS</td>
+			<td>C. UNITS</td>
 			<td>G.P THIS SEM</td>
 			<td>G.P AS AT LAST SEM</td>
-			<td>CUMM.G.P</td>
+			<td>C.G.P</td>
 			<td>G.P.A THIS SEM</td>
 			<td>C.G.P.A</td>
 			<td>SEM. REMARKS</td>
