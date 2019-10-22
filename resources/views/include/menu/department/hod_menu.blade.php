@@ -1,5 +1,5 @@
 <li>
-    <a href="#">Lecturers</a>
+    <a href="{{route('department.lecturer.index')}}">Lecturers</a>
 </li>
 <li>
     <a href="#">Admission</a>

@@ -55,11 +55,15 @@ class Lecturer extends Authenticatable
 
     public function duration()
     {
-        $date = strtotime($this->from) - time();
-        if($this->to){
-            $date = strtotime($this->to) - strtotime($this->from);
+        if(!$this->to){
+            $this->to = Carbon::now();
         }
-        return Carbon::create(date('Y',$date), date('m',$date), date('d',$date), date('H',$date), date('i',$date), date('s',$date))->diffForHumans();
+        $count = Carbon::parse($this->from)->diffInYears($this->to);
+        $year = 'Year';
+        if($count > 1){
+            $year = 'Years';
+        }
+        return $count.' '.$year;
     }
 
     public function sessions()
