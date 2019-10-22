@@ -33,7 +33,10 @@ class DepartmentLecturerAppointmentController extends HodBaseController
      */
     public function register(Request $request)
     {
-        dd($request->all());
+        $request->validate(['appointment'=>'required']);
+        headOfDepartment()->department->departmentalAppointments()->firstOrCreate(['appointment_id'=>$request->appointment,'lecturer_id'=>$request->lecturer_id]);
+        session()->flash('message','The appointment is registered successfully');
+        return back();
     }
 
     /**

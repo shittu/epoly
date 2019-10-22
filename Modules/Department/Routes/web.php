@@ -22,7 +22,7 @@ Route::prefix('department')
         Route::prefix('appointment')
 		->name('appointment.')
 		->group(function() {
-             Route::post('/register','DepartmentLecturerAppointmentController@index')->name('register');
+             Route::post('/register','DepartmentLecturerAppointmentController@register')->name('register');
 		});
 	});
     Route::prefix('student/result')

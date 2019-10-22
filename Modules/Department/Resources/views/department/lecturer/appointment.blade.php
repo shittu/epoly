@@ -8,7 +8,8 @@
             </div>
             <div class="modal-body">
             	<form method="post" action="{{route('department.lecturer.appointment.register')}}">
-            		<input type="hidden" name="lecturer_id" value="$staff->lecturer->id">
+            		@csrf
+            		<input type="hidden" name="lecturer_id" value="{{$staff->lecturer->id}}">
             		<select name="appointment" class="form-control">
             			<option value="">Appointment</option>
             			<option value="1">Exam Officer</option>
