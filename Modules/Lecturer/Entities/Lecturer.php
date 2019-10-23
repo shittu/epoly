@@ -46,6 +46,11 @@ class Lecturer extends Authenticatable
     {
         return $this->hasMany('Modules\Department\Entities\LecturerCourseAllocation');
     }
+
+    public function departmentalAppointments()
+    {
+        return $this->hasMany('Modules\Department\Entities\DepartmentalAppointment');
+    }
     
     
     public function lecturerCourses()
@@ -80,6 +85,17 @@ class Lecturer extends Authenticatable
             }
         }
         return $courses;
+    }
+
+    public function hasValidExamOfficerAppointment()
+    {
+        $status = false;
+        foreach ($this->departmentalAppointments as $appointment) {
+            if($appointment->appointment_id == 1 && $appointment->is_active == 1){
+                $status = true;
+            }
+        }
+        return $status;
     }
 
 }

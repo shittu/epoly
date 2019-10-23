@@ -53,16 +53,6 @@ if (!function_exists('lecturer')) {
     }
 }
 
-if (!function_exists('examOfficer')) {
-    function examOfficer()
-    {
-        $examOfficer = false;
-        if(lecturer() && lecturer()->appointment && lecturer()->appointment->where(['appointment_id'=>1,'is_active'=>1])){
-            $examOfficer = true;
-        }
-        return $examOfficer;
-    }
-}
 
 if (!function_exists('directer')) {
     function headOfDepartment()

@@ -16,8 +16,9 @@ class DepartmentalAppointment extends BaseModel
     	return $this->belongsTo('Modules\Admin\Entities\Appointment');
     }
 
-    public function lecturer($value='')
+    public function lecturer()
     {
     	$this->belongsTo('Modules\Lecturer\Entities\Lecturer');
     }
+    
 }

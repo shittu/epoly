@@ -1,7 +1,7 @@
 <li>
     <a href="{{route('lecturer.courses.index')}}">My Courses</a>
 </li>
-@if(examOfficer())
+@if(lecturer()->hasValidExamOfficerAppointment())
 <li>
     <a href="#">Department Results</a>
     <ul>
