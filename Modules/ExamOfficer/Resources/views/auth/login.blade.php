@@ -10,7 +10,7 @@
             <div class="login-block">
                 <div class="logo">
                     <img src="{{asset('img/logo.png')}}">
-                    <h2>Admin Login</h2>
+                    <h2>Exam Officer Login</h2>
                 </div>
                 <form class="login-form" action="{{route('admin.login')}}" method="post">
                     @csrf
