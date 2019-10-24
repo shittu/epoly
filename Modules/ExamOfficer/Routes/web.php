@@ -11,6 +11,12 @@
 |
 */
 
-Route::prefix('examofficer')->group(function() {
-    Route::get('/', 'ExamOfficerController@index');
+Route::prefix('examo-fficer')
+->name('exam.officer.')
+->group(function() {
+    Route::get('/', 'ExamOfficerController@verify')->name('verify');
+	  Route::get('/dashboard', 'ExamOfficerController@index')->name('dashboard');
+	  Route::get('/login', 'Auth\ExamOfficerLoginController@showLoginForm')->name('auth.login');
+	  Route::post('/login', 'Auth\ExamOfficerLoginController@login')->name('login');
+	  Route::post('logout', 'Auth\ExamOfficerLoginController@logout')->name('auth.logout');
 });
