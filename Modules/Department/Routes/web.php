@@ -29,10 +29,12 @@ Route::prefix('department')
 		->name('student.result.')
 		->namespace('Course')
 		->group(function() {
-		Route::get('/', 'StudentResultController@index')->name('index');
-		Route::get('/semester/{semester_id}/display', 'StudentResultController@viewResult')->name('view');
-		Route::post('/search', 'StudentResultController@searchResult')->name('search');
-	});
+			Route::post('/search', 'StudentResultController@searchResult')->name('search');
+		    Route::get('/', 'StudentResultController@index')->name('index');
+		    Route::get('/semester/{semester_id}/display', 'StudentResultController@viewResult')->name('view');
+		
+		}
+	);
 
     Route::prefix('result/course')
 	->name('result.course.')
