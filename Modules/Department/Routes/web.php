@@ -14,7 +14,17 @@
 Route::prefix('department')
 ->name('department.')
 ->group(function() {
+    Route::prefix('lecturer')
+		->name('lecturer.')
+		->group(function() {
+        Route::get('/','DepartmentLecturerController@index')->name('index');
 
+        Route::prefix('appointment')
+		->name('appointment.')
+		->group(function() {
+             Route::post('/register','DepartmentLecturerAppointmentController@register')->name('register');
+		});
+	});
     Route::prefix('student/result')
 		->name('student.result.')
 		->namespace('Course')

@@ -56,7 +56,7 @@ class CourseTableSeeder extends Seeder
     public function createCourses($i,$j)
     {
         $course = Course::firstOrCreate([
-                'code'=>'COM '.$i.$this->getCourseSerialNumber($j),
+                'code'=>'COM'.$i.$this->getCourseSerialNumber($j),
                 'title'=>'course title here',
                 'unit'=> $this->unit,
                 'department_id' => 1,

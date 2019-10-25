@@ -112,6 +112,17 @@ return [
             'provider' => 'students',
             'hash' => false,
         ],
+
+        'exam_officer' => [
+            'driver' => 'session',
+            'provider' => 'exam_officers',
+        ],
+
+        'exam_officer_api' => [
+            'driver' => 'token',
+            'provider' => 'exam_officers',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -165,10 +176,10 @@ return [
             'driver' => 'eloquent',
             'model' => Modules\Student\Entities\Student::class,
         ],
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'exam_officers' => [
+            'driver' => 'database',
+            'table' => 'exam_officers',
+        ],
     ],
 
     /*
@@ -218,6 +229,11 @@ return [
         ],
         'students' => [
             'provider' => 'students',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'exam_officers' => [
+            'provider' => 'exam_officers',
             'table' => 'password_resets',
             'expire' => 60,
         ],

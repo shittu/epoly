@@ -25,7 +25,7 @@ class AppointmentTableSeeder extends Seeder
             'admin_id'=>1,
             'department_id' => $staff->department->id,
             'staff_id' => $staff->id,
-            'from'=> '2019-10-03 18:52:00'
+            'from'=> '2019-10-03'
         ]);
         $staff = Staff::find(1);
         $staff->department->college->directers()->create([
@@ -34,7 +34,14 @@ class AppointmentTableSeeder extends Seeder
                 'admin_id'=>1,
                 'college_id' => $staff->department->college->id,
                 'staff_id' => $staff->id,
-                'from'=> '2019-10-03 18:52:00'
+                'from'=> '2019-10-03'
+            ]);
+        $staff = Staff::find(3);
+        $staff->department->examOfficers()->create([
+                'lecturer_id' => $staff->lecturer->id,
+                'email'=>$staff->email,
+                'password'=>$staff->password,
+                'from'=> '2019-10-03'
             ]);
     }
 }

@@ -31,6 +31,17 @@ if (!function_exists('staff')) {
     }
 }
 
+if (!function_exists('examOfficer')) {
+    function examOfficer()
+    {
+        $examOfficer = null;
+        if(auth()->guard('exam_officer')->check()){
+            $examOfficer = auth()->guard('exam_officer')->user();
+        }
+        return $examOfficer;
+    }
+}
+
 if (!function_exists('student')) {
     function student()
     {
@@ -52,6 +63,7 @@ if (!function_exists('lecturer')) {
         return $lecturer;
     }
 }
+
 
 if (!function_exists('directer')) {
     function headOfDepartment()
