@@ -4,9 +4,9 @@ namespace Modules\ExamOfficer\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
 
-class ExamOfficerController extends Controller
+class ExamOfficerController extends ExamOfficerBaseController
 {
     public function verify()
     {
