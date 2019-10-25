@@ -28,12 +28,11 @@ class BatingResultController extends HodBaseController
         $request->validate([
             'session'=>'required',
             'level'=>'required',
-            'semester'=>'required'
+            'semester'=>'required',
+            'paginate'=>'required'
         ]);
 
-        $vetting = new GenerateVettableResult($request->all());
-
-        session(['course_registrations'=>$vetting->results]);
+        session(['course_registrations'=>$request->all()]);
         return redirect()->route('department.result.course.bating.view',[$request->semester]);
         
     }
@@ -57,7 +56,10 @@ class BatingResultController extends HodBaseController
     public function view()
     {
         if(session('course_registrations')){
-            return view('department::department.course.result.bating.print',['registrations'=>session('course_registrations')]);
+        
+            $vetting = new GenerateVettableResult(session('course_registrations'));
+
+            return view('department::department.course.result.bating.print',['registrations'=>$vetting->results]);
         }
         return redirect()->route('department.result.course.bating.index');
         

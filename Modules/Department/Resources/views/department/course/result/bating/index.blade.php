@@ -24,6 +24,8 @@
      					<option value="1">First Semester</option>
      					<option value="2">Second Semester</option>
      				</select><br>
+     				<label>Student/Page</label>
+     				<input type="number" name="paginate" class="form-control"><br>
      				<button class="button-fullwidth cws-button bt-color-3 btn-block">Search Result</button>
      			</form>
      		</div>

@@ -20,8 +20,7 @@ class GenerateVettableResult
 
 	public function searchVettableResult()
 	{
-		
-        return SessionRegistration::where(['department_id'=>headOfDepartment()->department->id,'session_id'=>$this->data['session'],'level_id'=>$this->data['level']])->paginate(3);
+        return SessionRegistration::where(['department_id'=>headOfDepartment()->department->id,'session_id'=>$this->data['session'],'level_id'=>$this->data['level']])->paginate($this->data['paginate']);
         
 	}
 
