@@ -40,7 +40,7 @@
             <a href="{{route('department.result.course.index')}}">View Result</a>
         </li>
         <li>
-            <a href="{{route('department.result.course.bating.index')}}">AB Format</a>
+            <a href="{{route('exam.officer.result.vetting.index')}}">AB Format</a>
         </li>
         <li>
             <a href="{{route('department.result.remark.index')}}">Remarks</a>

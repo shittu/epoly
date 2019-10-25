@@ -1,15 +1,16 @@
 <?php
 
-namespace Modules\Department\Http\Controllers\Course;
+namespace Modules\ExamOfficer\Http\Controllers\Results;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Admin\Entities\Session;
 use Modules\Department\Entities\Level;
 use Modules\Department\Services\Vetting\GenerateVettableResult;
-use Modules\Core\Http\Controllers\Department\HodBaseController;
+use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
 
-class BatingResultController extends HodBaseController
+
+class VettingResultController extends ExamOfficerBaseController
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +18,7 @@ class BatingResultController extends HodBaseController
      */
     public function index()
     {
-        return view('department::department.course.result.bating.index',['sessions'=>Session::all(),'levels'=>Level::all()]);
+        return view('department::department.course.result.bating.index',['route'=>'exam.officer.result.vetting.search','levels'=>Level::all(),'sessions'=>Session::all()]);
     }
 
     /**
@@ -35,7 +36,7 @@ class BatingResultController extends HodBaseController
         ]);
 
         session(['course_registrations'=>$request->all()]);
-        return redirect()->route('department.result.course.bating.view',[$request->semester]);
+        return redirect()->route('exam.officer.result.vetting.view',[$request->semester]);
         
     }
 
@@ -63,7 +64,7 @@ class BatingResultController extends HodBaseController
 
             return view('department::department.course.result.bating.print',['registrations'=>$vetting->results]);
         }
-        return redirect()->route('department.result.course.bating.index');
+        return redirect()->route('exam.officer.result.vetting.index');
         
     }
 }

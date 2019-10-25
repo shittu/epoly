@@ -3,8 +3,8 @@
 @section('page-content')
 <div class="text text-center">
 	UMARU ALI SHINKAFI POLYTECHNIC SOKOTO<br>
-	COLEEGE OF {{strtoupper(headOfDepartment()->department->college->name)}}<br>
-	DEPARTMENT OF {{strtoupper(headOfDepartment()->department->name)}} EXAMINATION RESULTS OF {{'2018/2019'}} SESSION<br><br>
+	COLEEGE OF COLLEGE OF SCIENCE AND TECHNOLOGY<br>
+	DEPARTMENT OF COMPUTER SCIENCE EXAMINATION RESULTS OF {{'2018/2019'}} SESSION<br><br>
 	NATIONAL DIPLOMA IN COMPUTER SCIENCE II (MORNING)<br><br>
 	NDSC II (M)
 </div>

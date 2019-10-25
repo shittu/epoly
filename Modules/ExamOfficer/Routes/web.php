@@ -12,11 +12,26 @@
 */
 
 Route::prefix('exam-officer')
-->name('exam.officer.')
-->group(function() {
-    Route::get('/', 'ExamOfficerController@verify')->name('verify');
-	  Route::get('/dashboard', 'ExamOfficerController@index')->name('dashboard');
-	  Route::get('/login', 'Auth\ExamOfficerLoginController@showLoginForm')->name('auth.login');
-	  Route::post('/login', 'Auth\ExamOfficerLoginController@login')->name('login');
-	  Route::post('logout', 'Auth\ExamOfficerLoginController@logout')->name('auth.logout');
+    ->name('exam.officer.')
+    ->group(function() {
+        Route::get('/', 'ExamOfficerController@verify')->name('verify');
+	    Route::get('/dashboard', 'ExamOfficerController@index')->name('dashboard');
+	    Route::get('/login', 'Auth\ExamOfficerLoginController@showLoginForm')->name('auth.login');
+	    Route::post('/login', 'Auth\ExamOfficerLoginController@login')->name('login');
+	    Route::post('logout', 'Auth\ExamOfficerLoginController@logout')->name('auth.logout');
+	//result routes    
+    Route::prefix('results')
+    ->name('result.')
+    ->group(function() {
+    	//vetting result routes
+        Route::prefix('vetting')
+	    ->name('vetting.')
+	    ->namespace('Results')
+	    ->group(function() {
+            Route::get('/', 'VettingResultController@index')->name('index');
+		    Route::post('/search', 'VettingResultController@search')->name('search');
+		    Route::get('/semester/{semester_id}/view', 'VettingResultController@view')->name('view');
+	    });
+    });
+	    
 });
