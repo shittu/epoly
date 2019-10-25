@@ -38,12 +38,9 @@ class AppointmentTableSeeder extends Seeder
             ]);
         $staff = Staff::find(3);
         $staff->department->examOfficers()->create([
-                'lecturer_id' => $staff->lecturer->id
+                'lecturer_id' => $staff->lecturer->id,
                 'email'=>$staff->email,
                 'password'=>$staff->password,
-                'admin_id'=>1,
-                'college_id' => $staff->department->college->id,
-                'staff_id' => $staff->id,
                 'from'=> '2019-10-03'
             ]);
     }

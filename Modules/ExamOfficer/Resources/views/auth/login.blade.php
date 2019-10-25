@@ -12,7 +12,7 @@
                     <img src="{{asset('img/logo.png')}}">
                     <h2>Exam Officer Login</h2>
                 </div>
-                <form class="login-form" action="{{route('admin.login')}}" method="post">
+                <form class="login-form" action="{{route('exam.officer.login')}}" method="post">
                     @csrf
                     <div class="form-group">
                         <input type="text" name="email" class="login-input" placeholder="email">
