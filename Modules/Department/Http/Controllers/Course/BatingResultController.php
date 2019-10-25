@@ -4,7 +4,7 @@ namespace Modules\Department\Http\Controllers\Course;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Student\Entities\SessionRegistration;
+use Modules\Department\Services\Vetting\GenerateVettableResult;
 use Modules\Core\Http\Controllers\Department\HodBaseController;
 
 class BatingResultController extends HodBaseController
@@ -30,11 +30,10 @@ class BatingResultController extends HodBaseController
             'level'=>'required',
             'semester'=>'required'
         ]);
-        $course_registrations = [];
-        foreach(SessionRegistration::where(['department_id'=>headOfDepartment()->department->id,'session_id'=>$request->session,'level_id'=>$request->level])->get() as $session_registration){
-            $course_registrations[] = $session_registration;
-        }
-        session(['course_registrations'=>$course_registrations]);
+
+        $vetting = new GenerateVettableResult($request->all());
+
+        session(['course_registrations'=>$vetting->results]);
         return redirect()->route('department.result.course.bating.view',[$request->semester]);
         
     }

@@ -147,5 +147,6 @@
 	@endforeach
     </tbody>
 </table>
+{{  $registrations->links() }}
 </div>
 @endsection
