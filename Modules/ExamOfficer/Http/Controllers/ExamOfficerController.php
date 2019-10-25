@@ -8,6 +8,10 @@ use Illuminate\Routing\Controller;
 
 class ExamOfficerController extends Controller
 {
+    public function verify()
+    {
+        return redirect()->route('exam.officer.dashboard');
+    }
     /**
      * Display a listing of the resource.
      * @return Response

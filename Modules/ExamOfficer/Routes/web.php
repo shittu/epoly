@@ -11,7 +11,7 @@
 |
 */
 
-Route::prefix('examo-fficer')
+Route::prefix('exam-officer')
 ->name('exam.officer.')
 ->group(function() {
     Route::get('/', 'ExamOfficerController@verify')->name('verify');

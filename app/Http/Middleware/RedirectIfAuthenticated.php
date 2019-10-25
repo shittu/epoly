@@ -17,10 +17,46 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/home');
-        }
+        switch ($guard) {
+        case 'admin':
+            if (Auth::guard($guard)->check()) {
+                return redirect()->route('admin.dashboard');
+            }
+            break;
 
-        return $next($request);
+        case 'staff':
+            if (Auth::guard($guard)->check()) {
+                return redirect()->route('staff.dashboard');
+            }
+            break;
+          
+        case 'lecturer':
+            if (Auth::guard($guard)->check()) {
+                return redirect()->route('lecturer.dashboard');
+            }
+            break;
+        case 'exam_officer':
+            if (Auth::guard($guard)->check()) {
+                return redirect()->route('exam.officer.dashboard');
+            }
+            break;        
+        case 'directer':
+            if (Auth::guard($guard)->check()) {
+                return redirect()->route('college.directer.dashboard');
+            }
+            break;
+        case 'head_of_department':
+            if (Auth::guard($guard)->check()) {
+                return redirect()->route('department.hod.dashboard');
+            }
+            break;    
+        default:
+          if (Auth::guard($guard)->check()) {
+              return redirect('/student');
+          }
+          break;
+      }
+
+      return $next($request);
     }
 }
