@@ -177,8 +177,8 @@ return [
             'model' => Modules\Student\Entities\Student::class,
         ],
         'exam_officers' => [
-            'driver' => 'database',
-            'table' => 'exam_officers',
+            'driver' => 'eloquent',
+            'model' => Modules\ExamOfficer\Entities\ExamOfficer::class,
         ],
     ],
 

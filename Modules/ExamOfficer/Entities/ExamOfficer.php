@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Modules\Department\Entities\Semester;
 use Modules\Student\Entities\StudentType;
 use Modules\Student\Entities\StudentSession;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class ExamOfficer extends Authenticatable
@@ -32,7 +33,7 @@ class ExamOfficer extends Authenticatable
     
     public function department()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo('Modules\Department\Entities\Department');
     }
 
     public function duration()

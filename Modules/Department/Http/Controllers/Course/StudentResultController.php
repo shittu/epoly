@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Modules\Student\Entities\Result;
 use Modules\Department\Entities\Admission;
 use Modules\Core\Http\Controllers\Department\HodBaseController;
+use Modules\Department\Services\Results\Student\GenerateStudentResult;
 
 class StudentResultController extends HodBaseController
 {
@@ -45,6 +46,7 @@ class StudentResultController extends HodBaseController
     {
         return view('department::department.course.result.student.index');
     }
+
     public function searchResult(Request $request)
     {
         $admission = $this->getThisAdmission($request->admission_no);
@@ -75,12 +77,6 @@ class StudentResultController extends HodBaseController
         return back();
     }
 
-    public function getThisAdmission($number)
-    {
-        $admission = null;
-        foreach (Admission::where('admission_no',$number)->get() as $current_admission) {
-            $admission = $current_admission;
-        }
-        return $admission;
-    }
+    
+
 }

@@ -1,6 +1,4 @@
-<li>
-    <a href="{{route('department.lecturer.index')}}">Lecturers</a>
-</li>
+
 <li>
     <a href="#">Admission</a>
     <ul>
@@ -12,6 +10,7 @@
         </li>
     </ul>
 </li>
+
 <li>
     <a href="#">Courses</a>
     <ul>
@@ -27,16 +26,12 @@
         </li>
     </ul>
 </li>
-<li>
-    <a href="{{route('department.course.allocation.index')}}">
-    Course Allocation
-    </a>
-</li>
+
 <li>
     <a href="#">Results</a>
     <ul>
         <li>
-            <a href="{{route('department.student.result.index')}}">Check Student Results</a>
+            <a href="{{route('exam.officer.result.student.index')}}">Check Student Results</a>
         </li>
         <li>
             <a href="#">Results Statistics</a>
@@ -45,7 +40,7 @@
             <a href="{{route('department.result.course.index')}}">View Result</a>
         </li>
         <li>
-            <a href="{{route('department.result.course.vetting.index')}}">AB Format</a>
+            <a href="{{route('exam.officer.result.vetting.index')}}">AB Format</a>
         </li>
         <li>
             <a href="{{route('department.result.remark.index')}}">Remarks</a>

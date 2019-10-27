@@ -1,18 +1,15 @@
 @extends('layouts.result')
 
 @section('page-content')
-<br>
-<br>
 <div class="text text-center">
 	UMARU ALI SHINKAFI POLYTECHNIC SOKOTO<br>
-	COLEEGE OF {{strtoupper(headOfDepartment()->department->college->name)}}<br>
-	DEPARTMENT OF {{strtoupper(headOfDepartment()->department->name)}} EXAMINATION RESULTS OF {{'2018/2019'}} SESSION<br><br>
+	COLEEGE OF COLLEGE OF SCIENCE AND TECHNOLOGY<br>
+	DEPARTMENT OF COMPUTER SCIENCE EXAMINATION RESULTS OF {{'2018/2019'}} SESSION<br><br>
 	NATIONAL DIPLOMA IN COMPUTER SCIENCE II (MORNING)<br><br>
 	NDSC II (M)
-
 </div>
-<div class="table-responsive">
-<table class="table table-bordered table-condenced">
+<div class="table-responsive table-condenced">
+<table class="table table-bordered">
 	<thead>
 		<tr>
 			<td>S/N</td>
@@ -45,17 +42,14 @@
         	<td>
         		{{$registration->sessionRegistration->student->first_name}} {{$registration->sessionRegistration->student->last_name}}
         	</td>
-
         	<td>
         		{{$registration->sessionRegistration->student->admission->admission_no}}
         	</td>
-
         	<td >
         		@foreach($registration->courseRegistrations as $course_registration)
         		    {{$course_registration->course->code}}<br>
         		@endforeach
         	</td>
-
         	<td>
         		@foreach($registration->courseRegistrations as $course_registration)
         		{{$course_registration->course->unit}}<br>
@@ -73,46 +67,36 @@
         		{{$course_registration->result->points}}<br>
         		@endforeach
         	</td>
-                
         	<td>
         		@foreach($registration->courseRegistrations as $course_registration)
         		{{$course_registration->course->unit * $course_registration->result->points}}
         		<br>
         		@endforeach
         	</td>
-                
         	<td>
         		{{$registration->previousUnits() > 0 ?? ' '}}
         	</td>
-
         	<td>
         		{{$registration->currentUnits() ?? ' '}}
         	</td>
-
         	<td>
         		{{$registration->cummulativeUnits() ?? ' '}}
         	</td>
-
         	<td>
         		{{number_format($registration->currentSemesterGradePoints(),2) ?? ' '}}
         	</td>
-
         	<td>
         		{{number_format($registration->gradePointAsAtLastSemester(),2) ?? ' '}}
         	</td>
-
         	<td>
         		{{number_format($registration->cummulativeGradePoints(),2) ?? ' '}}
         	</td>
-
         	<td>
         		{{number_format($registration->currentSemesterCummulativeGradePointsAverage(),2) ?? ' '}}
         	</td>
-
         	<td>
         		{{number_format($registration->cummulativeGradePointsAverage(),2) ?? ' '}}
         	</td>
-
         	<td>
         		@foreach($registration->courseRegistrations as $course_registration)
         		{{$course_registration->result->remark->name ?? ' '}}<br>
@@ -147,5 +131,6 @@
 	@endforeach
     </tbody>
 </table>
+{{ $registrations->links() }}
 </div>
 @endsection

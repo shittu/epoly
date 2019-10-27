@@ -123,10 +123,12 @@ if (!function_exists('logout_route')) {
             $route = 'staff.auth.logout';
         }elseif (auth()->guard('lecturer')->check()) {
             $route = 'lecturer.auth.logout';
-        }elseif (auth()->guard('lecturer')->check()) {
+        }elseif (auth()->guard('head_of_department')->check()) {
             $route = 'department.hod.auth.logout';
         }elseif (auth()->guard('directer')->check()) {
             $route = 'college.directer.auth.logout';
+        }elseif(auth()->guard('exam_officer')->check()){
+            $route = 'exam.officer.auth.logout';
         }else{
             $route = 'student.auth.logout';
         }

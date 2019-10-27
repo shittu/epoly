@@ -4,10 +4,12 @@ namespace Modules\Department\Http\Controllers\Course;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Student\Entities\SessionRegistration;
+use Modules\Admin\Entities\Session;
+use Modules\Department\Entities\Level;
+use Modules\Department\Services\Vetting\GenerateVettableResult;
 use Modules\Core\Http\Controllers\Department\HodBaseController;
 
-class BatingResultController extends HodBaseController
+class VettingResultController extends HodBaseController
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +17,7 @@ class BatingResultController extends HodBaseController
      */
     public function index()
     {
-        return view('department::department.course.result.bating.index');
+        return view('department::department.course.result.vetting.index',['sessions'=>Session::all(),'levels'=>Level::all()]);
     }
 
     /**
@@ -28,14 +30,12 @@ class BatingResultController extends HodBaseController
         $request->validate([
             'session'=>'required',
             'level'=>'required',
-            'semester'=>'required'
+            'semester'=>'required',
+            'paginate'=>'required'
         ]);
-        $course_registrations = [];
-        foreach(SessionRegistration::where(['department_id'=>headOfDepartment()->department->id,'session_id'=>$request->session,'level_id'=>$request->level])->get() as $session_registration){
-            $course_registrations[] = $session_registration;
-        }
-        session(['course_registrations'=>$course_registrations]);
-        return redirect()->route('department.result.course.bating.view',[$request->semester]);
+
+        session(['course_registrations'=>$request->all()]);
+        return redirect()->route('department.result.course.vetting.view',[$request->semester]);
         
     }
 
@@ -58,9 +58,12 @@ class BatingResultController extends HodBaseController
     public function view()
     {
         if(session('course_registrations')){
-            return view('department::department.course.result.bating.print',['registrations'=>session('course_registrations')]);
+        
+            $vetting = new GenerateVettableResult(session('course_registrations'));
+
+            return view('department::department.course.result.vetting.print',['registrations'=>$vetting->results]);
         }
-        return redirect()->route('department.result.course.bating.index');
+        return redirect()->route('department.result.course.vetting.index');
         
     }
 }
