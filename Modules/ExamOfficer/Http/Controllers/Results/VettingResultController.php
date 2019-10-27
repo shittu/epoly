@@ -18,7 +18,7 @@ class VettingResultController extends ExamOfficerBaseController
      */
     public function index()
     {
-        return view('department::department.course.result.bating.index',['route'=>'exam.officer.result.vetting.search','levels'=>Level::all(),'sessions'=>Session::all()]);
+        return view('examofficer::result.vetting.index',['route'=>'exam.officer.result.vetting.search','levels'=>Level::all(),'sessions'=>Session::all()]);
     }
 
     /**
