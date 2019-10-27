@@ -41,6 +41,16 @@ Route::prefix('exam-officer')
             Route::get('sesmester/{semester_id}/view', 'StudentResultController@viewResult')->name('view');
             Route::post('/search', 'StudentResultController@searchResult')->name('search');
         });
+
+        //course results routes
+        Route::prefix('course')
+	    ->namespace('Results')
+	    ->name('course.')
+	    ->group(function() {
+            // Route::get('/create', 'CourseResultController@index')->name('index');
+            // Route::get('sesmester/{semester_id}/view', 'CourseResultController@viewResult')->name('view');
+            // Route::post('/search', 'CourseResultController@searchResult')->name('search');
+        });
     });
 	    
 });
