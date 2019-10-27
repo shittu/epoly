@@ -1,14 +1,17 @@
 <?php
+namespace Modules\Department\Services\Results\Student;
 
+use Modules\Department\Entities\Admission;
+use Modules\Admin\Entities\Session;
 /**
-* 
+* this class generate the student result for student on semester wise
 */
 class GenerateStudentResult
 {
 	private $data;
-	private $registration;
+	public $registration;
 	private $admission;
-	private $errors;
+	public $errors;
 
 	function __construct(array $data)
 	{
@@ -22,9 +25,12 @@ class GenerateStudentResult
 	{
 		$errors = [];
 		$this->admission = $this->getThisAdmission();
-		$this->registration = $this->getRegistration();
+		if($this->admission){
+			$this->registration = $this->getRegistration();
+		}
+		
 		if(!$this->admission){
-			$errors[] = 'Sorry this admission number does not exist in '.$this->department->name;
+			$errors[] = 'Sorry this admission number does not exist in '.$this->department->name. 'department';
 		}
 
 		if(!$this->getRegistration()){
@@ -48,8 +54,8 @@ class GenerateStudentResult
 	public function getThisAdmission()
     {
         $admission = null;
-        foreach (Admission::where(['department_id'=>$this->department->id'admission_no',$this->data['admission_no']])->get() as $currentAdmission) {
-        	$currentAdmission->department_id;
+        foreach (Admission::where(['department_id'=>$this->department->id,'admission_no'=>$this->data['admission_no']])->get() as $currentAdmission) {
+        	$admission = $currentAdmission;
         }
         return $admission;
     }
@@ -64,7 +70,8 @@ class GenerateStudentResult
 
     public function getRegistration()
     {
-        return $this->admission->student->sessionRegistrations->where('session_id',$this->data['session']); 
+    	if($this->admission)
+            return $this->admission ->student->sessionRegistrations->where('session_id',$this->data['session']); 
     }
 
 }

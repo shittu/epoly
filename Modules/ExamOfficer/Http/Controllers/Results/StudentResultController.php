@@ -35,7 +35,7 @@ class StudentResultController extends ExamOfficerBaseController
 
     public function index()
     {
-        return view('examofficer::result.student.index');
+        return view('examofficer::result.student.index',['route'=>'exam.officer.result.student.search']);
     }
 
     public function searchResult(Request $request)
@@ -43,7 +43,7 @@ class StudentResultController extends ExamOfficerBaseController
         $result = new GenerateStudentResult($request->all());
         if(empty($result->errors)){
             session(['registration'=>$result->registration]);
-            return redirect()->route('department.student.result.view',[$request->semester]);
+            return redirect()->route('exam.officer.result.student.view',[$request->semester]);
         }
         return back();
         

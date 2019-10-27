@@ -38,6 +38,8 @@ Route::prefix('exam-officer')
 	    ->name('student.')
 	    ->group(function() {
             Route::get('/create', 'StudentResultController@index')->name('index');
+            Route::get('sesmester/{semester_id}/view', 'StudentResultController@viewResult')->name('view');
+            Route::post('/search', 'StudentResultController@searchResult')->name('search');
         });
     });
 	    
