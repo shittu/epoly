@@ -32,6 +32,13 @@ Route::prefix('exam-officer')
 		    Route::post('/search', 'VettingResultController@search')->name('search');
 		    Route::get('/semester/{semester_id}/view', 'VettingResultController@view')->name('view');
 	    });
+	    //student results routes
+	    Route::prefix('student')
+	    ->namespace('Results')
+	    ->name('student.')
+	    ->group(function() {
+            Route::get('/create', 'StudentResultController@index')->name('index');
+        });
     });
 	    
 });

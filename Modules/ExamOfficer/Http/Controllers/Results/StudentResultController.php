@@ -4,56 +4,14 @@ namespace Modules\ExamOfficer\Http\Controllers\Results;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
+use Modules\Department\Services\Results\Student\GenerateStudentResult;
 
-class StudentResultController extends Controller
+class StudentResultController extends ExamOfficerBaseController
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-    public function index()
+    public function edit($result_id)
     {
-        return view('examofficer::index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('examofficer::create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('examofficer::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('examofficer::edit');
+        return view('department::department.course.result.student.edit',['result'=>Result::find($result_id)]);
     }
 
     /**
@@ -62,18 +20,40 @@ class StudentResultController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $result_id)
     {
-        //
+        $data = $request->all();
+        if(!$data['marks']){
+            $data['marks'] = 0;
+        }
+        $result = Result::find($result_id);
+        $result->update(['amended_by'=>$data['marks']]);
+        $result->computeGrade();
+        session()->flash('message','Result amended successfully');
+        return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
+    public function index()
     {
-        //
+        return view('examofficer::result.student.index');
+    }
+
+    public function searchResult(Request $request)
+    {
+        $result = new GenerateStudentResult($request->all());
+        if(empty($result->errors)){
+            session(['registration'=>$result->registration]);
+            return redirect()->route('department.student.result.view',[$request->semester]);
+        }
+        return back();
+        
+    }
+
+    public function viewResult($semester_id)
+    {
+        if(session('registration')){
+            return view('department::department.course.result.student.result',['registration'=>session('registration')]);
+        }
+        return back();
     }
 }

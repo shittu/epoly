@@ -31,7 +31,7 @@
     <a href="#">Results</a>
     <ul>
         <li>
-            <a href="{{route('department.student.result.index')}}">Check Student Results</a>
+            <a href="{{route('exam.officer.result.student.index')}}">Check Student Results</a>
         </li>
         <li>
             <a href="#">Results Statistics</a>
