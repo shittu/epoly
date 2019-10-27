@@ -13,7 +13,7 @@ class StudentResultController extends ExamOfficerBaseController
 {
     public function edit($result_id)
     {
-        return view('department::department.course.result.student.edit',['route'=>'exam.officer.result.student.update','result'=>Result::find($result_id)]);
+        return view('examofficer::result.student.edit',['route'=>'exam.officer.result.student.update','result'=>Result::find($result_id)]);
     }
 
     /**
