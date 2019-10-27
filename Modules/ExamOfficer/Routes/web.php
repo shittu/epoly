@@ -47,9 +47,9 @@ Route::prefix('exam-officer')
 	    ->namespace('Results')
 	    ->name('course.')
 	    ->group(function() {
-            // Route::get('/create', 'CourseResultController@index')->name('index');
+            Route::get('/create', 'CourseResultController@index')->name('index');
             // Route::get('sesmester/{semester_id}/view', 'CourseResultController@viewResult')->name('view');
-            // Route::post('/search', 'CourseResultController@searchResult')->name('search');
+            Route::post('/search', 'CourseResultController@search')->name('search');
         });
     });
 	    

@@ -2,7 +2,7 @@
     if(headOfDepartment()){
         $user = headOfDepartment();
 	}else{
-	    $user examOfficer()
+	    $user = examOfficer();
 	}
 @endphp
 <div class="col-md-3"></div>
