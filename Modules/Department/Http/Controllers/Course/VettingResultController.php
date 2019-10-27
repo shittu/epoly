@@ -9,7 +9,7 @@ use Modules\Department\Entities\Level;
 use Modules\Department\Services\Vetting\GenerateVettableResult;
 use Modules\Core\Http\Controllers\Department\HodBaseController;
 
-class BatingResultController extends HodBaseController
+class VettingResultController extends HodBaseController
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class BatingResultController extends HodBaseController
      */
     public function index()
     {
-        return view('department::department.course.result.bating.index',['sessions'=>Session::all(),'levels'=>Level::all()]);
+        return view('department::department.course.result.vetting.index',['sessions'=>Session::all(),'levels'=>Level::all()]);
     }
 
     /**
@@ -35,7 +35,7 @@ class BatingResultController extends HodBaseController
         ]);
 
         session(['course_registrations'=>$request->all()]);
-        return redirect()->route('department.result.course.bating.view',[$request->semester]);
+        return redirect()->route('department.result.course.vetting.view',[$request->semester]);
         
     }
 
@@ -61,9 +61,9 @@ class BatingResultController extends HodBaseController
         
             $vetting = new GenerateVettableResult(session('course_registrations'));
 
-            return view('department::department.course.result.bating.print',['registrations'=>$vetting->results]);
+            return view('department::department.course.result.vetting.print',['registrations'=>$vetting->results]);
         }
-        return redirect()->route('department.result.course.bating.index');
+        return redirect()->route('department.result.course.vetting.index');
         
     }
 }

@@ -42,9 +42,9 @@ Route::prefix('department')
 	->group(function() {
 	    Route::get('/', 'CourseResultController@index')->name('index');
 		Route::post('/search', 'CourseResultController@search')->name('search');
-		Route::get('/bating', 'BatingResultController@index')->name('bating.index');
-		Route::post('/bating/search', 'BatingResultController@search')->name('bating.search');
-		Route::get('/bating/semester/{semester_id}/view', 'BatingResultController@view')->name('bating.view');
+		Route::get('/vetting', 'VettingResultController@index')->name('vetting.index');
+		Route::post('/vetting/search', 'VettingResultController@search')->name('vetting.search');
+		Route::get('/vetting/semester/{semester_id}/view', 'VettingResultController@view')->name('vetting.view');
     });
 
     //remark routes

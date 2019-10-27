@@ -2,7 +2,7 @@
 <div class="col-md-6"><br>
  	<div class="card">
  		<div class="card-body">
- 			<form action="{{route($route ?? 'department.result.course.bating.search')}}" method="post">
+ 			<form action="{{route($route ?? 'department.result.course.vetting.search')}}" method="post">
  				@csrf
  				<select class="form-control" name="session">
  					<option value="">Session</option>
