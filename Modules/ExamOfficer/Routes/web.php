@@ -40,6 +40,22 @@ Route::prefix('exam-officer')
             Route::get('/create', 'StudentResultController@index')->name('index');
             Route::get('sesmester/{semester_id}/view', 'StudentResultController@viewResult')->name('view');
             Route::post('/search', 'StudentResultController@searchResult')->name('search');
+            Route::get('result/{result_id}/edit', 'StudentResultController@edit')->name('edit');
+		    Route::post('result/{result_id}/update', 'StudentResultController@update')->name('update');
+        });
+
+        //course results routes
+        Route::prefix('course')
+	    ->namespace('Results')
+	    ->name('course.')
+	    ->group(function() {
+            Route::get('/create', 'CourseResultController@index')->name('index');
+            Route::get('upload/{upload_id}/view', 'CourseResultController@review')->name('review');
+            Route::post('/search', 'CourseResultController@search')->name('search');
+            Route::get('result/{result_id}/amend', 'CourseResultController@amend')->name('amend');
+			Route::post('result/{result_id}/approve', 'CourseResultController@approve')->name('approve');
+			Route::post('result/{result_id}/amend/register', 'CourseResultController@amendResult')->name('amend.register');
+			Route::get('result/{result_id}/edit', 'CourseResultController@editCourseResult')->name('edit');
         });
     });
 	    

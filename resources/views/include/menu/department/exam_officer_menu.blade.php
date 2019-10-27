@@ -37,7 +37,7 @@
             <a href="#">Results Statistics</a>
         </li>
         <li>
-            <a href="{{route('department.result.course.index')}}">View Result</a>
+            <a href="{{route('exam.officer.result.course.index')}}">View Result</a>
         </li>
         <li>
             <a href="{{route('exam.officer.result.vetting.index')}}">AB Format</a>
