@@ -4,6 +4,8 @@ namespace Modules\ExamOfficer\Http\Controllers\Results;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Student\Entities\Result;
+use Modules\Department\Entities\Admission;
 use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
 use Modules\Department\Services\Results\Student\GenerateStudentResult;
 
@@ -11,7 +13,7 @@ class StudentResultController extends ExamOfficerBaseController
 {
     public function edit($result_id)
     {
-        return view('department::department.course.result.student.edit',['result'=>Result::find($result_id)]);
+        return view('department::department.course.result.student.edit',['route'=>'exam.officer.result.student.update','result'=>Result::find($result_id)]);
     }
 
     /**

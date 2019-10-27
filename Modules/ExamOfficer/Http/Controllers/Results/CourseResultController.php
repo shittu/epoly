@@ -48,7 +48,7 @@ class CourseResultController extends ExamOfficerBaseController
     }
     public function editCourseResult($result_id)
     {
-        return view('department::department.course.result.edit',['upload'=>LecturerCourseResultUpload::find($result_id)]);
+        return view('examofficer::result.course.edit',['route'=>'exam.officer.result.student.edit','upload'=>LecturerCourseResultUpload::find($result_id)]);
     }
     /**
      * Show the form for creating a new resource.
@@ -56,7 +56,7 @@ class CourseResultController extends ExamOfficerBaseController
      */
     public function amend($result_id)
     {
-        return view('examofficer::result.course.amend',['route'=>'exam.officer.result.course.amend.register','result'=>LecturerCourseResultUpload::find($result_id)]);
+        return view('examofficer::result.course.git amend',['route'=>'exam.officer.result.course.amend.register','result'=>LecturerCourseResultUpload::find($result_id)]);
     }
 
     /**
