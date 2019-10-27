@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use  Modules\Department\Services\Results\Course\GenerateCourseResult;
 use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
+use Modules\Lecturer\Entities\LecturerCourseResultUpload;
 
 class CourseResultController extends ExamOfficerBaseController
 {
@@ -24,7 +25,7 @@ class CourseResultController extends ExamOfficerBaseController
         $result = new GenerateCourseResult($request->all());
         if(empty($result->errors)){
             session()->flash('message','The result of '.$result->course->code.' at '.$result->session->name);
-            return redirect()->route('department.result.course.review',[$result->result->id]);
+            return redirect()->route('exam.officer.result.course.review',[$result->result->id]);
         }
         session()->flash('error',$result->errors);
         return back();
@@ -37,7 +38,13 @@ class CourseResultController extends ExamOfficerBaseController
      */
     public function review($result_id)
     {
-        return view('department::department.course.result.review',['result'=>LecturerCourseResultUpload::find($result_id)]);
+
+        $routes = [
+            'approve' => 'exam.officer.result.course.approve',
+            'edit' => 'exam.officer.result.course.edit',
+            'amend' => 'exam.officer.result.course.amend',
+        ];
+        return view('examofficer::result.course.review',['routes'=>$routes,'result'=>LecturerCourseResultUpload::find($result_id)]);
     }
     public function editCourseResult($result_id)
     {
@@ -49,7 +56,7 @@ class CourseResultController extends ExamOfficerBaseController
      */
     public function amend($result_id)
     {
-        return view('department::department.course.result.amend',['result'=>LecturerCourseResultUpload::find($result_id)]);
+        return view('examofficer::result.course.amend',['route'=>'exam.officer.result.course.amend.register','result'=>LecturerCourseResultUpload::find($result_id)]);
     }
 
     /**

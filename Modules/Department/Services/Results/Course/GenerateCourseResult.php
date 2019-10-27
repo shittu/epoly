@@ -11,11 +11,11 @@ use Modules\Lecturer\Entities\LecturerCourseResultUpload;
 class GenerateCourseResult
 {
 	private $data;
-    public $errors;
-    public $result;
-    private $session;
-    private $course;
-    
+    public  $errors;
+    public  $result;
+    public $session;
+    public $course;
+
 	function __construct(array $data)
 	{
 		$this->data = $data;
