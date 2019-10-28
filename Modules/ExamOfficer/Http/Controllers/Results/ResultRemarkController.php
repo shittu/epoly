@@ -14,7 +14,7 @@ class ResultRemarkController extends ExamOfficerBaseController
      */
     public function index()
     {
-        return view('department::department.course.result.remark.index');
+        return view('examofficer::result.student.remark.index');
     }
 
     /**
