@@ -4,9 +4,9 @@ namespace Modules\ExamOfficer\Http\Controllers\Results;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
 
-class ResultRemarkController extends Controller
+class ResultRemarkController extends ExamOfficerBaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ResultRemarkController extends Controller
      */
     public function index()
     {
-        return view('examofficer::index');
+        return view('department::department.course.result.remark.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class ResultRemarkController extends Controller
      */
     public function create()
     {
-        return view('examofficer::create');
+        return view('department::create');
     }
 
     /**
@@ -31,49 +31,41 @@ class ResultRemarkController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function register(Request $request)
     {
-        //
+        
+        $request->validate(['remark'=>'required']);
+        new MakeStudentRemark($request->all());
+        session()->flash('message','The Exam Monitoring Committee Verdict is registered successfully');
+        return back();
     }
 
     /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('examofficer::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('examofficer::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Search available rcourse registration in storage.
      * @param Request $request
-     * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function searchRegistration(Request $request)
     {
-        //
+        $request->validate([
+            'session'=>'required',
+            'level'=>'required',
+            'semester'=>'required'
+        ]);
+        $course_registrations = [];
+        foreach(SessionRegistration::where(['department_id'=>headOfDepartment()->department->id,'session_id'=>$request->session,'level_id'=>$request->level])->get() as $session_registration){
+            $course_registrations[] = $session_registration;
+        }
+        session(['course_registrations'=>$course_registrations]);
+        return redirect()->route('department.result.remark.registration.view',[$request->semester]);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
+    
+    public function viewRegistration()
     {
-        //
+        if(session('course_registrations')){
+            return view('department::department.course.result.remark.registration',['registrations'=>session('course_registrations')]);
+        }
+        return redirect()->route('department.result.remark.index');
+        
     }
 }
