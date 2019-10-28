@@ -10,7 +10,7 @@
      	<div class="card">
      		<div class="card-body">
      			<p><h3>Search course registrations to remark on</h3></p>
-     			<form action="{{route('department.result.remark.registration.search')}}" method="post">
+     			<form action="{{route($route ?? 'department.result.remark.registration.search')}}" method="post">
      				@csrf
      				<select class="form-control" name="session">
      					<option value="">Session</option>

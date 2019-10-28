@@ -4,6 +4,7 @@ namespace Modules\ExamOfficer\Http\Controllers\Results;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Student\Entities\SessionRegistration;
 use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
 
 class ResultRemarkController extends ExamOfficerBaseController
@@ -14,7 +15,7 @@ class ResultRemarkController extends ExamOfficerBaseController
      */
     public function index()
     {
-        return view('examofficer::result.student.remark.index');
+        return view('examofficer::result.student.remark.index',['route'=>'exam.officer.result.student.remark.registration.search']);
     }
 
     /**
@@ -53,11 +54,11 @@ class ResultRemarkController extends ExamOfficerBaseController
             'semester'=>'required'
         ]);
         $course_registrations = [];
-        foreach(SessionRegistration::where(['department_id'=>headOfDepartment()->department->id,'session_id'=>$request->session,'level_id'=>$request->level])->get() as $session_registration){
+        foreach(SessionRegistration::where(['department_id'=>examOfficer()->department->id,'session_id'=>$request->session,'level_id'=>$request->level])->get() as $session_registration){
             $course_registrations[] = $session_registration;
         }
         session(['course_registrations'=>$course_registrations]);
-        return redirect()->route('department.result.remark.registration.view',[$request->semester]);
+        return redirect()->route('exam.officer.result.student.remark.registration.view',[$request->semester]);
     }
     
     public function viewRegistration()
@@ -65,7 +66,7 @@ class ResultRemarkController extends ExamOfficerBaseController
         if(session('course_registrations')){
             return view('department::department.course.result.remark.registration',['registrations'=>session('course_registrations')]);
         }
-        return redirect()->route('department.result.remark.index');
+        return redirect()->route('exam.officer.result.student.remark.index');
         
     }
 }
