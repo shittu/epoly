@@ -42,6 +42,15 @@ Route::prefix('exam-officer')
             Route::post('/search', 'StudentResultController@searchResult')->name('search');
             Route::get('result/{result_id}/edit', 'StudentResultController@edit')->name('edit');
 		    Route::post('result/{result_id}/update', 'StudentResultController@update')->name('update');
+		    //emc verdict remark registrations
+		    Route::prefix('remark')
+			->name('remark.')
+			->group(function() {
+			    Route::get('/', 'ResultRemarkController@index')->name('index');
+			    Route::post('semester/{semester_id}/register', 'ResultRemarkController@register')->name('register');
+			    Route::post('/registration/search', 'ResultRemarkController@searchRegistration')->name('registration.search');
+			    Route::get('semester/{semester_id}/registration/view', 'ResultRemarkController@viewRegistration')->name('registration.view');
+			});
         });
 
         //course results routes

@@ -7,7 +7,7 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-            	<form action="{{route('department.result.remark.register',[request()->route('semester_id')])}}" method="post">
+            	<form action="{{route($route ?? 'department.result.remark.register',[request()->route('semester_id')])}}" method="post">
             		@csrf
             		<input type="hidden" name="registration_id" value="{{$registration->id}}">
 	            	<select class="form-control" name="remark">

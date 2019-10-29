@@ -43,7 +43,7 @@
             <a href="{{route('exam.officer.result.vetting.index')}}">AB Format</a>
         </li>
         <li>
-            <a href="{{route('department.result.remark.index')}}">Remarks</a>
+            <a href="{{route('exam.officer.result.student.remark.index')}}">Remarks</a>
         </li>
     </ul>
 </li>

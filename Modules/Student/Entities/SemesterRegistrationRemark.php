@@ -2,9 +2,9 @@
 
 namespace Modules\Student\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class SemesterRegistrationRemark extends Model
+class SemesterRegistrationRemark extends BaseModel
 {
     public function semesterRegistration()
     {
