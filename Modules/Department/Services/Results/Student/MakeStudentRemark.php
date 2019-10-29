@@ -38,7 +38,7 @@ class MakeStudentRemark
 	public function cancelationOfExam()
 	{
 		request()->validate(['course'=>'required']);
-	    foreach($this->registration->semesterRegistrations->where('semester_id',$this->data['semster_id']) as $semester_registration){
+	    foreach($this->registration->semesterRegistrations->where('semester_id',request()->route('semester_id') as $semester_registration){
 	        $course_registration = $semester_registration->courseRegistrations->where('course_id',$this->data['course'])->first();
 	        $course_registration->update(['cancelation_status'=>1]);
 	        $course_registration->repeatCourserRegistration(['student_id'=>$course_registration->semesterRegistration->sessionRegistration->student->id]);

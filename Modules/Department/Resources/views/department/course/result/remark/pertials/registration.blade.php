@@ -10,8 +10,7 @@
      						<td>COURSES</td>
      						<td>UNITS</td>
      						<td>GRADES</td>
-     						<td>POINTS</td>
-     						<td>GP</td>
+     						<td>REMARKS</td>
      						<td></td>
      					</tr>
      				</thead>
@@ -49,13 +48,31 @@
                             		@endforeach
                             	</td>
                             	<td>
-                            		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration)
-		                            	@foreach($semester_registration->courseRegistrations as $course_registration)
-	                            		{{$course_registration->result->points}}<br>
-	                            		@endforeach
-                            		@endforeach
+                            		<!-- if all the courses of the session has been uploaded and failed all of them -->
+					        		@if($registration->allCoursesUploaded() && $registration->passedResults() == 0)
+					                     With draw
+					        		@else
+					        		<!-- check if the student passed all his courses of the session -->
+					            		@if($registration->allCoursesUploaded() && empty($registration->failedResults()))
+					                        Passed <br>
+					            		@else
+					            		<!-- check if the student has any course to repeat -->
+					                        @foreach($registration->failedResults() as $course)
+					                            Repeat {{$course->code}}<br>
+					                        @endforeach
+					            		@endif
+					            	@endif
+					            	<!-- check if the student has sessional EMC verdict -->
+					            	@foreach($registration->sessionRegistrationRemarks as $emc_remark)
+					                    {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
+					            	@endforeach
+					            	<!-- check if the student has Semester EMC verdict -->
+					            	@foreach($registration->semesterRegistrations as $semesterRegistration)
+					            	    @foreach($semesterRegistration->semesterRegistrationRemarks as $emc_remark)
+					                        {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
+					            	    @endforeach
+					            	@endforeach
                             	</td>
-                            	<td>{{$registration->sessionGrandPoints(request()->route('semester_id'))}}</td>
                             	<td>
                             		<button class="btn btn-info" data-toggle="modal" data-target="#registration_{{$registration->id}}_remark">Remark</button>
                             	</td>
