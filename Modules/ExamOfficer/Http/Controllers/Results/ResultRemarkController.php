@@ -5,6 +5,7 @@ namespace Modules\ExamOfficer\Http\Controllers\Results;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Student\Entities\SessionRegistration;
+use Modules\Department\Services\Results\Student\MakeStudentRemark;
 use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
 
 class ResultRemarkController extends ExamOfficerBaseController
@@ -53,18 +54,18 @@ class ResultRemarkController extends ExamOfficerBaseController
             'level'=>'required',
             'semester'=>'required'
         ]);
-        $course_registrations = [];
-        foreach(SessionRegistration::where(['department_id'=>examOfficer()->department->id,'session_id'=>$request->session,'level_id'=>$request->level])->get() as $session_registration){
-            $course_registrations[] = $session_registration;
-        }
-        session(['course_registrations'=>$course_registrations]);
+        
+        session(['request'=>$request->all()]);
         return redirect()->route('exam.officer.result.student.remark.registration.view',[$request->semester]);
     }
     
     public function viewRegistration()
     {
         if(session('course_registrations')){
-            return view('department::department.course.result.remark.registration',['registrations'=>session('course_registrations')]);
+
+            $registrations = SessionRegistration::where(['department_id'=>examOfficer()->department->id,'session_id'=>session('request')['session'],'level_id'=>session('request')['level']])->paginate(session('request')['paginate']);
+                
+            return view('examofficer::result.student.remark.registration',['route'=>'exam.officer.result.student.remark.register','registrations'=>$registrations]);
         }
         return redirect()->route('exam.officer.result.student.remark.index');
         
