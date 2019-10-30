@@ -1,5 +1,5 @@
-<div class="col-md-4"></div>
-<div class="col-md-4">
+<div class="col-md-3"></div>
+<div class="col-md-6">
 	<div class="card">
 		<div class="card-header button-fullwidth cws-button bt-color-3">Download Result Templete Here</div>
 		<div class="card-body">
