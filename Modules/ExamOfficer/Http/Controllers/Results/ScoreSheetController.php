@@ -4,9 +4,9 @@ namespace Modules\ExamOfficer\Http\Controllers\Results;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
 
-class ScoreSheetController extends Controller
+class ScoreSheetController extends ExamOfficerBaseController
 {
     /**
      * Display a listing of the resource.

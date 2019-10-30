@@ -26,9 +26,9 @@ class ExamOfficer extends Authenticatable
     	'department_id'
     ];
 
-    public function lecturer_id()
+    public function lecturer()
     {
-        return $this->belongsTo('Modules\Admin\Entities\Admin');
+        return $this->belongsTo('Modules\Lecturer\Entities\Lecturer');
     }
     
     public function department()

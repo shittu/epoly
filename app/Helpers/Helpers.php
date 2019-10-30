@@ -101,17 +101,21 @@ if (!function_exists('currentSession')) {
 }
 
 if (!function_exists('nextSession')) {
-    function nextSession(Session $session)
+    $session = null;
+    function nextSession($session_id)
     { 
-        return Session::find($session->id + 1);
+        $session = Session::find($session_id + 1);
     }
+    return $session;
 }
 
 if (!function_exists('previousSession')) {
-    function previousSession(Session $session)
+    $session = null;
+    function previousSession($session_id)
     { 
-        return Session::find($session->id - 1);
+        $session = Session::find($session_id - 1);
     }
+    return $session;
 }
 
 if (!function_exists('logout_route')) {

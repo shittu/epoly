@@ -31,6 +31,16 @@
     <a href="#">Results</a>
     <ul>
         <li>
+            <a href="{{route('exam.officer.result.scoresheet.download.index')}}">
+                Download Score Sheet
+            </a>
+        </li>
+        <li>
+            <a href="{{route('exam.officer.result.scoresheet.upload.index')}}">
+                Upload Score Sheet
+            </a>
+        </li>
+        <li>
             <a href="{{route('exam.officer.result.student.index')}}">Check Student Results</a>
         </li>
         <li>
