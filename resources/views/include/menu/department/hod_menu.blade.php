@@ -36,17 +36,28 @@
     <a href="#">Results</a>
     <ul>
         <li>
+            <a href="#">Download Score Sheet</a>
+        </li>
+
+        <li>
+            <a href="#">Upload Score Sheet</a>
+        </li>
+
+        <li>
             <a href="{{route('department.student.result.index')}}">Check Student Results</a>
         </li>
+
         <li>
             <a href="#">Results Statistics</a>
         </li>
+
         <li>
             <a href="{{route('department.result.course.index')}}">View Result</a>
         </li>
         <li>
             <a href="{{route('department.result.course.vetting.index')}}">AB Format</a>
         </li>
+
         <li>
             <a href="{{route('department.result.remark.index')}}">Remarks</a>
         </li>

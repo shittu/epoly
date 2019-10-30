@@ -1,8 +1,11 @@
 <?php
-
+namespace Modules\Lecturer\Services\Result
 /**
 * this class will download the score sheet of the course at particular session
 */
+use Maatwebsite\Excel\Facades\Excel;
+use Modules\Department\Entities\Course;
+
 class DownloadScoreSheet
 {
 	
@@ -14,6 +17,7 @@ class DownloadScoreSheet
     public function currentCourse()
     {
      	$this->course = Course::find($this->data['course_id']);
+     	$this->downloadFile();
     }
 
     public function getFileHeader()
@@ -32,7 +36,7 @@ class DownloadScoreSheet
 	{
 		$datas[] = $this->getFileHeader();
 
-        foreach ($this->course->courseRegistrations as $course_registration) {
+        foreach ($this->course->courseRegistrations->where('session_id',$this->data['session']) as $course_registration) {
             $counter = 0;
             //lets compare student department and lecturer allocated department
             if($course_registration->course->department->id == $course->department->id){
@@ -51,6 +55,6 @@ class DownloadScoreSheet
 	public function downloadFile()
 	{
 	    $this->currentData();
-		return Excel::download(new ResultTemplete($this->getFileData()), $course->code.'_Result_Sheet_Templete.xlsx','Xlsx',$this->getFileHeader());
+		return Excel::download(new ResultTemplete($this->getFileData()), $this->course->code.'_Result_Sheet_Templete.xlsx','Xlsx',$this->getFileHeader());
 	}
 }
