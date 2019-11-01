@@ -1,10 +1,13 @@
 <?php
-namespace Modules\Lecturer\Services\Result
+namespace Modules\Lecturer\Services\Result;
 /**
 * this class will download the score sheet of the course at particular session
 */
 use Maatwebsite\Excel\Facades\Excel;
+use Modules\Admin\Entities\Session;
 use Modules\Department\Entities\Course;
+use Modules\Lecturer\Exports\ResultTemplete;
+use Modules\Student\Entities\CourseRegistration;
 
 class DownloadScoreSheet
 {
@@ -16,8 +19,12 @@ class DownloadScoreSheet
     
     public function currentCourse()
     {
-     	$this->course = Course::find($this->data['course_id']);
-     	$this->downloadFile();
+     	$this->course = Course::find($this->data['course']);
+    }
+
+    public function currentSession()
+    {
+     	return Session::find($this->data['session']);
     }
 
     public function getFileHeader()
@@ -34,27 +41,30 @@ class DownloadScoreSheet
 
 	public function getFileData()
 	{
-		$datas[] = $this->getFileHeader();
 
-        foreach ($this->course->courseRegistrations->where('session_id',$this->data['session']) as $course_registration) {
+		$datas[] = $this->getFileHeader();
+        foreach (CourseRegistration::where(['course_id'=>$this->data['course'],'session_id'=>$this->data['session']])->get() as $course_registration) {
             $counter = 0;
-            //lets compare student department and lecturer allocated department
-            if($course_registration->course->department->id == $course->department->id){
-                $datas[] = [
-                    'serial_no' => $counter++,
-                    'name'=>$course_registration->semesterRegistration->sessionRegistration->student->first_name.' '.$course_registration->semesterRegistration->sessionRegistration->student->last_name,
-                    'admission_no' => $course_registration->semesterRegistration->sessionRegistration->student->admission->admission_no,
-                    'registration_id' => $course_registration->id,
-                    'contenue_accessment'=> rand(1,40),
-                    'examination'=> rand(1,60),
-                ];
-            }
+            $datas[] = [
+                'serial_no' => $counter++,
+                'name'=>$course_registration->semesterRegistration->sessionRegistration->student->first_name.' '.$course_registration->semesterRegistration->sessionRegistration->student->last_name,
+                'admission_no' => $course_registration->semesterRegistration->sessionRegistration->student->admission->admission_no,
+                'registration_id' => $course_registration->id,
+                'contenue_accessment'=> rand(1,40),
+                'examination'=> rand(1,60),
+            ];
+           
         }
+        return $datas;
+	}
+	public function getFileName()
+	{
+		return $this->course->code.'_'.str_replace('/','_',$this->currentSession()->name).'_Result_Sheet.xlsx';
 	}
 
 	public function downloadFile()
 	{
-	    $this->currentData();
-		return Excel::download(new ResultTemplete($this->getFileData()), $this->course->code.'_Result_Sheet_Templete.xlsx','Xlsx',$this->getFileHeader());
+	    $this->currentCourse();
+		return Excel::download(new ResultTemplete($this->getFileData()), $this->getFileName() ,'Xlsx',$this->getFileHeader());
 	}
 }

@@ -4,6 +4,7 @@ namespace Modules\ExamOfficer\Http\Controllers\Results;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Lecturer\Services\Result\DownloadScoreSheet;
 use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
 
 class ScoreSheetController extends ExamOfficerBaseController
@@ -14,21 +15,12 @@ class ScoreSheetController extends ExamOfficerBaseController
      */
     public function downloadIndex()
     {
-        return view('examofficer::result.scoreSheet.download.index');
+        return view('examofficer::result.scoreSheet.download.index',['route'=>'exam.officer.result.scoresheet.download']);
     }
     
     public function uploadIndex()
     {
-        return view('examofficer::result.scoreSheet.upload.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('examofficer::create');
+        return view('examofficer::result.scoreSheet.upload.index',['route'=>'exam.officer.result.scoresheet.upload']);
     }
 
     /**
@@ -36,9 +28,14 @@ class ScoreSheetController extends ExamOfficerBaseController
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function downloadScoreSheet(Request $request)
     {
-        //
+        $request->validate([
+            'session'=>'required',
+            'course'=>'required'
+        ]);
+        $scoreSheet = new DownloadScoreSheet($request->all());
+        return $scoreSheet->downloadFile();
     }
 
     /**
