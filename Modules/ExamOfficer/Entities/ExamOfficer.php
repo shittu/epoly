@@ -74,4 +74,14 @@ class ExamOfficer extends Authenticatable
     {
         return StudentSession::all();
     }
+    public function myCoursesId()
+    {
+        $ids = [];
+        foreach($this->lecturer->lecturerCourses as $lecturer_course){
+            if($lecturer_course->is_active == 1){
+               $ids[] = $lecturer_course->course->id;
+            }
+        }
+        return $ids;
+    }
 }
