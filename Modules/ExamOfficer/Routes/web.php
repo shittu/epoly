@@ -40,6 +40,7 @@ Route::prefix('exam-officer')
 	    ->group(function() {
             Route::get('/download', 'ScoreSheetController@downloadIndex')->name('download.index');
             Route::post('/download/score-sheet', 'ScoreSheetController@downloadScoreSheet')->name('download');
+            Route::post('/upload/result', 'ScoreSheetController@uploadScoreSheet')->name('upload');
 		    Route::get('/upload', 'ScoreSheetController@uploadIndex')->name('upload.index');
 	    });
 	    //student results routes
