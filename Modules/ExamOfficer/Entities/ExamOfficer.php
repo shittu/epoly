@@ -26,9 +26,9 @@ class ExamOfficer extends Authenticatable
     	'department_id'
     ];
 
-    public function lecturer_id()
+    public function lecturer()
     {
-        return $this->belongsTo('Modules\Admin\Entities\Admin');
+        return $this->belongsTo('Modules\Lecturer\Entities\Lecturer');
     }
     
     public function department()
@@ -73,5 +73,15 @@ class ExamOfficer extends Authenticatable
     public function studentSessions()
     {
         return StudentSession::all();
+    }
+    public function myCoursesId()
+    {
+        $ids = [];
+        foreach($this->lecturer->lecturerCourses as $lecturer_course){
+            if($lecturer_course->is_active == 1){
+               $ids[] = $lecturer_course->course->id;
+            }
+        }
+        return $ids;
     }
 }

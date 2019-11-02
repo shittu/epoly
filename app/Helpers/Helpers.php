@@ -2,6 +2,28 @@
 
 use Modules\Admin\Entities\Session;
 
+if (!function_exists('logout_route')) {
+    function logout_route()
+    {
+        if(auth()->guard('admin')->check()){
+            $route = 'admin.auth.logout';
+        }elseif (auth()->guard('staff')->check()) {
+            $route = 'staff.auth.logout';
+        }elseif (auth()->guard('lecturer')->check()) {
+            $route = 'lecturer.auth.logout';
+        }elseif (auth()->guard('head_of_department')->check()) {
+            $route = 'department.hod.auth.logout';
+        }elseif (auth()->guard('directer')->check()) {
+            $route = 'college.directer.auth.logout';
+        }elseif(auth()->guard('exam_officer')->check()){
+            $route = 'exam.officer.auth.logout';
+        }else{
+            $route = 'student.auth.logout';
+        }
+        return $route;
+    }
+}
+
 if (!function_exists('storage_url')) {
     function storage_url($url)
     {
@@ -100,40 +122,6 @@ if (!function_exists('currentSession')) {
     }
 }
 
-if (!function_exists('nextSession')) {
-    function nextSession(Session $session)
-    { 
-        return Session::find($session->id + 1);
-    }
-}
 
-if (!function_exists('previousSession')) {
-    function previousSession(Session $session)
-    { 
-        return Session::find($session->id - 1);
-    }
-}
-
-if (!function_exists('logout_route')) {
-    function logout_route()
-    {
-        if(auth()->guard('admin')->check()){
-            $route = 'admin.auth.logout';
-        }elseif (auth()->guard('staff')->check()) {
-            $route = 'staff.auth.logout';
-        }elseif (auth()->guard('lecturer')->check()) {
-            $route = 'lecturer.auth.logout';
-        }elseif (auth()->guard('head_of_department')->check()) {
-            $route = 'department.hod.auth.logout';
-        }elseif (auth()->guard('directer')->check()) {
-            $route = 'college.directer.auth.logout';
-        }elseif(auth()->guard('exam_officer')->check()){
-            $route = 'exam.officer.auth.logout';
-        }else{
-            $route = 'student.auth.logout';
-        }
-        return $route;
-    }
-}
 
         

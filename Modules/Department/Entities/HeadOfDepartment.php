@@ -57,7 +57,17 @@ class HeadOfDepartment extends Authenticatable
         }
         return $count.' '.$month;
     }
-
+    
+    public function myCoursesId()
+    {
+        $ids = [];
+        foreach($this->staff->lecturer->lecturerCourses as $lecturer_course){
+            if($lecturer_course->is_active == 1){
+               $ids[] = $lecturer_course->course->id;
+            }
+        }
+        return $ids;
+    }
     public function levels()
     {
         return Level::all();

@@ -56,7 +56,7 @@ class CourseResultController extends ExamOfficerBaseController
      */
     public function amend($result_id)
     {
-        return view('examofficer::result.course.git amend',['route'=>'exam.officer.result.course.amend.register','result'=>LecturerCourseResultUpload::find($result_id)]);
+        return view('examofficer::result.course.amend',['route'=>'exam.officer.result.course.amend.register','result'=>LecturerCourseResultUpload::find($result_id)]);
     }
 
     /**

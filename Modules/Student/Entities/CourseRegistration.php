@@ -31,5 +31,10 @@ class CourseRegistration extends BaseModel
     {
         return $this->hasOne(RepeatCourseRegistration::class);
     }
+
+    public function session()
+    {
+        return $this->belongsTo('Modules\Admin\Entities\Session');
+    }
     
 }

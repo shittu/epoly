@@ -22,19 +22,29 @@ Route::prefix('exam-officer')
 	//result routes    
     Route::prefix('results')
     ->name('result.')
+    ->namespace('Results')
     ->group(function() {
+
     	//vetting result routes
         Route::prefix('vetting')
 	    ->name('vetting.')
-	    ->namespace('Results')
 	    ->group(function() {
             Route::get('/', 'VettingResultController@index')->name('index');
 		    Route::post('/search', 'VettingResultController@search')->name('search');
 		    Route::get('/semester/{semester_id}/view', 'VettingResultController@view')->name('view');
 	    });
+
+	    //score sheet routes
+	    Route::prefix('score-sheet')
+	    ->name('scoresheet.')
+	    ->group(function() {
+            Route::get('/download', 'ScoreSheetController@downloadIndex')->name('download.index');
+            Route::post('/download/score-sheet', 'ScoreSheetController@downloadScoreSheet')->name('download');
+            Route::post('/upload/result', 'ScoreSheetController@uploadScoreSheet')->name('upload');
+		    Route::get('/upload', 'ScoreSheetController@uploadIndex')->name('upload.index');
+	    });
 	    //student results routes
 	    Route::prefix('student')
-	    ->namespace('Results')
 	    ->name('student.')
 	    ->group(function() {
             Route::get('/create', 'StudentResultController@index')->name('index');
@@ -55,7 +65,6 @@ Route::prefix('exam-officer')
 
         //course results routes
         Route::prefix('course')
-	    ->namespace('Results')
 	    ->name('course.')
 	    ->group(function() {
             Route::get('/create', 'CourseResultController@index')->name('index');

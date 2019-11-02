@@ -57,6 +57,7 @@ class TestStudentCourseRegistrationCommand extends Command
                 $semester_registration = $session_registration->semesterRegistrations()->firstOrCreate(['semester_id'=>$course->semester->id]);
                 $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
                     'course_id'=>$course->id,
+                    'session_id'=> currentSession()->id
                 ]);
                 $course_registration->result()->firstOrCreate([]);
                 $bar->advance();

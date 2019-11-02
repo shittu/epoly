@@ -1,4 +1,4 @@
-@extends('lecturer::layouts.master')
+@extends('examofficer::layouts.master')
 
 @section('page-content')
 	@include('lecturer::result.pertials.downloadForm')
