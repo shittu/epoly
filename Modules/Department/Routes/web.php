@@ -31,6 +31,7 @@ Route::prefix('department')
 	->name('exam.officer.')
 	->group(function(){
         Route::get('/','DepartmentExamOfficerController@index')->name('index');
+        Route::get('/{exam_officer_id}/revoke','DepartmentExamOfficerController@revokeExamOfficer')->name('revoke');
 	});
     Route::prefix('student/result')
 		->name('student.result.')

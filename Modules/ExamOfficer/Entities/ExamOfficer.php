@@ -19,8 +19,8 @@ class ExamOfficer extends Authenticatable
     protected $fillable = [
     	'email',
     	'password',
-    	'admin_id',
-    	'staff_id',
+    	'lecturer_id',
+    	'head_of_department_id',
     	'from',
     	'to',
     	'department_id'

@@ -13,7 +13,7 @@
 	     			<th>Name</th>
 	     			<th>Email</th>
 	     			<th>Phone</th>
-	     			<th>Employed at</th>
+	     			<th>Appointed at</th>
 	     			<th>Year Since Appointment</th>
 	     			<th></th>
 	     		</tr>
@@ -28,9 +28,9 @@
 		     			<td>{{$examOfficer->from}}</td>
 		     			<td>{{$examOfficer->duration()}}</td>
 		     			<td>
-		     				<a href="#">
+		     				<a href="{{route('department.exam.officer.revoke',[$examOfficer->id])}}">
 		     					<button class="btn btn-primary">
-			     					Revoke Exam Officer
+			     					{{$examOfficer->is_active == 1 ? 'Revoke' : 'Activate'}} Exam Officer
 			     				</button>
 		     				</a>
 		     			</td>
