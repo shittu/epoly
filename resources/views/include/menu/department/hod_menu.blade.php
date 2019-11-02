@@ -2,7 +2,7 @@
     <a href="#">Staffs</a>
     <ul>
         <li>
-            <a href="{{route('department.lecturer.index')}}">New Admission</a>
+            <a href="{{route('department.lecturer.index')}}">Lecturers</a>
         </li>
         <li>
             <a href="{{route('department.exam.officer.index')}}">Exam Officers</a>

@@ -42,12 +42,9 @@ class ExamOfficer extends Authenticatable
         if($this->to){
             $start = Carbon::parse($this->to);
         }
-        $count = Carbon::parse($this->from)->diffInMonths($start);
-        $month = 'Month';
-        if($count > 1){
-            $month = 'Months';
-        }
-        return $count.' '.$month;
+        $count = Carbon::parse($this->from)->diffInYears($start);
+       
+        return $count;
     }
 
     public function levels()

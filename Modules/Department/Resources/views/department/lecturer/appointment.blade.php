@@ -12,7 +12,9 @@
             		<input type="hidden" name="lecturer_id" value="{{$staff->lecturer->id}}">
             		<select name="appointment" class="form-control">
             			<option value="">Appointment</option>
-            			<option value="1">Exam Officer</option>
+            			@if(!$staff->lecturer->hasValidExamOfficerAppointment())
+            			    <option value="1">Exam Officer</option>
+            			@endif
             		</select><br>
                     <button class="button-fullwidth cws-button bt-color-3 btn-block">Register</button>
             	</form>
