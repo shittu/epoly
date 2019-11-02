@@ -1,5 +1,13 @@
 <li>
-    <a href="{{route('department.lecturer.index')}}">Lecturers</a>
+    <a href="#">Staffs</a>
+    <ul>
+        <li>
+            <a href="{{route('department.lecturer.index')}}">New Admission</a>
+        </li>
+        <li>
+            <a href="{{route('department.exam.officer.index')}}">Exam Officers</a>
+        </li>
+    </ul>
 </li>
 <li>
     <a href="#">Admission</a>

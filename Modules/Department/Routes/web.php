@@ -18,11 +18,19 @@ Route::prefix('department')
 		->name('lecturer.')
 		->group(function() {
         Route::get('/','DepartmentLecturerController@index')->name('index');
-
+        
+        //appointment routes
         Route::prefix('appointment')
 		->name('appointment.')
 		->group(function() {
              Route::post('/register','DepartmentLecturerAppointmentController@register')->name('register');
+		});
+		
+		//exam officer routes
+		Route::prefix('exam-officer')
+		->name('exam.officer.')
+		->group(function(){
+            Route::get('/','ExamOfficerController@index')->name('index');
 		});
 	});
     Route::prefix('student/result')
