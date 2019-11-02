@@ -6,7 +6,6 @@ namespace Modules\Lecturer\Services\Result;
 */
 class UploadScoreSheet extends DownloadScoreSheet
 {
-	
 	function __construct(array $data)
 	{
 		$this->data = $data;
