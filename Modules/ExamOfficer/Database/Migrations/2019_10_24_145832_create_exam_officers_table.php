@@ -31,6 +31,14 @@ class CreateExamOfficersTable extends Migration
             ->on('lecturers')
             ->delete('restrict')
             ->update('cascade');
+            $table->integer('head_of_department_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('head_of_departments')
+            ->delete('restrict')
+            ->update('cascade');
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

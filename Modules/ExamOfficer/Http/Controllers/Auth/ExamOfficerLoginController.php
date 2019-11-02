@@ -36,4 +36,8 @@ class ExamOfficerLoginController extends Controller
         Auth::guard('exam_officer')->logout();
         return redirect('/exam-officer/login');
     }
+    public function unauthorize()
+    {
+      return view('examofficer::auth.auth');
+    }
 }

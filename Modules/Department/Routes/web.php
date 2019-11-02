@@ -18,12 +18,20 @@ Route::prefix('department')
 		->name('lecturer.')
 		->group(function() {
         Route::get('/','DepartmentLecturerController@index')->name('index');
-
+        
+        //appointment routes
         Route::prefix('appointment')
 		->name('appointment.')
 		->group(function() {
-             Route::post('/register','DepartmentLecturerAppointmentController@register')->name('register');
+            Route::post('/register','DepartmentLecturerAppointmentController@register')->name('register');
 		});
+	});
+	//exam officer routes
+	Route::prefix('exam-officer')
+	->name('exam.officer.')
+	->group(function(){
+        Route::get('/','DepartmentExamOfficerController@index')->name('index');
+        Route::get('/{exam_officer_id}/revoke','DepartmentExamOfficerController@revokeExamOfficer')->name('revoke');
 	});
     Route::prefix('student/result')
 		->name('student.result.')
@@ -32,9 +40,7 @@ Route::prefix('department')
 			Route::post('/search', 'StudentResultController@searchResult')->name('search');
 		    Route::get('/', 'StudentResultController@index')->name('index');
 		    Route::get('/semester/{semester_id}/display', 'StudentResultController@viewResult')->name('view');
-		
-		}
-	);
+		});
 
     Route::prefix('result/course')
 	->name('result.course.')

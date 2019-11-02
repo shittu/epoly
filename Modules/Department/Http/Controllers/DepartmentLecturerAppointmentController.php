@@ -4,28 +4,11 @@ namespace Modules\Department\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Lecturer\Entities\Lecturer;
 use Modules\Core\Http\Controllers\Department\HodBaseController;
 
 class DepartmentLecturerAppointmentController extends HodBaseController
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-    public function index()
-    {
-        return view('department::index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('department::create');
-    }
-
     /**
      * Store a newly created resource in storage.
      * @param Request $request
@@ -33,50 +16,17 @@ class DepartmentLecturerAppointmentController extends HodBaseController
      */
     public function register(Request $request)
     {
+        $staff = Lecturer::find($request->lecturer_id)->staff;
         $request->validate(['appointment'=>'required']);
-        headOfDepartment()->department->departmentalAppointments()->firstOrCreate(['appointment_id'=>$request->appointment,'lecturer_id'=>$request->lecturer_id]);
+        headOfDepartment()->department->examOfficers()->create(
+            [
+                'email'=>$staff->email,
+                'password'=>$staff->password,
+                'head_of_department_id'=>headOfDepartment()->id,
+                'from'=> $request->appointment_date,
+                'lecturer_id'=>$request->lecturer_id
+            ]);
         session()->flash('message','The appointment is registered successfully');
-        return back();
-    }
-
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('department::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('department::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect()->route('department.exam.officer.index');
     }
 }

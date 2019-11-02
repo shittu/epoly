@@ -1,4 +1,4 @@
-@extends('admin::layouts.master')
+@extends('department::layouts.master')
 
 @section('title')
     Available staffs in {{headOfDepartment()->department->name}} Department

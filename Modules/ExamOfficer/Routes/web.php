@@ -19,6 +19,8 @@ Route::prefix('exam-officer')
 	    Route::get('/login', 'Auth\ExamOfficerLoginController@showLoginForm')->name('auth.login');
 	    Route::post('/login', 'Auth\ExamOfficerLoginController@login')->name('login');
 	    Route::post('logout', 'Auth\ExamOfficerLoginController@logout')->name('auth.logout');
+		Route::get('/Authorisation/fail', 'Auth\ExamOfficerLoginController@unauthorize')->name('auth.auth');
+
 	//result routes    
     Route::prefix('results')
     ->name('result.')

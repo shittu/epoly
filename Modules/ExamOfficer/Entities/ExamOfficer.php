@@ -19,8 +19,8 @@ class ExamOfficer extends Authenticatable
     protected $fillable = [
     	'email',
     	'password',
-    	'admin_id',
-    	'staff_id',
+    	'lecturer_id',
+    	'head_of_department_id',
     	'from',
     	'to',
     	'department_id'
@@ -42,12 +42,9 @@ class ExamOfficer extends Authenticatable
         if($this->to){
             $start = Carbon::parse($this->to);
         }
-        $count = Carbon::parse($this->from)->diffInMonths($start);
-        $month = 'Month';
-        if($count > 1){
-            $month = 'Months';
-        }
-        return $count.' '.$month;
+        $count = Carbon::parse($this->from)->diffInYears($start);
+       
+        return $count;
     }
 
     public function levels()
