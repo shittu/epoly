@@ -1,13 +1,10 @@
 @extends('student::layouts.master')
 
 @section('page-content')
-<input type="checkbox" name="">
-<div class="col-md-1"></div>
-<div class="col-md-10">
 	<form action="{{route('student.course.registration.courses.register')}}" method="post">
 	    @csrf
 		<div class="card">
-			<div class="card-header button-fullwidth cws-button bt-color-3">{{student()->level()}} {{date('Y')}} / {{date('Y')+1}} Session Courses</div>
+			<div class="card-header button-fullwidth cws-button bt-color-3">{{student()->level()}} {{currentSession()->name}} Session Courses</div>
 			<div class="card-body">
 				<table class="table">
 					<head>
@@ -49,7 +46,7 @@
 		</div>
 		<br>
 		<div class="card">
-			<div class="card-header button-fullwidth cws-button bt-color-3">{{student()->level()}} {{date('Y')}} / {{date('Y')+1}} Carry Over Courses</div>
+			<div class="card-header button-fullwidth cws-button bt-color-3">{{student()->level()}} {{currentSession()->name}} Carry Over Courses</div>
 			<div class="card-body">
 				
 			</div>
@@ -57,5 +54,4 @@
 
 	    <button class="btn-block button-fullwidth cws-button bt-color-3">Register</button>
 	</form>
-</div> 
 @endsection

@@ -1,13 +1,12 @@
-@extends('student::layouts.master')
+@extends('layouts.result')
 
 @section('page-content')
-<input type="checkbox" name="">
-<div class="col-md-1"></div>
-<div class="col-md-10">
+
+
 	<form action="{{route('student.course.registration.courses.register')}}" method="post">
 	    @csrf
 		<div class="card">
-			<div class="card-header button-fullwidth cws-button bt-color-3">{{student()->level()}} {{currentSession()}} Session Courses Registered</div>
+			<div class="card-header text text-center">{{student()->level()}} {{currentSession()->name}} Session Courses Registered</div>
 			<div class="card-body">
 				<table class="table">
 					<head>
@@ -41,7 +40,7 @@
 										{{$course_registration->course->currentCourseMaster() ??  'Not available'}}
 									</td>
 									<td>
-										<button class="btn btn-info"><i class="fa fa-minus"></i></button>  
+										<input type="checkbox" checked="1" class="form-control" name="remove[]">
 									</td>
 								</tr>
 								@endforeach
@@ -53,7 +52,7 @@
 		</div>
 		<br>
 		<div class="card">
-			<div class="card-header button-fullwidth cws-button bt-color-3">{{student()->level()}} {{currentSession()}} Carry Over Courses</div>
+			<div class="card-header text text-center">{{student()->level()}} {{currentSession()->name}} Carry Over Courses</div>
 			<div class="card-body">
 				<table class="table">
 					<head>
@@ -85,7 +84,7 @@
 									{{$repeat->courseRegistration->course_registration->course->currentCourseMaster() ??  'Not available'}}
 								</td>
 								<td>
-									<button class="btn btn-info"><i class="fa fa-plus"></i></button>  
+									<input type="checkbox" checked="1" class="form-control" name="add[]">  
 								</td>
 							</tr>
 						@endforeach
@@ -96,5 +95,5 @@
 
 	    <button class="btn-block button-fullwidth cws-button bt-color-3">Register</button>
 	</form>
-</div> 
+
 @endsection
