@@ -14,21 +14,8 @@
      		<div class="card-body">
      			<form method="post" action="{{route($route ?? 'department.result.course.search')}}">
      				@csrf
-	     			<select class="form-control" name='session'>
-	     				<option value="">Session</option>
-	     				@foreach($user->sessions() as $session)
-                            <option value="{{$session->id}}">{{$session->name}}</option>
-	     				@endforeach
-	     			</select>
-	     			<br>
-	     			<select class="form-control" name='course'>
-	     				<option value="">Course</option>
-	     				@foreach($user->department->departmentCourses as $department_course)
-                            <option value="{{$department_course->course->id}}">{{$department_course->course->code}}
-                            </option>
-	     				@endforeach
-	     			</select>
-                    <br>
+	     			@include('lecturer::result.pertials.course')<br>
+                    @include('lecturer::result.pertials.session')<br>
 	     			<button class="button-fullwidth cws-button bt-color-3 btn-block">View Result</button>
      			</form>
      		</div>
