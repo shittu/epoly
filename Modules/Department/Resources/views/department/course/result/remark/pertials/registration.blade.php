@@ -27,22 +27,22 @@
                             		{{$registration->student->admission->admission_no}}
                             	</td>
                             	<td>
-                            		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration)
-	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
+                            		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id'))->where('cancelation_status',0) as $semester_registration)
+	                            		@foreach($semester_registration->courseRegistrations->where('cancelation_status',0) as $course_registration)
 	                            		    {{$course_registration->course->code}}<br>
 	                            		@endforeach
                             		@endforeach
                             	</td>
                             	<td>
                             		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration)
-	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
+	                            		@foreach($semester_registration->courseRegistrations->where('cancelation_status',0) as $course_registration)
 	                            		{{$course_registration->course->unit}}<br>
 	                            		@endforeach
                             		@endforeach
                             	</td>
                             	<td>
                             		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration)
-	                            		@foreach($semester_registration->courseRegistrations as $course_registration)
+	                            		@foreach($semester_registration->courseRegistrations->where('cancelation_status',0) as $course_registration)
 	                            		{{$course_registration->result->grade}}<br>
 	                            		@endforeach
                             		@endforeach

@@ -63,19 +63,19 @@
 
                 	<td>
                     	@foreach($registration->courseRegistrations as $course_registration)
-                		{{$course_registration->result->points}}<br>
+                		{{number_format($course_registration->result->points,2)}}<br>
                 		@endforeach
                 	</td>
                         
                 	<td>
                 		@foreach($registration->courseRegistrations as $course_registration)
-                		{{$course_registration->course->unit * $course_registration->result->points}}
+                		{{number_format($course_registration->course->unit * $course_registration->result->points,2)}}
                 		<br>
                 		@endforeach
                 	</td>
                         
                 	<td>
-                		{{$registration->previousUnits() > 0 ?? ' '}}
+                		{{$registration->previousUnits() ?? ' '}}
                 	</td>
 
                 	<td>

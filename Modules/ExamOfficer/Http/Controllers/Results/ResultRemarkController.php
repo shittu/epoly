@@ -35,7 +35,6 @@ class ResultRemarkController extends ExamOfficerBaseController
      */
     public function register(Request $request)
     {
-        
         $request->validate(['remark'=>'required']);
         new MakeStudentRemark($request->all());
         session()->flash('message','The Exam Monitoring Committee Verdict is registered successfully');
@@ -52,7 +51,8 @@ class ResultRemarkController extends ExamOfficerBaseController
         $request->validate([
             'session'=>'required',
             'level'=>'required',
-            'semester'=>'required'
+            'semester'=>'required',
+            'paginate'=>'required'
         ]);
         
         session(['request'=>$request->all()]);
@@ -61,8 +61,7 @@ class ResultRemarkController extends ExamOfficerBaseController
     
     public function viewRegistration()
     {
-        if(session('course_registrations')){
-
+        if(session('request')){
             $registrations = SessionRegistration::where(['department_id'=>examOfficer()->department->id,'session_id'=>session('request')['session'],'level_id'=>session('request')['level']])->paginate(session('request')['paginate']);
                 
             return view('examofficer::result.student.remark.registration',['route'=>'exam.officer.result.student.remark.register','registrations'=>$registrations]);

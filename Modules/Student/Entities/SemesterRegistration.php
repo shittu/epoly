@@ -42,13 +42,22 @@ class SemesterRegistration extends BaseModel
     	$units = 0;
     	foreach ($this->sessionRegistration->semesterRegistrations as $semesterRegistration) {
     		if($this->id > $semesterRegistration->id){
-    			$units = $units + $semesterRegistration->currentUnits();
+    			$units = $units + $this->getThisSemesterUnits($semesterRegistration);
     		}
     	}
-    	
     	return $units;
     }
     
+    public function getThisSemesterUnits($semester)
+    {
+    	$units = 0;
+    	foreach ($semester->courseRegistrations as $courseRegistration) {
+    		if($courseRegistration->result->lecturerCourseResultUpload){
+                $units = $courseRegistration->course->unit + $units;
+    		}
+    	}
+    	return $units;
+    }
     public function cummulativeUnits()
     {
     	return $this->previousUnits() + $this->currentUnits();
@@ -103,10 +112,16 @@ class SemesterRegistration extends BaseModel
    public function failedResults()
     {
         $courses = [];
-        foreach ($this->courseRegistrations as $course_registration) {
-            if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
-                $courses[] = $course_registration->course;
-            }
+        if($this->cancelation_status == 1){
+            foreach ($this->courseRegistrations as $course_registration) {
+	            $courses[] = $course_registration->course;
+	        }
+        }else{
+        	foreach ($this->courseRegistrations as $course_registration) {
+	            if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
+	                $courses[] = $course_registration->course;
+	            }
+	        }
         }
         return $courses;
     }
@@ -114,11 +129,14 @@ class SemesterRegistration extends BaseModel
     public function passedResults()
     {
         $course = 0;
-        foreach ($this->courseRegistrations as $course_registration) {
-            if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->points > 2){
-                $course++;
-            }
+        if($this->cancelation_status == 0){
+            foreach ($this->courseRegistrations as $course_registration) {
+	            if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->points > 2){
+	                $course++;
+	            }
+	        }
         }
+        
         return $course;
     }
 
