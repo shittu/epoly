@@ -18,13 +18,25 @@ class MakeStudentRemark
 	public function cancellationOfSemester()
 	{
 		foreach ($this->registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration) {
+			//cancel the semester registration
 	        $semester_registration->update(['cancelation_status'=>1]);
+	        //cancel all the course registration in the semester
+	        foreach ($semester_registration->courseRegistrations as $courseRegistration) {
+	        	$this->cancelCourseRegistration($courseRegistration);
+	        }
 	        $semester_registration->semesterRegistrationRemarks()->firstOrCreate([
 	            'remark_id' => $this->data['remark']
 	        ]);
 	    }
 	}
-
+    public function cancelCourseRegistration($registration)
+    {
+    	$registration->cancelation_status = 1;
+    	$registration->save();
+    	$registration->repeatCourseRegistration()->firstOrCreate([
+    		'student_id'=>$registration->semesterRegistration->sessionRegistration->student->id
+    	]);
+    }
 	public function willDraw()
 	{
 		$this->registration->student->update(['is_active'=>0]);
@@ -32,16 +44,22 @@ class MakeStudentRemark
 
 	public function cancellationOfSession()
 	{
-		$this->registration->update(['cancelation_status'=>1]);
+		$this->registration->cancelation_status =1;
+		$this->registration->save();
+		foreach ($this->registratration->semesterRegistrations as $semesterRegistration) {
+			foreach ($semesterRegistration->courseRegistrations as $courseRegistration) {
+	        	$this->cancelCourseRegistration($courseRegistration);
+	        }
+		}
+
 	}
 
 	public function cancelationOfExam()
 	{
 		request()->validate(['course'=>'required']);
-	    foreach($this->registration->semesterRegistrations->where('semester_id',request()->route('semester_id') as $semester_registration){
+	    foreach($this->registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration){
 	        $course_registration = $semester_registration->courseRegistrations->where('course_id',$this->data['course'])->first();
-	        $course_registration->update(['cancelation_status'=>1]);
-	        $course_registration->repeatCourserRegistration(['student_id'=>$course_registration->semesterRegistration->sessionRegistration->student->id]);
+	        $this->cancelCourseRegistration($course_registration);
 	    }
 	}
 
@@ -80,12 +98,11 @@ class MakeStudentRemark
 	    }
 	    $this->registerTheRemark();
 	}
-
-        
+   
     public function registerTheRemark()
     {
     	if($this->data['remark'] != 1){
-            $registration->sessionRegistrationRemarks()->firstOrCreate([
+            $this->registration->sessionRegistrationRemarks()->firstOrCreate([
                 'remark_id'=>$this->data['remark'],
                 'semester_id'=>request()->route('semester_id')
             ]);

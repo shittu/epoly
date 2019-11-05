@@ -18,8 +18,8 @@
 	            	</select><br>
 	            	<select class="form-control" name="course">
 	            		<option value="">Course</option>
-	            		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration)
-	            		    @foreach($semester_registration->courseRegistrations as $course_registration)
+	            		@foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id'))->where('cancelation_status',0) as $semester_registration)
+	            		    @foreach($semester_registration->courseRegistrations->where('cancelation_status',0) as $course_registration)
 		                        <option value="{{$course_registration->course->id}}">{{$course_registration->course->code}}</option>
 		            		@endforeach
 	            		@endforeach

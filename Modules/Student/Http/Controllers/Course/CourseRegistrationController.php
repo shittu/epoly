@@ -40,14 +40,17 @@ class CourseRegistrationController extends StudentBaseController
         $courses = $request->course;
         $session_registration = student()->sessionRegistrations()->firstOrCreate([
             'level_id'=>Level::where('name',student()->level())->first()->id,
-            'session_id'=> Session::where('name',currentSession())->first()->id,
+            'session_id'=> currentSession()->id,
             'department_id'=> student()->admission->department->id
             ]);
         foreach ($courses as $course_id) {
             $course = Course::find($course_id);
-            $semester_registration = $session_registration->semesterRegistrations()->firstOrCreate(['semester_id'=>$course->semester->id]);
+            $semester_registration = $session_registration
+            ->semesterRegistrations()
+            ->firstOrCreate(['semester_id'=>$course->semester->id]);
             $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
                 'course_id'=>$course_id,
+                'session_id'=> currentSession()->id,
             ]);
             $course_registration->result()->firstOrCreate([]);
         }

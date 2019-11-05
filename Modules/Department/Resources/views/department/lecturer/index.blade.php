@@ -6,6 +6,8 @@
 
 @section('page-content')
 	@if($staffs)
+	<div class="col-md-12">
+	<div class="table-responsive" >
 	    <table class="table">
 	     	<thead>
 	     		<tr>
@@ -28,7 +30,6 @@
 		     			<td>{{$staff->phone}}</td>
 		     			<td>{{$staff->employed_at}}</td>
 		     			<td>{{$staff->lecturer->duration()}}</td>
-		     			<td></td>
 		     			<td>
 		     				<button class="btn btn-primary" data-toggle="modal" data-target="#lecturer_{{$staff->lecturer->id}}">
 		     					Make Appointment
@@ -40,6 +41,8 @@
 	     		@endforeach
 	     	</tbody>
 	    </table>
+	</div>
+    </div>
 	@else
 		<div class="alert alert-danger">
 			No staff record available in {{headOfDepartment()->department->name}} Department

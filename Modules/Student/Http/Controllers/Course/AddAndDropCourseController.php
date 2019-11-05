@@ -28,7 +28,6 @@ class AddAndDropCourseController extends Controller
 
     public function showRegisredAndCarryOverCourses()
     {
-        $session = Session::where('name',currentSession())->first();
-        return view('student::course.registration.add_or_drop_course',['registrations'=>student()->sessionRegistrations->where('session_id',$session->id)]);
+        return view('student::course.registration.add_or_drop_course',['registrations'=>student()->sessionRegistrations->where('session_id',currentSession()->id)]);
     }
 }

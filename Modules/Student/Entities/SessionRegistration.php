@@ -55,26 +55,38 @@ class SessionRegistration extends BaseModel
     public function failedResults()
     {
         $courses = [];
-        foreach ($this->semesterRegistrations as $semester_registration) {
-            foreach ($semester_registration->courseRegistrations as $course_registration) {
-                if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
+        if($this->cancelation_status == 1){
+            foreach ($this->semesterRegistrations as $semester_registration) {
+                foreach ($semester_registration->courseRegistrations as $course_registration) {
                     $courses[] = $course_registration->course;
                 }
             }
+        }else{
+            foreach ($this->semesterRegistrations as $semester_registration) {
+                foreach ($semester_registration->courseRegistrations as $course_registration) {
+                    if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
+                        $courses[] = $course_registration->course;
+                    }
+                }
+            }
         }
+        
         return $courses;
     }
 
     public function passedResults()
     {
         $course = 0;
-        foreach ($this->semesterRegistrations as $semester_registration) {
-            foreach ($semester_registration->courseRegistrations as $course_registration) {
-                if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->points > 2){
-                    $course++;
+        if($this->cancelation_status == 0){
+            foreach ($this->semesterRegistrations as $semester_registration) {
+                foreach ($semester_registration->courseRegistrations as $course_registration) {
+                    if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->points > 2){
+                        $course++;
+                    }
                 }
             }
         }
+        
         return $course;
     }
 
