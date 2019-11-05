@@ -29,7 +29,7 @@ class SemesterRegistration extends BaseModel
     public function currentUnits()
     {  
     	$units = 0;
-    	foreach ($this->courseRegistrations as $courseRegistration) {
+    	foreach ($this->courseRegistrations->where('cancelation_status',0) as $courseRegistration) {
     		if($courseRegistration->result->lecturerCourseResultUpload){
                 $units = $courseRegistration->course->unit + $units;
     		}
@@ -40,7 +40,7 @@ class SemesterRegistration extends BaseModel
     public function previousUnits()
     {
     	$units = 0;
-    	foreach ($this->sessionRegistration->semesterRegistrations as $semesterRegistration) {
+    	foreach ($this->sessionRegistration->semesterRegistrations->where('cancelation_status',0) as $semesterRegistration) {
     		if($this->id > $semesterRegistration->id){
     			$units = $units + $this->getThisSemesterUnits($semesterRegistration);
     		}
@@ -51,7 +51,7 @@ class SemesterRegistration extends BaseModel
     public function getThisSemesterUnits($semester)
     {
     	$units = 0;
-    	foreach ($semester->courseRegistrations as $courseRegistration) {
+    	foreach ($semester->courseRegistrations->where('cancelation_status',0) as $courseRegistration) {
     		if($courseRegistration->result->lecturerCourseResultUpload){
                 $units = $courseRegistration->course->unit + $units;
     		}
@@ -66,7 +66,7 @@ class SemesterRegistration extends BaseModel
     public function currentSemesterGradePoints()
     {
     	$points = 0;
-    	foreach ($this->courseRegistrations as $course_registration) {
+    	foreach ($this->courseRegistrations->where('cancelation_status',0) as $course_registration) {
             if($course_registration->result->lecturerCourseResultUpload){
                 $course_unit = $course_registration->course->unit;
                 $points = ($course_registration->result->points * $course_unit) + $points;
@@ -78,7 +78,7 @@ class SemesterRegistration extends BaseModel
     public function gradePointAsAtLastSemester()
     {
     	$points = 0;
-    	foreach ($this->sessionRegistration->semesterRegistrations as $semesterRegistration) {
+    	foreach ($this->sessionRegistration->semesterRegistrations->where('cancelation_status',0) as $semesterRegistration) {
     		if($this->id > $semesterRegistration->id){
     			$points = $points + $semesterRegistration->currentSemesterGradePoints();
     		}
