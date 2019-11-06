@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Modules\Department\Entities\Admission;
+use Modules\Department\Entities\Department;
 
 class TestStudentsCommand extends Command
 {
@@ -30,6 +31,7 @@ class TestStudentsCommand extends Command
     public function __construct()
     {
         parent::__construct();
+        $this->department = Department::find(1);
     }
 
     /**
@@ -39,74 +41,42 @@ class TestStudentsCommand extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(500);
+        $bar = $this->output->createProgressBar(1000);
 
         $bar->setBarWidth(100);
 
         $bar->start();
 
-        for ($i=1; $i <= 5 ; $i++) { 
-            switch ($i) {
-                case '1':
-                    //create 100 NDI student
-                    for ($j=1; $j <=100 ; $j++) { 
-                        $number = '191'.$this->getSerialNumber($j);
-                        $this->registerThisStudent($number);
-                        $bar->advance(); 
-                    }
-                    break;
-                case '2':
-                    //create 100 NDII student
-                    for ($k=1; $k <=100 ; $k++) { 
-                        $number = '181'.$this->getSerialNumber($k);
-                        $this->registerThisStudent($number);
-                        $bar->advance(); 
-                    }
-                    break;
-                case '3':
-                    //create 100 HNDI student
-                    for ($l=1; $l <=100 ; $l++) { 
-                        $number = '190'.$this->getSerialNumber($l);
-                        $this->registerThisStudent($number);
-                        $bar->advance(); 
-                    }
-                    break;
-                case '4':
-                    //create 100 HNDII student
-                    for ($m=1; $m <=100 ; $m++) {
-                        $number = '181'.$this->getSerialNumber($m);
-                        $this->registerThisStudent($number);
-                        $bar->advance();
-                    }    
-                    break;
-                
-                default:
-                    for ($n=1; $n <=100 ; $n++) {
-                        $number = '182'.$this->getSerialNumber($n);
-                        $this->registerThisStudent($number);
-                        $bar->advance();
-                    }
-                    break;
-            }
-            
-        }
+        $this->generateMorningStudent($bar);
+
+        $this->generateEveningStudent($bar);
+
         $bar->finish();
     }
 
-    public function getSerialNumber($number)
+    public function generateEveningStudent($bar)
     {
-        if($number < 10){
-            $new_number = '00'.$number;
-        }else if ($number < 100) {
-            $new_number = '0'.$number;
-        }else{
-            $new_number = $number;;
+        for ($j=1; $j <= 500 ; $j++) { 
+            //generate evening student
+            $number = $this->department->generateAdmissionNo(['session'=>9,'year'=>18,'type'=>1,'serial_no'=>$j]);
+            $this->registerThisStudent($number);
+            $bar->advance();
         }
-        return $new_number;
     }
+
+    public function generateMorningStudent($bar)
+    {
+        for ($i=1; $i <= 500 ; $i++) { 
+            //generate morning student
+            $number = $this->department->generateAdmissionNo(['session'=>0,'year'=>18,'type'=>1,'serial_no'=>$i]);
+            $this->registerThisStudent($number);
+            $bar->advance();
+        }
+    }
+
     public function registerThisStudent($number)
     {
-        $admission = Admission::firstOrCreate([
+        $admission = Admission::create([
             'admission_no'=>$number,
             'head_of_department_id'=>1,
             'department_id'=>1
@@ -121,9 +91,9 @@ class TestStudentsCommand extends Command
             'password'=> Hash::make($number),
         ]);
         $student->studentAccount()->firstOrCreate([
-            'gender_id'=>1,
-            'tribe_id'=>1,
-            'religion_id'=>1
+            'gender_id'=>rand(1,2),
+            'tribe_id'=>rand(1,3),
+            'religion_id'=>rand(1,3)
         ]);
     }
 }

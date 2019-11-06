@@ -40,7 +40,7 @@ class TestStudentCourseRegistrationCommand extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(2500);
+        $bar = $this->output->createProgressBar(15000);
 
         $bar->setBarWidth(100);
 
