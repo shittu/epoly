@@ -2,14 +2,24 @@
 namespace Modules\Student\Services\Traits;
 
 use Illuminate\Support\Carbon;
+use Modules\Department\Entities\Level;
 
 trait HasLevelAndSemester
 
 {
+    public function courses()
+    {
+        return $this->level()->courses;
+    }
 
+    public function carryOvers()
+    {
+        return $this->repeatCourseRegistrations->where('status',1);
+    }
+    // stage = 1 means iwant the previos student level while stage = 0 means i want the the current student level
     public function level()
     {
-        return $this->currentLevel();
+        return Level::where('name',$this->currentLevel())->first();
     }
 
     protected function currentLevel()
@@ -18,7 +28,7 @@ trait HasLevelAndSemester
 
         $prefix = $this->levelPrefix();
 
-        switch ($this->yearsSinceAdmission()) {
+        switch ($this->yearsSinceAdmission() - 1) {
             case 0:
                 $level = $prefix.' 1';
                 break;
@@ -26,7 +36,7 @@ trait HasLevelAndSemester
                 $level = $prefix.' 2';
                 break;
             default:
-                $level = 'SPEAL OVER';
+                $level = 'SPILL OVER';
                 break;
         }
         return $level;
@@ -52,6 +62,8 @@ trait HasLevelAndSemester
         $prefix = 'ND';
         if($this->studentType->id == 2){
             $prefix = 'HND';
+        }else if($this->studentType->id == 3){
+            $prefix = 'CONVERSION';
         }
         return $prefix;
     }

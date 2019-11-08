@@ -51,7 +51,7 @@ class CourseAllocationCommand extends Command
                     'lecturer_course_status_id'=>1,
                     'lecturer_id'=>$lecturer->id,
                     'department_id'=> $lecturer->staff->department->id,
-                    'from' => time()
+                    'from' => '2019-10-03'
                 ]);
             }
             $bar->advance();

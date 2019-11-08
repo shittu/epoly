@@ -28,8 +28,8 @@
 			<td>C.G.P</td>
 			<td>G.P.A THIS SEM</td>
 			<td>C.G.P.A</td>
-			<td>SEM. REMARKS</td>
-			<td>GEN. REMARKS</td>
+			<td>SEMESTER. REMARKS</td>
+			<td>GENERAL. REMARKS</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -112,9 +112,12 @@
                         Passed <br>
             		@else
             		<!-- check if the student has any course to repeat -->
-                        @foreach($registration->failedResults() as $course)
-                            Repeat {{$course->code}}<br>
-                        @endforeach
+                        @if($registration->failedResults())
+                            RPT
+                            @foreach($registration->failedResults() as $course)
+                                {{$course->code.','}}<br>
+                            @endforeach
+                        @endif
             		@endif
             	@endif
             	<!-- check if the student has sessional EMC verdict -->

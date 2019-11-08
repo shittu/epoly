@@ -19,7 +19,7 @@ class StudentTypeTableSeeder extends Seeder
 
         $types = [
             ['name'=>'ND','code'=>1],
-            ['name'=>'HND','code'=>2]
+            ['name'=>'HND','code'=>3]
         ];
         foreach ($types as $type) {
             StudentType::firstOrCreate($type);

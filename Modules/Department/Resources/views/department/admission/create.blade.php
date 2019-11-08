@@ -15,6 +15,7 @@
     <form class="login-form" action="{{route('department.admission.register')}}" method="post">
         @csrf
         <div class="form-group">
+            <input type="hidden" name="year" value="{{substr(date('Y'),0,2)}}">
         	<label>Student Type</label>
             <select name="type" class="form-control">
             	<option value=""></option>

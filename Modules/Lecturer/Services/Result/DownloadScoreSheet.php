@@ -41,7 +41,6 @@ class DownloadScoreSheet
 
 	public function getFileData()
 	{
-
 		$datas[] = $this->getFileHeader();
         foreach (CourseRegistration::where(['course_id'=>$this->data['course'],'session_id'=>$this->data['session']])->get() as $course_registration) {
             $counter = 0;

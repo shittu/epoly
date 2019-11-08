@@ -41,54 +41,82 @@ class TestStudentsCommand extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(1000);
+        $bar = $this->output->createProgressBar(2000);
 
         $bar->setBarWidth(100);
 
         $bar->start();
 
-        $this->generateMorningStudent($bar);
+        $this->generateMorningNdStudent($bar);
 
-        $this->generateEveningStudent($bar);
+        $this->generateEveningNdStudent($bar);
+
+        $this->generateMorningHndStudent($bar);
+
+        $this->generateEveningHndStudent($bar);
 
         $bar->finish();
     }
 
-    public function generateEveningStudent($bar)
+    public function generateEveningNdStudent($bar)
     {
         for ($j=1; $j <= 500 ; $j++) { 
             //generate evening student
-            $number = $this->department->generateAdmissionNo(['session'=>9,'year'=>18,'type'=>1,'serial_no'=>$j]);
-            $this->registerThisStudent($number);
+            $number = $this->department->generateAdmissionNo(['session'=>0,'year'=>18,'type'=>1,'serial_no'=>$j]);
+            $this->registerThisStudent(['number'=>$number,'type'=>1,'session'=>2]);
+            $this->department->updateDepartmentSessionAdmissionCounter(['session'=>9,'year'=>18,'type'=>1,'serial_no'=>$j,'admission_no'=>$number]);
             $bar->advance();
         }
     }
 
-    public function generateMorningStudent($bar)
+    public function generateMorningNdStudent($bar)
     {
         for ($i=1; $i <= 500 ; $i++) { 
             //generate morning student
-            $number = $this->department->generateAdmissionNo(['session'=>0,'year'=>18,'type'=>1,'serial_no'=>$i]);
-            $this->registerThisStudent($number);
+            $number = $this->department->generateAdmissionNo(['session'=>9,'year'=>18,'type'=>1,'serial_no'=>$i]);
+            $this->registerThisStudent(['number'=>$number,'type'=>1,'session'=>1]);
+            $this->department->updateDepartmentSessionAdmissionCounter(['session'=>0,'year'=>18,'type'=>1,'serial_no'=>$i,'admission_no'=>$number]);
             $bar->advance();
         }
     }
 
-    public function registerThisStudent($number)
+    public function generateEveningHndStudent($bar)
+    {
+        for ($j=1; $j <= 500 ; $j++) { 
+            //generate evening student
+            $number = $this->department->generateAdmissionNo(['session'=>0,'year'=>18,'type'=>2,'serial_no'=>$j]);
+            $this->registerThisStudent(['number'=>$number,'type'=>2,'session'=>2]);
+            $this->department->updateDepartmentSessionAdmissionCounter(['session'=>9,'year'=>18,'type'=>2,'serial_no'=>$j,'admission_no'=>$number]);
+            $bar->advance();
+        }
+    }
+
+    public function generateMorningHndStudent($bar)
+    {
+        for ($i=1; $i <= 500 ; $i++) { 
+            //generate morning student
+            $number = $this->department->generateAdmissionNo(['session'=>9,'year'=>18,'type'=>2,'serial_no'=>$i]);
+            $this->registerThisStudent(['number'=>$number,'type'=>2,'session'=>1]);
+            $this->department->updateDepartmentSessionAdmissionCounter(['session'=>0,'year'=>18,'type'=>2,'serial_no'=>$i,'admission_no'=>$number]);
+            $bar->advance();
+        }
+    }
+
+    public function registerThisStudent(array $data)
     {
         $admission = Admission::create([
-            'admission_no'=>$number,
+            'admission_no'=>$data['number'],
             'head_of_department_id'=>1,
             'department_id'=>1
         ]);
         $student = $admission->student()->firstOrCreate([
             'first_name'=> 'first name',
             'last_name'=> 'last name',
-            'email'=> $number.'@sospoly.com',
+            'email'=> $data['number'].'@sospoly.com',
             'phone'=>'08243434343',
-            'student_session_id'=> 1,
-            'student_type_id'=>  1,
-            'password'=> Hash::make($number),
+            'student_session_id'=> $data['session'],
+            'student_type_id'=>  $data['type'],
+            'password'=> Hash::make($data['number']),
         ]);
         $student->studentAccount()->firstOrCreate([
             'gender_id'=>rand(1,2),
