@@ -112,28 +112,10 @@
                 		@endforeach
                 	</td>
                 	<td>
-                		<!-- if all the courses of the session has been uploaded and failed all of them -->
-                		@if($registration->sessionRegistration->allCoursesUploaded() && $registration->sessionRegistration->passedResults() == 0)
-                             With draw
-                		@else
-                		<!-- check if the student passed all his courses of the session -->
-                    		@if(empty($registration->failedResults()) && $registration->sessionRegistration->allCoursesUploaded())
-                                Passed <br>
-                    		@else
-                    		<!-- check if the student has any course to repeat -->
-                                @foreach($registration->failedResults() as $course)
-                                    Repeat {{$course->code}}<br>
-                                @endforeach
-                    		@endif
-                    	@endif
-                    	<!-- check if the student has sessional EMC verdict -->
-                    	@foreach($registration->sessionRegistration->sessionRegistrationRemarks as $emc_remark)
-                            {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
-                    	@endforeach
-                    	<!-- check if the student has Semester EMC verdict -->
-                    	@foreach($registration->semesterRegistrationRemarks as $emc_remark)
-                            {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
-                    	@endforeach
+                        {{$registration->generalRemarks()['remark']}}<br>
+                        @foreach($registration->generalRemarks()['conditions'] as $condition)
+                            {{$condition}}<br>
+                        @endforeach
                 	</td>
                 </tr>
 				@endforeach

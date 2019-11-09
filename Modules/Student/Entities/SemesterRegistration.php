@@ -3,9 +3,12 @@
 namespace Modules\Student\Entities;
 
 use Modules\Core\Entities\BaseModel;
+use Modules\Department\Services\Results\Student\ResultGeneralRemark;
 
 class SemesterRegistration extends BaseModel
 {
+	use ResultGeneralRemark;
+	
     public function sessionRegistration()
     {
     	return $this->belongsTo(SessionRegistration::class);
