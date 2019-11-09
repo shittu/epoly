@@ -76,6 +76,7 @@ class CourseRegistrationController extends StudentBaseController
      */
     public function showCourses()
     {
+
         return view('student::course.registration.show',['courses'=>student()->currentRegisteredCourses()]);
     }
 

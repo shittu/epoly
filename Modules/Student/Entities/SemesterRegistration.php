@@ -8,7 +8,7 @@ use Modules\Department\Services\Results\Student\ResultGeneralRemark;
 class SemesterRegistration extends BaseModel
 {
 	use ResultGeneralRemark;
-	
+
     public function sessionRegistration()
     {
     	return $this->belongsTo(SessionRegistration::class);
@@ -36,6 +36,15 @@ class SemesterRegistration extends BaseModel
     		if($courseRegistration->result->lecturerCourseResultUpload){
                 $units = $courseRegistration->course->unit + $units;
     		}
+    	}
+    	return $units;
+    }
+
+    public function registeredUnits()
+    {  
+    	$units = 0;
+    	foreach ($this->courseRegistrations as $courseRegistration) {
+            $units = $courseRegistration->course->unit + $units;
     	}
     	return $units;
     }

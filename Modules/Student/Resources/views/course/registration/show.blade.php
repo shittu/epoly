@@ -1,11 +1,10 @@
 @extends('student::layouts.master')
 
 @section('page-content')
-<input type="checkbox" name="">
 <div class="col-md-1"></div>
 <div class="col-md-10">
 	<div class="card">
-		<div class="card-header button-fullwidth cws-button bt-color-3">{{student()->level()}} {{date('Y')}} / {{date('Y')+1}} Registered Courses</div>
+		<div class="card-header button-fullwidth cws-button bt-color-3">{{student()->level()->name}} {{currentSession()->name}} Registered Courses</div>
 		<div class="card-body">
 			<table class="table">
 				<head>
@@ -33,6 +32,13 @@
 						</td>
 					</tr>
 					@endforeach
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Registerd Units</td>
+						<td></td>
+					</tr>
 				</tbody>
 			</table>	
 		</div>

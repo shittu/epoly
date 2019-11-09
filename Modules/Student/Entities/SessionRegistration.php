@@ -112,4 +112,13 @@ class SessionRegistration extends BaseModel
         return $remarks;
     }
 
+    public function registeredUnits()
+    {
+        $units = 0;
+        foreach ($this->semesterRegistrations as $semesterRegistration) {
+            $units = $units + $semesterRegistration->registeredUnits();
+        }
+        return $units;
+    }
+
 }

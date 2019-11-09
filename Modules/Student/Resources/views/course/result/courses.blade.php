@@ -43,6 +43,13 @@ $count = 1;
 							</tr>
 					    @endforeach
 					@endforeach
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td class="strong h4">Registerd Units</td>
+						<td class="strong h4">{{$session_registration->registeredUnits()}}</td>
+					</tr>
 				</tbody>
 			</table>	
 		</div>
