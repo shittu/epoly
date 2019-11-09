@@ -7,15 +7,8 @@ use Modules\Department\Entities\Level;
 trait HasLevelAndSemester
 
 {
-    public function courses()
-    {
-        return $this->level()->courses;
-    }
-
-    public function carryOvers()
-    {
-        return $this->repeatCourseRegistrations->where('status',1);
-    }
+    use HasCoursesAndCarryOvers;
+    
     // stage = 1 means iwant the previos student level while stage = 0 means i want the the current student level
     public function level()
     {
@@ -28,7 +21,7 @@ trait HasLevelAndSemester
 
         $prefix = $this->levelPrefix();
 
-        switch ($this->yearsSinceAdmission() - 1) {
+        switch ($this->yearsSinceAdmission()) {
             case 0:
                 $level = $prefix.' 1';
                 break;

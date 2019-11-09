@@ -17,8 +17,8 @@ class CourseRegistrationController extends StudentBaseController
      */
     public function availableCourses()
     {
-        $level = Level::where('name',student()->level())->first();
-        return view('student::course.registration.create',['courses'=>$level->courses]);
+    
+        return view('student::course.registration.create',['courses'=>student()->courses()]);
     }
 
     /**

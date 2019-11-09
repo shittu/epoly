@@ -77,9 +77,11 @@ class Student extends Authenticatable
 
     public function makeCurrentSessionRegistration()
     {
-        if($this->sessionRegistrations->where('session_id',currentSession()->id)){
-            return true;
+        $flag = false;
+        foreach ($this->sessionRegistrations->where('session_id',currentSession()->id) as $session) {
+            $flag = true;
         }
+        return $flag;
     }
     
 }
