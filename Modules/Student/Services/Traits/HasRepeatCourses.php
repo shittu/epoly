@@ -11,7 +11,7 @@ trait HasRepeatCourses
     public function currentSessionCarryOverCourseUnits()
     {
         $units = 0;
-        foreach ($this->carryOvers() as $repeatCourse) {
+        foreach ($this->repeatCourses as $repeatCourse) {
             $units = $units + $repeatCourse->course->unit;
         }
         return $units;

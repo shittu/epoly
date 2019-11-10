@@ -17,21 +17,21 @@
 						@foreach(student()->currentLevelCourses() as $levelCourse)
 						<tr>
 							<td>{{$loop->index+1}}</td>
-							<td>{{$levelCourse->course->title}}</td>
+							<td>{{$levelCourse->title}}</td>
 							<td>
-								{{$levelCourse->course->code}}
+								{{$levelCourse->code}}
 							</td>
 							<td>
-								{{$levelCourse->course->unit}}
+								{{$levelCourse->unit}}
 							</td>
 							<td>
-								{{$levelCourse->course->semester->name}}
+								{{$levelCourse->semester->name}}
 							</td>
 							<td>
-								{{$levelCourse->course->currentCourseMaster() ? $levelCourse->course->currentCourseMaster()->staff->first_name.' '.$levelCourse->course->currentCourseMaster()->staff->last_name : 'Not available'}}
+								{{$levelCourse->currentCourseMaster() ? $levelCourse->currentCourseMaster()->staff->first_name.' '.$levelCourse->currentCourseMaster()->staff->last_name : 'Not available'}}
 							</td>
 							<td>
-								<input type="checkbox" name="course[]" value="{{$course->id}}" checked class="form-control">  
+								<input type="checkbox" name="course[]" value="{{$levelCourse->id}}" checked class="form-control">  
 							</td>
 						</tr>
 						@endforeach

@@ -9,7 +9,6 @@ trait HasLevelAndSemester
 {
     use HasCurrentLevelCourses, HasDropCourses, HasReRegisterCourses,HasRepeatCourses;
     
-    // stage = 1 means iwant the previos student level while stage = 0 means i want the the current student level
     public function level()
     {
         return Level::where('name',$this->currentLevel())->first();
@@ -21,7 +20,7 @@ trait HasLevelAndSemester
 
         $prefix = $this->levelPrefix();
 
-        switch ($this->yearsSinceAdmission()-1) {
+        switch ($this->yearsSinceAdmission()) {
             case 0:
                 $level = $prefix.' 1';
                 break;

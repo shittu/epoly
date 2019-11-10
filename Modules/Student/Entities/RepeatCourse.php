@@ -15,4 +15,9 @@ class RepeatCourse extends BaseModel
     {
     	return $this->belongsTo(Student::class);
     }
+
+    public function session()
+    {
+    	return $this->belongsTo('Modules\Admin\Entities\Session');
+    }
 }

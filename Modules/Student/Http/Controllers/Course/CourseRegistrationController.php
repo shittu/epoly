@@ -18,7 +18,7 @@ class CourseRegistrationController extends StudentBaseController
     public function availableCourses()
     {
     
-        return view('student::course.registration.create',['courses'=>student()->courses()]);
+        return view('student::course.registration.create',['courses'=>student()->currentLevelCourses()]);
     }
 
     /**
@@ -73,7 +73,7 @@ class CourseRegistrationController extends StudentBaseController
     {
         $availableCourses = [];
         $dropCourses = [];
-        foreach (student()->level()->courses as $course) {
+        foreach (student()->level()->currentLevelCourses as $course) {
             if(!in_array($course->id, $courses)){
                 $dropCourses[] = $course->id;
             }

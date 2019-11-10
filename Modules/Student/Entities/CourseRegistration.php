@@ -27,9 +27,9 @@ class CourseRegistration extends BaseModel
         return $this->belongsTo(SemesterRegistration::class);
     }
 
-    public function repeatCourseRegistration()
+    public function repeatCourse()
     {
-        return $this->hasOne(RepeatCourseRegistration::class);
+        return $this->hasOne(RepeatCourse::class);
     }
 
     public function session()

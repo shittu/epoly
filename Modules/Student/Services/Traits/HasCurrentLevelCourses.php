@@ -16,7 +16,7 @@ trait HasCurrentLevelCourses
     public function currentLevelCourseUnits()
     {
         $units = 0;
-        foreach ($this->courses() as $course) {
+        foreach ($this->currentLevelCourses() as $course) {
             $units = $units + $course->unit;
         }
         return $units;

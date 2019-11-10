@@ -20,7 +20,22 @@ class Course extends BaseModel
     {
         return $this->hasMany('Modules\Student\Entities\CourseRegistration');
     }
-    
+
+    public function repeatCourses()
+    {
+        return $this->hasMany('Modules\Student\Entities\RepeatCourse');
+    }
+
+    public function reRegisterCourses()
+    {
+        return $this->hasMany('Modules\Student\Entities\ReRegisterCourse');
+    }
+
+    public function dropCourses()
+    {
+        return $this->hasMany('Modules\Student\Entities\DropCourse');
+    }
+
     public function lecturerCourses()
     {
     	return $this->hasMany(LecturerCourse::class);

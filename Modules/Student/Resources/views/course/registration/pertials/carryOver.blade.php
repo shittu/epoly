@@ -14,24 +14,24 @@
 				</tr>
 			</head>
 			<tbody>
-				@foreach(student()->repeatCourseRegistrations->where('status',1) as $repeat)
+				@foreach(student()->repeatCourses->where('status',1) as $repeat)
 					<tr>
 						<td>{{$loop->index+1}}</td>
-						<td>{{$repeat->courseRegistration->course->title}}</td>
+						<td>{{$repeat->course->title}}</td>
 						<td>
-							{{$repeat->courseRegistration->course->code}}
+							{{$repeat->course->code}}
 						</td>
 						<td>
-							{{$repeat->courseRegistration->course->unit}}
+							{{$repeat->course->unit}}
 						</td>
 						<td>
-							{{$repeat->courseRegistration->course->semester->name}}
+							{{$repeat->course->semester->name}}
 						</td>
 						<td>
-							{{$repeat->courseRegistration->course->currentCourseMaster() ??  'Not available'}}
+							{{$repeat->course->currentCourseMaster() ??  'Not available'}}
 						</td>
 						<td>
-							<input type="checkbox" value="{{$repeat->courseRegistration->id}}" class="form-control" name="add[]">  
+							<input type="checkbox" value="{{$repeat->id}}" class="form-control" name="add[]">  
 						</td>
 					</tr>
 				@endforeach
