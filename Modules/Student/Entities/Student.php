@@ -64,8 +64,7 @@ class Student extends Authenticatable
     public function currentRegisteredCourses()
     {
         $courses = [];
-        $level = Level::where('name',$this->level())->first();
-        foreach ($this->sessionRegistrations()->where('level_id',$level->id)->get() as $session_registration) {
+        foreach ($this->sessionRegistrations()->where('level_id',$this->level()->id)->get() as $session_registration) {
             foreach ($session_registration->semesterRegistrations as $semester_registration) {
                 foreach ($semester_registration->courseRegistrations as $course_registraion) {
                     $courses[] = $course_registraion->course;
@@ -82,6 +81,11 @@ class Student extends Authenticatable
             $flag = true;
         }
         return $flag;
+    }
+
+    public function units()
+    {
+        
     }
     
 }

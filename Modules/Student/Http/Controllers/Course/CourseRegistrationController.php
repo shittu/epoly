@@ -37,9 +37,11 @@ class CourseRegistrationController extends StudentBaseController
      */
     public function registerCourses(Request $request)
     {
-        $courses = $request->course;
+
+        $courses = array_merge($request->course,$request->add);
+        $dropCourses = $this->getCurrentSessionDropCourses($request->course);
         $session_registration = student()->sessionRegistrations()->firstOrCreate([
-            'level_id'=>Level::where('name',student()->level())->first()->id,
+            'level_id'=>student()->level()->id,
             'session_id'=> currentSession()->id,
             'department_id'=> student()->admission->department->id
             ]);
@@ -54,10 +56,30 @@ class CourseRegistrationController extends StudentBaseController
             ]);
             $course_registration->result()->firstOrCreate([]);
         }
+        if(!empty($dropCourses)){
+            foreach ($dropCourses as $course_id) {
+                student()->dropCourses()->firstOrCreate([
+                    'session_id'=>currentSession()->id,
+                    'course_id'=>$course_id,
+                    'status'=>1,
+                ]);
+            }
+        }
         session()->flash('message', 'Congratulation all courses has been registered success fully');
         return redirect()->route('student.course.registration.courses.register.show');
     }
+    
+    public function getCurrentSessionDropCourses($courses)
+    {
+        $availableCourses = [];
+        $dropCourses = [];
+        foreach (student()->level()->courses as $course) {
+            if(!in_array($course->id, $courses)){
+                $dropCourses[] = $course->id;
+            }
+        }
 
+    }
     /**
      * Show the form for editing the specified resource.
      * @param int $id

@@ -31,7 +31,7 @@
 								{{$course->currentCourseMaster() ? $course->currentCourseMaster()->staff->first_name.' '.$course->currentCourseMaster()->staff->last_name : 'Not available'}}
 							</td>
 							<td>
-								<input type="checkbox" name="course[]" value="{{$course->id}}" style="visibility: show" checked class="form-control">  
+								<input type="checkbox" name="course[]" value="{{$course->id}}" checked class="form-control">  
 							</td>
 						</tr>
 						@endforeach
@@ -40,7 +40,7 @@
 							<td></td>
 							<td></td>
 							<td></td>
-							<td class="strong h4">Total Unit</td>
+							<td class="strong h4">Total Units</td>
 							<td class="strong h4">{{student()->currentSessionCourseUnits()}}</td>
 						</tr>
 					</tbody>
