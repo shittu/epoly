@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRepeatCourseRegistrationsTable extends Migration
+class CreateRepeatCoursesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateRepeatCourseRegistrationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('repeat_course_registrations', function (Blueprint $table) {
+        Schema::create('repeat_courses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('course_registration_id')
+            $table->integer('course_id')
             ->unsigned()
             ->nullable()
             ->foreign()
             ->references('id')
-            ->on('course_registrations')
+            ->on('courses')
             ->delete('restrict')
             ->update('cascade');
             $table->integer('student_id')
@@ -43,6 +43,6 @@ class CreateRepeatCourseRegistrationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('repeat_course_registrations');
+        Schema::dropIfExists('repeat_courses');
     }
 }

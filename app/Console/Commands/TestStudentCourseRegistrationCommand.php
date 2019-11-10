@@ -53,7 +53,7 @@ class TestStudentCourseRegistrationCommand extends Command
             'session_id'=> currentSession()->id
             ]);
             
-            foreach($student->courses() as $course){
+            foreach($student->currentLevelCourses() as $course){
                 
                 $semester_registration = $session_registration->semesterRegistrations()->firstOrCreate(['semester_id'=>$course->semester->id]);
 

@@ -56,9 +56,9 @@ class Student extends Authenticatable
         return $this->hasMany(SessionRegistration::class);
     }
     
-    public function repeatCourseRegistrations()
+    public function repeatCourses()
     {
-        return $this->hasMany(RepeatCourseRegistration::class);
+        return $this->hasMany(RepeatCourse::class);
     }
 
     public function reRegisterCourses()

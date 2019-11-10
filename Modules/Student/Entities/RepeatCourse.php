@@ -4,11 +4,11 @@ namespace Modules\Student\Entities;
 
 use Modules\Core\Entities\BaseModel;
 
-class RepeatCourseRegistration extends BaseModel
+class RepeatCourse extends BaseModel
 {
-    public function courseRegistration()
+    public function course()
     {
-    	return $this->belongsTo(CourseRegistration::class);
+    	return $this->belongsTo('Modules\Department\Entities\Course');
     }
 
     public function student()

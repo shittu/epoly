@@ -7,7 +7,7 @@ use Modules\Department\Entities\Level;
 trait HasLevelAndSemester
 
 {
-    use HasCoursesAndCarryOvers;
+    use HasCurrentLevelCourses, HasDropCourses, HasReRegisterCourses,HasRepeatCourses;
     
     // stage = 1 means iwant the previos student level while stage = 0 means i want the the current student level
     public function level()
