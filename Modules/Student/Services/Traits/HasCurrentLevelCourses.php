@@ -4,7 +4,7 @@ namespace Modules\Student\Services\Traits;
 use Illuminate\Support\Carbon;
 use Modules\Department\Entities\Level;
 
-trait HasCurrentSessionCourses
+trait HasCurrentLevelCourses
 
 {
 

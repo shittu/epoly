@@ -91,20 +91,32 @@ class Result extends BaseModel
             $this->repeat();
         }elseif($point == -1){
             $this->remark_id = 7;
-            $this->repeat();
+            $this->reRegister();
         }elseif($point == -2){
             $this->remark_id = 8;
-            $this->repeat();
+            $this->reRegister();
         }elseif($point == -3){
             $this->remark_id = 9;
-            $this->repeat();
+            $this->reRegister();
         }
     	$this->save();
     }
     public function repeat()
     {
-        $this->courseRegistration->repeatCourseRegistration()->firstOrCreate(['student_id'=>$this->courseRegistration->semesterRegistration->sessionRegistration->student->id]);
+        $this->courseRegistration->course->repeatCourse()->firstOrCreate([
+            'student_id'=>$this->courseRegistration->semesterRegistration->sessionRegistration->student->id,
+            'session_id'=>currentSession()->id + 1
+        ]);
     }
+
+    public function reRegister()
+    {
+        $this->courseRegistration->course->reRegisterCourse()->firstOrCreate([
+            'student_id'=>$this->courseRegistration->semesterRegistration->sessionRegistration->student->id,
+            'session_id'=>currentSession()->id + 1
+        ]);
+    }
+
     public function computeGrade()
     {
         if(is_numeric($this->exam)){

@@ -8,6 +8,7 @@
 	<div class="card">
 		<div class="card-header button-fullwidth cws-button bt-color-3">{{$session_registration->level->name}} Courses Result</div>
 		<div class="card-body">
+			@if($session_registration->hasApprovedResult())
 			<table class="table">
 				<head>
 					<tr>
@@ -61,6 +62,11 @@
                     </tr>
 				</tbody>
 			</table>	
+			@else
+				<div class="alert alert-danger text-center h4">
+					{{'Sorry none of your registered courses result are available for '.$session_registration->session->name}}
+				</div>
+            @endif
 		</div>
 	</div><br>
 	@endforeach

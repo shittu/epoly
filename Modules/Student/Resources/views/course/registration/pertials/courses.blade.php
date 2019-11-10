@@ -14,21 +14,21 @@
 						</tr>
 					</head>
 					<tbody>
-						@foreach($courses as $course)
+						@foreach(student()->currentLevelCourses() as $levelCourse)
 						<tr>
 							<td>{{$loop->index+1}}</td>
-							<td>{{$course->title}}</td>
+							<td>{{$levelCourse->course->title}}</td>
 							<td>
-								{{$course->code}}
+								{{$levelCourse->course->code}}
 							</td>
 							<td>
-								{{$course->unit}}
+								{{$levelCourse->course->unit}}
 							</td>
 							<td>
-								{{$course->semester->name}}
+								{{$levelCourse->course->semester->name}}
 							</td>
 							<td>
-								{{$course->currentCourseMaster() ? $course->currentCourseMaster()->staff->first_name.' '.$course->currentCourseMaster()->staff->last_name : 'Not available'}}
+								{{$levelCourse->course->currentCourseMaster() ? $levelCourse->course->currentCourseMaster()->staff->first_name.' '.$levelCourse->course->currentCourseMaster()->staff->last_name : 'Not available'}}
 							</td>
 							<td>
 								<input type="checkbox" name="course[]" value="{{$course->id}}" checked class="form-control">  
@@ -41,7 +41,7 @@
 							<td></td>
 							<td></td>
 							<td class="strong h4">Total Units</td>
-							<td class="strong h4">{{student()->currentSessionCourseUnits()}}</td>
+							<td class="strong h4">{{student()->currentLevelCourseUnits()}}</td>
 						</tr>
 					</tbody>
 				</table>	

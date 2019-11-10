@@ -40,9 +40,15 @@ class SessionRegistration extends BaseModel
         foreach ($this->semesterRegistrations as $semester_registration) {
             foreach ($semester_registration->courseRegistrations as $course_registration) {
                 if($course_registration->result->lecturerCourseResultUpload){
-                    $course_unit = $course_registration->course->unit;
-                    $units = $course_unit + $units;
-                    $points = ($course_registration->result->points * $course_unit) + $points;
+                    if(student() && $course_registration->result->lecturerCourseResultUpload->verification_status == 1){
+                        $course_unit = $course_registration->course->unit;
+                        $units = $course_unit + $units;
+                        $points = ($course_registration->result->points * $course_unit) + $points;
+                    }else{
+                        $course_unit = $course_registration->course->unit;
+                        $units = $course_unit + $units;
+                        $points = ($course_registration->result->points * $course_unit) + $points;
+                    }
                 }
             }
         }
@@ -120,5 +126,17 @@ class SessionRegistration extends BaseModel
         }
         return $units;
     }
-
+    
+    public function hasApprovedResult()
+    {
+        $flag = false;
+        foreach ($this->semesterRegistrations as $semester_registration) {
+            foreach ($semester_registration->courseRegistrations as $course_registration) {
+                if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->verification_status == 1){
+                    $flag = true;
+                }
+            }
+        }
+        return $flag;
+    }
 }

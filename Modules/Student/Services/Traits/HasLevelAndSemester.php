@@ -21,7 +21,7 @@ trait HasLevelAndSemester
 
         $prefix = $this->levelPrefix();
 
-        switch ($this->yearsSinceAdmission()) {
+        switch ($this->yearsSinceAdmission()-1) {
             case 0:
                 $level = $prefix.' 1';
                 break;
