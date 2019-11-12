@@ -63,12 +63,12 @@ class Student extends Authenticatable
 
     public function reRegisterCourses()
     {
-        return $this->hasMany(ReRegisterCourses::class);
+        return $this->hasMany(ReRegisterCourse::class);
     }
 
     public function dropCourses()
     {
-        return $this->hasMany(DropCourses::class);
+        return $this->hasMany(DropCourse::class);
     }
 
     public function currentRegisteredCourses()

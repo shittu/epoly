@@ -37,14 +37,15 @@ class CourseRegistrationController extends StudentBaseController
      */
     public function registerCourses(Request $request)
     {
+        $request->validate(['course'=>'required']);
 
-        $courses = array_merge($request->course,$request->add);
+        $courses = array_merge($request->course,$request->add ?? []);
         $dropCourses = $this->getCurrentSessionDropCourses($request->course);
         $session_registration = student()->sessionRegistrations()->firstOrCreate([
             'level_id'=>student()->level()->id,
             'session_id'=> currentSession()->id,
             'department_id'=> student()->admission->department->id
-            ]);
+        ]);
         foreach ($courses as $course_id) {
             $course = Course::find($course_id);
             $semester_registration = $session_registration
@@ -54,7 +55,23 @@ class CourseRegistrationController extends StudentBaseController
                 'course_id'=>$course_id,
                 'session_id'=> currentSession()->id,
             ]);
+
             $course_registration->result()->firstOrCreate([]);
+            //check if the added course is from the carry over courses
+            $carryOver = $this->getThisCourseFromStudentCarryOverCourses($course_id);
+            if($carryOver){
+                $carryOver->update(['status'=>0]);
+            }
+            //check if the added course is from the drop courses
+            $dropCourse = $this->getThisCourseFromStudentDropCourses($course_id);
+            if($dropCourse){
+                $dropCourse->update(['status'=>0]);
+            }
+            //check if the added course is from the reregister courses
+            $reRegisterCourse = $this->getThisCourseFromStudentReRegisterCourses($course_id);
+            if($reRegisterCourse){
+                $reRegisterCourse->update(['status'=>0]);
+            }
         }
         if(!empty($dropCourses)){
             foreach ($dropCourses as $course_id) {
@@ -68,12 +85,41 @@ class CourseRegistrationController extends StudentBaseController
         session()->flash('message', 'Congratulation all courses has been registered success fully');
         return redirect()->route('student.course.registration.courses.register.show');
     }
+    public function getThisCourseFromStudentReRegisterCourses($course_id)
+    {
+        $reRegisterCourse = null;
+        foreach(student()->reRegisterCourses->where('course_id',$course_id) as $reRegisterCourse){
+            $reRegisterCourse = $reRegisterCourse;
+        }
+        return $reRegisterCourse;
+    }
+
+    public function getThisCourseFromStudentCarryOverCourses($course_id)
+    {
+        $carryOverCourse = null;
+        foreach(student()->repeatCourses->where('course_id',$course_id) as $carryOverCourse){
+            $carryOverCourse = $carryOverCourse;
+        }
+        return $carryOverCourse;
+    }
     
+    public function getThisStudentCurrentCourseRegistration($course_id)
+    {
+        $courseRegistrations = [];
+        foreach (student()->sessionRegistrations->where('session_id',currentSession()->id) as $sessionRegistration) {
+            foreach ($sessionRegistration->semesterRegistration as $semesterRegistration) {
+                foreach ($sessionRegistration->courseRegistrations as $courseRegistration) {
+                    $courseRegistrations[] = $courseRegistration;
+                }
+            }
+        }
+        return $courseRegistrations;
+    }
     public function getCurrentSessionDropCourses($courses)
     {
         $availableCourses = [];
         $dropCourses = [];
-        foreach (student()->level()->currentLevelCourses as $course) {
+        foreach (student()->level()->courses as $course) {
             if(!in_array($course->id, $courses)){
                 $dropCourses[] = $course->id;
             }

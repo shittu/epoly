@@ -89,7 +89,7 @@ class Lecturer extends Authenticatable
 
     public function hasValidExamOfficerAppointment()
     {
-        $status = false;
+        $status = false;    
         foreach ($this->departmentalAppointments as $appointment) {
             if($appointment->appointment_id == 1 && $appointment->is_active == 1){
                 $status = true;

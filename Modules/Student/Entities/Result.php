@@ -105,7 +105,7 @@ class Result extends BaseModel
     {
         $this->courseRegistration->course->repeatCourses()->firstOrCreate([
             'student_id'=>$this->courseRegistration->semesterRegistration->sessionRegistration->student->id,
-            //'session_id'=>currentSession()->id + 1
+            'session_id'=>currentSession()->id + 1
         ]);
     }
 

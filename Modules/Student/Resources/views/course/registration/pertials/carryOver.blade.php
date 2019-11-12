@@ -1,3 +1,4 @@
+@if(student()->repeatCourses->where('status',1))
 <div class="card">
 	<div class="card-header text text-center">{{student()->level()->name}} {{currentSession()->name}} Carry Over Courses</div>
 	<div class="card-body">
@@ -14,24 +15,24 @@
 				</tr>
 			</head>
 			<tbody>
-				@foreach(student()->repeatCourses->where('status',1) as $repeat)
+				@foreach(student()->currentLevelReRegisterCourses() as $course)
 					<tr>
 						<td>{{$loop->index+1}}</td>
-						<td>{{$repeat->course->title}}</td>
+						<td>{{$course->title}}</td>
 						<td>
-							{{$repeat->course->code}}
+							{{$course->code}}
 						</td>
 						<td>
-							{{$repeat->course->unit}}
+							{{$course->unit}}
 						</td>
 						<td>
-							{{$repeat->course->semester->name}}
+							{{$course->semester->name}}
 						</td>
 						<td>
-							{{$repeat->course->currentCourseMaster() ??  'Not available'}}
+							{{$course->currentCourseMaster() ??  'Not available'}}
 						</td>
 						<td>
-							<input type="checkbox" value="{{$repeat->id}}" class="form-control" name="add[]">  
+							<input type="checkbox" value="{{$course->id}}" class="form-control" name="add[]">  
 						</td>
 					</tr>
 				@endforeach
@@ -47,3 +48,4 @@
 		</table>	
 	</div>
 </div>
+@endif

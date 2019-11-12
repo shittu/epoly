@@ -718,7 +718,7 @@ class CourseTableSeeder extends Seeder
                 'level_id'=>5,
                 'department_id'=>1,
                 'code'=>'COM423',
-                'title'=>'Intro. to Artificial Intelligence and Expert systems.',
+                'title'=>'Introduction to Artificial Intelligence and Expert systems.',
                 'unit'=>3
             ],
             [

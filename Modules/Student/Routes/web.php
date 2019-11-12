@@ -38,6 +38,7 @@ Route::prefix('student')
 	        Route::get('/registered/show', 'CourseRegistrationController@showCourses')->name('courses.register.show');
             //add and drop course registration routes
 	        Route::get('/add-or-drop-course', 'AddAndDropCourseController@showRegisredAndCarryOverCourses')->name('add.drop');
+	        Route::post('/add-or-drop-course/register', 'AddAndDropCourseController@register')->name('add.drop.register');
 		});
 		
 	});

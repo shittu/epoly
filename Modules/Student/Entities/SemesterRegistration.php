@@ -33,7 +33,7 @@ class SemesterRegistration extends BaseModel
     {  
     	$units = 0;
     	foreach ($this->courseRegistrations->where('cancelation_status',0) as $courseRegistration) {
-    		if($courseRegistration->result->lecturerCourseResultUpload){
+    		if($courseRegistration->result->lecturerCourseResultUpload && $courseRegistration->result->points > 0){
                 $units = $courseRegistration->course->unit + $units;
     		}
     	}
@@ -43,7 +43,7 @@ class SemesterRegistration extends BaseModel
     public function registeredUnits()
     {  
     	$units = 0;
-    	foreach ($this->courseRegistrations as $courseRegistration) {
+    	foreach ($this->courseRegistrations->where('cancelation_status',0) as $courseRegistration) {
             $units = $courseRegistration->course->unit + $units;
     	}
     	return $units;
@@ -59,12 +59,25 @@ class SemesterRegistration extends BaseModel
     	}
     	return $units;
     }
+
+    public function previousRegisteredUnits()
+    {
+    	$units = 0;
+    	foreach ($this->sessionRegistration->semesterRegistrations->where('cancelation_status',0) as $semesterRegistration) {
+    		if($this->id > $semesterRegistration->id){
+    			foreach ($semesterRegistration->courseRegistrations->where('cancelation_status',0) as $courseRegistration) {
+		            $units = $courseRegistration->course->unit + $units;
+		        }
+    		}
+    	}
+    	return $units;
+    }
     
     public function getThisSemesterUnits($semester)
     {
     	$units = 0;
     	foreach ($semester->courseRegistrations->where('cancelation_status',0) as $courseRegistration) {
-    		if($courseRegistration->result->lecturerCourseResultUpload){
+    		if($courseRegistration->result->lecturerCourseResultUpload && $courseRegistration->result->points > 0){
                 $units = $courseRegistration->course->unit + $units;
     		}
     	}
@@ -73,6 +86,11 @@ class SemesterRegistration extends BaseModel
     public function cummulativeUnits()
     {
     	return $this->previousUnits() + $this->currentUnits();
+    }
+
+    public function cummulativeRegisteredUnits()
+    {
+    	return $this->previousRegisteredUnits() + $this->registeredUnits();
     }
 
     public function currentSemesterGradePoints()
@@ -105,7 +123,7 @@ class SemesterRegistration extends BaseModel
 
     public function currentSemesterCummulativeGradePointsAverage()
     {
-    	$units = $this->currentUnits();
+    	$units = $this->registeredUnits();
     	if($units < 1){
     		$units = 1;
     	}
@@ -114,7 +132,7 @@ class SemesterRegistration extends BaseModel
 
     public function cummulativeGradePointsAverage()
     {
-    	$units = $this->cummulativeUnits();
+    	$units = $this->cummulativeRegisteredUnits();
     	if($units < 1){
     		$units = 1;
     	}

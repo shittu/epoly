@@ -13,7 +13,7 @@ trait SubSemesterCalenders
 	public function registerNewSemesterExamMarkingCalender($semester)
     {
     	$calender = null;
-    	if($semester == 1){
+        if($semester == 1){
             $calender = MarkingCalender::firstOrCreate([
             	'start'=>$this->data['first_semester_exam_marking_start'],
             	'end'=>$this->data['first_semester_exam_marking_end']

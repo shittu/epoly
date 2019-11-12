@@ -6,7 +6,6 @@ use Modules\Core\Entities\BaseModel;
 
 class SessionRegistration extends BaseModel
 {
-    protected $paginate = 3;
     
     public function level()
     {

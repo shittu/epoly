@@ -52,7 +52,6 @@ class DownloadScoreSheet
                 'contenue_accessment'=> rand(1,40),
                 'examination'=> rand(1,60),
             ];
-           
         }
         return $datas;
 	}

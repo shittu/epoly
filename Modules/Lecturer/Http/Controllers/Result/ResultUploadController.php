@@ -85,11 +85,4 @@ class ResultUploadController extends LecturerBaseController
     {
         //
     }
-
-    public function import() 
-    {
-        Excel::import(new UsersImport,request()->file('file'));
-           
-        return back();
-    }
 }

@@ -104,7 +104,7 @@ class TestStudentsCommand extends Command
 
     public function registerThisStudent(array $data)
     {
-        $admission = Admission::create([
+        $admission = Admission::firstOrCreate([
             'admission_no'=>$data['number'],
             'head_of_department_id'=>1,
             'department_id'=>1
