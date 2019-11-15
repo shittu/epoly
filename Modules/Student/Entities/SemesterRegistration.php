@@ -143,11 +143,11 @@ class SemesterRegistration extends BaseModel
     {
         $courses = [];
         if($this->cancelation_status == 1){
-            foreach ($this->courseRegistrations as $course_registration) {
+            foreach ($this->courseRegistrations->where('ancelation_status',0) as $course_registration) {
 	            $courses[] = $course_registration->course;
 	        }
         }else{
-        	foreach ($this->courseRegistrations as $course_registration) {
+        	foreach ($this->courseRegistrations->where('ancelation_status',0) as $course_registration) {
 	            if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
 	                $courses[] = $course_registration->course;
 	            }
@@ -160,7 +160,7 @@ class SemesterRegistration extends BaseModel
     {
         $course = 0;
         if($this->cancelation_status == 0){
-            foreach ($this->courseRegistrations as $course_registration) {
+            foreach ($this->courseRegistrations->where('ancelation_status',0) as $course_registration) {
 	            if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->points > 2){
 	                $course++;
 	            }
