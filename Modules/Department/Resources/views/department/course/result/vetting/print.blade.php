@@ -98,18 +98,18 @@
         		{{number_format($registration->cummulativeGradePointsAverage(),2) ?? ' '}}
         	</td>
         	<td>
-        		@foreach($registration->courseRegistrations as $course_registration)
+        		@foreach($registration->courseRegistrations->where('cancelation_status',0) as $course_registration)
         		{{$course_registration->result->remark->name ?? ' '}}<br>
         		@endforeach
         	</td>
         	<td>
         		<!-- if all the courses of the session has been uploaded and failed all of them -->
-        		@if($registration->sessionRegistration->allCoursesUploaded() && $registration->sessionRegistration->passedResults() == 0)
-                     With draw
+        		@if($registration->allCoursesUploaded() && $registration->passedResults() == 0 && !empty($registration->failedResults()))
+                     WITH DRAW
         		@else
         		<!-- check if the student passed all his courses of the session -->
-            		@if($registration->sessionRegistration->allCoursesUploaded() && empty($registration->failedResults()))
-                        Passed <br>
+            		@if($registration->sessionRegistration->allCoursesUploaded() && empty($registration->failedResults()) && !empty($registration->passedResults()))
+                        PASSED <br>
             		@else
             		<!-- check if the student has any course to repeat -->
                         @if($registration->failedResults())
@@ -122,11 +122,11 @@
             	@endif
             	<!-- check if the student has sessional EMC verdict -->
             	@foreach($registration->sessionRegistration->sessionRegistrationRemarks as $emc_remark)
-                    {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
+                    {{'EMC'}} {{$emc_remark->remark->name}} <br>
             	@endforeach
             	<!-- check if the student has Semester EMC verdict -->
             	@foreach($registration->semesterRegistrationRemarks as $emc_remark)
-                    {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
+                    {{'EMC'}} {{$emc_remark->remark->name}} <br>
             	@endforeach
         	</td>
         </tr>

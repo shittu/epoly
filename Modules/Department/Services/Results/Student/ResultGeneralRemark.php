@@ -54,7 +54,7 @@ trait ResultGeneralRemark
 	public function toReRegisterCourses()
 	{
 		$courses = 'RGT';
-		foreach($this->courseRegistrations as $courseRegistration){
+		foreach($this->courseRegistrations->where('cancelation_status',1) as $courseRegistration){
             $courses = $courses.' '.$courseRegistration->course->code;
 		}
 		return $courses;
@@ -64,12 +64,12 @@ trait ResultGeneralRemark
     {
     	$conditions = [];
 
-    	foreach($this->sessionRegistration->sessionRegistrationRemarks as $emc_remark){
-            $conditions[] = 'EMC VERDICT '.$emc_remark->remark->name;
+    	foreach($this->semesterRegistrationRemarks as $emc_remark){
+            $conditions[] = 'EMC '.$emc_remark->remark->name;
         }
 
         foreach($this->semesterRegistrationRemarks as $emc_remark){
-            $conditions[] = 'EMC VERDICT '.$emc_remark->remark->name;
+            $conditions[] = 'EMC '.$emc_remark->remark->name;
     	}
     	return $conditions;
     }

@@ -138,8 +138,17 @@ class SemesterRegistration extends BaseModel
     	}
     	return $this->cummulativeGradePoints() / $units;
     }
-
-   public function failedResults()
+    public function allCoursesUploaded()
+    {
+        $upload = true;
+        foreach ($this->courseRegistrations as $course_registration) {
+            if(!$course_registration->result->lecturerCourseResultUpload){
+                $upload = false;
+            }
+        }
+        return $upload;
+    }
+    public function failedResults()
     {
         $courses = [];
         if($this->cancelation_status == 0){
