@@ -31,14 +31,6 @@ class CreateSessionRegistrationRemarksTable extends Migration
             ->on('remarks')
             ->delete('restrict')
             ->update('cascade');
-            $table->integer('semester_id')
-            ->unsigned()
-            ->nullable()
-            ->foreign()
-            ->references('id')
-            ->on('semesters')
-            ->delete('restrict')
-            ->update('cascade');
             $table->timestamps();
         });
     }

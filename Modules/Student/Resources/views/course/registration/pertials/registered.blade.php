@@ -18,8 +18,12 @@
 							@foreach($registration->semesterRegistrations as $semester_registration)
 								@foreach($semester_registration->courseRegistrations as $course_registration)
 								<tr>
-									<td>{{$loop->index+1}}</td>
-									<td>{{$course_registration->course->title}}</td>
+									<td>
+										{{$loop->index+1}}
+									</td>
+									<td>
+										{{$course_registration->course->title}}
+									</td>
 									<td>
 										{{$course_registration->course->code}}
 									</td>
@@ -33,7 +37,7 @@
 										{{$course_registration->course->currentCourseMaster() ??  'Not available'}}
 									</td>
 									<td>
-										<input type="checkbox" value="{{$course_registration->id}}" checked="1" class="form-control" name="remove[]">
+										<input type="checkbox" value="{{$course_registration->course->id}}" checked="1" class="form-control" name="remove[]">
 									</td>
 								</tr>
 								@endforeach

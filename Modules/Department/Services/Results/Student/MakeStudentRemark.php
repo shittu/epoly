@@ -29,14 +29,18 @@ class MakeStudentRemark
 	        ]);
 	    }
 	}
+
     public function cancelCourseRegistration($registration)
     {
     	$registration->cancelation_status = 1;
     	$registration->save();
-    	$registration->repeatCourseRegistration()->firstOrCreate([
-    		'student_id'=>$registration->semesterRegistration->sessionRegistration->student->id
+    	$registration->course->reRegisterCourses()->firstOrCreate([
+    		'student_id'=>$registration->semesterRegistration->sessionRegistration->student->id,
+    		'status'=>1,
+    		'session_id'=>currentSession()->id
     	]);
     }
+
 	public function willDraw()
 	{
 		$this->registration->student->update(['is_active'=>0]);

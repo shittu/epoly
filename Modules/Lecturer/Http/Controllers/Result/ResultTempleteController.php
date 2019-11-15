@@ -43,19 +43,16 @@ class ResultTempleteController extends LecturerBaseController
             'CA SCORE',
             'EXAM SCORE'
         ];
-        foreach ($course->courseRegistrations as $course_registration) {
+        foreach ($course->courseRegistrations->where('session_id',$request->session) as $course_registration) {
             $counter = 0;
-            //lets compare student department and lecturer allocated department
-            if($course_registration->course->department->id == $course->department->id){
-                $datas[] = [
-                    'serial_no' => $counter++,
-                    'name'=>$course_registration->semesterRegistration->sessionRegistration->student->first_name.' '.$course_registration->semesterRegistration->sessionRegistration->student->last_name,
-                    'admission_no' => $course_registration->semesterRegistration->sessionRegistration->student->admission->admission_no,
-                    'registration_id' => $course_registration->id,
-                    'contenue_accessment'=> rand(1,40),
-                    'examination'=> rand(1,60),
-                ];
-            }
+            $datas[] = [
+                'serial_no' => $counter++,
+                'name'=>$course_registration->semesterRegistration->sessionRegistration->student->first_name.' '.$course_registration->semesterRegistration->sessionRegistration->student->last_name,
+                'admission_no' => $course_registration->semesterRegistration->sessionRegistration->student->admission->admission_no,
+                'registration_id' => $course_registration->id,
+                'contenue_accessment'=> rand(1,40),
+                'examination'=> rand(1,60),
+            ];
         }
         return Excel::download(new ResultTemplete($datas), $course->code.'_Result_Sheet_Templete.xlsx','Xlsx',$headers);
     }
