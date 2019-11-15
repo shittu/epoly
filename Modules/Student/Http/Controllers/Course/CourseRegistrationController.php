@@ -85,6 +85,15 @@ class CourseRegistrationController extends StudentBaseController
         session()->flash('message', 'Congratulation all courses has been registered success fully');
         return redirect()->route('student.course.registration.courses.register.show');
     }
+    public function getThisCourseFromStudentDropCourses($course_id)
+    {
+        $dropCourse = null;
+        foreach(student()->dropCourses->where('course_id',$course_id) as $dropCourse){
+            $dropCourse = $dropCourse;
+        }
+        return $dropCourse;
+    }
+    
     public function getThisCourseFromStudentReRegisterCourses($course_id)
     {
         $reRegisterCourse = null;

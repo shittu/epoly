@@ -36,17 +36,19 @@ class  SessionRegistration extends BaseModel
     {
         $units = 0;
         $points = 0;
-        foreach ($this->semesterRegistrations->where('cancelation_status',0) as $semester_registration) {
-            foreach ($semester_registration->courseRegistrations->where('cancelation_status',0) as $course_registration) {
-                if($course_registration->result->lecturerCourseResultUpload){
-                    if(student() && $course_registration->result->lecturerCourseResultUpload->verification_status == 1){
-                        $course_unit = $course_registration->course->unit;
-                        $units = $course_unit + $units;
-                        $points = ($course_registration->result->points * $course_unit) + $points;
-                    }else{
-                        $course_unit = $course_registration->course->unit;
-                        $units = $course_unit + $units;
-                        $points = ($course_registration->result->points * $course_unit) + $points;
+        if($this->cancelation_status == 0){
+            foreach ($this->semesterRegistrations->where('cancelation_status',0) as $semester_registration) {
+                foreach ($semester_registration->courseRegistrations->where('cancelation_status',0) as $course_registration) {
+                    if($course_registration->result->lecturerCourseResultUpload){
+                        if(student() && $course_registration->result->lecturerCourseResultUpload->verification_status == 1){
+                            $course_unit = $course_registration->course->unit;
+                            $units = $course_unit + $units;
+                            $points = ($course_registration->result->points * $course_unit) + $points;
+                        }else{
+                            $course_unit = $course_registration->course->unit;
+                            $units = $course_unit + $units;
+                            $points = ($course_registration->result->points * $course_unit) + $points;
+                        }
                     }
                 }
             }
@@ -60,22 +62,15 @@ class  SessionRegistration extends BaseModel
     public function failedResults()
     {
         $courses = [];
-        if($this->cancelation_status == 1){
-            foreach ($this->semesterRegistrations as $semester_registration) {
-                foreach ($semester_registration->courseRegistrations as $course_registration) {
-                    $courses[] = $course_registration->course;
-                }
-            }
-        }else{
-            foreach ($this->semesterRegistrations as $semester_registration) {
-                foreach ($semester_registration->courseRegistrations as $course_registration) {
+        if($this->cancelation_status == 0){
+            foreach ($this->semesterRegistrations->where('cancelation_status',0) as $semester_registration) {
+                foreach ($semester_registration->courseRegistrations->where('cancelation_status',0) as $course_registration) {
                     if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
                         $courses[] = $course_registration->course;
                     }
                 }
             }
         }
-        
         return $courses;
     }
 
@@ -83,8 +78,8 @@ class  SessionRegistration extends BaseModel
     {
         $course = 0;
         if($this->cancelation_status == 0){
-            foreach ($this->semesterRegistrations as $semester_registration) {
-                foreach ($semester_registration->courseRegistrations as $course_registration) {
+            foreach ($this->semesterRegistrations->where('cancelation_status',0) as $semester_registration) {
+                foreach ($semester_registration->courseRegistrations->where('cancelation_status',0) as $course_registration) {
                     if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->points > 2){
                         $course++;
                     }
@@ -98,8 +93,8 @@ class  SessionRegistration extends BaseModel
     public function allCoursesUploaded()
     {
         $upload = true;
-        foreach ($this->semesterRegistrations as $semester_registration) {
-            foreach ($semester_registration->courseRegistrations as $course_registration) {
+        foreach ($this->semesterRegistrations->where('cancelation_status',0) as $semester_registration) {
+            foreach ($semester_registration->courseRegistrations->where('cancelation_status',0) as $course_registration) {
                 if(!$course_registration->result->lecturerCourseResultUpload){
                     $upload = false;
                 }
@@ -120,7 +115,7 @@ class  SessionRegistration extends BaseModel
     public function registeredUnits()
     {
         $units = 0;
-        foreach ($this->semesterRegistrations as $semesterRegistration) {
+        foreach ($this->semesterRegistrations->where('cancelation_status',0) as $semesterRegistration) {
             $units = $units + $semesterRegistration->registeredUnits();
         }
         return $units;
@@ -129,8 +124,8 @@ class  SessionRegistration extends BaseModel
     public function hasApprovedResult()
     {
         $flag = false;
-        foreach ($this->semesterRegistrations as $semester_registration) {
-            foreach ($semester_registration->courseRegistrations as $course_registration) {
+        foreach ($this->semesterRegistrations->where('cancelation_status',0) as $semester_registration) {
+            foreach ($semester_registration->courseRegistrations->where('cancelation_status',0) as $course_registration) {
                 if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->lecturerCourseResultUpload->verification_status == 1){
                     $flag = true;
                 }

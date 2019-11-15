@@ -20,7 +20,7 @@ class AddAndDropCourseController extends Controller
     {
         
         //register all the add courses
-        foreach ($request->add as $course_id) {
+        foreach ($request->add ?? [] as $course_id) {
             $course = Course::find($course_id);
             $semester_registration = $this->getStudentCurrentSessionRegistration()
             ->semesterRegistrations()
