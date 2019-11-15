@@ -5,21 +5,21 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Modules\Student\Entities\Student;
 
-class MakeStudentLastSessionCourseRegistrationCommand extends Command
+class MakeStudentCurrentSessionCourseRegistrationCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'sospoly:make-student-last-session-courses-registration';
+    protected $signature = 'sospoly:make-student-current-session-course-registration';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command will make 2000 students courses registration 10 foreach';
+    protected $description = 'Command description';
 
     /**
      * Create a new command instance.
@@ -38,9 +38,9 @@ class MakeStudentLastSessionCourseRegistrationCommand extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(38000);
+        $bar = $this->output->createProgressBar(2000);
 
-        $bar->setBarWidth(3800);
+        $bar->setBarWidth(100);
 
         $bar->start();
         foreach(Student::cursor() as $student){
@@ -48,7 +48,7 @@ class MakeStudentLastSessionCourseRegistrationCommand extends Command
             $session_registration = $student->sessionRegistrations()->firstOrCreate([
             'level_id'=>$level->id,
             'department_id'=>$student->admission->department_id,
-            'session_id'=> lastSession()->id
+            'session_id'=> currentSession()->id
             ]);
             
             foreach($student->currentLevelCourses() as $course){
@@ -57,13 +57,26 @@ class MakeStudentLastSessionCourseRegistrationCommand extends Command
 
                 $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
                     'course_id'=>$course->id,
-                    'session_id'=> lastSession()->id
+                    'session_id'=> currentSession()->id
                 ]);
 
                 $course_registration->result()->firstOrCreate([]);
-                $bar->advance();
+                
             }
-            
+            // register all the repeated courses
+            foreach ($student->repeatCourses as $repeatCourse) {
+                $semester_registration = $session_registration->semesterRegistrations()->firstOrCreate(['semester_id'=>$repeatCourse->course->semester->id]);
+
+                $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
+                    'course_id'=>$repeatCourse->course->id,
+                    'session_id'=> currentSession()->id
+                ]);
+
+                $course_registration->result()->firstOrCreate([]);
+
+                $repeatCourse->update(['status'=>0]);
+            }
+            $bar->advance();
         }
         $bar->finish();
     }
