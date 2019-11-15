@@ -36,8 +36,8 @@ class  SessionRegistration extends BaseModel
     {
         $units = 0;
         $points = 0;
-        foreach ($this->semesterRegistrations as $semester_registration) {
-            foreach ($semester_registration->courseRegistrations as $course_registration) {
+        foreach ($this->semesterRegistrations->where('cancelation_status',0) as $semester_registration) {
+            foreach ($semester_registration->courseRegistrations->where('cancelation_status',0) as $course_registration) {
                 if($course_registration->result->lecturerCourseResultUpload){
                     if(student() && $course_registration->result->lecturerCourseResultUpload->verification_status == 1){
                         $course_unit = $course_registration->course->unit;

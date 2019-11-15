@@ -23,8 +23,8 @@
 					</tr>
 				</head>
 				<tbody>
-					@foreach($session_registration->semesterRegistrations as $semester_registration)
-						@foreach($semester_registration->courseRegistrations as $course_registration)    				
+					@foreach($session_registration->semesterRegistrations->where('cancelation_status',0) as $semester_registration)
+						@foreach($semester_registration->courseRegistrations->where('cancelation_status',0) as $course_registration)    				
 							@if($course_registration->result->approved())
 							<tr>
 								<td>{{$loop->index+1}}</td>
@@ -58,7 +58,7 @@
                     	<td></td>
                     	<td></td>
                     	<td><b>G P</b></td>
-                    	<td><b>{{number_format($session_registration->sessionGrandPoints(2),2)}}</b></td>
+                    	<td><b>{{number_format($session_registration->sessionGrandPoints(),2)}}</b></td>
                     </tr>
 				</tbody>
 			</table>	
