@@ -50,26 +50,29 @@
                             	<td>
                             		<!-- if all the courses of the session has been uploaded and failed all of them -->
 					        		@if($registration->allCoursesUploaded() && $registration->passedResults() == 0)
-					                     With draw
+					                     WITH DRAW
 					        		@else
 					        		<!-- check if the student passed all his courses of the session -->
+
 					            		@if($registration->allCoursesUploaded() && empty($registration->failedResults()))
-					                        Passed <br>
+					                        PASSED <br>
 					            		@else
 					            		<!-- check if the student has any course to repeat -->
-					                        @foreach($registration->failedResults() as $course)
-					                            Repeat {{$course->code}}<br>
+					                        @foreach($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semesterRegistration)
+                                                @foreach($semesterRegistration->failedResults() as $course)
+    					                            RPT {{$course->code}}<br>
+                                                @endforeach
 					                        @endforeach
 					            		@endif
 					            	@endif
 					            	<!-- check if the student has sessional EMC verdict -->
 					            	@foreach($registration->sessionRegistrationRemarks as $emc_remark)
-					                    {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
+					                    {{'EMC'}} {{$emc_remark->remark->name}} <br>
 					            	@endforeach
 					            	<!-- check if the student has Semester EMC verdict -->
 					            	@foreach($registration->semesterRegistrations as $semesterRegistration)
 					            	    @foreach($semesterRegistration->semesterRegistrationRemarks as $emc_remark)
-					                        {{'EMC Verdict'}} {{$emc_remark->remark->name}} <br>
+					                        {{'EMC'}} {{$emc_remark->remark->name}} <br>
 					            	    @endforeach
 					            	@endforeach
                             	</td>

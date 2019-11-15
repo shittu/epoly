@@ -142,12 +142,8 @@ class SemesterRegistration extends BaseModel
    public function failedResults()
     {
         $courses = [];
-        if($this->cancelation_status == 1){
-            foreach ($this->courseRegistrations->where('ancelation_status',0) as $course_registration) {
-	            $courses[] = $course_registration->course;
-	        }
-        }else{
-        	foreach ($this->courseRegistrations->where('ancelation_status',0) as $course_registration) {
+        if($this->cancelation_status == 0){
+	    	foreach ($this->courseRegistrations->where('cancelation_status',0) as $course_registration) {
 	            if($course_registration->result->lecturerCourseResultUpload && $course_registration->result->grade == 'F'){
 	                $courses[] = $course_registration->course;
 	            }
