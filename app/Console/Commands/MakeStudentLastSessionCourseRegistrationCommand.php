@@ -7,14 +7,14 @@ use Modules\Admin\Entities\Session;
 use Modules\Student\Entities\Student;
 use Modules\Department\Entities\Level;
 
-class TestStudentCourseRegistrationCommand extends Command
+class MakeStudentLastSessionCourseRegistrationCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'sospoly:student-courses-registration';
+    protected $signature = 'sospoly:make-student-last-session-courses-registration';
 
     /**
      * The console command description.
@@ -50,7 +50,7 @@ class TestStudentCourseRegistrationCommand extends Command
             $session_registration = $student->sessionRegistrations()->firstOrCreate([
             'level_id'=>$level->id,
             'department_id'=>$student->admission->department_id,
-            'session_id'=> currentSession()->id -1
+            'session_id'=> lastSession()->id
             ]);
             
             foreach($student->currentLevelCourses() as $course){
@@ -59,7 +59,7 @@ class TestStudentCourseRegistrationCommand extends Command
 
                 $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
                     'course_id'=>$course->id,
-                    'session_id'=> currentSession()->id-1
+                    'session_id'=> lastSession()->id
                 ]);
 
                 $course_registration->result()->firstOrCreate([]);

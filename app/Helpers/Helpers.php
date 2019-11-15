@@ -122,6 +122,13 @@ if (!function_exists('currentSession')) {
     }
 }
 
+if (!function_exists('lastSession')) {
+    function lastSession()
+    {    
+        return Session::find(currentSession()->id-1);
+    }
+}
+
 
 
         
