@@ -7,6 +7,7 @@ use Modules\Department\Entities\Level;
 trait HasRepeatCourses
 
 {
+    use HasReRegisterCourses,HasDropCourses;
 
     public function currentSessionCarryOverCourseUnits()
     {
@@ -14,7 +15,7 @@ trait HasRepeatCourses
         foreach ($this->repeatCourses as $repeatCourse) {
             $units = $units + $repeatCourse->course->unit;
         }
-        return $units;
+        return $units + $this->dropCourseUnits() + $this->reRegisterCourseUnits();
     }
     
 }
