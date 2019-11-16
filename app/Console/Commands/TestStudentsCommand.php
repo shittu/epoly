@@ -112,6 +112,7 @@ class TestStudentsCommand extends Command
         $student = $admission->student()->firstOrCreate([
             'first_name'=> 'first name',
             'last_name'=> 'last name',
+            'user_name'=>$data['number'],
             'email'=> $data['number'].'@sospoly.com',
             'phone'=>'08243434343',
             'student_session_id'=> $data['session'],

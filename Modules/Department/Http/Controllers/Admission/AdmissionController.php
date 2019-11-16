@@ -47,6 +47,7 @@ class AdmissionController extends HodBaseController
             'first_name'=>'',
             'last_name'=>'',
             'phone'=>'',
+            'user_name'=>$admission->admission_no,
             'email'=>$admission->admission_no.'@sospoly.com',
             'password'=>Hash::make($admission->admission_no),
             'student_type_id' => $request->type,

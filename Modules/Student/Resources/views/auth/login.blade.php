@@ -15,13 +15,13 @@
                 <form class="login-form" method="post" action="{{route('student.auth.login')}}">
                     @csrf
                     <div class="form-group">
-                        <input type="text" class="login-input" placeholder="E-mail" name="email">
+                        <input type="text" class="login-input" placeholder="Username" name="user_name">
                         <span class="input-icon">
                             <i class="fa fa-user"></i>
                         </span>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="login-input" placeholder="Pasword" name="password">
+                        <input type="password" class="login-input" placeholder="Password" name="password">
                         <span class="input-icon">
                             <i class="fa fa-lock"></i>
                         </span>

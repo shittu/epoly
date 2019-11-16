@@ -17,6 +17,7 @@ class Student extends Authenticatable
         'last_name',
         'phone',
         'email',
+        'user_name',
         'password',
         'student_type_id',
         'student_session_id'
