@@ -52,10 +52,13 @@ class SemesterRegistration extends BaseModel
     public function previousUnits()
     {
     	$units = 0;
-    	foreach ($this->sessionRegistration->semesterRegistrations->where('cancelation_status',0) as $semesterRegistration) {
-    		if($this->id > $semesterRegistration->id){
-    			$units = $units + $this->getThisSemesterUnits($semesterRegistration);
-    		}
+    	$student = $this->sessionRegistration->student;
+    	foreach ($student->sessionRegistrations->where('cancelation_status',0) as $sessionRegistration){
+    		foreach($sessionRegistration->semesterRegistrations->where('cancelation_status',0) as $semesterRegistration) {
+	    		if($this->id > $semesterRegistration->id){
+	    			$units = $units + $this->getThisSemesterUnits($semesterRegistration);
+	    		}
+	    	}
     	}
     	return $units;
     }
@@ -63,13 +66,16 @@ class SemesterRegistration extends BaseModel
     public function previousRegisteredUnits()
     {
     	$units = 0;
-    	foreach ($this->sessionRegistration->semesterRegistrations->where('cancelation_status',0) as $semesterRegistration) {
-    		if($this->id > $semesterRegistration->id){
-    			foreach ($semesterRegistration->courseRegistrations->where('cancelation_status',0) as $courseRegistration) {
-		            $units = $courseRegistration->course->unit + $units;
-		        }
-    		}
-    	}
+    	$student = $this->sessionRegistration->student;
+    	foreach ($student->sessionRegistrations->where('cancelation_status',0) as $sessionRegistration) {
+	    	foreach ($sessionRegistration->semesterRegistrations->where('cancelation_status',0) as $semesterRegistration) {
+	    		if($this->id > $semesterRegistration->id){
+	    			foreach ($semesterRegistration->courseRegistrations->where('cancelation_status',0) as $courseRegistration) {
+			            $units = $courseRegistration->course->unit + $units;
+			        }
+	    		}
+	    	}
+	    }
     	return $units;
     }
     
@@ -108,11 +114,14 @@ class SemesterRegistration extends BaseModel
     public function gradePointAsAtLastSemester()
     {
     	$points = 0;
-    	foreach ($this->sessionRegistration->semesterRegistrations->where('cancelation_status',0) as $semesterRegistration) {
-    		if($this->id > $semesterRegistration->id){
-    			$points = $points + $semesterRegistration->currentSemesterGradePoints();
-    		}
-    	}
+    	$student = $this->sessionRegistration->student;
+    	foreach ($student->sessionRegistrations->where('cancelation_status',0) as $sessionRegistration) {
+	    	foreach ($sessionRegistration->semesterRegistrations->where('cancelation_status',0) as $semesterRegistration) {
+	    		if($this->id > $semesterRegistration->id){
+	    			$points = $points + $semesterRegistration->currentSemesterGradePoints();
+	    		}
+	    	}
+	    }
     	return $points;
     }
 

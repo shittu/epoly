@@ -12,7 +12,7 @@ class MakeStudentCurrentSessionCourseRegistrationCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'sospoly:make-student-current-session-course-registration';
+    protected $signature = 'sospoly:make-student-current-session-courses-registration';
 
     /**
      * The console command description.
