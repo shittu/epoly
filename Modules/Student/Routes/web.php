@@ -21,6 +21,14 @@ Route::prefix('student')
 	Route::post('/login', 'Auth\StudentLoginController@login')->name('login');
 	Route::post('logout', 'Auth\StudentLoginController@logout')->name('auth.logout');
 
+   //diferring routes
+    Route::prefix('diferring')
+	->name('diferring.')
+	->namespace('Student')
+	->group(function() {
+	    Route::get('/', 'DiferringController@index')->name('index');
+        
+	});
 	Route::prefix('courses')
 	->name('course.')
 	->namespace('Course')

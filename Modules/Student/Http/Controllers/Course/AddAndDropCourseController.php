@@ -4,12 +4,12 @@ namespace Modules\Student\Http\Controllers\Course;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\Session;
 use Modules\Department\Entities\Course;
 use Modules\Student\Entities\SessionRegistration;
+use Modules\Core\Http\Controllers\Student\StudentBaseController;
 
-class AddAndDropCourseController extends Controller
+class AddAndDropCourseController extends StudentBaseController
 {
     /**
      * Store a newly created resource in storage.

@@ -11,3 +11,11 @@
         <a href="{{route('student.course.registration.courses')}}">Course Registraion</a>
     @endif
 </li>
+<li>
+    <a href="#">Request</a>
+    <!-- sub menu -->
+    <ul>
+        <li><a href="{{route('student.diferring.index')}}">Diferring</a></li>
+    </ul>
+    <!-- / sub menu -->
+</li>
