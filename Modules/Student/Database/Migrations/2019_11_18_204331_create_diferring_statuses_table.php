@@ -15,7 +15,7 @@ class CreateDiferringStatusesTable extends Migration
     {
         Schema::create('diferring_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->string('name');
             $table->timestamps();
         });
     }

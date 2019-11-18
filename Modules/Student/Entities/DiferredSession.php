@@ -2,9 +2,9 @@
 
 namespace Modules\Student\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class DiferredSession extends Model
+class DiferredSession extends BaseModel
 {
     public function session()
     {
@@ -14,5 +14,10 @@ class DiferredSession extends Model
     public function student()
     {
     	return $this->belongsTo(Student::class);
+    }
+
+    public function diferringStatus()
+    {
+    	reteurn $this->belongsTo(DiferringStatus::class);
     }
 }
