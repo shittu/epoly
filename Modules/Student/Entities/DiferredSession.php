@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class DiferredSession extends Model
 {
-    protected $fillable = [];
+    public function session()
+    {
+    	return $this->belongsTo('Modules\Admin\Entities\Session');
+    }
+
+    public function student()
+    {
+    	return $this->belongsTo(Student::class);
+    }
 }

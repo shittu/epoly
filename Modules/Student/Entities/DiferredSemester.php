@@ -2,9 +2,22 @@
 
 namespace Modules\Student\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class DiferredSemester extends Model
+class DiferredSemester extends BaseModel
 {
-    protected $fillable = [];
+    public function session()
+    {
+    	return $this->belongsTo('Modules\Admin\Entities\Session');
+    }
+
+    public function semester()
+    {
+    	return $this->belongsTo('Modules\Department\Entities\Semester');
+    }
+
+    public function student()
+    {
+    	return $this->belongsTo(Student::class);
+    }
 }

@@ -71,6 +71,16 @@ class Student extends Authenticatable
     {
         return $this->hasMany(DropCourse::class);
     }
+    
+    public function diferredSessions()
+    {
+        return $this->hasMany(DiferredSession::class);
+    }
+
+    public function diferredSemesters()
+    {
+        return $this->hasMany(DiferredSemester::class);
+    }
 
     public function currentRegisteredCourses()
     {
