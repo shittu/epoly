@@ -15,7 +15,38 @@ class CreateDiferredSemestersTable extends Migration
     {
         Schema::create('diferred_semesters', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->integer('session_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('sessions')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('student_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('students')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('semester_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('semesters')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('diferring_statuse_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('diferring_statuses')
+            ->delete('restrict')
+            ->update('cascade');
             $table->timestamps();
         });
     }

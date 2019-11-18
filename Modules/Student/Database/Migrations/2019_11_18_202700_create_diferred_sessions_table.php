@@ -15,7 +15,30 @@ class CreateDiferredSessionsTable extends Migration
     {
         Schema::create('diferred_sessions', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->integer('session_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('sessions')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('student_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('students')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('diferring_statuse_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('diferring_statuses')
+            ->delete('restrict')
+            ->update('cascade');
             $table->timestamps();
         });
     }
