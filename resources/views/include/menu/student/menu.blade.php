@@ -12,7 +12,7 @@
     @endif
 </li>
 <li>
-    <a href="#">Request</a>
+    <a href="#">Applications</a>
     <!-- sub menu -->
     <ul>
         <li><a href="{{route('student.diferring.index')}}">Diferring</a></li>

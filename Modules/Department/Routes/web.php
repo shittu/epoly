@@ -26,6 +26,14 @@ Route::prefix('department')
             Route::post('/register','DepartmentLecturerAppointmentController@register')->name('register');
 		});
 	});
+	Route::prefix('diferring')
+		->name('diferring.')
+		->namespace('Admission')
+		->group(function() {
+        Route::get('/','DiferringController@index')->name('index');
+        Route::get('/{type}/{diferred_id}/verify','DiferringController@verify')->name('verify');
+        Route::get('/{type}/{diferred_id}/delete','DiferringController@delete')->name('delete');
+	});	
 	//exam officer routes
 	Route::prefix('exam-officer')
 	->name('exam.officer.')

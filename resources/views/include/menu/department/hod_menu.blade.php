@@ -71,5 +71,13 @@
         </li>
     </ul>
 </li>
+<li>
+    <a href="#">Applications</a>
+    <!-- sub menu -->
+    <ul>
+        <li><a href="{{route('department.diferring.index')}}">Diferring</a></li>
+    </ul>
+    <!-- / sub menu -->
+</li>
 
 
