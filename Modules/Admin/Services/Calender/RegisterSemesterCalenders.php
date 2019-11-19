@@ -27,16 +27,43 @@ class RegisterSemesterCalenders
 
 	public function registerCurrentSession()
 	{
-        Session::firstOrCreate([
-            'name'=>'2017/2018',
-            'start'=>$this->data['session_start'],
-            'end'=>$this->data['session_end'],
-        ]);
-		return Session::firstOrCreate([
-			'name'=>$this->data['session'],
-			'start'=>$this->data['session_start'],
-			'end'=>$this->data['session_end'],
-		]);
+        $sessions = [
+            [
+                'name'=>'2013/2014',
+                'start'=>$this->data['session_start'],
+                'end'=>$this->data['session_end'],
+            ],
+            [
+                'name'=>'2014/2015',
+                'start'=>$this->data['session_start'],
+                'end'=>$this->data['session_end'],
+            ],
+            [
+                'name'=>'2015/2016',
+                'start'=>$this->data['session_start'],
+                'end'=>$this->data['session_end'],
+            ],
+            [
+                'name'=>'2016/2017',
+                'start'=>$this->data['session_start'],
+                'end'=>$this->data['session_end'],
+            ],
+            [
+                'name'=>'2017/2018',
+                'start'=>$this->data['session_start'],
+                'end'=>$this->data['session_end'],
+            ],
+            [
+                'name'=>'2018/2019',
+                'start'=>$this->data['session_start'],
+                'end'=>$this->data['session_end'],
+            ]
+        ];
+        foreach ($sessions as $session) {
+            Session::firstOrCreate($session);
+        }
+        
+		return Session::find(1);
 	}
 
     public function registerSemestersCalender()

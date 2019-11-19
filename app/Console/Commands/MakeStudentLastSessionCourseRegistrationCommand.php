@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Modules\Admin\Entities\Session;
 use Modules\Student\Entities\Student;
 
 class MakeStudentLastSessionCourseRegistrationCommand extends Command
@@ -48,7 +49,7 @@ class MakeStudentLastSessionCourseRegistrationCommand extends Command
             $session_registration = $student->sessionRegistrations()->firstOrCreate([
             'level_id'=>$level->id,
             'department_id'=>$student->admission->department_id,
-            'session_id'=> lastSession()->id
+            'session_id'=> Session::find(1)->id
             ]);
             
             foreach($student->currentLevelCourses() as $course){
@@ -57,7 +58,7 @@ class MakeStudentLastSessionCourseRegistrationCommand extends Command
 
                 $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
                     'course_id'=>$course->id,
-                    'session_id'=> lastSession()->id
+                    'session_id'=> Session::find(1)->id
                 ]);
 
                 $course_registration->result()->firstOrCreate([]);

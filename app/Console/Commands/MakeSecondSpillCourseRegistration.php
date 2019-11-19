@@ -3,16 +3,17 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Modules\Admin\Entities\Session;
 use Modules\Student\Entities\Student;
 
-class MakeStudentCurrentSessionCourseRegistrationCommand extends Command
+class MakeSecondSpillCourseRegistration extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'sospoly:make-student-current-session-courses-registration';
+    protected $signature = 'sospoly:make-second-spill.course-registration';
 
     /**
      * The console command description.
@@ -48,28 +49,16 @@ class MakeStudentCurrentSessionCourseRegistrationCommand extends Command
             $session_registration = $student->sessionRegistrations()->firstOrCreate([
             'level_id'=>$level->id,
             'department_id'=>$student->admission->department_id,
-            'session_id'=> Session::find(2)->id
+            'session_id'=> Session::find(3)->id
             ]);
             
-            foreach($student->currentLevelCourses() as $course){
-                
-                $semester_registration = $session_registration->semesterRegistrations()->firstOrCreate(['semester_id'=>$course->semester->id]);
-
-                $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
-                    'course_id'=>$course->id,
-                    'session_id'=> Session::find(2)->id
-                ]);
-
-                $course_registration->result()->firstOrCreate([]);
-                
-            }
             // register all the repeated courses
             foreach ($student->repeatCourses as $repeatCourse) {
                 $semester_registration = $session_registration->semesterRegistrations()->firstOrCreate(['semester_id'=>$repeatCourse->course->semester->id]);
 
                 $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
                     'course_id'=>$repeatCourse->course->id,
-                    'session_id'=> Session::find(2)->id
+                    'session_id'=> Session::find(3)->id
                 ]);
 
                 $course_registration->result()->firstOrCreate([]);
