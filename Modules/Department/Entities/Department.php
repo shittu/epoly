@@ -64,6 +64,16 @@ class Department extends BaseModel
         return $this->hasMany(LecturerCourseAllocation::class);
     }
 
+    public function diferredSessions()
+    {
+        return $this->hasMany('Modules\Student\Entities\DiferredSession');
+    }
+
+    public function diferredSemesters()
+    {
+        return $this->hasMany('Modules\Student\Entities\DiferredSemester');
+    }
+
     public function unverifiedResults()
     {
         $results = [];

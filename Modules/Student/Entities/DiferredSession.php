@@ -18,6 +18,11 @@ class DiferredSession extends BaseModel
 
     public function diferringStatus()
     {
-    	reteurn $this->belongsTo(DiferringStatus::class);
+    	return $this->belongsTo(DiferringStatus::class);
+    }
+
+    public function department()
+    {
+    	return $this->belongsTo('Modules\Department\Entities\Department');
     }
 }

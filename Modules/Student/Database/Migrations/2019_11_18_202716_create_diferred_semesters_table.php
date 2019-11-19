@@ -39,12 +39,20 @@ class CreateDiferredSemestersTable extends Migration
             ->on('semesters')
             ->delete('restrict')
             ->update('cascade');
-            $table->integer('diferring_statuse_id')
+            $table->integer('diferring_status_id')
             ->unsigned()
             ->nullable()
             ->foreign()
             ->references('id')
             ->on('diferring_statuses')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->integer('department_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('departments')
             ->delete('restrict')
             ->update('cascade');
             $table->timestamps();

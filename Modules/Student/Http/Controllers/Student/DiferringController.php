@@ -4,6 +4,7 @@ namespace Modules\Student\Http\Controllers\Student;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Department\Entities\Semester;
 use Modules\Core\Http\Controllers\Student\StudentBaseController;
 
 class DiferringController extends StudentBaseController
@@ -14,16 +15,7 @@ class DiferringController extends StudentBaseController
      */
     public function index()
     {
-        return view('student::diferring.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('student::create');
+        return view('student::diferring.index',['semesters'=>$this->getValidSemesters(),'sessions'=>$this->getValidSessions()]);
     }
 
     /**
@@ -31,49 +23,66 @@ class DiferringController extends StudentBaseController
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function apply(Request $request)
     {
-        //
+        $request->validate(['session'=>'required']);
+        $requestOf = 'Semester';
+        if($request->semester){
+            student()->diferredSemesters()->firstOrCreate([
+                'session_id' =>$request->session,
+                'semester_id' =>$request->semester,
+                'diferring_status_id' =>1,
+                'department_id' =>student()->admission->department->id
+            ]);
+        }else{
+            $requestOf = 'Session';
+            student()->diferredSessions()->firstOrCreate([
+                'session_id' =>$request->session,
+                'diferring_status_id' =>1,
+                'department_id' =>student()->admission->department->id
+            ]);
+        }
+        session()->flash('message','Congratulation your '.$requestOf.' diferring application is successful at your end please check your dashboard for the approval from your head of department and the implementaion from your exam officer');
+        return back();
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
+    public function getValidSessions()
     {
-        return view('student::show');
+        $session = [];
+        if(!student()->diferredSessions->where('session_id',currentSession()->id)){
+            $session[] = currentSession();
+        }
+        return $session;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
+    public function getDiferredSemesters()
     {
-        return view('student::edit');
+        $semesters = [];
+        foreach(student()->diferredSemesters->where('session_id',currentSession()->id) as $diferredSemester){
+            $semesters[] = $diferredSemester->semester;
+        }
+        return $semesters;
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
+    public function getValidSemesters()
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        if(empty($this->getValidSessions())){
+            return [];
+        }
+        if(empty($this->getDiferredSemesters())){
+            return Semester::all();
+        }else{
+            $diferredSemesterId = [];
+            $validSemesters = [];
+            foreach ($this->getDiferredSemesters as $diferredSemester) {
+                $diferredSemesterId[] = $diferredSemester->id;
+            }
+            foreach (Semester::all() as $semester) {
+                if(!in_array($semester->id, $diferredSemesterId)){
+                    $validSemesters[] = $semester;
+                }
+            }
+            return $validSemesters;
+        }
     }
 }

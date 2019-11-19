@@ -10,21 +10,23 @@
 	    </div>
 	    <div class="card">
 	    	<div class="card-body">
-	    		<form class="login-form" action="{{route('department.admission.register')}}" method="post">
+	    		<form class="login-form" action="{{route('student.diferring.apply')}}" method="post">
 			        @csrf
 			        <div class="form-group">
 			        	<label class="text-success">Session</label>
 			            <select name="session" class="form-control">
-			            	<option value="{{currentSession()->id}}">{{currentSession()->name}}</option>
-			            	
+			            	@foreach($sessions as $session)
+			            	    <option value="{{$session->id}}">{{$session->name}}</option>
+			            	@endforeach
 			            </select>
 			        </div>
 			        <div class="form-group">
 			            <label class="text-success">If wishes to diferred a Semester</label>
 			            <select name="semester" class="form-control">
 			                <option value=""></option>
-			                <option value="1">First Semester</option>
-			                <option value="2">Second Semester</option>
+			                @foreach($semesters as $semester)
+			            	    <option value="{{$semester->id}}">{{$semester->name}}</option>
+			            	@endforeach
 			            </select>
 			        </div>
 			        <button class="button-fullwidth cws-button bt-color-3 btn-block">Apply</button>

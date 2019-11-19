@@ -27,6 +27,7 @@ Route::prefix('student')
 	->namespace('Student')
 	->group(function() {
 	    Route::get('/', 'DiferringController@index')->name('index');
+	    Route::post('/apply', 'DiferringController@apply')->name('apply');
         
 	});
 	Route::prefix('courses')
