@@ -103,10 +103,10 @@ class Student extends Authenticatable
         }
         return $flag;
     }
-
-    public function units()
+    public function graduated()
     {
-        
+        if(empty($this->currentLevelReRegisterCourses()) && $this->level()){
+            return true;
+        }
     }
-    
 }

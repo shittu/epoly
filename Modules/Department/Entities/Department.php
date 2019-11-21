@@ -3,11 +3,13 @@
 namespace Modules\Department\Entities;
 
 use Modules\Core\Entities\BaseModel;
+use Modules\Admin\Entities\Session;
+use Modules\Department\Services\Graduation\HasGraduatedStudent;
 use Modules\Admission\Services\Traits\AdmissionNumberGenerator;
 
 class Department extends BaseModel
 {
-    use AdmissionNumberGenerator;
+    use AdmissionNumberGenerator, HasGraduatedStudent;
 
     public function college()
     {
@@ -88,5 +90,8 @@ class Department extends BaseModel
         }
         return $results;
     }
-
+    public function sessions()
+    {
+        return Session::all();
+    }
 }

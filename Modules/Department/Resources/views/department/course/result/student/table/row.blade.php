@@ -1,6 +1,6 @@
     <tr>
     	<td>
-    		{{$registration->sessionRegistration->student->first_name}} {{$registration->sessionRegistration->student->last_name}}
+    		{{strtoupper($registration->sessionRegistration->student->first_name)}} {{strtoupper($registration->sessionRegistration->student->last_name)}}
     	</td>
 
     	<td>

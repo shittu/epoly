@@ -20,15 +20,21 @@ trait HasLevelAndSemester
 
         $prefix = $this->levelPrefix();
 
-        switch ($this->yearsSinceAdmission()-5) {
+        switch ($this->yearsSinceAdmission()-3) {
             case 0:
                 $level = $prefix.' 1';
                 break;
             case 1:
                 $level = $prefix.' 2';
                 break;
+            case 2:
+                $level = 'FIRST SPILL';
+                break;
+            case 3:
+                $level = 'SECOND SPILL';
+                break;
             default:
-                $level = 'SPILL OVER';
+                $level = 'SPILL';
                 break;
         }
         return $level;

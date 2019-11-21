@@ -1,6 +1,7 @@
-@if(student()->repeatCourses->where('status',1))
+
+@if(count(student()->repeatCourses->where('status',1))>0)
 <div class="card">
-	<div class="card-header text text-center">{{student()->level()->name}} {{currentSession()->name}} Carry Over Courses</div>
+	<div class="card-header text text-center">{{student()->level()->name ?? ''}} {{currentSession()->name == null ? 'Carry' : 'Spill'}} Over Courses</div>
 	<div class="card-body">
 		<table class="table">
 			<head>

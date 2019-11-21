@@ -10,7 +10,7 @@ trait HasCurrentLevelCourses
 
     public function currentLevelCourses()
     {
-        return $this->level()->courses;
+        return $this->level()->courses ?? [];
     }
 
     public function currentLevelCourseUnits()

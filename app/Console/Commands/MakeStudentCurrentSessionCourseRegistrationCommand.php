@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Modules\Admin\Entities\Session;
 use Modules\Student\Entities\Student;
 
 class MakeStudentCurrentSessionCourseRegistrationCommand extends Command

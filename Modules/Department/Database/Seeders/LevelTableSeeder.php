@@ -20,7 +20,7 @@ class LevelTableSeeder extends Seeder
         $levels = [
             ['name'=>'ND 1','student_type_id'=>1],
             ['name'=>'ND 2','student_type_id'=>1],
-            ['name'=>'PRE HND','student_type_id'=>2],
+            ['name'=>'CONVERSION','student_type_id'=>2],
             ['name'=>'HND 1','student_type_id'=>2],
             ['name'=>'HND 2','student_type_id'=>2],
         ];
