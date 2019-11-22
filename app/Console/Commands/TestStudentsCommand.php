@@ -107,7 +107,8 @@ class TestStudentsCommand extends Command
         $admission = Admission::firstOrCreate([
             'admission_no'=>$data['number'],
             'head_of_department_id'=>1,
-            'department_id'=>1
+            'department_id'=>1,
+            'session_id'=>1
         ]);
         $student = $admission->student()->firstOrCreate([
             'first_name'=> 'first name',

@@ -10,7 +10,17 @@
         </li>
     </ul>
 </li>
-
+<li>
+    <a href="#">Graduation</a>
+    <ul>
+        <li>
+            <a href="{{route('exam.officer.graduation.index')}}">Grduated Student</a>
+        </li>
+        <li>
+            <a href="#">Spill Student</a>
+        </li>
+    </ul>
+</li>
 <li>
     <a href="#">Courses</a>
     <ul>

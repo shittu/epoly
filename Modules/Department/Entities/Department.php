@@ -94,4 +94,14 @@ class Department extends BaseModel
     {
         return Session::all();
     }
+    public function availableGraduationSessions()
+    {
+        $session = [];
+        foreach($this->sessions() as $session){
+            if(date('Y') - substr($session->name, 5) >= 2){
+                $sessions[] = $session;
+            }
+        }
+        return $sessions;
+    }
 }

@@ -11,7 +11,7 @@
 					<td>Course Code</td>
 					<td>Course Unit</td>
 					<td>Semester</td>
-					<td>lecturer</td>
+					<td>Lecturer</td>
 					<td></td>
 				</tr>
 			</head>
