@@ -112,13 +112,13 @@ if (!function_exists('directer')) {
 if (!function_exists('currentSession')) {
     function currentSession()
     { 
-        $start = date('Y')-1;
-        $end = date('Y');
-        $session = null;
-        foreach(Session::where('name',$start.'/'.$end)->get() as $current_session){
-            $session = $current_session;
-        }
-        return $session;
+        // $start = date('Y')-1;
+        // $end = date('Y');
+        // $session = null;
+        // foreach(Session::where('name',$start.'/'.$end)->get() as $current_session){
+        //     $session = $current_session;
+        // }
+        return Session::find(2);
     }
 }
 
