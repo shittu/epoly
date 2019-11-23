@@ -118,7 +118,7 @@ if (!function_exists('currentSession')) {
         // foreach(Session::where('name',$start.'/'.$end)->get() as $current_session){
         //     $session = $current_session;
         // }
-        return Session::find(3);
+        return Session::find(4);
     }
 }
 
