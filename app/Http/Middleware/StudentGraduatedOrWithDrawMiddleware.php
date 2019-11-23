@@ -16,7 +16,7 @@ class StudentGraduatedOrWithDrawMiddleware
     public function handle($request, Closure $next)
     {
         if(student()->graduated()){
-            return redirect()->route('student.graduated.status.page');
+            return redirect()->route('student.graduation.status.page');
         }elseif(student()->withDrawed()){
             return redirect()->route('student.withdraw.status.page');
         }

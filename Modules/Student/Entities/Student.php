@@ -116,6 +116,6 @@ class Student extends Authenticatable
         if($count == 0){
             $count++;
         }
-        return $points/$count;
+        return number_format($points/$count,2);
     }
 }

@@ -20,7 +20,8 @@ Route::prefix('student')
 	Route::get('/unauthorize-student', 'Auth\StudentLoginController@unauthorize')->name('auth.auth');
 	Route::post('/login', 'Auth\StudentLoginController@login')->name('login');
 	Route::post('logout', 'Auth\StudentLoginController@logout')->name('auth.logout');
-
+   Route::get('/graduation/status/page','StudentGraduationController@graduation')->name('graduation.status.page');
+   Route::get('/withdraw/status/page','StudentGraduationController@withDraw')->name('withdraw.status.page');
    //diferring routes
     Route::prefix('diferring')
 	->name('diferring.')
