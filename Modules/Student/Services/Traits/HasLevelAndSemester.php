@@ -20,7 +20,7 @@ trait HasLevelAndSemester
 
         $prefix = $this->levelPrefix();
 
-        switch ($this->yearsSinceAdmission()-2) {
+        switch ($this->yearsSinceAdmission()) {
             case 0:
                 $level = $prefix.' 1';
                 break;
@@ -52,7 +52,7 @@ trait HasLevelAndSemester
 
     public function yearsSinceAdmission()
     {
-        return date('Y') - $this->admissionYear();
+        return substr(currentSession()->name, 5) - $this->admissionYear();
     }
 
     public function levelPrefix()

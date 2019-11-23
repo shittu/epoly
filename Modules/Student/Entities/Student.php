@@ -6,11 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Modules\Admin\Entities\Session;
 use Modules\Department\Entities\Level;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\Student\Services\Traits\HasGraduationStatus;
 use Modules\Student\Services\Traits\HasLevelAndSemester;
 
 class Student extends Authenticatable
 {
-	use Notifiable, HasLevelAndSemester;
+	use Notifiable, HasLevelAndSemester, HasGraduationStatus;
 
 	protected $fillable = [
         'first_name',
@@ -109,7 +110,7 @@ class Student extends Authenticatable
             return true;
         }
     }
-    
+
     public function cummulativeGradePointAverage()
     {
         $count = 0;
