@@ -25,7 +25,7 @@ trait HasGraduationStatus
 
     public function canMakeCourseRegistration()
     {
-    	if($this->yearsToGraduate() < $this->yearSinceAdmission()){
+    	if($this->yearsToGraduate() < $this->yearsSinceAdmission()){
     		return true;
     	}
     	return false;
@@ -33,7 +33,7 @@ trait HasGraduationStatus
 
     public function graduated()
     {
-        if(empty($this->currentLevelReRegisterCourses()) && $this->yearSinceAdmission() >= 2){
+        if(empty($this->currentLevelReRegisterCourses()) && $this->yearsSinceAdmission() >= 2){
             return true;
         }
         return false;

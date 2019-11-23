@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Modules\Admin\Entities\Session;
 use Modules\Department\Entities\Level;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Modules\Student\Services\Traits\HasGraduationStatus;
+use Modules\Student\Services\Traits\Student\HasGraduationStatus;
 use Modules\Student\Services\Traits\HasLevelAndSemester;
 
 class Student extends Authenticatable
@@ -104,13 +104,7 @@ class Student extends Authenticatable
         }
         return $flag;
     }
-    public function graduated()
-    {
-        if(empty($this->currentLevelReRegisterCourses()) && $this->yearSinceAdmission() >= 2){
-            return true;
-        }
-    }
-
+    
     public function cummulativeGradePointAverage()
     {
         $count = 0;
