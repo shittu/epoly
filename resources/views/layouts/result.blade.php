@@ -14,11 +14,14 @@
     </style>
 </head>
 <body class="" >
-	<div class="card">
-		<div class="card-body">
-	    	@yield('page-content')
-	    </div>
-	</div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                @yield('page-content')
+            </div>
+        </div>
+    </div>
+	
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

@@ -15,7 +15,9 @@
     <a href="#">Applications</a>
     <!-- sub menu -->
     <ul>
-        <li><a href="{{route('student.diferring.index')}}">Diferring</a></li>
+        <li><a href="{{route('student.diferring.index')}}">Diferment</a></li>
+        <li><a href="#">Late Course Registration</a></li>
+        <li><a href="#">Add Or Drop Courses</a></li>
     </ul>
     <!-- / sub menu -->
 </li>

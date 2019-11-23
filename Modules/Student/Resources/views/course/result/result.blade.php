@@ -37,9 +37,7 @@
 									{{$course_registration->result->exam}}
 								</td>
 								<td>
-									
-									   {{$course_registration->result->accessment() + $course_registration->result->examination()}}
-								    				
+									{{$course_registration->result->accessment() + $course_registration->result->examination()}}
 								</td>
 								<td>
 									{{$course_registration->result->grade}}

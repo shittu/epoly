@@ -105,7 +105,7 @@ class Student extends Authenticatable
     }
     public function graduated()
     {
-        if(empty($this->currentLevelReRegisterCourses()) && $this->level()){
+        if(empty($this->currentLevelReRegisterCourses()) && $this->yearSinceAdmission() >= 2){
             return true;
         }
     }

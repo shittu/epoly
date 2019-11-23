@@ -3,7 +3,7 @@
 <div class="card">
 	<div class="card-header text text-center">
         {{currentSession()->name}} {{student()->level()->id < 6 ? student()->level()->name.' Carry Over Courses' : student()->level()->name.' Re Register Courses' }}</div>
-	<div class="card-body">
+	<div class="card-body table-responsive">
 		<table class="table">
 			<head>
 				<tr>

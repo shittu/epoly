@@ -17,9 +17,4 @@ class SessionRegistrationRemark extends BaseModel
     	return $this->belongsTo(Remark::class);
     }
 
-    public function semester()
-    {
-    	return $this->belongsTo('Modules\Admin\Entities\Session');
-    }
-
 }
