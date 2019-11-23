@@ -109,4 +109,18 @@ class Student extends Authenticatable
             return true;
         }
     }
+    
+    public function cummulativeGradePointAverage()
+    {
+        $count = 0;
+        $points = 0;
+        foreach ($this->sessionRegistrations as $sessionRegistration) {
+            $count ++ ;
+            $points = $points + $sessionRegistration->sessionGrandPoints();
+        }
+        if($count == 0){
+            $count++;
+        }
+        return $points/$count;
+    }
 }
