@@ -7,7 +7,7 @@ use Modules\Department\Entities\Level;
 trait HasLevelAndSemester
 
 {
-    use HasCurrentLevelCourses,HasRepeatCourses;
+    use HasCurrentLevelCourses,HasRepeatCourses, HasCurrentLevelCoursesAt;
     
     public function level()
     {
@@ -20,7 +20,7 @@ trait HasLevelAndSemester
 
         $prefix = $this->levelPrefix();
 
-        switch ($this->yearsSinceAdmission()-3) {
+        switch ($this->yearsSinceAdmission()) {
             case 0:
                 $level = $prefix.' 1';
                 break;
@@ -34,7 +34,7 @@ trait HasLevelAndSemester
                 $level = 'SECOND SPILL';
                 break;
             default:
-                $level = 'SPILL';
+                $level = 'WITH DRAW';
                 break;
         }
         return $level;
@@ -52,7 +52,7 @@ trait HasLevelAndSemester
 
     public function yearsSinceAdmission()
     {
-        return date('Y') - $this->admissionYear();
+        return substr(currentSession()->name, 5) - $this->admissionYear();
     }
 
     public function levelPrefix()

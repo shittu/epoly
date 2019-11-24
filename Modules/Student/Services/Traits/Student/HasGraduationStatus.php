@@ -4,59 +4,47 @@ namespace Modules\Student\Services\Traits\Student;
 trait HasGraduationStatus
 
 {
-	public function graduationYear()
+	public function graduationYearLimit()
 	{
-		# code...
+		$this->admission->year+$this->yearsToGraduate();
 	}
 
 	public function yearsToGraduate()
 	{
-		# code...
-	}
-    /*
-    this method will check if the student need to extend 
-    the graduation year for a reason
-    */
-	public function hasSessionExtension()
-	{
-		if($this->getAvailableCanceledSessions() || $this->getAvailableCanceledSemesters()){
-			return true
+		$expectedYearsToGraduate = 3;
+		if($this->diferredSessions){
+			$expectedYearsToGraduate = $expectedYearsToGraduate + count($this->diferredSessions);
 		}
+		return $expectedYearsToGraduate;
 	}
 
-	public function graduationYearExtendsTo()
-	{
-		if($this->hasSessionExtension()){
+    public function currentSessionYear()
+    {
+    	return substr(currentSession()->name, 5);
+    }
 
-		}
-	}
+    public function canMakeCourseRegistration()
+    {
+    	if($this->yearsToGraduate() > $this->yearsSinceAdmission()){
+    		return true;
+    	}
+    	return false;
+    }
 
-	public function getAvailableDiferredSession()
-	{
-		# code...
-	}
-    /*
-    this method will return all the semesterRegistration 
-    that have been canceled
-    */
-	public function getAvailableCanceledSessions()
-	{
-		return $this->sessionRegistrations->where('cancelation_status',1);
-	}
+    public function graduated()
+    {
+        if(empty($this->currentLevelReRegisterCourses()) && $this->yearsSinceAdmission() >= 2){
+            return true;
+        }
+        return false;
+    }
 
-    /*
-    this method will return all the semesterRegistration 
-    that have been canceled
-    */
-	public function getAvailableCanceledSemesters()
-	{
-		$semesters = [];
-		foreach ($this->sessionRegistrations as $sessionRegistration) {
-			foreach ($sessionRegistration->semesterRegistrations->where('cancelation_status',1) as $semesterRegistration) {
-				$semesters[] = $semesterRegistration;
-			}
-			return $semesters;
-		}
-	}
+    public function withDrawed()
+    {
+    	if(!empty($this->currentLevelReRegisterCourses()) && !$this->canMakeCourseRegistration()){
+            return true;
+        }
+        return false;
+    }
 
 }

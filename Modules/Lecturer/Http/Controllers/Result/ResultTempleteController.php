@@ -39,6 +39,7 @@ class ResultTempleteController extends LecturerBaseController
             'S/N',
             'NAME',
             'ADMISSION NO',
+            'REGISTRATION KEY',
             'CA SCORE',
             'EXAM SCORE'
         ];
@@ -48,6 +49,7 @@ class ResultTempleteController extends LecturerBaseController
                 'serial_no' => $counter++,
                 'name'=>$course_registration->semesterRegistration->sessionRegistration->student->first_name.' '.$course_registration->semesterRegistration->sessionRegistration->student->last_name,
                 'admission_no' => $course_registration->semesterRegistration->sessionRegistration->student->admission->admission_no,
+                'registration_id' => $course_registration->id,
                 'contenue_accessment'=> rand(1,40),
                 'examination'=> rand(1,60),
             ];

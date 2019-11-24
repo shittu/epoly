@@ -12,5 +12,6 @@ class StudentBaseController extends Controller
     {
         $this->middleware('auth:student');
         $this->middleware('active_student');
+        $this->middleware('graduated_withdrawed');
     }
 }

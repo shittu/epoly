@@ -5,7 +5,7 @@
 <div class="col-md-10">
 	<div class="card">
 		<div class="card-header button-fullwidth cws-button bt-color-3">{{student()->level()->name}} {{currentSession()->name}} Registered Courses</div>
-		<div class="card-body">
+		<div class="card-body table-responsive">
 			<table class="table">
 				<head>
 					<tr>

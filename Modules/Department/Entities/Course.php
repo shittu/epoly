@@ -88,5 +88,10 @@ class Course extends BaseModel
         }
         return $lecturer;
     }
-
+    public function hasRegisteredStudent()
+    {
+        if(count($this->courseRegistrations->where('session_id',currentSession()->id))>0){
+            return true;
+        }
+    }
 }

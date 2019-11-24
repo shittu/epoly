@@ -6,14 +6,14 @@ use Illuminate\Console\Command;
 use Modules\Admin\Entities\Session;
 use Modules\Student\Entities\Student;
 
-class MakeStudentCurrentSessionCourseRegistrationCommand extends Command
+class MakeStudentSecondYearCourseRegistrationCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'sospoly:make-student-current-session-courses-registration';
+    protected $signature = 'sospoly:make-student-second-year-courses-registration';
 
     /**
      * The console command description.
@@ -39,7 +39,7 @@ class MakeStudentCurrentSessionCourseRegistrationCommand extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(2000);
+        $bar = $this->output->createProgressBar(100);
 
         $bar->setBarWidth(100);
 

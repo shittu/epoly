@@ -7,10 +7,12 @@ use Modules\Admin\Entities\Session;
 use Modules\Department\Entities\Level;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\Student\Services\Traits\HasLevelAndSemester;
+use Modules\Student\Services\Traits\Student\HasGraduationStatus;
+use Modules\Student\Services\Traits\Student\HasGraduationStatusAt;
 
 class Student extends Authenticatable
 {
-	use Notifiable, HasLevelAndSemester;
+	use Notifiable, HasLevelAndSemester, HasGraduationStatus, HasGraduationStatusAt;
 
 	protected $fillable = [
         'first_name',
@@ -103,10 +105,18 @@ class Student extends Authenticatable
         }
         return $flag;
     }
-    public function graduated()
+    
+    public function cummulativeGradePointAverage()
     {
-        if(empty($this->currentLevelReRegisterCourses()) && $this->level()){
-            return true;
+        $count = 0;
+        $points = 0;
+        foreach ($this->sessionRegistrations as $sessionRegistration) {
+            $count ++ ;
+            $points = $points + $sessionRegistration->sessionGrandPoints();
         }
+        if($count == 0){
+            $count++;
+        }
+        return number_format($points/$count,2);
     }
 }

@@ -8,11 +8,11 @@ if(examOfficer()){
 }
 @endphp
 <select class="form-control" name="session">
-	<option value="">Session</option>
-	@foreach($department->sessions() as $session)
+	<option value="{{currentSession()->id}}">{{currentSession()->name}}</option>
+	<!-- @foreach($department->sessions() as $session)
 		<option value="{{$session->id}}">
 			{{$session->name}}
 		</option>
-	@endforeach
+	@endforeach -->
 </select>	
 

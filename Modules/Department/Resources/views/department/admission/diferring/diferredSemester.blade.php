@@ -9,10 +9,11 @@
 		<td>{{$diferredSemester->student->email}}</td>
 		<td>{{$diferredSemester->student->phone}}</td>
 		<td>
-			<button class="btn btn-danger" onclick="confirm('Are you sure you want to delete this student from the list of students in this department')"><a href="{{route('department.admission.delete',['admission_id'=>$admission->id])}}" style="color: white">Approve</a> </i>
+			<button class="btn btn-danger" onclick="confirm('Are you sure you want to delete this student from the list of students in this department')"><a href="{{route('department.diferring.verify',['type'=>'semester','diferring_id'=>$diferredSemester->id])}}" style="color: white">Approve</a> </i>
 			</button>
+
 			<button class="btn btn-info">
-				<a href="{{route('department.admission.edit',['admission_id'=>$admission->id])}}" style="color: white">Delete</a></i>
+				<a href="{{route('department.diferring.delete',['type'=>'semester','diferring_id'=>$diferredSemester->id])}}" style="color: white">Delete</a></i>
 			</button>
 		</td>
 	</tr>

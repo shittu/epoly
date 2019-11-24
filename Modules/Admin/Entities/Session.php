@@ -32,4 +32,45 @@ class Session extends BaseModel
 		return $count.' '.$month.' Remain';
     }
 
+    public function graduatedStudents()
+    {
+        $students = [];
+        foreach($this->sessionRegistrations->where('department_id',$this->userDepartment()->id) as $sessionRegistration){
+            if($sessionRegistration->student->graduatedAt($this)){
+                $students[] = $sessionRegistration->student;
+            }
+        }
+        return $students;
+    }
+
+    public function spilledStudents()
+    {
+        $students = [];
+        foreach($this->sessionRegistrations->where('department_id',$this->userDepartment()->id) as $sessionRegistration){
+            if($sessionRegistration->student->spillededAt($this)){
+                $students[] = $sessionRegistration->student;
+            }
+        }
+        return $students;
+    }
+    public function withDrawStudents()
+    {
+        $students = [];
+        foreach($this->sessionRegistrations->where('department_id',$this->userDepartment()->id) as $sessionRegistration){
+            if($sessionRegistration->student->withDrawedAt($this)){
+                $students[] = $sessionRegistration->student;
+            }
+        }
+        return $students;
+    }
+
+    public function userDepartment()
+    {
+        $department = examOfficer()->department;
+        if(!$department){
+            $department = headOfDepartment()->department;
+        }
+        return $department;
+    }
+
 }

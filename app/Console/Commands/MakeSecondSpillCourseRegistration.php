@@ -13,7 +13,7 @@ class MakeSecondSpillCourseRegistration extends Command
      *
      * @var string
      */
-    protected $signature = 'sospoly:make-second-spill.course-registration';
+    protected $signature = 'sospoly:make-second-spill-course-registration';
 
     /**
      * The console command description.
@@ -39,7 +39,7 @@ class MakeSecondSpillCourseRegistration extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(2000);
+        $bar = $this->output->createProgressBar(100);
 
         $bar->setBarWidth(100);
 
@@ -47,18 +47,18 @@ class MakeSecondSpillCourseRegistration extends Command
         foreach(Student::cursor() as $student){
             $level = $student->level();
             $session_registration = $student->sessionRegistrations()->firstOrCreate([
-            'level_id'=>$level->id,
+            'level_id'=>7,
             'department_id'=>$student->admission->department_id,
-            'session_id'=> Session::find(3)->id
+            'session_id'=> Session::find(4)->id
             ]);
             
             // register all the repeated courses
-            foreach ($student->repeatCourses as $repeatCourse) {
+            foreach ($student->repeatCourses->where('status',1) as $repeatCourse) {
                 $semester_registration = $session_registration->semesterRegistrations()->firstOrCreate(['semester_id'=>$repeatCourse->course->semester->id]);
 
                 $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
                     'course_id'=>$repeatCourse->course->id,
-                    'session_id'=> Session::find(3)->id
+                    'session_id'=> Session::find(4)->id
                 ]);
 
                 $course_registration->result()->firstOrCreate([]);

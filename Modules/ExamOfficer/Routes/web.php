@@ -20,7 +20,18 @@ Route::prefix('exam-officer')
 	    Route::post('/login', 'Auth\ExamOfficerLoginController@login')->name('login');
 	    Route::post('logout', 'Auth\ExamOfficerLoginController@logout')->name('auth.logout');
 		Route::get('/Authorisation/fail', 'Auth\ExamOfficerLoginController@unauthorize')->name('auth.auth');
-
+	//graduation routes
+    Route::prefix('graduation')
+    ->name('graduation.')
+    ->namespace('Graduation')
+    ->group(function() {
+        Route::get('/', 'GraduationController@graduationIndex')->name('graduate.index');
+        Route::get('/spill', 'GraduationController@spillOverIndex')->name('spill.index');
+        Route::get('/with-draw', 'GraduationController@withDrawIndex')->name('withdraw.index');
+        Route::post('/search/graduates', 'GraduationController@searchGraduateStudents')->name('search.graduates');
+        Route::post('/search/spill-overs', 'GraduationController@searchSpillingStudents')->name('search.spills');
+        Route::post('/search/with-draws', 'GraduationController@searchWithDrawedStudents')->name('search.withdraws');
+    });
 	//result routes    
     Route::prefix('results')
     ->name('result.')
@@ -50,7 +61,7 @@ Route::prefix('exam-officer')
 	    ->name('student.')
 	    ->group(function() {
             Route::get('/create', 'StudentResultController@index')->name('index');
-            Route::get('sesmester/{semester_id}/view', 'StudentResultController@viewResult')->name('view');
+            Route::get('semester/{semester_id}/view', 'StudentResultController@viewResult')->name('view');
             Route::post('/search', 'StudentResultController@searchResult')->name('search');
             Route::get('result/{result_id}/edit', 'StudentResultController@edit')->name('edit');
 		    Route::post('result/{result_id}/update', 'StudentResultController@update')->name('update');

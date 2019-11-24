@@ -9,7 +9,7 @@ $count = 1;
 <div class="col-md-10">
 	@foreach(student()->sessionRegistrations as $session_registration)
 	<div class="card">
-		<div class="card-header button-fullwidth cws-button bt-color-3">{{$session_registration->level->name}} Registered Courses</div>
+		<div class="card-header button-fullwidth cws-button bt-color-3">{{$session_registration->session->name}} {{$session_registration->level->name}} Registered Courses</div>
 		<div class="card-body">
 			<table class="table">
 				<head>

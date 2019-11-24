@@ -23,6 +23,8 @@ class LevelTableSeeder extends Seeder
             ['name'=>'CONVERSION','student_type_id'=>2],
             ['name'=>'HND 1','student_type_id'=>2],
             ['name'=>'HND 2','student_type_id'=>2],
+            ['name'=>'FIRST SPILL'],
+            ['name'=>'SECOND SPILL'],
         ];
         foreach ($levels as $level) {
             Level::firstOrCreate($level);

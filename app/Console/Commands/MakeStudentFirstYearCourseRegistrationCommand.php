@@ -6,14 +6,14 @@ use Illuminate\Console\Command;
 use Modules\Admin\Entities\Session;
 use Modules\Student\Entities\Student;
 
-class MakeStudentLastSessionCourseRegistrationCommand extends Command
+class MakeStudentFirstYearCourseRegistrationCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'sospoly:make-student-last-session-courses-registration';
+    protected $signature = 'sospoly:make-student-first-year-courses-registration';
 
     /**
      * The console command description.
@@ -39,9 +39,9 @@ class MakeStudentLastSessionCourseRegistrationCommand extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(38000);
+        $bar = $this->output->createProgressBar(100);
 
-        $bar->setBarWidth(3800);
+        $bar->setBarWidth(100);
 
         $bar->start();
         foreach(Student::cursor() as $student){
@@ -53,18 +53,14 @@ class MakeStudentLastSessionCourseRegistrationCommand extends Command
             ]);
             
             foreach($student->currentLevelCourses() as $course){
-                
                 $semester_registration = $session_registration->semesterRegistrations()->firstOrCreate(['semester_id'=>$course->semester->id]);
-
                 $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
                     'course_id'=>$course->id,
                     'session_id'=> Session::find(1)->id
                 ]);
-
                 $course_registration->result()->firstOrCreate([]);
-                $bar->advance();
             }
-            
+            $bar->advance();
         }
         $bar->finish();
     }
