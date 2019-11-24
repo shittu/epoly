@@ -6,12 +6,13 @@ use Illuminate\Notifications\Notifiable;
 use Modules\Admin\Entities\Session;
 use Modules\Department\Entities\Level;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Modules\Student\Services\Traits\Student\HasGraduationStatus;
 use Modules\Student\Services\Traits\HasLevelAndSemester;
+use Modules\Student\Services\Traits\Student\HasGraduationStatus;
+use Modules\Student\Services\Traits\Student\HasGraduationStatusAt;
 
 class Student extends Authenticatable
 {
-	use Notifiable, HasLevelAndSemester, HasGraduationStatus;
+	use Notifiable, HasLevelAndSemester, HasGraduationStatus, HasGraduationStatusAt;
 
 	protected $fillable = [
         'first_name',

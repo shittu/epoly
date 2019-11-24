@@ -4,6 +4,7 @@ namespace Modules\ExamOfficer\Http\Controllers\Graduation;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Admin\Entities\Session;
 use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
 
 class GraduationController extends ExamOfficerBaseController
@@ -20,7 +21,9 @@ class GraduationController extends ExamOfficerBaseController
     
     public function search(Request $request)
     {
-        dd($request->all());
+        $request->validate(['session'=>'required']);
+        $session = Session::find($request->session);
+        return view('examofficer::graduation.graduates',['session'=>$session,'graduates'=>$session->graduates()]);
     }
 
 }

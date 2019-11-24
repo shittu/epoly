@@ -98,7 +98,7 @@ class Department extends BaseModel
     {
         $session = [];
         foreach($this->sessions() as $session){
-            if(date('Y') - substr($session->name, 5) >= 2){
+            if(substr(currentSession()->name, 5) - substr($session->name, 5) <= 2){
                 $sessions[] = $session;
             }
         }

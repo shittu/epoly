@@ -56,7 +56,7 @@ Route::prefix('exam-officer')
 	    ->name('student.')
 	    ->group(function() {
             Route::get('/create', 'StudentResultController@index')->name('index');
-            Route::get('sesmester/{semester_id}/view', 'StudentResultController@viewResult')->name('view');
+            Route::get('semester/{semester_id}/view', 'StudentResultController@viewResult')->name('view');
             Route::post('/search', 'StudentResultController@searchResult')->name('search');
             Route::get('result/{result_id}/edit', 'StudentResultController@edit')->name('edit');
 		    Route::post('result/{result_id}/update', 'StudentResultController@update')->name('update');

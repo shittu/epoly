@@ -7,7 +7,7 @@ use Modules\Department\Entities\Level;
 trait HasLevelAndSemester
 
 {
-    use HasCurrentLevelCourses,HasRepeatCourses;
+    use HasCurrentLevelCourses,HasRepeatCourses, HasCurrentLevelCoursesAt;
     
     public function level()
     {
