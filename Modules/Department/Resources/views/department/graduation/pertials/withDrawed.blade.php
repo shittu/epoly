@@ -13,7 +13,7 @@
 		    	UMARU ALI SHINKAFI POLYTECHNIC SOKOTO<br>
 		    	COLLEGE OF {{strtoupper($department->college->name)}}<br>
 		    	DEPARTMENT OF {{strtoupper($department->name)}}<br>
-		    	LIST OF GRADUATED STUDENTS IN, {{$session->name}} SESSION<br><br>
+		    	LIST OF WITH DRAWED STUDENTS IN, {{$session->name}} SESSION<br><br>
 		    </div>
 			<div class="table-responsive">
 				<table class="table">
@@ -25,7 +25,7 @@
 				     		<td>Admission No</td>
 				     		<td>Phone</td>
 				     		<td>Student</td>
-				     		<td>CGPA</td>
+				     		<td>Failed Courses</td>
 				     	</tr>
 				    </thead>
 				    <tbody>
@@ -37,7 +37,9 @@
 				     		<td>{{$student->admission->admission_no}}</td>
 				     		<td>{{$student->phone}}</td>
 				     		<td>{{$student->studentType->name}}</td>
-				     		<td>{{$student->cummulativeGradePointAverage()}}</td>
+				     		<td>
+				     			{{count($student->currentLevelReRegisterCoursesAt($session))}}
+				     		</td>
 				     	</tr>
 				    	@endforeach
 				    </tbody>
@@ -48,6 +50,6 @@
 </div>
 @else
 <div class="col-md-12">
-	<div class="alert alert-danger">Sorry there is no graduates found at {{$session->name}} Session</div>
+	<div class="alert alert-danger">Sorry there is no with draw students found at {{$session->name}} Session</div>
 </div>
 @endif

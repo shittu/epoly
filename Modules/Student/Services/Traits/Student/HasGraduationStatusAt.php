@@ -23,10 +23,23 @@ trait HasGraduationStatusAt
 
     public function withDrawedAt($session)
     {
-    	if(!empty($this->currentLevelReRegisterCoursesAt($session)) && !$this->canMakeCourseRegistration()){
+    	if(!empty($this->currentLevelReRegisterCoursesAt($session)) && !$this->canMakeCourseRegistrationAt($session)){
             return true;
         }
         return false;
+    }
+
+    public function canMakeCourseRegistrationAt($session)
+    {
+        if($this->yearsToGraduate() > $this->yearsSinceAdmissionTo($session)){
+            return true;
+        }
+        return false;
+    }
+
+    public function yearsSinceAdmissionTo($session)
+    {
+        return substr($session->name, 5) - $this->admissionYear();
     }
 
 }

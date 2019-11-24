@@ -11,7 +11,7 @@ trait HasGraduationStatus
 
 	public function yearsToGraduate()
 	{
-		$expectedYearsToGraduate = 4;
+		$expectedYearsToGraduate = 3;
 		if($this->diferredSessions){
 			$expectedYearsToGraduate = $expectedYearsToGraduate + count($this->diferredSessions);
 		}
@@ -25,7 +25,7 @@ trait HasGraduationStatus
 
     public function canMakeCourseRegistration()
     {
-    	if($this->yearsToGraduate() < $this->yearsSinceAdmission()){
+    	if($this->yearsToGraduate() > $this->yearsSinceAdmission()){
     		return true;
     	}
     	return false;

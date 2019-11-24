@@ -47,7 +47,7 @@ class GraduationController extends ExamOfficerBaseController
     {
         $request->validate(['session'=>'required']);
         $session = Session::find($request->session);
-        return view('examofficer::graduation.spilled',['session'=>$session,'students'=>$session->withDrawStudents()]);
+        return view('examofficer::graduation.withDrawed',['session'=>$session,'students'=>$session->withDrawStudents()]);
     }
 
 }

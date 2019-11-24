@@ -1,7 +1,20 @@
+@php
+	if(examOfficer()){
+		$department = examOfficer()->department;
+	}else{
+		$department = headOfDepartment()->department;
+	}
+@endphp
 @if(count($students)> 0)
 <div class="col-md-12">
 	<div class="card">
 		<div class="card-body">
+			<div class="col-md-12 text-center"><br><br>
+		    	UMARU ALI SHINKAFI POLYTECHNIC SOKOTO<br>
+		    	COLLEGE OF {{strtoupper($department->college->name)}}<br>
+		    	DEPARTMENT OF {{strtoupper($department->name)}}<br>
+		    	LIST OF SPILLED OVER STUDENTS IN, {{$session->name}} SESSION<br><br>
+		    </div>
 			<div class="table-responsive">
 				<table class="table">
 				    <thead>
@@ -12,7 +25,7 @@
 				     		<td>Admission No</td>
 				     		<td>Phone</td>
 				     		<td>Student</td>
-				     		<td>Courses</td>
+				     		<td>Re Register Courses</td>
 				     	</tr>
 				    </thead>
 				    <tbody>
