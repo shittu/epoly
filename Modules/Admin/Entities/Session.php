@@ -53,6 +53,16 @@ class Session extends BaseModel
         }
         return $students;
     }
+    public function withDrawStudents()
+    {
+        $students = [];
+        foreach($this->sessionRegistrations->where('department_id',$this->userDepartment()->id) as $sessionRegistration){
+            if($sessionRegistration->student->withDrawedAt($this)){
+                $students[] = $sessionRegistration->student;
+            }
+        }
+        return $students;
+    }
 
     public function userDepartment()
     {

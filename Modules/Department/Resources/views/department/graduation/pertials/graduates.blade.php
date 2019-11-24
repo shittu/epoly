@@ -19,8 +19,8 @@
 				    	@foreach($students as $student)
 			            <tr>
 				     		<td>{{$loop->index+1}}</td>
-				     		<td>{{$student->first_name}}</td>
-				     		<td>{{$student->last_name}}</td>
+				     		<td>{{strtoupper($student->first_name)}}</td>
+				     		<td>{{strtoupper($student->last_name)}}</td>
 				     		<td>{{$student->admission->admission_no}}</td>
 				     		<td>{{$student->phone}}</td>
 				     		<td>{{$student->studentType->name}}</td>

@@ -19,6 +19,9 @@
         <li>
             <a href="{{route('exam.officer.graduation.spill.index')}}">Spill Student</a>
         </li>
+        <li>
+            <a href="{{route('exam.officer.graduation.withdraw.index')}}">With Drawed Student</a>
+        </li>
     </ul>
 </li>
 <li>

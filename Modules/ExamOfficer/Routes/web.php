@@ -27,8 +27,10 @@ Route::prefix('exam-officer')
     ->group(function() {
         Route::get('/', 'GraduationController@graduationIndex')->name('graduate.index');
         Route::get('/spill', 'GraduationController@spillOverIndex')->name('spill.index');
+        Route::get('/with-draw', 'GraduationController@withDrawIndex')->name('withdraw.index');
         Route::post('/search/graduates', 'GraduationController@searchGraduateStudents')->name('search.graduates');
         Route::post('/search/spill-overs', 'GraduationController@searchSpillingStudents')->name('search.spills');
+        Route::post('/search/with-draws', 'GraduationController@searchWithDrawedStudents')->name('search.withdraws');
     });
 	//result routes    
     Route::prefix('results')

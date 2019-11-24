@@ -23,6 +23,11 @@ class GraduationController extends ExamOfficerBaseController
         return view('examofficer::graduation.index',['message'=>'Search Spill Over Students','department'=>examOfficer()->department,'route'=>'exam.officer.graduation.search.spills']);
     }
 
+    public function withDrawIndex()
+    {
+        return view('examofficer::graduation.index',['message'=>'Search With Draw Students','department'=>examOfficer()->department,'route'=>'exam.officer.graduation.search.withdraws']);
+    }
+
     
     public function searchGraduateStudents(Request $request)
     {
@@ -36,6 +41,13 @@ class GraduationController extends ExamOfficerBaseController
         $request->validate(['session'=>'required']);
         $session = Session::find($request->session);
         return view('examofficer::graduation.spilled',['session'=>$session,'students'=>$session->spilledStudents()]);
+    }
+
+    public function searchWithDrawedStudents(Request $request)
+    {
+        $request->validate(['session'=>'required']);
+        $session = Session::find($request->session);
+        return view('examofficer::graduation.spilled',['session'=>$session,'students'=>$session->withDrawStudents()]);
     }
 
 }
