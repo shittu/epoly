@@ -12,7 +12,7 @@
 				     		<td>Admission No</td>
 				     		<td>Phone</td>
 				     		<td>Student</td>
-				     		<td>CGPA</td>
+				     		<td>Courses</td>
 				     	</tr>
 				    </thead>
 				    <tbody>
@@ -24,7 +24,7 @@
 				     		<td>{{$student->admission->admission_no}}</td>
 				     		<td>{{$student->phone}}</td>
 				     		<td>{{$student->studentType->name}}</td>
-				     		<td>{{$student->cummulativeGradePointAverage()}}</td>
+				     		<td>{{count($student->currentLevelReRegisterCoursesAt($session))}}</td>
 				     	</tr>
 				    	@endforeach
 				    </tbody>
@@ -35,6 +35,6 @@
 </div>
 @else
 <div class="col-md-12">
-	<div class="alert alert-danger">Sorry there is no graduates fount at {{$session->name}} Session</div>
+	<div class="alert alert-danger">Sorry there is no spill over students found at {{$session->name}} Session</div>
 </div>
 @endif

@@ -14,10 +14,10 @@
     <a href="#">Graduation</a>
     <ul>
         <li>
-            <a href="{{route('exam.officer.graduation.index')}}">Grduated Student</a>
+            <a href="{{route('exam.officer.graduation.graduate.index')}}">Grduated Student</a>
         </li>
         <li>
-            <a href="#">Spill Student</a>
+            <a href="{{route('exam.officer.graduation.spill.index')}}">Spill Student</a>
         </li>
     </ul>
 </li>

@@ -13,7 +13,15 @@ trait HasGraduationStatusAt
         return false;
     }
 
-    public function withDrawedAt()
+    public function spillededAt($session)
+    {
+        if(!empty($this->currentLevelReRegisterCoursesAt($session)) && $this->yearsSinceAdmission() >= 2){
+            return true;
+        }
+        return false;
+    }
+
+    public function withDrawedAt($session)
     {
     	if(!empty($this->currentLevelReRegisterCoursesAt($session)) && !$this->canMakeCourseRegistration()){
             return true;

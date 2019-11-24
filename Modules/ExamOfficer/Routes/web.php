@@ -20,12 +20,15 @@ Route::prefix('exam-officer')
 	    Route::post('/login', 'Auth\ExamOfficerLoginController@login')->name('login');
 	    Route::post('logout', 'Auth\ExamOfficerLoginController@logout')->name('auth.logout');
 		Route::get('/Authorisation/fail', 'Auth\ExamOfficerLoginController@unauthorize')->name('auth.auth');
+	//graduation routes
     Route::prefix('graduation')
     ->name('graduation.')
     ->namespace('Graduation')
     ->group(function() {
-        Route::get('/', 'GraduationController@index')->name('index');
-        Route::post('/', 'GraduationController@search')->name('search');
+        Route::get('/', 'GraduationController@graduationIndex')->name('graduate.index');
+        Route::get('/spill', 'GraduationController@spillOverIndex')->name('spill.index');
+        Route::post('/search/graduates', 'GraduationController@searchGraduateStudents')->name('search.graduates');
+        Route::post('/search/spill-overs', 'GraduationController@searchSpillingStudents')->name('search.spills');
     });
 	//result routes    
     Route::prefix('results')
