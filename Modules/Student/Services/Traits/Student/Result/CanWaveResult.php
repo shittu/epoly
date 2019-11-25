@@ -5,10 +5,11 @@ trait CanWaveResult
 {
 	public function waveThisResult()
 	{
-		$this->update(['waved_by'=>$this->waveThisResultWith(),'grade'=>'E']);
+		$this->update(['waved_by'=>$this->waveThisResultWith(),'grade'=>'E','points'=>2.00]);
 		$this->removeThisCourseIfExistFromDropCourses();
 		$this->removeThisCourseIfExistFromRepeatCourses();
 		$this->removeThisCourseIfExistFromReRegisterCourses();
+        $this->updateThisResultRemark();
 	}
 
 	public function waveThisResultWith()
@@ -39,6 +40,18 @@ trait CanWaveResult
     {
         foreach($this->thisResultStudent()->reRegisterCourses->where(['course_id',$this->courseRegistration->course->id,'status'=>1]) as $reRegister){
             $reRegister->update(['status'=>0]);
+        }
+    }
+
+    public function updateThisResultRemark()
+    {
+        $this->remark->update(['remark_id'=>5]);
+    }
+
+    public function waved()
+    {
+        if($this->waved_by > 0){
+            return true;
         }
     }
 }

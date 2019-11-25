@@ -24,6 +24,28 @@ if (!function_exists('logout_route')) {
     }
 }
 
+if (!function_exists('home_route')) {
+    function home_route()
+    {
+        if(auth()->guard('admin')->check()){
+            $route = 'admin.dashboard';
+        }elseif (auth()->guard('staff')->check()) {
+            $route = 'staff.dashboard';
+        }elseif (auth()->guard('lecturer')->check()) {
+            $route = 'lecturer.dashboard';
+        }elseif (auth()->guard('head_of_department')->check()) {
+            $route = 'department.hod.dashboard';
+        }elseif (auth()->guard('directer')->check()) {
+            $route = 'college.directer.dashboard';
+        }elseif(auth()->guard('exam_officer')->check()){
+            $route = 'exam.officer.dashboard';
+        }else{
+            $route = 'student.dashboard';
+        }
+        return $route;
+    }
+}
+
 if (!function_exists('storage_url')) {
     function storage_url($url)
     {
@@ -112,13 +134,11 @@ if (!function_exists('directer')) {
 if (!function_exists('currentSession')) {
     function currentSession()
     { 
-        // $start = date('Y')-1;
-        // $end = date('Y');
-        // $session = null;
-        // foreach(Session::where('name',$start.'/'.$end)->get() as $current_session){
-        //     $session = $current_session;
-        // }
-        return Session::find(4);
+        $currentSession = null;
+        foreach (Session::where('status',1)->get() as $session) {
+            $currentSession = $session;
+        }
+        return $currentSession;
     }
 }
 
@@ -126,6 +146,13 @@ if (!function_exists('lastSession')) {
     function lastSession()
     {    
         return Session::find(currentSession()->id-1);
+    }
+}
+
+if (!function_exists('sessions')) {
+    function sessions()
+    {    
+        return Session::all();
     }
 }
 

@@ -9,6 +9,7 @@
         </div>
     </div>
     <div class="row">
+        @include('admin::calender.activate')
         @yield('page-content')
     </div>
 </div>

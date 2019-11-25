@@ -21,7 +21,12 @@
 
     	<td>
     		@foreach($registration->courseRegistrations->where('cancelation_status',0) as $course_registration)
-    		{{$course_registration->result->grade}}<br>
+    		    @if($course_registration->result->waved())
+                    <i><strong class="h4">{{$course_registration->result->grade}}</strong></i>
+                @else
+                    {{$course_registration->result->grade}}
+                @endif
+                <br>
     		@endforeach
     	</td>
 

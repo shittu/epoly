@@ -1,3 +1,4 @@
+
 @extends('admin::layouts.master')
 @section('title')
     admin view calender page
@@ -7,32 +8,32 @@
 </div>
 <div class="col-md-6">
 	@if(admin())
-	<button class="card-header button-fullwidth cws-button bt-color-3"><a href="{{route('admin.calender.edit',[$session->id])}}" style="color: white">{{$session->name}} Edit Calender</a></button>
-    <button class="card-header button-fullwidth cws-button bt-color-3"><a href="{{route('admin.calender.delete',[$session->id])}}" style="color: white" onclick="confirm('Are you sure you want to delete this school calender')">{{$session->name}} Delete Calender</a></button><br>
+	<button class="card-header button-fullwidth cws-button bt-color-3"><a href="{{route('admin.calender.edit',[currentSession()->id])}}" style="color: white">{{currentSession()->name}} Edit Calender</a></button>
+    <button class="card-header button-fullwidth cws-button bt-color-3"><a href="{{route('admin.calender.delete',[currentSession()->id])}}" style="color: white" onclick="confirm('Are you sure you want to delete this school calender')">{{currentSession()->name}} Delete Calender</a></button><br>
     @endif
     <br>
 	<div class="card">
 		<div class="card-header button-fullwidth cws-button bt-color-3">
-		    {{$session->name}} Session Calender 
+		    {{currentSession()->name}} Session Calender 
 	    </div>
 		<div class="card-body">
 			<table>
 				<tr>
 					<td>Session Start Date</td>
-					<td>{{$session->start}}</td>
+					<td>{{currentSession()->start}}</td>
 				</tr>
 				<tr>
 					<td>Session End Date</td>
-					<td>{{$session->end}}</td>
+					<td>{{currentSession()->end}}</td>
 				</tr>
 				<tr>
 					<td>Session Count Down</td>
-					<td>{{$session->countDown()}}</td>
+					<td>{{currentSession()->countDown()}}</td>
 				</tr>
 			</table>
 		</div>
 	</div><br>
-	@foreach($session->calenders as $calender)
+	@foreach(currentSession()->calenders as $calender)
 	    <div class="card">
 			<div class="card-header button-fullwidth cws-button bt-color-3">
 			    {{$calender->semester->name}} Calender 

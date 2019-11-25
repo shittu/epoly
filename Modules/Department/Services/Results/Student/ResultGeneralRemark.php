@@ -44,7 +44,11 @@ trait ResultGeneralRemark
 
 	public function toRepeatCourses()
 	{
-		$courses = 'RPT';
+		if(!empty($this->failedResults())){
+		    $courses = 'RPT';
+		}else{
+		    $courses = '';
+		}
 		foreach($this->failedResults() as $course){
             $courses = $courses.' '.$course->code;
 		}

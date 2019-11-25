@@ -28,4 +28,11 @@ trait AfterGradingEvent
         }
         return false;
     }
+
+    public function uploaded()
+    {
+        if($this->lecturerCourseResultUpload){
+            return true;
+        }
+    }
 }

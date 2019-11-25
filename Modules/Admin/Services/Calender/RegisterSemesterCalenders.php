@@ -57,7 +57,7 @@ class RegisterSemesterCalenders
                 'name'=>'2018/2019',
                 'start'=>$this->data['session_start'],
                 'end'=>$this->data['session_end'],
-                'status'=> 1
+                'status'=> 0
             ]
         ];
         foreach ($sessions as $session) {

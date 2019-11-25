@@ -11,7 +11,7 @@
 		<div class="card">
 			<div class="card-header button-fullwidth cws-button bt-color-3">Session Calender </div>
 		 	<div class="card-body">
-		 	    <label>Session</label><input type="text" name="session" class="form-control" value="{{date('Y')}}/{{date('Y')+1}}" disabled="">
+		 	    <label>Session</label><input type="text" name="session" class="form-control" value="{{currentSession()->name}}" disabled="">
 		 	    <label>session start at</label><input type="date" name="session_start" class="form-control" value="{{old('session_start')}}">
 		 	    <label>session end at</label><input type="date" name="session_end" class="form-control" value="{{old('session_end')}}">
 		 	</div>

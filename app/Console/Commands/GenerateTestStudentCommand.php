@@ -7,21 +7,21 @@ use Illuminate\Support\Facades\Hash;
 use Modules\Department\Entities\Admission;
 use Modules\Department\Entities\Department;
 
-class GenearateStudentsCommand extends Command
+class GenerateTestStudentCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'sospoly:student-generate';
+    protected $signature = 'sospoly:computer-generate-students';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command will create dummy account of 2000 students for testing the result upload';
+    protected $description = 'Command description';
 
     /**
      * Create a new command instance.
@@ -108,7 +108,8 @@ class GenearateStudentsCommand extends Command
             'admission_no'=>$data['number'],
             'head_of_department_id'=>1,
             'department_id'=>1,
-            'session_id'=>1
+            'session_id'=>1,
+            'year'=> substr(currentSession()->name, 5)
         ]);
         $student = $admission->student()->firstOrCreate([
             'first_name'=> 'first name',

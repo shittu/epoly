@@ -12,10 +12,16 @@
                     <nav class="main-nav">
                         <ul class="clear-fix">
                             <!-- menus -->
-                            <li>
-                                <a href="{{route('welcome')}}" class="active">Home</a>
-                            </li>
-                            
+                            @if(!auth()->check())
+                                <li>
+                                    <a href="{{route('welcome')}}" class="active"><i class="fa fa-home"></i>Home</a>
+                                </li>
+                            @else
+                                <li>
+                                    <a href="{{route(home_route())}}" class="active"><i class="fa fa-dashboard"></i> Dashboard</a>
+                                </li>
+                            @endif
+
                             @if(!auth()->check())
                             <li>
                                 <a href="#">Collages</a>
@@ -47,13 +53,17 @@
                             
                             @endif
                             <li>
-                                <a href="events-single-item.html">Calendar</a>
+                                <a href="#"><i class="fa fa-calendar"></i> Calendar</a>
                                 <!-- sub menu -->
                                 <ul>
-                                    @if(admin())
+                                    @if(admin() || examOfficer() || headOfDepartment())
                                     <li>
                                         <a href="{{route('admin.calender.create')}}">New {{currentSession()->name}} Calendar</a>
                                     </li>
+                                    <li>
+                                        <a href="#" data-toggle="modal" data-target="#activate_session" >Activate New Calendar</a>
+                                    </li>
+                                    <!-- the modal is included from main layouts.app -->
                                     @endif
                                     <li>
                                         <a href="{{route('admin.calender.view',[str_replace('/','-',currentSession()->name)])}}">View {{currentSession()->name}} Calendar</a>
