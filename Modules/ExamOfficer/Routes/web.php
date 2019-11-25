@@ -46,6 +46,14 @@ Route::prefix('exam-officer')
 		    Route::post('/search', 'VettingResultController@search')->name('search');
 		    Route::get('/semester/{semester_id}/view', 'VettingResultController@view')->name('view');
 	    });
+        //wave result routes
+	    Route::prefix('student/wave')
+	    ->name('student.wave.')
+	    ->group(function() {
+            Route::get('/', 'WaveResultController@index')->name('index');
+		    Route::post('/search', 'WaveResultController@search')->name('search');
+		    Route::get('/semester/{semester_id}/view', 'WaveResultController@view')->name('view');
+	    });
 
 	    //score sheet routes
 	    Route::prefix('score-sheet')
