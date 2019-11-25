@@ -28,35 +28,36 @@ class RegisterSemesterCalenders
 	public function registerCurrentSession()
 	{
         $sessions = [
-            [
-                'name'=>'2013/2014',
-                'start'=>$this->data['session_start'],
-                'end'=>$this->data['session_end'],
-            ],
+            
             [
                 'name'=>'2014/2015',
                 'start'=>$this->data['session_start'],
                 'end'=>$this->data['session_end'],
+                'status'=> 1
             ],
             [
                 'name'=>'2015/2016',
                 'start'=>$this->data['session_start'],
                 'end'=>$this->data['session_end'],
+                'status'=> 0
             ],
             [
                 'name'=>'2016/2017',
                 'start'=>$this->data['session_start'],
                 'end'=>$this->data['session_end'],
+                'status'=> 0
             ],
             [
                 'name'=>'2017/2018',
                 'start'=>$this->data['session_start'],
                 'end'=>$this->data['session_end'],
+                'status'=> 0
             ],
             [
                 'name'=>'2018/2019',
                 'start'=>$this->data['session_start'],
                 'end'=>$this->data['session_end'],
+                'status'=> 1
             ]
         ];
         foreach ($sessions as $session) {

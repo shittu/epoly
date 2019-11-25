@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Modules\Department\Entities\Admission;
 use Modules\Department\Entities\Department;
 
-class TestStudentsCommand extends Command
+class GenearateStudentsCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -62,9 +62,9 @@ class TestStudentsCommand extends Command
     {
         for ($j=1; $j <= 25 ; $j++) { 
             //generate evening student
-            $number = $this->department->generateAdmissionNo(['session'=>0,'year'=>14,'type'=>1,'serial_no'=>$j]);
+            $number = $this->department->generateAdmissionNo(['session'=>0,'year'=>15,'type'=>1,'serial_no'=>$j]);
             $this->registerThisStudent(['number'=>$number,'type'=>1,'session'=>2]);
-            $this->department->updateDepartmentSessionAdmissionCounter(['session'=>9,'year'=>14,'type'=>1,'serial_no'=>$j,'admission_no'=>$number]);
+            $this->department->updateDepartmentSessionAdmissionCounter(['session'=>9,'year'=>15,'type'=>1,'serial_no'=>$j,'admission_no'=>$number]);
             $bar->advance();
         }
     }
@@ -73,9 +73,9 @@ class TestStudentsCommand extends Command
     {
         for ($i=1; $i <= 25 ; $i++) { 
             //generate morning student
-            $number = $this->department->generateAdmissionNo(['session'=>9,'year'=>14,'type'=>1,'serial_no'=>$i]);
+            $number = $this->department->generateAdmissionNo(['session'=>9,'year'=>15,'type'=>1,'serial_no'=>$i]);
             $this->registerThisStudent(['number'=>$number,'type'=>1,'session'=>1]);
-            $this->department->updateDepartmentSessionAdmissionCounter(['session'=>0,'year'=>14,'type'=>1,'serial_no'=>$i,'admission_no'=>$number]);
+            $this->department->updateDepartmentSessionAdmissionCounter(['session'=>0,'year'=>15,'type'=>1,'serial_no'=>$i,'admission_no'=>$number]);
             $bar->advance();
         }
     }
@@ -84,9 +84,9 @@ class TestStudentsCommand extends Command
     {
         for ($j=1; $j <= 25 ; $j++) { 
             //generate evening student
-            $number = $this->department->generateAdmissionNo(['session'=>0,'year'=>14,'type'=>3,'serial_no'=>$j]);
+            $number = $this->department->generateAdmissionNo(['session'=>0,'year'=>15,'type'=>3,'serial_no'=>$j]);
             $this->registerThisStudent(['number'=>$number,'type'=>2,'session'=>2]);
-            $this->department->updateDepartmentSessionAdmissionCounter(['session'=>9,'year'=>14,'type'=>2,'serial_no'=>$j,'admission_no'=>$number]);
+            $this->department->updateDepartmentSessionAdmissionCounter(['session'=>9,'year'=>15,'type'=>2,'serial_no'=>$j,'admission_no'=>$number]);
             $bar->advance();
         }
     }
@@ -95,9 +95,9 @@ class TestStudentsCommand extends Command
     {
         for ($i=1; $i <= 25 ; $i++) { 
             //generate morning student
-            $number = $this->department->generateAdmissionNo(['session'=>9,'year'=>14,'type'=>3,'serial_no'=>$i]);
+            $number = $this->department->generateAdmissionNo(['session'=>9,'year'=>15,'type'=>3,'serial_no'=>$i]);
             $this->registerThisStudent(['number'=>$number,'type'=>2,'session'=>1]);
-            $this->department->updateDepartmentSessionAdmissionCounter(['session'=>0,'year'=>14,'type'=>2,'serial_no'=>$i,'admission_no'=>$number]);
+            $this->department->updateDepartmentSessionAdmissionCounter(['session'=>0,'year'=>15,'type'=>2,'serial_no'=>$i,'admission_no'=>$number]);
             $bar->advance();
         }
     }

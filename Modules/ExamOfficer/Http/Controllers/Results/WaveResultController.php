@@ -5,6 +5,7 @@ namespace Modules\ExamOfficer\Http\Controllers\Results;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Admin\Entities\Session;
+use Modules\Student\Entities\Result;
 use Modules\Department\Entities\Level;
 use Modules\Department\Services\Vetting\GenerateVettableResult;
 use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
@@ -53,5 +54,16 @@ class WaveResultController extends ExamOfficerBaseController
         }
         return redirect()->route('exam.officer.result.student.wave.index');
     }
+
+    public function waveResult($result_id)
+    {
+        if(Result::find($result_id)->waveThisResult()){
+            session()->flash('message', 'The resut is waved successfully');
+        }
+        return back();
+    }
+
+    
+
 
 }

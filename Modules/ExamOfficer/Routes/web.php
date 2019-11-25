@@ -53,6 +53,7 @@ Route::prefix('exam-officer')
             Route::get('/', 'WaveResultController@index')->name('index');
 		    Route::post('/search', 'WaveResultController@search')->name('search');
 		    Route::get('/semester/{semester_id}/view', 'WaveResultController@view')->name('view');
+		    Route::get('/result/{result_id}/register', 'WaveResultController@waveResult')->name('register');
 	    });
 
 	    //score sheet routes
