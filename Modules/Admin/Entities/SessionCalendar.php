@@ -17,5 +17,20 @@ class SessionCalendar extends BaseModel
     {
     	return $this->belongsTo(Session::class);
     }
+
+    public function semesterCalendars()
+    {
+        return $this->hasMany(SemesterCalendar::class);
+    }
+
+    public function countDown()
+    {
+        $count = Carbon::parse($this->end)->diffInMonths(Carbon::now());
+        $month = 'Month';
+        if($count > 1){
+            $month = 'Months';
+        }
+        return $count.' '.$month.' Remain';
+    }
     
 }

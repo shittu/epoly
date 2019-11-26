@@ -9,7 +9,7 @@ class UploadResultCalendar extends BaseModel
 {
     public function semesterCalendar()
     {
-    	return $this->hasOne(SemesterCalender::class);
+    	return $this->hasOne(SemesterCalendar::class);
     }
 
     public function countDown()

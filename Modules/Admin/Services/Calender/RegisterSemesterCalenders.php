@@ -2,7 +2,7 @@
 namespace Modules\Admin\Services\Calender;
 
 use Modules\Admin\Entities\Session;
-use Modules\Admin\Services\Calender\SubSemesterCalenders;
+use Modules\Admin\Services\Calender\SubSemesterCalendars;
 
 /**
 * this class initiate the calender's session and register various caleders
@@ -61,12 +61,12 @@ class RegisterSemesterCalenders
         ];
         foreach ($sessions as $session) {
             $session = Session::firstOrCreate($session);
-            $sessionCalendar = $session->sessionCalendar()->firstOrCreate(['start'=>$this->data['session_start','end'=>$this->data['end']]]);
-             $this->registerSemestersCalender($sessionCalendar);
+            $sessionCalendar = $session->sessionCalendar()->firstOrCreate(['start'=>$this->data['session_start'],'end'=>$this->data['session_end']]);
+             $this->registerSemestersCalendar($sessionCalendar);
         }
 	}
 
-    public function registerSemestersCalender($sessionCalender)
+    public function registerSemestersCalendar($sessionCalendar)
     {
         $admin_id = 1;
         if(admin()){
@@ -74,18 +74,9 @@ class RegisterSemesterCalenders
         }
     	foreach ($this->semesters as $semester) {
             // create semester calender
-    		$semesterCalendar = $sessionCalendar->semsterCalendars()->firstOrCreate([
+    		$semesterCalendar = $sessionCalendar->semesterCalendars()->firstOrCreate([
                 'semester_id'=>$semester
             ]);
-
-            $semesterCalendar->update([
-                'upload_result_calender_id' => $this->registerNewSemseterResultUploadCalender($semesterCalendar)->id,
-                'lecture_calender_id' => $this->registerNewSemesterLectureCalender($semesterCalendar)->id,
-                'course_allocation_calender_id'=>$this->registerNewSemseterCourseAllocationCalender($semesterCalendar)->id,
-                'marking_calender_id'=>$this->registerNewSemesterExamMarkingCalender($semesterCalendar)->id,
-                'exam_calender_id' => $this->registerNewSemesterExamCalender($semesterCalendar)->id,
-                'admin_id' => $admin_id,
-    		]);
             if($semester == 1){
                 $semesterCalendar->update([
                     'start'=>$this->data['first_semester_start'],
@@ -97,6 +88,12 @@ class RegisterSemesterCalenders
                     'end'=>$this->data['second_semester_end'],
                 ]);
             }
+            $this->registerNewSemseterResultUploadCalendar($semesterCalendar);
+            $this->registerNewSemesterLectureCalendar($semesterCalendar);
+            $this->registerNewSemseterCourseAllocationCalendar($semesterCalendar);
+            $this->registerNewSemesterExamMarkingCalendar($semesterCalendar);
+            $this->registerNewSemesterExamCalendar($semesterCalendar);
+            
     	}
     }
 

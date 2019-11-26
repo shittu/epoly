@@ -2,9 +2,10 @@
 
 namespace Modules\Admin\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+use Modules\Core\Entities\BaseModel;
 
-class SemesterCalendar extends Model
+class SemesterCalendar extends BaseModel
 {
 	public function sessionCalendar()
 	{
@@ -26,28 +27,28 @@ class SemesterCalendar extends Model
 		return $count.' '.$week.' Remain';
     }
 
-    public function courseAllocationCalender()
+    public function courseAllocationCalendar()
     {
-    	return $this->hasOne(CourseAllocationCalender::class);
+    	return $this->hasOne(CourseAllocationCalendar::class);
     }
 
-    public function examCalender()
+    public function examCalendar()
     {
-    	return $this->hasOne(ExamCalender::class);
+    	return $this->hasOne(ExamCalendar::class);
     }
 
-    public function lectureCalender()
+    public function lectureCalendar()
     {
-    	return $this->hasOne(LectureCalender::class);
+    	return $this->hasOne(LectureCalendar::class);
     }
 
-    public function markingCalender()
+    public function markingCalendar()
     {
-    	return $this->hasOne(MarkingCalender::class);
+    	return $this->hasOne(MarkingCalendar::class);
     }
 
-    public function uploadResultCalender()
+    public function uploadResultCalendar()
     {
-    	return $this->hasOne(UploadResultCalender::class);
+    	return $this->hasOne(UploadResultCalendar::class);
     }
 }

@@ -9,7 +9,7 @@ class Session extends BaseModel
 {
     public function sessionCalendar()
     {
-    	return $this->hasOne(Calender::class);
+    	return $this->hasOne(SessionCalendar::class);
     }
 
     public function sessionRegistrations()

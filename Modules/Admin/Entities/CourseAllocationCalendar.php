@@ -9,7 +9,7 @@ class CourseAllocationCalendar extends BaseModel
 {
     public function semesterCalendar()
     {
-        return $this->hasOne(SemesterCalender::class);
+        return $this->belongsTo(SemesterCalendar::class);
     }
 
     public function countDown()
