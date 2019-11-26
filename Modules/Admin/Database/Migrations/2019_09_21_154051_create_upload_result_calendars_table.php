@@ -28,6 +28,6 @@ class CreateUploadResultCalendarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('upload_result_calenders');
+        Schema::dropIfExists('upload_result_calendars');
     }
 }

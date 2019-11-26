@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCourseAllocationCalendersTable extends Migration
+class CreateCourseAllocationCalendarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCourseAllocationCalendersTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_allocation_calenders', function (Blueprint $table) {
+        Schema::create('course_allocation_calendars', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('start');
             $table->string('end');
@@ -28,6 +28,6 @@ class CreateCourseAllocationCalendersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_allocation_calenders');
+        Schema::dropIfExists('course_allocation_calendars');
     }
 }

@@ -7,9 +7,9 @@ use Modules\Core\Entities\BaseModel;
 
 class UploadResultCalendar extends BaseModel
 {
-    public function calender()
+    public function semesterCalendar()
     {
-    	return $this->hasOne(Calender::class);
+    	return $this->hasOne(SemesterCalender::class);
     }
 
     public function countDown()
