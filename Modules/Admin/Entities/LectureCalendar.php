@@ -5,7 +5,7 @@ namespace Modules\Admin\Entities;
 use Illuminate\Support\Carbon;
 use Modules\Core\Entities\BaseModel;
 
-class ExamCalender extends BaseModel
+class LectureCalendar extends BaseModel
 {
     public function calender()
     {

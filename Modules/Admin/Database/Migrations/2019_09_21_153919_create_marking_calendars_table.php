@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExamCalendersTable extends Migration
+class CreateMarkingCalendersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateExamCalendersTable extends Migration
      */
     public function up()
     {
-        Schema::create('exam_calenders', function (Blueprint $table) {
+        Schema::create('marking_calendars', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('start');
             $table->string('end');
@@ -28,6 +28,6 @@ class CreateExamCalendersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exam_calenders');
+        Schema::dropIfExists('marking_calendars');
     }
 }
