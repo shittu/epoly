@@ -1,95 +1,96 @@
 <?php
 namespace Modules\Admin\Services\Calender;
 
-use Modules\Admin\Entities\ExamCalender;
-use Modules\Admin\Entities\LectureCalender;
-use Modules\Admin\Entities\MarkingCalender;
-use Modules\Admin\Entities\UploadResultCalender;
-use Modules\Admin\Entities\CourseAllocationCalender;
+use Modules\Admin\Entities\ExamCalendar;
+use Modules\Admin\Entities\LectureCalendar;
+use Modules\Admin\Entities\MarkingCalendar;
+use Modules\Admin\Entities\UploadResultCalendar;
+use Modules\Admin\Entities\CourseAllocationCalendar;
 
 trait SubSemesterCalenders
 
 {
-	public function registerNewSemesterExamMarkingCalender($semester)
+	public function registerNewSemesterExamMarkingCalendar($semesterCalendar)
     {
-    	$calender = null;
-        if($semester == 1){
-            $calender = MarkingCalender::firstOrCreate([
+    	$calendar = null;
+        if($semesterCalendar->semester_id == 1){
+            $calendar = $semesterCalendar->markingCalendar()->firstOrCreate([
             	'start'=>$this->data['first_semester_exam_marking_start'],
             	'end'=>$this->data['first_semester_exam_marking_end']
             ]);
     	}else{
-            $calender = MarkingCalender::firstOrCreate([
+            $calendar = $semesterCalendar->markingCalendar()->firstOrCreate([
             	'start'=>$this->data['second_semester_exam_marking_start'],
             	'end'=>$this->data['second_semester_exam_marking_end']
             ]);
     	}
-    	return $calender;
+    	return $calendar;
     }
 
-    public function registerNewSemseterCourseAllocationCalender($semester)
+    public function registerNewSemseterCourseAllocationCalendar($semesterCalendar)
     {
-    	$calender = null;
-    	if($semester == 1){
-            $calender = CourseAllocationCalender::firstOrCreate([
+    	$calendar = null;
+    	if($semesterCalendar->semester_id == 1){
+            $calendar = $semesterCalendar->courseAllocationCalendar()->firstOrCreate([
             	'start'=>$this->data['first_semester_course_allocatiion_start'],
             	'end'=>$this->data['first_semester_course_allocatiion_end']
             ]);
     	}else{
-            $calender = CourseAllocationCalender::firstOrCreate([
+            $calendar = $semesterCalendar->courseAllocationCalendar()->firstOrCreate([
             	'start'=>$this->data['second_semester_course_allocation_start'],
             	'end'=>$this->data['second_semester_course_allocation_end']
             ]);
     	}
-    	return $calender;
+    	return $calendar;
     }
 
-    public function registerNewSemseterResultUploadCalender($semester)
+    public function registerNewSemseterResultUploadCalendar($semesterCalendar)
     {
-    	$calender = null;
-    	if($semester == 1){
-            $calender = UploadResultCalender::firstOrCreate([
+    	$calendar = null;
+    	if($semesterCalendar->semester_id == 1){
+            $calendar = $semesterCalendar->uploadResultCalendar()->firstOrCreate([
             	'start'=>$this->data['first_semester_result_upload_start'],
             	'end'=>$this->data['first_semester_result_upload_end']
             ]);
     	}else{
-            $calender = UploadResultCalender::firstOrCreate([
+            $calendar = $semesterCalendar->uploadResultCalendar()->firstOrCreate([
             	'start'=>$this->data['second_semester_result_upload_start'],
             	'end'=>$this->data['second_semester_result_upload_end']
             ]);
     	}
-    	return $calender;
+    	return $calendar;
     }
-    public function registerNewSemesterExamCalender($semester)
+
+    public function registerNewSemesterExamCalendar($semesterCalendar)
     {
-    	$calender = null;
-    	if($semester == 1){
-            $calender = ExamCalender::firstOrCreate([
+    	$calendar = null;
+    	if($semesterCalendar->semester_id == 1){
+            $calendar = $semesterCalendar->examCalendar()->firstOrCreate([
             	'start'=>$this->data['first_semester_exam_start'],
             	'end'=>$this->data['first_semester_exam_end']
             ]);
     	}else{
-            $calender = ExamCalender::firstOrCreate([
+            $calendar = $semesterCalendar->examCalendar()->firstOrCreate([
             	'start'=>$this->data['second_semester_exam_start'],
             	'end'=>$this->data['second_semester_exam_end']
             ]);
     	}
-    	return $calender;
+    	return $calendar;
     }
-    public function registerNewSemesterLectureCalender($semester)
+    public function registerNewSemesterLectureCalendar($semesterCalendar)
     {
-    	$calender = null;
-    	if($semester == 1){
-            $calender = LectureCalender::firstOrCreate([
+    	$calendar = null;
+    	if($semesterCalendar->semester_id == 1){
+            $calendar = $semesterCalendar->lectureCalendar()->firstOrCreate([
             	'start'=>$this->data['first_semester_lecture_start'],
             	'end'=>$this->data['first_semester_lecture_end']
             ]);
     	}else{
-            $calender = LectureCalender::firstOrCreate([
+            $calendar = $semesterCalendar->lectureCalendar()->firstOrCreate([
             	'start'=>$this->data['second_semester_lecture_start'],
             	'end'=>$this->data['second_semester_lecture_end']
             ]);
     	}
-    	return $calender;
+    	return $calendar;
     }
 }

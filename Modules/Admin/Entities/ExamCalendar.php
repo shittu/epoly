@@ -5,11 +5,11 @@ namespace Modules\Admin\Entities;
 use Illuminate\Support\Carbon;
 use Modules\Core\Entities\BaseModel;
 
-class ExamCalender extends BaseModel
+class ExamCalendar extends BaseModel
 {
-    public function calender()
+    public function semesterCalendar()
     {
-    	return $this->hasOne(Calender::class);
+        return $this->belongsTo(SemesterCalendar::class);
     }
 
     public function countDown()

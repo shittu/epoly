@@ -57,17 +57,21 @@
                                 <!-- sub menu -->
                                 <ul>
                                     @if(admin() || examOfficer() || headOfDepartment())
-                                    <li>
-                                        <a href="{{route('admin.calender.create')}}">New {{currentSession()->name}} Calendar</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="modal" data-target="#activate_session" >Activate New Calendar</a>
-                                    </li>
+                                        @if(!currentSession()->sessionCalendar)
+                                        <li>
+                                            <a href="{{route('admin.calender.create')}}">New {{currentSession()->name}} Calendar</a>
+                                        </li>
+                                        @else
+                                        <li>
+                                            <a href="{{route('admin.calender.view',[str_replace('/','-',currentSession()->name)])}}">View {{currentSession()->name}} Calendar</a>
+                                        </li>
+                                        @endif
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target="#activate_session" >Activate New Calendar</a>
+                                        </li>
                                     <!-- the modal is included from main layouts.app -->
                                     @endif
-                                    <li>
-                                        <a href="{{route('admin.calender.view',[str_replace('/','-',currentSession()->name)])}}">View {{currentSession()->name}} Calendar</a>
-                                    </li>
+                                    
                                     
                                 </ul>
                                 <!-- / sub menu -->

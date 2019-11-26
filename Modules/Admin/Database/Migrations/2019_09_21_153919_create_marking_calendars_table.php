@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLectureCalendersTable extends Migration
+class CreateMarkingCalendarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,16 @@ class CreateLectureCalendersTable extends Migration
      */
     public function up()
     {
-        Schema::create('lecture_calenders', function (Blueprint $table) {
+        Schema::create('marking_calendars', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('semester_calendar_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('semester_calendars')
+            ->delete('restrict')
+            ->update('cascade');
             $table->string('start');
             $table->string('end');
             $table->timestamps();
@@ -28,6 +36,6 @@ class CreateLectureCalendersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lecture_calenders');
+        Schema::dropIfExists('marking_calendars');
     }
 }

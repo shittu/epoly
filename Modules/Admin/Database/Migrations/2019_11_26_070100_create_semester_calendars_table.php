@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCalendersTable extends Migration
+class CreateSemesterCalendarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,38 +13,14 @@ class CreateCalendersTable extends Migration
      */
     public function up()
     {
-        Schema::create('calenders', function (Blueprint $table) {
+        Schema::create('semester_calendars', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('admin_id')
+            $table->integer('session_calendar_id')
             ->unsigned()
             ->nullable()
             ->foreign()
             ->references('id')
-            ->on('admins')
-            ->delete('restrict')
-            ->update('cascade');
-            $table->integer('session_id')
-            ->unsigned()
-            ->nullable()
-            ->foreign()
-            ->references('id')
-            ->on('sessions')
-            ->delete('restrict')
-            ->update('cascade');
-            $table->integer('exam_calender_id')
-            ->unsigned()
-            ->nullable()
-            ->foreign()
-            ->references('id')
-            ->on('exam_calenders')
-            ->delete('restrict')
-            ->update('cascade');
-            $table->integer('upload_result_calender_id')
-            ->unsigned()
-            ->nullable()
-            ->foreign()
-            ->references('id')
-            ->on('upload_result_calenders')
+            ->on('session_calendars')
             ->delete('restrict')
             ->update('cascade');
             $table->integer('semester_id')
@@ -55,28 +31,28 @@ class CreateCalendersTable extends Migration
             ->on('semesters')
             ->delete('restrict')
             ->update('cascade');
-            $table->integer('lecture_calender_id')
+            $table->integer('lecture_calendar_id')
             ->unsigned()
             ->nullable()
             ->foreign()
             ->references('id')
-            ->on('lecture_calenders')
+            ->on('lecture_calendars')
             ->delete('restrict')
             ->update('cascade');
-            $table->integer('course_allocation_calender_id')
+            $table->integer('course_allocation_calendar_id')
             ->unsigned()
             ->nullable()
             ->foreign()
             ->references('id')
-            ->on('course_allocation_calenders')
+            ->on('course_allocation_calendars')
             ->delete('restrict')
             ->update('cascade');
-            $table->integer('marking_calender_id')
+            $table->integer('marking_calendar_id')
             ->unsigned()
             ->nullable()
             ->foreign()
             ->references('id')
-            ->on('marking_calenders')
+            ->on('marking_calendars')
             ->delete('restrict')
             ->update('cascade');
             $table->string('start')->nullable();
@@ -92,6 +68,6 @@ class CreateCalendersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('calenders');
+        Schema::dropIfExists('semester_calendars');
     }
 }

@@ -7,9 +7,9 @@ use Modules\Core\Entities\BaseModel;
 
 class Session extends BaseModel
 {
-    public function calenders()
+    public function sessionCalendar()
     {
-    	return $this->hasMany(Calender::class);
+    	return $this->hasOne(SessionCalendar::class);
     }
 
     public function sessionRegistrations()
