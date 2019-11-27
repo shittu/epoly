@@ -34,12 +34,8 @@ trait AdmissionNumberGenerator
 
 	public function yearExt($student)
 	{
-		$yearExt = substr(date('Y'), 0,2);
-
-		if($student['year']){
-            $yearExt = $student['year'];
-		}
-		return $yearExt;
+		
+		return substr(currentSession()->name,7);
 	}
 
 	public function getAdmissionSerialNo(array $student)
@@ -56,6 +52,7 @@ trait AdmissionNumberGenerator
 	public function updateDepartmentSessionAdmissionCounter(array $student)
 	{
 		//update the admission counter if the current admission no is not in the reserved admission
+		dd($student);
         $reserved_admission = null;
 		foreach ($this->reservedDepartmentSessionAdmissions->where(
 			'admission_no',$student['admission_no']

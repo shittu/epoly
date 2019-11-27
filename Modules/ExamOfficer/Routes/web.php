@@ -14,6 +14,32 @@
 Route::prefix('exam-officer')
     ->name('exam.officer.')
     ->group(function() {
+
+        //admission routes
+        Route::prefix('student/admission')
+		->name('student.admission.')
+		->namespace('Admission')
+		->group(function() {
+
+			Route::get('/', 'AdmissionController@index')->name('index');
+
+			Route::get('/create-admission', 'AdmissionController@create')->name('create');
+
+			Route::post('{admission_id}/update-admission', 'AdmissionController@update')->name('update');
+
+			Route::get('{admission_id}/edit-admission', 'AdmissionController@edit')->name('edit');
+
+			Route::get('{admission_id}/revoke-admission', 'AdmissionController@revokeAdmission')->name('revoke');
+
+			Route::post('/register-admission', 'AdmissionController@register')->name('register');
+
+			Route::get('{admission_id}/delete-admission', 'AdmissionController@delete')->name('delete');
+			
+		});
+
+
+
+
         Route::get('/', 'ExamOfficerController@verify')->name('verify');
 	    Route::get('/dashboard', 'ExamOfficerController@index')->name('dashboard');
 	    Route::get('/login', 'Auth\ExamOfficerLoginController@showLoginForm')->name('auth.login');

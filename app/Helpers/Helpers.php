@@ -156,6 +156,23 @@ if (!function_exists('sessions')) {
     }
 }
 
+if (!function_exists('department')) {
+    function department()
+    {    
+        $department = null;
+        if(headOfDepartment()) {
+            $department = headOfDepartment()->department;
+        }elseif (examOfficer()) {
+            $department = examOfficer()->department;
+        }elseif (student()) {
+            $department = student()->admission->department;
+        }elseif (lecturer()) {
+            $department = lecturer()->staff->department;
+        }
+        return $department;
+    }
+}
+
 
 
         

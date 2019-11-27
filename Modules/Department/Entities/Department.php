@@ -4,6 +4,10 @@ namespace Modules\Department\Entities;
 
 use Modules\Core\Entities\BaseModel;
 use Modules\Admin\Entities\Session;
+use Modules\Department\Entities\Level;
+use Modules\Department\Entities\Semester;
+use Modules\Student\Entities\StudentType;
+use Modules\Student\Entities\StudentSession;
 use Modules\Department\Services\Graduation\HasGraduatedStudent;
 use Modules\Admission\Services\Traits\AdmissionNumberGenerator;
 
@@ -103,5 +107,24 @@ class Department extends BaseModel
             }
         }
         return $sessions;
+    }
+    public function levels()
+    {
+        return Level::all();
+    }
+
+    public function semesters()
+    {
+        return Semester::all();
+    }
+
+    public function studentTypes()
+    {
+        return StudentType::all();
+    }
+
+    public function studentSessions()
+    {
+        return StudentSession::all();
     }
 }
