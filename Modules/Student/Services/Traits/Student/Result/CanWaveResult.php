@@ -45,7 +45,7 @@ trait CanWaveResult
 
     public function updateThisResultRemark()
     {
-        $this->remark->update(['remark_id'=>5]);
+        $this->update(['remark_id'=>5]);
     }
 
     public function waved()
