@@ -28,10 +28,10 @@ class CreateAdmissionsTable extends Migration
             ->nullable()
             ->foreign()
             ->references('id')
-            ->on('head_of_departments')
+            ->on('exam_officers')
             ->delete('restrict')
             ->update('cascade');
-            $table->integer('exam_officer_id')
+            $table->integer('department_id')
             ->unsigned()
             ->nullable()
             ->foreign()

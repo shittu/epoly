@@ -52,7 +52,6 @@ trait AdmissionNumberGenerator
 	public function updateDepartmentSessionAdmissionCounter(array $student)
 	{
 		//update the admission counter if the current admission no is not in the reserved admission
-		dd($student);
         $reserved_admission = null;
 		foreach ($this->reservedDepartmentSessionAdmissions->where(
 			'admission_no',$student['admission_no']
@@ -62,7 +61,7 @@ trait AdmissionNumberGenerator
 		if($reserved_admission){
 			$reserved_admission->delete();
 		}else{
-			$this->departmentSessionAdmission->update(['count' => $student['serial_no']]);
+			$this->departmentSessionAdmission->update(['count' => $student['serial_no'] + 1]);
 		}
 		
 	}

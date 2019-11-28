@@ -4,10 +4,10 @@ namespace Modules\ExamOfficer\Http\Controllers\Admission;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
+use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
 
-class AdmissionController extends Controller
+class AdmissionController extends ExamOfficerBaseController
 {
     /**
      * Display a listing of the resource.
@@ -38,9 +38,10 @@ class AdmissionController extends Controller
             'session'=>'required',
             'type'=>'required',
         ]);
-        
+        $data = $request->all();
         $admission = examOfficer()->admissions()->create([
-            'admission_no'=>examOfficer()->department->generateAdmissionNo($request->all())]);
+            'admission_no'=>examOfficer()->department->generateAdmissionNo($data)]);
+        $data['admission_no'] = $admission->admission_no;
         $student = $admission->student()->create([
             'first_name'=>'',
             'last_name'=>'',
@@ -52,7 +53,7 @@ class AdmissionController extends Controller
             'student_session_id' => $request->session
         ]);
         $student->studentAccount()->create([]);
-        examOfficer()->department->updateDepartmentSessionAdmissionCounter($request->all());
+        examOfficer()->department->updateDepartmentSessionAdmissionCounter($data);
         session()->flash('message','Congratulation this admission is registered successfully and this student can logged in as student using '.$admission->admission_no.'@poly.com as his email and '.$admission->admission_no.' as his password');
 
         return redirect()->route('department.admission.edit',[$admission->id]);
