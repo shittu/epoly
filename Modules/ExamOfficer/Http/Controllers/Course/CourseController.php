@@ -4,9 +4,10 @@ namespace Modules\ExamOfficer\Http\Controllers\Course;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use Modules\Department\Entities\Course;
+use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
 
-class CourseController extends Controller
+class CourseController extends ExamOfficerBaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,11 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('examofficer::index');
+        return view('examofficer::course.index',['route'=>[
+                'edit'=>'exam.officer.department.course.edit',
+                'delete'=>'exam.officer.department.course.delete',
+            ]
+        ]);
     }
 
     /**
@@ -31,9 +36,22 @@ class CourseController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function register(Request $request)
     {
-        //
+        $course = department()->courses()->firstOrCreate([
+            'code'=>$request->code,
+            'title'=>$request->title,
+            'level_id'=>$request->level,
+            'semester_id'=>$request->semester,
+            'unit'=>$request->unit
+        ]);
+        department()->departmentCourses()->create(['course_id'=>$course->id]);
+        session()->flash('message','Course is created successfully');
+        return redirect()->route('exam.officer.department.course.index',['route'=>[
+                'edit'=>'exam.officer.department.course.edit',
+                'delete'=>'exam.officer.department.course.delete',
+            ]
+        ]);
     }
 
     /**
@@ -51,9 +69,9 @@ class CourseController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($course_id)
     {
-        return view('examofficer::edit');
+        return view('examofficer::course.edit',['route'=>'exam.officer.department.course.update','course'=>Course::find($course_id)]);
     }
 
     /**
@@ -62,9 +80,18 @@ class CourseController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $course_id)
     {
-        //
+        $course = Course::find($course_id);
+        $course->update([
+            'code'=>$request->code,
+            'title'=>$request->title,
+            'level_id'=>$request->level,
+            'semester_id'=>$request->semester,
+            'unit'=>$request->unit
+        ]);
+        session()->flash('message','Course is updated successfully');
+        return back();
     }
 
     /**

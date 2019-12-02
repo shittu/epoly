@@ -7,7 +7,7 @@
     	</div>
     </div>
     
-    <form class="login-form" action="{{route('department.course.register')}}" method="post">
+    <form class="login-form" action="{{route($route ?? 'department.course.register')}}" method="post">
         @csrf
         <div class="form-group">
         	<label>Couser Title</label>

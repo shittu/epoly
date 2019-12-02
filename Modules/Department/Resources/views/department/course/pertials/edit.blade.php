@@ -7,7 +7,7 @@
     	</div>
     </div>
     
-    <form class="login-form" action="{{route('department.course.update',['course_id'=>$course->id])}}" method="post">
+    <form class="login-form" action="{{route($route ?? 'department.course.update',['course_id'=>$course->id])}}" method="post">
         @csrf
         <div class="form-group">
         	<label>Couser Title</label>
@@ -42,7 +42,7 @@
         	<label>Level</label>
             <select name="level" class="form-control">
             	<option value="{{$course->level->id}}">{{$course->level->name}}</option>
-            	@foreach(headOfDepartment()->levels() as $level)
+            	@foreach(department()->levels() as $level)
             	    @if($course->level->id != $level->id)
                         <option value="{{$level->id}}">
                         	{{$level->name}}
@@ -60,7 +60,7 @@
         	<label>Semester</label>
             <select name="semester" class="form-control">
             	<option value="{{$course->semester->id}}">{{$course->semester->name}}</option>
-            	@foreach(headOfDepartment()->semesters() as $semester)
+            	@foreach(department()->semesters() as $semester)
             	    @if($course->semester->id != $semester->id)
 	                    <option value="{{$semester->id}}">
 	                    	{{$semester->name}}

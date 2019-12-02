@@ -1,4 +1,4 @@
-@if(count(headOfDepartment()->department->departmentCourses)>0)
+@if(count(department()->departmentCourses)>0)
 	    <table class="table">
 	     	<thead>
 	     		<tr>
@@ -12,7 +12,7 @@
 	     		</tr>
 	     	</thead>
 	     	<tbody>
-	     		@foreach(headOfDepartment()->department->departmentCourses as $departmentCourse)
+	     		@foreach(department()->departmentCourses as $departmentCourse)
 	     		<tr>
 	     			<td>{{$loop->index+1}}</td>
 	     			<td>{{$departmentCourse->course->title}}</td>
@@ -21,8 +21,10 @@
 	     			<td>{{$departmentCourse->course->semester->name}}</td>
 	     			<td>{{$departmentCourse->course->level->name}}</td>
 	     			<td>
-	     				<button class="btn btn-danger" onclick="confirm('Are you sure you want to delete this course from the list of courses in this department')"><a href="{{route('department.course.delete',['course_id'=>$departmentCourse->course->id])}}" style="color: white">Delete</a> </i></button>
-	     				<button class="btn btn-info"><a href="{{route('department.course.edit',['course_id'=>$departmentCourse->course->id])}}" style="color: white">Edit</a></i></button>
+	     				<button class="btn btn-danger" onclick="confirm('Are you sure you want to delete this course from the list of courses in this department')"><a href="{{route($route['delete'] ?? 'department.course.delete',['course_id'=>$departmentCourse->course->id])}}" style="color: white">Delete</a> </i>
+	     				</button>
+	     				<button class="btn btn-info"><a href="{{route($route['edit'] ?? 'department.course.edit',['course_id'=>$departmentCourse->course->id])}}" style="color: white">Edit</a></i>
+	     				</button>
 	     			</td>
 	     		</tr>
 	     		@endforeach
