@@ -49,7 +49,7 @@ class MakeFirstSpillCourseRegistration extends Command
             $session_registration = $student->sessionRegistrations()->firstOrCreate([
             'level_id'=>6,
             'department_id'=>$student->admission->department_id,
-            'session_id'=> Session::find(3)->id
+            'session_id'=> currentSession()->id
             ]);
             
             // register all the repeated courses
@@ -58,7 +58,7 @@ class MakeFirstSpillCourseRegistration extends Command
 
                 $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
                     'course_id'=>$repeatCourse->course->id,
-                    'session_id'=> Session::find(3)->id
+                    'session_id'=> currentSession()->id
                 ]);
 
                 $course_registration->result()->firstOrCreate([]);

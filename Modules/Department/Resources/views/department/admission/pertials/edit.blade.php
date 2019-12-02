@@ -1,12 +1,12 @@
-<div class="col-md-4"></div>
-<div class="col-md-4"><br>
+<div class="col-md-3"></div>
+<div class="col-md-6"><br>
     <div class="row">
     	<div class="col-md-12">
     		<h3>Edit Admission</h3>
     	</div>
     </div>
     
-    <form class="login-form" action="{{route('department.admission.update',[$admission->id])}}" method="post">
+    <form class="login-form" action="{{route($route ?? 'department.admission.update',[$admission->id])}}" method="post">
         @csrf
         <div class="form-group">
             <label>First Name</label>
@@ -98,10 +98,10 @@
         <div class="form-group">
         	<label>Student Type</label>
             <select name="type" class="form-control">
-            	<option value="{{$admission->student->studentType->id}}">{{$admission->student->studentType->name}}</option>
-            	@foreach(headOfDepartment()->studentTypes() as $student_type)
+            	<option value="{{$admission->student->studentType->code}}">{{$admission->student->studentType->name}}</option>
+            	@foreach(department()->studentTypes() as $student_type)
             	    @if($admission->student->studentType->id != $student_type->id)
-                    <option value="{{$student_type->id}}">{{$student_type->name}}</option>
+                    <option value="{{$student_type->code}}">{{$student_type->name}}</option>
                     @endif
             	@endforeach
             </select>
@@ -114,10 +114,10 @@
         <div class="form-group">
             <label>Student Type</label>
             <select name="session" class="form-control">
-                <option value="{{$admission->student->studentSession->id}}">{{$admission->student->studentSession->name}}</option>
-                @foreach(headOfDepartment()->studentSessions() as $student_session)
+                <option value="{{$admission->student->studentSession->code}}">{{$admission->student->studentSession->name}}</option>
+                @foreach(department()->studentSessions() as $student_session)
                     @if($admission->student->studentSession->id != $student_session->id)
-                        <option value="{{$student_session->id}}">
+                        <option value="{{$student_session->code}}">
                             {{$student_session->name}}
                         </option>
                     @endif

@@ -10,10 +10,10 @@ use Modules\Student\Entities\StudentType;
 use Modules\Student\Entities\StudentSession;
 use Modules\Department\Services\Graduation\HasGraduatedStudent;
 use Modules\Admission\Services\Traits\AdmissionNumberGenerator;
-
+use Modules\Department\Services\Admission\CanAdmittStudent as Admittable;
 class Department extends BaseModel
 {
-    use AdmissionNumberGenerator, HasGraduatedStudent;
+    use AdmissionNumberGenerator, HasGraduatedStudent, Admittable;
 
     public function college()
     {
@@ -69,10 +69,15 @@ class Department extends BaseModel
     {
         return $this->hasMany(LecturerCourseAllocation::class);
     }
-
+ 
     public function diferredSessions()
     {
         return $this->hasMany('Modules\Student\Entities\DiferredSession');
+    }
+
+    public function admissions()
+    {
+        return $this->hasMany('Modules\Department\Entities\Admission');
     }
 
     public function diferredSemesters()

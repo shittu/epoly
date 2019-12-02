@@ -37,6 +37,8 @@ class CalenderController extends AdminBaseController
         return redirect()->route('admin.calender.view',[str_replace('/','-',$calender->session)]);
     }
 
+    
+
     /**
      * Show the specified resource.
      * @param int $id

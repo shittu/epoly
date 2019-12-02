@@ -6,7 +6,7 @@ trait HasGraduatedStudent
 	public function graduuates()
 	{
 		$graduates = [];
-		foreach ($this->admissions() as $admission) {
+		foreach ($this->availableAdmissions() as $admission) {
 			if($admission->student->graduated()){
 				$graduates[] = $admission->stduent;
 			}
@@ -14,7 +14,7 @@ trait HasGraduatedStudent
 		$graduates;
 	}
 
-	public function admissions(Session $session)
+	public function availableAdmissions(Session $session)
 	{
 		return $this->admissions->where('session_id',$session->id);
 	}

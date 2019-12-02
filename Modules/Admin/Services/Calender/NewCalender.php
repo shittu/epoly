@@ -12,16 +12,9 @@ class NewCalender
 	function __construct(array $data)
 	{
 		$this->data = $data;
-		$this->data['session'] = $this->getCurrentSession();
+		$this->data['session'] = $this->currentSession()->name;
 		$this->session = $this->data['session'];
 		new RegisterSemesterCalenders([1,2],$this->data);
-	}
-
-	public function getCurrentSession()
-	{
-		$start = date('Y')-1;
-		$end = date('Y');
-		return $start.'/'.$end;
 	}
 
 }
