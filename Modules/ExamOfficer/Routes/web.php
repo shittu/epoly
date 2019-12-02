@@ -15,6 +15,19 @@ Route::prefix('exam-officer')
     ->name('exam.officer.')
     ->group(function() {
 
+        Route::prefix('department/course')
+		->name('department.course.')
+		->namespace('Course')
+		->group(function() {
+
+			Route::get('/', 'CourseController@index')->name('index');
+			Route::get('/create-course', 'CourseController@create')->name('create');
+			Route::post('{course_id}/update-course', 'CourseController@update')->name('update');
+			Route::get('{course_id}/edit-course', 'CourseController@edit')->name('edit');
+			Route::post('/register-course', 'CourseController@register')->name('register');
+			Route::get('{course_id}/delete-course', 'CourseController@delete')->name('delete');
+			
+		});
         //admission routes
         Route::prefix('student/admission')
 		->name('student.admission.')

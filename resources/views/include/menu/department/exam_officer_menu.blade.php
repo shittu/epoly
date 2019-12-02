@@ -28,14 +28,14 @@
     <a href="#">Courses</a>
     <ul>
         <li>
-            <a href="{{route('department.course.create')}}">Register Course</a>
+            <a href="{{route('exam.officer.department.course.create')}}">Register Course</a>
         </li>
         <li>
             <a href="#">Upload Courses</a>
         </li>
         
         <li>
-            <a href="{{route('department.course.create')}}">View Courses</a>
+            <a href="{{route('exam.officer.department.course.index')}}">View Courses</a>
         </li>
     </ul>
 </li>
