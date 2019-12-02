@@ -6,12 +6,13 @@ use Modules\Core\Entities\BaseModel;
 use Modules\Staff\Entities\Tribe;
 use Modules\Staff\Entities\Gender;
 use Modules\Staff\Entities\Religion;
+use Modules\Department\Services\Admission\AfterAdmission;
 use Modules\Admission\Services\Traits\AdmissionHasDetail;
 use Modules\Department\Services\Admission\CanUpdateAdmission as UpdateAble;
 class Admission extends BaseModel
 {
 	
-	use AdmissionHasDetail, UpdateAble;
+	use AdmissionHasDetail, UpdateAble, AfterAdmission;
 
     public function student()
     {

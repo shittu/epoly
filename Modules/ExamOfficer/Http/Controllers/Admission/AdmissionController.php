@@ -16,7 +16,11 @@ class AdmissionController extends ExamOfficerBaseController
      */
     public function index()
     {
-        return view('examofficer::admission.index');
+        return view('examofficer::admission.index',['route'=>[
+            'delete'=>'exam.officer.student.admission.delete',
+            'edit'=>'exam.officer.student.admission.edit',
+            'revoke'=>'exam.officer.student.admission.revoke',
+        ]]);
     }
 
     /**
@@ -52,19 +56,8 @@ class AdmissionController extends ExamOfficerBaseController
      */
     public function revokeAdmission($admission_id)
     {
-        $admission = Admission::find($admission_id);
-        if($admission->student->is_active == 1){
-            $admission->student->is_active = 0;
-        }else{
-            $admission->student->is_active = 1;
-        }
-        $admission->student->save();
-        
-        $admission->student->update(['is_active'=>0]);
-
-        session()->flash('message','Congratulation this admission is revoked successfully');
-
-        return redirect()->route('department.admission.index');
+        Admission::find($admission_id)->revokeThisAdmission();
+        return redirect()->route('exam.officer.student.admission.index');
     }
 
     /**
@@ -101,13 +94,7 @@ class AdmissionController extends ExamOfficerBaseController
      */
     public function delete($admission_id)
     {
-        $admission = Admission::find($admission_id);
-        $admission->student->studentAccount->delete();
-        $admission->student->delete();
-        $admission->delete();
-
-        session()->flash('message','Congratulation this admission is deleted successfully');
-
-        return redirect()->route('department.admission.index');
+        Admission::find($admission_id)->deleteThisAdmission();
+        return redirect()->route('exam.officer.student.admission.index');
     }
 }
