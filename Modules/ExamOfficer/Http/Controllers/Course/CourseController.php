@@ -55,16 +55,6 @@ class CourseController extends ExamOfficerBaseController
     }
 
     /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('examofficer::show');
-    }
-
-    /**
      * Show the form for editing the specified resource.
      * @param int $id
      * @return Response
@@ -91,7 +81,11 @@ class CourseController extends ExamOfficerBaseController
             'unit'=>$request->unit
         ]);
         session()->flash('message','Course is updated successfully');
-        return back();
+        return redirect()->route('exam.officer.department.course.index',['route'=>[
+                'edit'=>'exam.officer.department.course.edit',
+                'delete'=>'exam.officer.department.course.delete',
+            ]
+        ]);
     }
 
     /**
@@ -99,8 +93,27 @@ class CourseController extends ExamOfficerBaseController
      * @param int $id
      * @return Response
      */
-    public function destroy($id)
+    public function delete($course_id)
     {
-        //
+        $errors = [];
+        $course = Course::find($course_id);
+        //check if this course is not allocated to any lecturer
+        if($course->lecturerCourseAllocation){
+            $errors[] = 'Sorry this course is already been allocated to some lecturer to delete it you have to delete the allocation';
+        }
+        if($course->departmentCourses){
+            $errors[] = 'Sorry this course is already been assigned to some department to delete it you have to delete the department course assignment';
+        }
+        if(empty($errors)){
+            $course->delete();
+            session()->flash('message','Course is deleted successfully');
+        }else{
+            session()->flash('error',$errors);
+        }
+        return redirect()->route('exam.officer.department.course.index',['route'=>[
+                'edit'=>'exam.officer.department.course.edit',
+                'delete'=>'exam.officer.department.course.delete',
+            ]
+        ]);
     }
 }
