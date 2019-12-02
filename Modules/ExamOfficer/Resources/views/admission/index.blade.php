@@ -1,7 +1,7 @@
-@extends('department::layouts.master')
+@extends('examofficer::layouts.master')
 
 @section('title')
-    department registered courses
+    department register student
 @endsection
 
 @section('page-content')

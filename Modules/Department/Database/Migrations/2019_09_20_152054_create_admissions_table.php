@@ -23,6 +23,14 @@ class CreateAdmissionsTable extends Migration
             ->on('head_of_departments')
             ->delete('restrict')
             ->update('cascade');
+            $table->integer('exam_officer_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('exam_officers')
+            ->delete('restrict')
+            ->update('cascade');
             $table->integer('department_id')
             ->unsigned()
             ->nullable()

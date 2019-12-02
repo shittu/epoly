@@ -1,6 +1,7 @@
-@extends('department::layouts.master')
+@extends('examofficer::layouts.master')
+
 @section('title')
-    department create new admission page
+    department register student
 @endsection
 
 @section('page-content')

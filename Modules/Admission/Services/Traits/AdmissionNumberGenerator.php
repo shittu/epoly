@@ -11,66 +11,76 @@ trait AdmissionNumberGenerator
 	
 	public function generateAdmissionNo(array $student)
 	{
-		$reserved_admission_no = null;
-		foreach ($this->reservedDepartmentSessionAdmissions->where([
+        
+		$reservedAdmission = $this->reservedDepartmentSessionAdmissions->where([
 			'session_id' => currentSession()->id,
-			'student_type_id'=>$student['type'],
-			'student_session_id'=>$student['session']
-		]) as $admission) {
-			$reserved_admission_no = $admission->admission_no;
-			$admission->delete();
-		}
-		if($reserved_admission_no){
-			return $reserved_admission_no;
+			'student_type_id'=>$this->studentTypeId($student),
+			'student_session_id'=>$this->studentSessionId($student)
+		])->first();
+		if($reservedAdmission){
+			$admissionNo = $reservedAdmission->admission_no;
+			$reservedAdmission->delete();
 		}else{
-			return  $this->yearExt($student).
+			$admissionNo =  $this->yearExt($student).
 					$this->college->code.
 					$this->code.
 					$student['session'].
 					$student['type'].
 					$this->getAdmissionSerialNo($student);
 		}
+		return $admissionNo;
 	}
 
 	public function yearExt($student)
 	{
-		$yearExt = substr(date('Y'), 0,2);
-
-		if($student['year']){
-            $yearExt = $student['year'];
-		}
-		return $yearExt;
-	}
-
-	public function getAdmissionSerialNo(array $student)
-	{
-		$current_serial_no = $this->departmentSessionAdmissions()->firstOrCreate([
-			'session_id'=>currentSession()->id,
-			'student_type_id'=>$student['type'],
-			'student_session_id'=>$student['session'],
-		]);
-		$this->departmentSessionAdmission = $current_serial_no;
-		return $this->validateThisSerialNo($current_serial_no->count + 1);
-	}
-
-	public function updateDepartmentSessionAdmissionCounter(array $student)
-	{
-		//update the admission counter if the current admission no is not in the reserved admission
-        $reserved_admission = null;
-		foreach ($this->reservedDepartmentSessionAdmissions->where(
-			'admission_no',$student['admission_no']
-		) as $admission) {
-			$reserved_admission = $admission;
-		}
-		if($reserved_admission){
-			$reserved_admission->delete();
-		}else{
-			$this->departmentSessionAdmission->update(['count' => $student['serial_no']]);
-		}
 		
+		return substr(currentSession()->name,7);
 	}
 
-	public function validateThisSerialNo($no)
+	public function getAdmissionSerialNo($student)
+	{
+		$serialNo = $this->getAdmissionCounter($student);
+		if(isset($student['serial_no'])){
+			$serialNo = $student['serial_no'];
+		}
+		return $this->formatThisSerialNo($serialNo);
+	}
+
+    public function getAdmissionCounter($student)
+    {
+    	$counter = $this->departmentSessionAdmissions()->firstOrCreate([
+            'session_id' => currentSession()->id,
+            'student_session_id' => $this->studentSessionId($student),
+            'student_type_id' => $this->studentTypeId($student)
+    	]);
+    	//update the counter for the next admission
+    	$counter->update(['count'=>$counter->count += 1]);
+    	return $counter->count;
+    }
+
+    public function studentTypeId($student)
+    {
+    	$id = null;
+    	foreach ($this->studentTypes() as $type) {
+    		if($type->code == $student['type']){
+    			$id = $type->id;
+    		}
+    	}
+    	return $id;
+    }
+
+    public function studentSessionId($student)
+    {
+    	$id = null;
+    	foreach ($this->studentSessions() as $session) {
+    		if($session->code == $student['session']){
+    			$id = $session->id;
+    		}
+    	}
+    	return $id;
+    }
+
+	public function formatThisSerialNo($no)
 	{
 		if($no <= 9){
 			$valid_no = '00'.$no;

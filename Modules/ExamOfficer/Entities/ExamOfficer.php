@@ -36,6 +36,11 @@ class ExamOfficer extends Authenticatable
         return $this->belongsTo('Modules\Department\Entities\Department');
     }
 
+    public function admissions()
+    {
+        return $this->belongsTo('Modules\Department\Entities\Admission');
+    }
+
     public function duration()
     {
         $start = Carbon::now();

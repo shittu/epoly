@@ -4,9 +4,11 @@ namespace Modules\ExamOfficer\Http\Controllers\Admission;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Hash;
+use Modules\Department\Entities\Admission;
+use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
 
-class AdmissionController extends Controller
+class AdmissionController extends ExamOfficerBaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,11 @@ class AdmissionController extends Controller
      */
     public function index()
     {
-        return view('examofficer::index');
+        return view('examofficer::admission.index',['route'=>[
+            'delete'=>'exam.officer.student.admission.delete',
+            'edit'=>'exam.officer.student.admission.edit',
+            'revoke'=>'exam.officer.student.admission.revoke',
+        ]]);
     }
 
     /**
@@ -23,7 +29,7 @@ class AdmissionController extends Controller
      */
     public function create()
     {
-        return view('examofficer::create');
+        return view('examofficer::admission.create',['route'=>'exam.officer.student.admission.register']);
     }
 
     /**
@@ -31,9 +37,16 @@ class AdmissionController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function register(Request $request)
     {
-        //
+        $request->validate([
+            'session'=>'required',
+            'type'=>'required',
+        ]);
+        
+        $admission = department()->generateNewAdmission($request->all());
+
+        return redirect()->route('exam.officer.student.admission.edit',[$admission->id]);
     }
 
     /**
@@ -41,9 +54,10 @@ class AdmissionController extends Controller
      * @param int $id
      * @return Response
      */
-    public function show($id)
+    public function revokeAdmission($admission_id)
     {
-        return view('examofficer::show');
+        Admission::find($admission_id)->revokeThisAdmission();
+        return redirect()->route('exam.officer.student.admission.index');
     }
 
     /**
@@ -51,9 +65,12 @@ class AdmissionController extends Controller
      * @param int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit($admission_id)
     {
-        return view('examofficer::edit');
+        return view('examofficer::admission.edit',[
+            'route'=>'exam.officer.student.admission.update',
+            'admission'=>Admission::find($admission_id)
+        ]);
     }
 
     /**
@@ -62,9 +79,12 @@ class AdmissionController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $admission_id)
     {
-        //
+        
+        Admission::find($admission_id)->updateThisAdmission($request->all());
+    
+        return back();
     }
 
     /**
@@ -72,8 +92,9 @@ class AdmissionController extends Controller
      * @param int $id
      * @return Response
      */
-    public function destroy($id)
+    public function delete($admission_id)
     {
-        //
+        Admission::find($admission_id)->deleteThisAdmission();
+        return redirect()->route('exam.officer.student.admission.index');
     }
 }

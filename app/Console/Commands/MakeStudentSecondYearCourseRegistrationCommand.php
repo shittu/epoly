@@ -49,7 +49,7 @@ class MakeStudentSecondYearCourseRegistrationCommand extends Command
             $session_registration = $student->sessionRegistrations()->firstOrCreate([
             'level_id'=>$level->id,
             'department_id'=>$student->admission->department_id,
-            'session_id'=> Session::find(2)->id
+            'session_id'=> currentSession()->id
             ]);
             
             foreach($student->currentLevelCourses() as $course){
@@ -58,7 +58,7 @@ class MakeStudentSecondYearCourseRegistrationCommand extends Command
 
                 $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
                     'course_id'=>$course->id,
-                    'session_id'=> Session::find(2)->id
+                    'session_id'=> currentSession()->id
                 ]);
 
                 $course_registration->result()->firstOrCreate([]);
@@ -70,7 +70,7 @@ class MakeStudentSecondYearCourseRegistrationCommand extends Command
 
                 $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
                     'course_id'=>$repeatCourse->course->id,
-                    'session_id'=> Session::find(2)->id
+                    'session_id'=> currentSession()->id
                 ]);
 
                 $course_registration->result()->firstOrCreate([]);
