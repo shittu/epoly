@@ -5,6 +5,7 @@ use Modules\Admin\Entities\Session;
 use Modules\Student\Entities\StudentType;
 use Modules\Student\Entities\StudentSession;
 use Modules\Department\Entities\DepartmentSessionAdmission;
+use Modules\Department\Entities\ReservedDepartmentSessionAdmission;
 
 trait AdmissionNumberGenerator
 {
@@ -12,11 +13,8 @@ trait AdmissionNumberGenerator
 	public function generateAdmissionNo(array $student)
 	{
         
-		$reservedAdmission = $this->reservedDepartmentSessionAdmissions->where([
-			'session_id' => currentSession()->id,
-			'student_type_id'=>$this->studentTypeId($student),
-			'student_session_id'=>$this->studentSessionId($student)
-		])->first();
+		$reservedAdmission = $this->getAdmissionFromTheReserved($student);
+		  
 		if($reservedAdmission){
 			$admissionNo = $reservedAdmission->admission_no;
 			$reservedAdmission->delete();
@@ -33,10 +31,25 @@ trait AdmissionNumberGenerator
 
 	public function yearExt($student)
 	{
-		
 		return substr(currentSession()->name,7);
 	}
 
+    public function getAdmissionFromTheReserved($student)
+    {
+    	$admission = null;
+    	foreach (ReservedDepartmentSessionAdmission::where([
+            'department_id'=> department()->id,
+            'session_id'=> currentSession()->id,
+            'student_type_id'=> $this->studentTypeId($student),
+            'student_session_id'=> $this->studentSessionId($student)
+    	])->get() as $reservedAdmission) {
+    		if(!$admission){
+                $admission = $reservedAdmission;
+    		}
+    	}
+    	return $admission;
+    }
+    
 	public function getAdmissionSerialNo($student)
 	{
 		$serialNo = $this->getAdmissionCounter($student);

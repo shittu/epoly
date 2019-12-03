@@ -3,5 +3,5 @@
     department create new course page
 @endsection
 @section('page-content')
-    @include('department.department.course.create')
+    @include('department.department.course.pertials.create')
 @endsection

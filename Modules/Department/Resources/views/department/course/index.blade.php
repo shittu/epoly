@@ -5,5 +5,5 @@
 @endsection
 
 @section('page-content')
-    @include('department.department.course.edit')
+    @include('department.department.course.pertials.edit')
 @endsection

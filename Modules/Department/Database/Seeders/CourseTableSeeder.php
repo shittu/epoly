@@ -38,7 +38,7 @@ class CourseTableSeeder extends Seeder
                     break;
             }
             $registeredCourse = Course::firstOrCreate($course);
-            $registeredCourse->departmentCourses->firstOrCretae(['department_id'=>1]);
+            $registeredCourse->departmentCourses()->firstOrCreate(['department_id'=>1]);
         } 
     }
 
