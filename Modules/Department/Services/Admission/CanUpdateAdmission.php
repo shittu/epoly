@@ -29,8 +29,8 @@ trait CanUpdateAdmission
     {
     	department()->reservedDepartmentSessionAdmissions()->firstOrCreate([
             'session_id'=>currentSession()->id,
-            'student_session_id'=>department()->studentSessionId($data),
-            'student_type_id'=>department()->studentTypeId($data),
+            'student_session_id'=>$this->student->student_session_id,
+            'student_type_id'=>$this->student->student_type_id,
             'admission_no' => $this->admission_no
         ]);
     }
