@@ -72,16 +72,16 @@
      				</tr>
      				<tr>
      					<td>
-		         		    <button class="button-fullwidth cws-button bt-color-3"><a href="{{route($routes ? $routes['amend'] : 'department.result.course.amend',[$result->id])}}" style="color: white">Amend This Result</a> </button>
+		         		    <button class="button-fullwidth cws-button bt-color-3"><a href="{{route($routes['amend'] ??  'department.result.course.amend',[$result->id])}}" style="color: white">Amend This Result</a> </button>
 		         		</td>
      					<td>
-     						<form method="post" action="{{route($routes ? $routes['approve'] : 'department.result.course.approve',[$result->id])}}">
+     						<form method="post" action="{{route($routes['approve'] ??  'department.result.course.approve',[$result->id])}}">
      							@csrf
 		         				<button class="button-fullwidth cws-button bt-color-3">{{$result->verification_status == 0 ? 'Approve This Result' : 'Dis Approve This Result'}}</button>
      		         			</form>
      		         		</td>
 		         		<td>
-		         			<button class="button-fullwidth cws-button bt-color-3 btn-block"><a href="{{route($routes ? $routes['edit'] : 'department.result.course.edit',[$result->id])}}" style="color: white">Edit This Result</a></button>
+		         			<button class="button-fullwidth cws-button bt-color-3 btn-block"><a href="{{route($routes['edit'] ?? 'department.result.course.edit',[$result->id])}}" style="color: white">Edit This Result</a></button>
 		         		</td>
      				</tr>
      			</table>

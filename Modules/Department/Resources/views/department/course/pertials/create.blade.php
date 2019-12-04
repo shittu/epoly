@@ -43,7 +43,9 @@
 		            <select name="level" class="form-control">
 		            	<option value=""></option>
 		            	@foreach(department()->levels() as $level)
+		            	     @if($level->id <= 5)
 		                     <option value="{{$level->id}}">{{$level->name}}</option>
+		                     @endif
 		            	@endforeach
 		            </select>
 		            @error('level')

@@ -41,21 +41,7 @@ class AdmissionController extends HodBaseController
             'type'=>'required',
         ]);
         
-        $admission = headOfDepartment()->admissions()->create([
-            'admission_no'=>headOfDepartment()->department->generateAdmissionNo($request->all())]);
-        $student = $admission->student()->create([
-            'first_name'=>'',
-            'last_name'=>'',
-            'phone'=>'',
-            'user_name'=>$admission->admission_no,
-            'email'=>$admission->admission_no.'@sospoly.com',
-            'password'=>Hash::make($admission->admission_no),
-            'student_type_id' => $request->type,
-            'student_session_id' => $request->session
-        ]);
-        $student->studentAccount()->create([]);
-        headOfDepartment()->department->updateDepartmentSessionAdmissionCounter($request->all());
-        session()->flash('message','Congratulation this admission is registered successfully and this student can logged in as student using '.$admission->admission_no.'@poly.com as his email and '.$admission->admission_no.' as his password');
+        $admission = department()->generateNewAdmission($request->all());
 
         return redirect()->route('department.admission.edit',[$admission->id]);
     }
@@ -67,17 +53,7 @@ class AdmissionController extends HodBaseController
      */
     public function revokeAdmission($admission_id)
     {
-        $admission = Admission::find($admission_id);
-        if($admission->student->is_active == 1){
-            $admission->student->is_active = 0;
-        }else{
-            $admission->student->is_active = 1;
-        }
-        $admission->student->save();
-        
-        $admission->student->update(['is_active'=>0]);
-
-        session()->flash('message','Congratulation this admission is revoked successfully');
+        Admission::find($admission_id)->revokeThisAdmission();
 
         return redirect()->route('department.admission.index');
     }
@@ -100,39 +76,7 @@ class AdmissionController extends HodBaseController
      */
     public function update(Request $request, $admission_id)
     {
-        $admission = Admission::find($admission_id);
-        $session = Session::where('name',currentSession())->first();
-        $data = $request->all();
-        if($data['type'] != $admission->typeNo() || $data['session'] != $admission->sessionNo()){
-            //reserve the current admission number
-            headOfDepartment()->department->reservedDepartmentSessionAdmissions()->firstOrCreate([
-                    'session_id'=>$session->id,
-                    'student_session_id'=>$data['session'],
-                    'student_type_id'=>$data['type'],
-                    'admission_no' => $admission->admission_no
-                ]);
-            //generate another admission number and update admission with the new admission no
-            $admission->update([
-                'admission_no'=>headOfDepartment()->department->generateAdmissionNo($data)
-            ]);
-        }
-        //update student information
-        $student = $admission->student->update([
-            'first_name'=>$data['first_name'],
-            'last_name'=>$data['last_name'],
-            'phone'=>$data['phone'],
-            'email'=>$admission->admission_no.'@sospoly.com',
-            'password'=>Hash::make($admission->admission_no),
-            'student_type_id' => $data['type'],
-            'student_session_id' => $data['session'],
-        ]);
-        //update student account information
-        $admission->student->studentAccount->update([
-            'gender_id'=>$data['gender'],
-            'tribe_id'=>$data['tribe'],
-            'religion_id'=>$data['religion'],
-        ]);
-        session()->flash('message','Congratulation this admission is updated successfully and this student can logged in as student using '.$admission->admission_no.'@poly.com as his email and '.$admission->admission_no.' as his password');
+        Admission::find($admission_id)->updateThisAdmission($request->all());
 
         return back();
 
