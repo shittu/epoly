@@ -4,7 +4,7 @@
 <div class="col-md-1"></div> 
 <div class="col-md-10">
 	<div class="card">
-		<div class="card-body">
+		<div class="card-body table-responsive">
 			<table class="table table-default">
 				<thead>
 					<tr>
@@ -17,21 +17,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach(lecturer()->lecturerCourses as $lecture_course)
+					@foreach(lecturer()->lecturerCourses as $lecturer_course)
 					<tr>
 						<td>{{$loop->index+1}}</td>
-						<td>{{$lecture_course->course->title}}</td>
-						<td>{{$lecture_course->course->code}}</td>
-						<td>{{$lecture_course->course->unit}}</td>
-						<td>{{$lecture_course->course->semester->name}}</td>
+						<td>{{$lecturer_course->course->title}}</td>
+						<td>{{$lecturer_course->course->code}}</td>
+						<td>{{$lecturer_course->course->unit}}</td>
+						<td>{{$lecturer_course->course->semester->name}}</td>
 						<td>
 							<form action="{{route('lecturer.result.templete.download')}}" method="post">
 								@csrf
-								<input type="hidden" name="course_id" value="{{$lecture_course->course->id}}">
+								<input type="hidden" name="course_id" value="{{$lecturer_course->course->id}}">
 								<button class="btn btn-info" style="color: white"><i class="fa fa-download"></i>Download Result Sheet</button>
 							</form>
 
-							<button data-toggle="modal" data-target="#result_{{$lecture_course->course->id}}" class="btn btn-info" style="color: white">
+							<button data-toggle="modal" data-target="#result_{{$lecturer_course->course->id}}" class="btn btn-info" style="color: white">
 								<i class="fa fa-upload"></i>Uplaod Result
 							</button>
 							@include('lecturer::course.upload')

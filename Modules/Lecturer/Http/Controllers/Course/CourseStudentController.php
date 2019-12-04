@@ -47,13 +47,13 @@ class CourseStudentController extends LecturerBaseController
             case '1':
                 //get all the available students for this course
                 foreach (Student::all() as $student) {
-                    if($student->level() == $course->level->name){
+                    if($student->level()->name == $course->level->name){
                         $students[] = $student;
                     }
                 }
                 session(['students'=>$students]);
                 $route = "lecturer.courses.students.available";
-                $message = count($students).' Available Student Found for '.$course->code.' in '.$request->session.' Session';
+                $message = count($students).' Available Student Found for '.$course->code.' in '.currentSession()->name.' Session';
                 break;
             
             default:
@@ -65,7 +65,7 @@ class CourseStudentController extends LecturerBaseController
                 }
                 $route = "lecturer.courses.students.registered";
                 session(['students'=>$students]);
-                $message = count($students).' Registered Student Found for '.$course->code.' in '.$request->session.' Session';
+                $message = count($students).' Registered Student Found for '.$course->code.' in '.currentSession()->name.' Session';
                 break;
         }
         session()->flash('message', $message);

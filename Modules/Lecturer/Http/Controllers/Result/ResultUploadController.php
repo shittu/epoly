@@ -5,9 +5,10 @@ namespace Modules\Lecturer\Http\Controllers\Result;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
-use Modules\Lecturer\Imports\UploadResult;
 use Maatwebsite\Excel\Facades\Excel;
 use Modules\Department\Entities\Course;
+use Modules\Lecturer\Imports\UploadResult;
+use Modules\Lecturer\Services\Result\UploadScoreSheet;
 use Modules\Lecturer\Entities\LecturerCourseResultUpload;
 use Modules\Core\Http\Controllers\Lecturer\LecturerBaseController;
 
@@ -30,59 +31,19 @@ class ResultUploadController extends LecturerBaseController
     public function upload(Request $request)
     {
         $request->validate([
-        'course_id' =>'required',
+        'course' =>'required',
         'result'  => 'required',
         'session'  => 'required'
         ]);
 
-        $course_lecturer = Course::find($request->course_id)->currentCourseLecturer();
-        $course_upload_by = $course_lecturer->lecturerCourseResultUploads()->firstOrCreate(['session_id'=>$request->session]);
+        $course = Course::find($request->course);
+        $result = new UploadScoreSheet($request->all());
+        Excel::import(new UploadResult($result->uploadedBy()), $request->file('result'));
 
-        Excel::import(new UploadResult($course_upload_by), $request->file('result'));
-
-        session()->flash('message','Congratulation the result of all registered students is successfully uploaded');
+        session()->flash('message','Congratulation '.currentSession()->name.' result of '.$course->code.' is successfully uploaded to all registered students');
 
         return back();
     }
 
-    /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        return view('lecturer::show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        return view('lecturer::edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }

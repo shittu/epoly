@@ -38,7 +38,7 @@ trait AdmissionNumberGenerator
     {
     	$admission = null;
     	foreach (ReservedDepartmentSessionAdmission::where([
-            'department_id'=> department()->id,
+            'department_id'=> 1,
             'session_id'=> currentSession()->id,
             'student_type_id'=> $this->studentTypeId($student),
             'student_session_id'=> $this->studentSessionId($student)

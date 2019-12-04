@@ -29,8 +29,8 @@ trait CanAdmittStudent
 	public function registerStudent($admission,$data)
 	{
 		$student = $admission->student()->firstOrCreate([
-            'first_name'=> 'first name',
-            'last_name'=> 'last name',
+            'first_name'=> '',
+            'last_name'=> '',
             'user_name'=>$admission->admission_no,
             'email'=> $admission->admission_no.'@sospoly.com',
             'phone'=>'0'.rand(7,9).rand(0,1).rand(00000000,99999999),
