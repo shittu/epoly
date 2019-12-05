@@ -10,13 +10,27 @@
     </ul>
 </li>
 <li>
-    <a href="#">Admission</a>
+    <a href="#">Admissions</a>
     <ul>
         <li>
             <a href="{{route('department.admission.create')}}">New Admission</a>
         </li>
         <li>
             <a href="{{route('department.admission.index')}}">View Student Detail</a>
+        </li>
+    </ul>
+</li>
+<li>
+    <a href="#">Graduations</a>
+    <ul>
+        <li>
+            <a href="{{route('department.graduation.graduate.index')}}">Grduated Student</a>
+        </li>
+        <li>
+            <a href="{{route('department.graduation.spill.index')}}">Spill Student</a>
+        </li>
+        <li>
+            <a href="{{route('department.graduation.withdraw.index')}}">With Drawed Student</a>
         </li>
     </ul>
 </li>
@@ -62,6 +76,7 @@
         <li>
             <a href="{{route('department.result.course.index')}}">View Result</a>
         </li>
+
         <li>
             <a href="{{route('department.result.course.vetting.index')}}">AB Format</a>
         </li>
@@ -72,12 +87,15 @@
     </ul>
 </li>
 <li>
-    <a href="#">Applications</a>
+    <a href="#">Requests</a>
     <!-- sub menu -->
     <ul>
-        <li><a href="{{route('department.diferring.index')}}">Diferring</a></li>
+        <li><a href="{{route('department.diferring.index')}}">Diferment</a></li>
+        <li><a href="{{route('department.diferring.index')}}">Course Registration</a></li>
+        <li><a href="{{route('department.diferring.index')}}">Add Or Drop Course</a></li>
     </ul>
     <!-- / sub menu -->
 </li>
+
 
 

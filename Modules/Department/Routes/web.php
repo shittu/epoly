@@ -81,7 +81,18 @@ Route::prefix('department')
             Route::post('/upload/result', 'ScoreSheetController@uploadScoreSheet')->name('upload');
 		    Route::get('/upload', 'ScoreSheetController@uploadIndex')->name('upload.index');
 	    });
-
+    //graduation routes
+    Route::prefix('graduation')
+    ->name('graduation.')
+    ->namespace('Graduation')
+    ->group(function() {
+        Route::get('/', 'GraduationController@graduationIndex')->name('graduate.index');
+        Route::get('/spill', 'GraduationController@spillOverIndex')->name('spill.index');
+        Route::get('/with-draw', 'GraduationController@withDrawIndex')->name('withdraw.index');
+        Route::post('/search/graduates', 'GraduationController@searchGraduateStudents')->name('search.graduates');
+        Route::post('/search/spill-overs', 'GraduationController@searchSpillingStudents')->name('search.spills');
+        Route::post('/search/with-draws', 'GraduationController@searchWithDrawedStudents')->name('search.withdraws');
+    });
 	//result routes
 	Route::prefix('result/{result_id}')
 	->name('result.')

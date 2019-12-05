@@ -66,11 +66,7 @@ class Session extends BaseModel
 
     public function userDepartment()
     {
-        $department = examOfficer()->department;
-        if(!$department){
-            $department = headOfDepartment()->department;
-        }
-        return $department;
+        return department();
     }
 
 }
