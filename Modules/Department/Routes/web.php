@@ -26,6 +26,16 @@ Route::prefix('department')
             Route::post('/register','DepartmentLecturerAppointmentController@register')->name('register');
 		});
 	});
+    //wave result routes
+	Route::prefix('students/results/wave')
+	    ->name('students.results.wave.')
+	    ->namespace('Result')
+	    ->group(function() {
+            Route::get('/', 'WaveResultController@index')->name('index');
+		    Route::post('/search', 'WaveResultController@search')->name('search');
+		    Route::get('/semester/{semester_id}/view', 'WaveResultController@view')->name('view');
+		    Route::get('/result/{result_id}/register', 'WaveResultController@waveResult')->name('register');
+	    });		
 	Route::prefix('diferring')
 		->name('diferring.')
 		->namespace('Admission')

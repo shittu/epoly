@@ -88,11 +88,6 @@ class MakeStudentRemark
 	            break;
 	        
 	        case '3':
-	            # session ccancelation
-	            $this->cancellationOfSession();
-	            break;
-	        
-	        case '4':
 	            # exam cancelation
 	            $this->cancelationOfExam();
 	            break;
@@ -107,8 +102,7 @@ class MakeStudentRemark
     {
     	if($this->data['remark'] != 1){
             $this->registration->sessionRegistrationRemarks()->firstOrCreate([
-                'remark_id'=>$this->data['remark'],
-                'semester_id'=>request()->route('semester_id')
+                'remark_id'=>$this->data['remark']
             ]);
         }
     }

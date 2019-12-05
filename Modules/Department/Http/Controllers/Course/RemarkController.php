@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Student\Entities\SessionRegistration;
 use Modules\Core\Http\Controllers\Department\HodBaseController;
+use Modules\Department\Services\Results\Student\MakeStudentRemark;
 
 class RemarkController extends HodBaseController
 {
@@ -34,49 +35,9 @@ class RemarkController extends HodBaseController
      */
     public function register(Request $request)
     {
-        $registration = SessionRegistration::find($request->registration_id);
+        
         $request->validate(['remark'=>'required']);
-
-        switch ($request->remark) {
-            case '1':
-                # semester cancelation
-                foreach ($registration->semesterRegistrations->where('semester_id',request()->route('semester_id')) as $semester_registration) {
-                    $semester_registration->update(['cancelation_status'=>1]);
-                    $semester_registration->semesterRegistrationRemarks()->firstOrCreate([
-                        'remark_id' => $request->remark
-                    ]);
-                }
-                break;
-            
-            case '2':
-                # with draw
-                $registration->student->update(['is_active'=>0]);
-                break;
-            
-            case '3':
-                # session ccancelation
-                $registration->update(['cancelation_status'=>1]);
-                break;
-            
-            case '4':
-                # exam cancelation
-                $request->validate(['course'=>'required']);
-                foreach($registration->semesterRegistrations->where('semester_id',$request->semster_id) as $semester_registration){
-                    $course_registration = $semester_registration->courseRegistrations->where('course_id',$request->course)->first();
-                    $course_registration->update(['cancelation_status'=>1]);
-                    $course_registration->repeatCourserRegistration(['student_id'=>$course_registration->semesterRegistration->sessionRegistration->student->id]);
-                }
-                break;
-            default:
-                //
-                break;
-        }
-        if($request->remark != 1){
-            $registration->sessionRegistrationRemarks()->firstOrCreate([
-                'remark_id'=>$request->remark,
-                'semester_id'=>request()->route('semester_id')
-            ]);
-        }
+        new MakeStudentRemark($request->all());
         session()->flash('message','The Exam Monitoring Committee Verdict is registered successfully');
         return back();
     }

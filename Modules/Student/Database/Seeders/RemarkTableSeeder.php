@@ -20,7 +20,6 @@ class RemarkTableSeeder extends Seeder
         $remarks = [
             ['name'=>'Cancelation of Semester','remark_type_id'=>2],
             ['name'=>'Withdraw','remark_type_id'=>2],
-            ['name'=>'Cancelation of Session','remark_type_id'=>2],
             ['name'=>'Cancelation of Exam','remark_type_id'=>2],
             ['name'=>'PASSED','remark_type_id'=>1],
             ['name'=>'FAILED','remark_type_id'=>1],

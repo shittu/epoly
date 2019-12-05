@@ -46,10 +46,10 @@
     	<td>
     		@foreach($registration->courseRegistrations->where('cancelation_status',0) as $course_registration)
 	    		@if($course_registration->result->grade == 'F')
-	    		    <a href="{{route('exam.officer.result.student.wave.register',[$course_registration->result->id])}}" style="color: white"><button class="btn btn-warning">Wave {{$course_registration->course->code}}</button></a>
+	    		    <a href="{{route($route ?? 'exam.officer.result.student.wave.register',[$course_registration->result->id])}}" style="color: white"><button class="btn btn-warning">Wave {{$course_registration->course->code}}</button></a>
 	    		@endif
 	    		@if($course_registration->result->waved())
-                    <a href="{{route('exam.officer.result.student.wave.register',[$course_registration->result->id])}}" style="color: white"><button class="btn btn-warning">Un Wave {{$course_registration->course->code}}</button></a>
+                    <a href="{{route($route ?? 'exam.officer.result.student.wave.register',[$course_registration->result->id])}}" style="color: white"><button class="btn btn-warning">Un Wave {{$course_registration->course->code}}</button></a>
 	    		@endif
     		@endforeach
     	</td>

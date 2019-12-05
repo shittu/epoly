@@ -55,12 +55,12 @@ trait CanComputeGrade
             $this->points = 0.00;
         }
         if($point >= 2){
-            $this->remark_id = 5;
+            $this->remark_id = 4;
             if($this->courseRegistration->repeatCourseRegistration){
                 $this->courseRegistration->repeatCourseRegistration->update(['status'=>0]);
             }
         }elseif($point == 0){
-            $this->remark_id = 6;
+            $this->remark_id = 5;
             $this->repeat();
         }elseif($point == -1){
             $this->remark_id = 7;

@@ -79,7 +79,7 @@
             <a href="{{route('department.result.remark.index')}}">Register EMC Remarks</a>
         </li>
         <li>
-            <a href="{{route('exam.officer.result.student.wave.index')}}">Wave Student Result</a>
+            <a href="{{route('department.students.results.wave.index')}}">Wave Student Result</a>
         </li>
     </ul>
 </li>

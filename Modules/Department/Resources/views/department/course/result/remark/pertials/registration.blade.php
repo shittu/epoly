@@ -85,7 +85,7 @@
      					@endforeach
      				</tbody>
      			</table>
-     			{{$registrations->links()}}
+     			
      		</div>
      	</div>
     </div>

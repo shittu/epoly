@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\ExamOfficer\Http\Controllers\Results;
+namespace Modules\Department\Http\Controllers\Result;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -8,9 +8,9 @@ use Modules\Admin\Entities\Session;
 use Modules\Student\Entities\Result;
 use Modules\Department\Entities\Level;
 use Modules\Department\Services\Vetting\GenerateVettableResult;
-use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
+use Modules\Core\Http\Controllers\Department\HodBaseController;
 
-class WaveResultController extends ExamOfficerBaseController
+class WaveResultController extends HodBaseController
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class WaveResultController extends ExamOfficerBaseController
      */
     public function index()
     {
-        return view('examofficer::result.wave.index',['route'=>'exam.officer.result.student.wave.search','levels'=>Level::all(),'sessions'=>Session::all()]);
+        return view('department::department.result.wave.index',['route'=>'department.students.results.wave.search','levels'=>Level::all(),'sessions'=>Session::all()]);
     }
 
     /**
@@ -36,7 +36,7 @@ class WaveResultController extends ExamOfficerBaseController
         ]);
 
         session(['course_registrations'=>$request->all()]);
-        return redirect()->route('exam.officer.result.student.wave.view',[$request->semester]);
+        return redirect()->route('department.students.results.wave.view',[$request->semester]);
     }
 
     /**
@@ -50,9 +50,9 @@ class WaveResultController extends ExamOfficerBaseController
         
             $vetting = new GenerateVettableResult(session('course_registrations'));
 
-            return view('department::department.course.result.student.wave',['registrations'=>$vetting->results]);
+            return view('department::department.course.result.student.wave',['route'=>'department.students.results.wave.register','registrations'=>$vetting->results]);
         }
-        return redirect()->route('exam.officer.result.student.wave.index');
+        return redirect()->route('department.students.results.wave.index');
     }
 
     public function waveResult($result_id)
@@ -70,8 +70,4 @@ class WaveResultController extends ExamOfficerBaseController
         
         return back();
     }
-
-    
-
-
 }

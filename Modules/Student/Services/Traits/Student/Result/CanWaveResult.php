@@ -3,6 +3,8 @@ namespace Modules\Student\Services\Traits\Student\Result;
 
 trait CanWaveResult
 {
+    use UnWaveResult;
+
 	public function waveThisResult()
 	{
 		$this->update(['waved_by'=>$this->waveThisResultWith(),'grade'=>'E','points'=>2.00]);
