@@ -60,29 +60,26 @@
         <li>
             <a href="{{route('department.results.scoresheet.download.index')}}">Download Score Sheet</a>
         </li>
-
         <li>
             <a href="{{route('department.results.scoresheet.upload.index')}}">Upload Score Sheet</a>
         </li>
-
         <li>
             <a href="{{route('department.student.result.index')}}">Check Student Results</a>
         </li>
-
         <li>
-            <a href="#">Results Statistics</a>
+            <a href="#">View Course Results Statistics</a>
         </li>
-
         <li>
-            <a href="{{route('department.result.course.index')}}">View Result</a>
+            <a href="{{route('department.result.course.index')}}">View Course Result</a>
         </li>
-
         <li>
             <a href="{{route('department.result.course.vetting.index')}}">AB Format</a>
         </li>
-
         <li>
-            <a href="{{route('department.result.remark.index')}}">Remarks</a>
+            <a href="{{route('department.result.remark.index')}}">Register EMC Remarks</a>
+        </li>
+        <li>
+            <a href="{{route('exam.officer.result.student.wave.index')}}">Wave Student Result</a>
         </li>
     </ul>
 </li>
