@@ -1,5 +1,5 @@
 
-@if(count(student()->repeatCourses->where('status',1))>0)
+@if(count(student()->currentLevelReRegisterCourses()))>0)
 <div class="card">
 	<div class="card-header text text-center">
         {{currentSession()->name}} {{student()->level()->id < 6 ? student()->level()->name.' Carry Over Courses' : student()->level()->name.' Re Register Courses' }}</div>

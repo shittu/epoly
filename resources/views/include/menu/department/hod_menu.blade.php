@@ -44,11 +44,11 @@
     <a href="#">Results</a>
     <ul>
         <li>
-            <a href="#">Download Score Sheet</a>
+            <a href="{{route('department.results.scoresheet.download.index')}}">Download Score Sheet</a>
         </li>
 
         <li>
-            <a href="#">Upload Score Sheet</a>
+            <a href="{{route('department.results.scoresheet.upload.index')}}">Upload Score Sheet</a>
         </li>
 
         <li>

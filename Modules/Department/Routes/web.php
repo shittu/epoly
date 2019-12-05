@@ -71,6 +71,16 @@ Route::prefix('department')
 	    Route::post('/registration/search', 'RemarkController@searchRegistration')->name('registration.search');
 	    Route::get('semester/{semester_id}/registration/view', 'RemarkController@viewRegistration')->name('registration.view');
 	});
+	//department score sheets routes
+	Route::prefix('result/score-sheet')
+	    ->name('results.scoresheet.')
+	    ->namespace('Result')
+	    ->group(function() {
+            Route::get('/download', 'ScoreSheetController@downloadIndex')->name('download.index');
+            Route::post('/download/score-sheet', 'ScoreSheetController@downloadScoreSheet')->name('download');
+            Route::post('/upload/result', 'ScoreSheetController@uploadScoreSheet')->name('upload');
+		    Route::get('/upload', 'ScoreSheetController@uploadIndex')->name('upload.index');
+	    });
 
 	//result routes
 	Route::prefix('result/{result_id}')
@@ -139,8 +149,6 @@ Route::prefix('department')
 			});
 			
 		});
-
-		
 
 		Route::prefix('admission')
 		->name('admission.')

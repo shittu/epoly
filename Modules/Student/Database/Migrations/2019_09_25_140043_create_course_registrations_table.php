@@ -40,6 +40,7 @@ class CreateCourseRegistrationsTable extends Migration
             ->delete('restrict')
             ->update('cascade');
             $table->string('cancelation_status')->default(0);
+            $table->string('drop_status')->default(0);
             $table->timestamps();
         });
     }

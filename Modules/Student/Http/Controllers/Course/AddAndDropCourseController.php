@@ -56,7 +56,7 @@ class AddAndDropCourseController extends StudentBaseController
                 //delete course registration result templete
                 $courseRegistration->result->delete();
                 //delete the course registrations
-                $courseRegistration->delete();
+                $courseRegistration->update('drop_status',1);
             }
         }
 
