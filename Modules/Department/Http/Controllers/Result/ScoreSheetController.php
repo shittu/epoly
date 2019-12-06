@@ -59,7 +59,7 @@ class ScoreSheetController extends HodBaseController
         $course = Course::find($request->course);
         $result = new UploadScoreSheet($request->all());
 
-        Excel::import(new UploadResult($result->uploadedBy()), $request->file('result'));
+        Excel::import(new UploadResult($result->uploadedBy(),$request->all()), $request->file('result'));
 
         session()->flash('message','Congratulation '.$session->name.' result of '.$course->code.' is successfully uploaded to all registered students');
 

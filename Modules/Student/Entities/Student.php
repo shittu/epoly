@@ -5,6 +5,7 @@ namespace Modules\Student\Entities;
 use Illuminate\Notifications\Notifiable;
 use Modules\Admin\Entities\Session;
 use Modules\Department\Entities\Level;
+use Modules\Department\Entities\Course;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\Student\Services\Traits\HasLevelAndSemester;
 use Modules\Student\Services\Traits\Student\HasGraduationStatus;
@@ -118,5 +119,22 @@ class Student extends Authenticatable
             $count++;
         }
         return number_format($points/$count,2);
+    }
+
+    public function getCurrentSessionCourseRegistrationResult($data)
+    {
+
+        $course = Course::find($data['course']);
+        $result = null;
+
+        foreach ($this->sessionRegistrations->where('session_id',$data['session']) as $sessionRegistration) {
+
+            foreach ($sessionRegistration->semesterRegistrations->where('semester_id',$course->semester->id) as $semesterRegistration) {
+                foreach ($semesterRegistration->courseRegistrations->where('course_id',$data['course'])->where('cancelation_status',0) as $courseRegistration) {
+                    $result = $courseRegistration->result;
+                }
+            }
+        }
+        return $result;
     }
 }
