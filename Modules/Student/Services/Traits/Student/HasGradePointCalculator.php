@@ -61,7 +61,9 @@ trait HasGradePointCalculator
 	    	foreach ($sessionRegistration->semesterRegistrations->where('cancelation_status',0) as $semesterRegistration) {
 	    		if($this->id > $semesterRegistration->id){
 	    			foreach ($semesterRegistration->courseRegistrations->where('cancelation_status',0) as $courseRegistration) {
-			            $units = $courseRegistration->course->unit + $units;
+                        if($courseRegistration->result->uploaded()){
+                            $units = $courseRegistration->course->unit + $units;
+                        }
 			        }
 	    		}
 	    	}

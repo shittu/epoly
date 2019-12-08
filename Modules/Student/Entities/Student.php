@@ -128,9 +128,8 @@ class Student extends Authenticatable
         $result = null;
 
         foreach ($this->sessionRegistrations->where('session_id',$data['session']) as $sessionRegistration) {
-
             foreach ($sessionRegistration->semesterRegistrations->where('semester_id',$course->semester->id) as $semesterRegistration) {
-                foreach ($semesterRegistration->courseRegistrations->where('course_id',$data['course'])->where('cancelation_status',0) as $courseRegistration) {
+                foreach ($semesterRegistration->courseRegistrations->where('course_id',$data['course'])->where('cancelation_status',0)->where('session_id',currentSession()->id) as $courseRegistration) {
                     $result = $courseRegistration->result;
                 }
             }

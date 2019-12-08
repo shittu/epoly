@@ -10,10 +10,12 @@ use Modules\Department\Entities\Course;
 use Modules\Lecturer\Imports\UploadResult;
 use Modules\Lecturer\Services\Result\DownloadScoreSheet;
 use Modules\Lecturer\Services\Result\UploadScoreSheet;
+use Modules\Lecturer\Services\Result\VerifyUploadFile;
 use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
 
 class ScoreSheetController extends ExamOfficerBaseController
 {
+    use VerifyUploadFile;
     /**
      * Display a listing of the resource.
      * @return Response
@@ -55,14 +57,20 @@ class ScoreSheetController extends ExamOfficerBaseController
         'result'  => 'required',
         'session'  => 'required'
         ]);
-        $session = Session::find($request->session);
-        $course = Course::find($request->course);
-        $result = new UploadScoreSheet($request->all());
+        $errors = $this->verifyThisFile($request->result);
+        if(empty($errors)){
+            $session = Session::find($request->session);
+            $course = Course::find($request->course);
+            $result = new UploadScoreSheet($request->all());
 
-        Excel::import(new UploadResult($result->uploadedBy(),$request->all()), $request->file('result'));
+            Excel::import(new UploadResult($result->uploadedBy(),$request->all()), $request->file('result'));
 
-        session()->flash('message','Congratulation '.$session->name.' result of '.$course->code.' is successfully uploaded to all registered students');
-
+            if(!session('error')){
+                session()->flash('message','Congratulation '.currentSession()->name.' result of '.$course->code.' is successfully uploaded to all registered students');
+            }
+        }else{
+            session()->flash('error',$errors);
+        }
         return back();
     }
 }

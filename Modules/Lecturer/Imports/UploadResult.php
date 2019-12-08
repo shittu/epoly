@@ -22,22 +22,15 @@ class UploadResult implements ToModel
     */
     public function model(array $results)
     {
-        session(['failed'=>0,'uploaded'=>0]);
         $student = $this->getStudent(substr($results[2],0,9));
         // $result = Result::find($results[3]);
         if($student){
-
             $result = $student->getCurrentSessionCourseRegistrationResult($this->data);
-            
             if($result){
-
-                // $uploadCount = session('uploaded') + 1;
-                // session(['failed'=>$uploadCount]);
-                $result->update(['lecturer_course_result_upload_id'=>$this->uploaded_by->id,'ca'=>$results[4],'exam'=>$results[5]]);
+                $result->update(['lecturer_course_result_upload_id'=>$this->uploaded_by->id,'ca'=>$results[3],'exam'=>$results[4]]);
                 $result->computeGrade();
             }else{
-                // $failedCount = session('failed') + 1;
-                // session(['failed'=>$failedCount]);
+                session('error',['Sorry this file has passed its name and current session verification, but its content does not matches the current session registration, this happen due to the the previous session result file renamed to the current session result file if this problem persist please download another file and upload again']);
             }
         }
        

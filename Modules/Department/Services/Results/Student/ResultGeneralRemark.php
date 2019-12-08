@@ -76,11 +76,5 @@ trait ResultGeneralRemark
             $conditions[] = 'EMC '.$emc_remark->remark->name;
     	}
     	return $conditions;
-    }
-
-                    		
-                            
-                        		
-                        
-                    	
+    }                  	
 }
