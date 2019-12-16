@@ -47,6 +47,16 @@ class CreateStudentAccountsTable extends Migration
             ->on('religions')
             ->delete('restrict')
             ->update('cascade');
+            $table->integer('lga_id')
+            ->unsigned()
+            ->nullable()
+            ->foreign()
+            ->references('id')
+            ->on('lgas')
+            ->delete('restrict')
+            ->update('cascade');
+            $table->string('address')->nullable();
+            $table->text('picture')->nullable();
             $table->timestamps();
         });
     }

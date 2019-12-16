@@ -56,6 +56,7 @@ trait AdmissionNumberGenerator
 		if(isset($student['serial_no'])){
 			$serialNo = $student['serial_no'];
 		}
+
 		return $this->formatThisSerialNo($serialNo);
 	}
 
@@ -66,9 +67,16 @@ trait AdmissionNumberGenerator
             'student_session_id' => $this->studentSessionId($student),
             'student_type_id' => $this->studentTypeId($student)
     	]);
-    	//update the counter for the next admission
-    	$counter->update(['count'=>$counter->count += 1]);
     	return $counter->count;
+    }
+
+    public function updateTheAdmissionCounter($admissionNo)
+    {
+        foreach (DepartmentSessionAdmission::where(['session_id' => currentSession()->id,
+            'student_session_id' => substr($admissionNo, 4,1),
+            'student_type_id' => substr($admissionNo, 5,1)]) as $admission) {
+            $admission->update(['count'=>$admission->count+1]);
+        }
     }
 
     public function studentTypeId($student)
@@ -95,6 +103,7 @@ trait AdmissionNumberGenerator
 
 	public function formatThisSerialNo($no)
 	{
+        
 		if($no <= 9){
 			$valid_no = '00'.$no;
 		}elseif ($no < 100) {

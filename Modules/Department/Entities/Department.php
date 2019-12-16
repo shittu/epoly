@@ -4,6 +4,10 @@ namespace Modules\Department\Entities;
 
 use Modules\Core\Entities\BaseModel;
 use Modules\Admin\Entities\Session;
+use Modules\Staff\Entities\Lga;
+use Modules\Staff\Entities\State;
+use Modules\Staff\Entities\Gender;
+use Modules\Staff\Entities\Religion;
 use Modules\Department\Entities\Level;
 use Modules\Department\Entities\Semester;
 use Modules\Student\Entities\StudentType;
@@ -118,6 +122,16 @@ class Department extends BaseModel
         return Level::all();
     }
 
+    public function religions()
+    {
+        return Religion::all();
+    }
+
+    public function genders()
+    {
+        return Gender::all();
+    }
+
     public function semesters()
     {
         return Semester::all();
@@ -132,4 +146,15 @@ class Department extends BaseModel
     {
         return StudentSession::all();
     }
+
+    public function states()
+    {
+        return State::all();
+    }
+
+    public function lgas()
+    {
+        return Lga::all();
+    }
+
 }

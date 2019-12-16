@@ -47,7 +47,7 @@ class CreateDepartmentSessionAdmissionsTable extends Migration
             ->on('student_sessions')
             ->delete('restrict')
             ->update('cascade');
-            $table->integer('count')->default(0);
+            $table->integer('count')->default(1);
             $table->timestamps();
         });
     }

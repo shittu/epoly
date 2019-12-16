@@ -25,4 +25,9 @@ class StudentAccount extends BaseModel
     {
     	return $this->belongsTo('Modules\Staff\Entities\Religion');
     }
+
+    public function lga()
+    {
+        return $this->belongsTo('Modules\Staff\Entities\Lga');
+    }
 }

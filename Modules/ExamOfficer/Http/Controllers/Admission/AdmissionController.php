@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Modules\Department\Entities\Admission;
+use Modules\Department\Http\Requests\Admission\AdmissionFormRequest;
 use Modules\Core\Http\Controllers\Department\ExamOfficerBaseController;
 
 class AdmissionController extends ExamOfficerBaseController
@@ -27,26 +28,42 @@ class AdmissionController extends ExamOfficerBaseController
      * Show the form for creating a new resource.
      * @return Response
      */
-    public function create()
+    public function generateNumberIndex()
     {
-        return view('examofficer::admission.create',['route'=>'exam.officer.student.admission.register']);
+        return view('examofficer::admission.create',['route'=>'exam.officer.student.admission.generate.number']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Response
-     */
-    public function register(Request $request)
+    public function generateNumber(Request $request)
     {
         $request->validate([
             'session'=>'required',
             'type'=>'required',
         ]);
+
+        $admissionNo = department()->generateAdmissionNo($request->all());
+
+        return redirect()->route('exam.officer.student.admission.register.generated.number.index',[$admissionNo]);
+
+    }
+    /**
+     * Store a newly created resource in storage.
+     * @param Request $request
+     * @return Response
+     */
+    public function generatedNumberRegistration()
+    {       
+        return view('examofficer::admission.registration',[
+            'admissionNo'=>request()->route('admissionNo'),
+            'route'=>'exam.officer.student.admission.register.generated.number',
+        ]);
+    }
+
+    public function registerGeneratedNumber(AdmissionFormRequest $request)
+    {
         
         $admission = department()->generateNewAdmission($request->all());
 
-        return redirect()->route('exam.officer.student.admission.edit',[$admission->id]);
+        return redirect()->route('exam.officer.student.view.biodata',[$admission->student->id]);
     }
 
     /**

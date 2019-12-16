@@ -6,7 +6,7 @@
                     <!-- logo -->
                     <a href="index.html" class="logo">
                         <img src="{{ asset('img/logo.png') }}"  data-at2x="img/logo@2x.png" alt>
-                        <h1>sosPoly</h1>
+                        <h1>UASPoly</h1>
                     </a>
                     <!-- / logo -->
                     <nav class="main-nav">
@@ -14,7 +14,7 @@
                             <!-- menus -->
                             @if(!auth()->check())
                                 <li>
-                                    <a href="{{route('welcome')}}" class="active"><i class="fa fa-home"></i>Home</a>
+                                    <a href="{{route('welcome')}}" class="active h3"><i class="fa fa-home"></i>Home</a>
                                 </li>
                             @else
                                 <li>

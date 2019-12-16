@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{asset('css/owl.carousel.css')}}">
     <!--styles -->
 </head>
-<body class="">
+<body style="background-color: #DCF9FA">
     <main>
     	@yield('page-content')
     </main>

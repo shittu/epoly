@@ -2,9 +2,12 @@
 
 namespace Modules\Staff\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\BaseModel;
 
-class Lga extends Model
+class Lga extends BaseModel
 {
-    protected $fillable = [];
+    public function state()
+    {
+    	return $this->belongsTo(State::class);
+    }
 }
