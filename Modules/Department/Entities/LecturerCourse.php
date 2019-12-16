@@ -26,5 +26,12 @@ class LecturerCourse extends BaseModel
     {
         return $this->hasMany('Modules\Lecturer\Entities\LecturerCourseResultUpload');
     }
+
+    public function hasUploadedCurrentSessionResult()
+    {
+        if(count($this->lecturerCourseResultUploads->where('session_id',currentSession()->id)) > 0){
+            return true;
+        }
+    }
     
 }

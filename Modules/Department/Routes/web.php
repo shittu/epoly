@@ -138,8 +138,7 @@ Route::prefix('department')
 	Route::get('/', 'DepartmentController@verify')->name('verify');
 	Route::get('/hod', 'DepartmentController@verify')->name('verify');
 	//hod authentication routes
-	    Route::prefix('hod')
-		->name('hod.')
+	    Route::name('hod.')
 		->group(function() {
 			Route::get('/dashboard', 'DepartmentController@index')->name('dashboard');
 			Route::get('/login', 'Auth\DepartmentLoginController@showLoginForm')->name('auth.login');

@@ -129,6 +129,6 @@
                 </span>
             @enderror
         </div>
-        <button class="button-fullwidth cws-button bt-color-3">Save Changes</button>
+        <button class="button-fullwidth cws-button bt-color-3">Register</button>
     </form><br><br>
 </div>

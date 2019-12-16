@@ -37,6 +37,6 @@ class DepartmentLoginController extends Controller
     public function logout()
     {
         Auth::guard('head_of_department')->logout();
-        return redirect('/hod/login');
+        return redirect('/department/login');
     }
 }

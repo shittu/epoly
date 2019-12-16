@@ -53,6 +53,12 @@ class CourseAllocationCommand extends Command
                     'department_id'=> $lecturer->staff->department->id,
                     'from' => '2019-10-03'
                 ]);
+                $course->lecturerCourses()->firstOrCreate([
+                    'lecturer_course_status_id'=>2,
+                    'lecturer_id'=>$lecturer->id,
+                    'department_id'=> $lecturer->staff->department->id,
+                    'from' => '2019-10-03'
+                ]);
             }
             $bar->advance();
         }

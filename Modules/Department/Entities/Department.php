@@ -90,7 +90,7 @@ class Department extends BaseModel
         $results = [];
         foreach ($this->departmentCourses as $department_course) {
             if($department_course->course->currentCourseLecturer() && $department_course->course->currentCourseLecturer()->lecturerCourseResultUploads){
-                foreach($department_course->course->currentCourseLecturer()->lecturerCourseResultUploads as $result){
+                foreach($department_course->course->currentCourseLecturer()->lecturerCourseResultUploads->where('session_id',currentSession()->id) as $result){
                     if($result->verification_status == 0){
                         $results[] = $result;
                     }

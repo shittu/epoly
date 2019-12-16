@@ -32,6 +32,11 @@ class CourseRegistration extends BaseModel
         return $this->hasOne(RepeatCourse::class);
     }
 
+    public function admission()
+    {
+        return $this->belongsTo('Modules\Department\Entities\Admission');
+    }
+    
     public function session()
     {
         return $this->belongsTo('Modules\Admin\Entities\Session');

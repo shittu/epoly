@@ -36,6 +36,6 @@
                 </span>
             @enderror
         </div>
-        <button class="button-fullwidth cws-button bt-color-3">Register</button>
+        <button class="button-fullwidth cws-button bt-color-3">Generate Admission Number</button>
     </form><br><br>
 </div>

@@ -22,28 +22,29 @@ class UploadResult implements ToModel
     */
     public function model(array $results)
     {
-        $student = $this->getStudent(substr($results[2],0,9));
-        // $result = Result::find($results[3]);
-        if($student){
-            $result = $student->getCurrentSessionCourseRegistrationResult($this->data);
-            if($result){
-                $result->update(['lecturer_course_result_upload_id'=>$this->uploaded_by->id,'ca'=>$results[3],'exam'=>$results[4]]);
-                $result->computeGrade();
-            }else{
-                session('error',['Sorry this file has passed its name and current session verification, but its content does not matches the current session registration, this happen due to the the previous session result file renamed to the current session result file if this problem persist please download another file and upload again']);
-            }
+        $this->data['admission_no'] = substr($results[2],0,9);
+        
+        $result = $this->getCurrentSessionCourseRegistrationResult();
+        if($result){
+            $result->update(['lecturer_course_result_upload_id'=>$this->uploaded_by->id,'ca'=>$results[3],'exam'=>$results[4]]);
+            $result->computeGrade();
+        }else{
+            session('error',['Sorry this file has passed its name and current session verification, but its content does not matches the current session registration, this happen due to the the previous session result file renamed to the current session result file if this problem persist please download another file and upload again']);
         }
-       
+    
     }
 
-    public function getStudent($admission_no)
+    public function getCurrentSessionCourseRegistrationResult()
     {
-        $student = null;
-        foreach (Admission::where('admission_no',$admission_no)->get() as $admission) {
-            if($admission){
-                $student = $admission->student;
+        $result = null;
+        foreach (Admission::where('admission_no',$this->data['admission_no'])->get() as $admission) {
+            foreach($admission->courseRegistrations
+                        ->where('session_id',$this->data['session'])
+                        ->where('course_id',$this->data['course'])
+                        ->where('cancelation_status',0) as $registration){
+                return $registration->result;
             }
         }
-        return $student;
+        return $result;
     }
 }

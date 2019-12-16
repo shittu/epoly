@@ -37,7 +37,7 @@ class ResultUploadController extends LecturerBaseController
         'result'  => 'required',
         'session'  => 'required'
         ]);
-        $errors = $this->verifyThisFile($request->result);
+        $errors = $this->verifyThisFile($request->all());
         if(empty($errors)){
             $course = Course::find($request->course);
             $result = new UploadScoreSheet($request->all());

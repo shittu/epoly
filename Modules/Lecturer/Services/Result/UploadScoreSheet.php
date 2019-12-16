@@ -9,7 +9,7 @@ class UploadScoreSheet extends DownloadScoreSheet
 	function __construct(array $data)
 	{
 		$this->data = $data;
-		$this->currentCourse();
+		$this->course = $this->currentCourse();
 	}
     
     public function uploadedBy()

@@ -57,7 +57,7 @@ class ScoreSheetController extends ExamOfficerBaseController
         'result'  => 'required',
         'session'  => 'required'
         ]);
-        $errors = $this->verifyThisFile($request->result);
+        $errors = $this->verifyThisFile($request->all());
         if(empty($errors)){
             $session = Session::find($request->session);
             $course = Course::find($request->course);

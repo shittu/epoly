@@ -39,7 +39,7 @@ class MakeStudentSecondYearCourseRegistrationCommand extends Command
      */
     public function handle()
     {
-        $bar = $this->output->createProgressBar(100);
+        $bar = $this->output->createProgressBar(200);
 
         $bar->setBarWidth(100);
 
@@ -58,7 +58,8 @@ class MakeStudentSecondYearCourseRegistrationCommand extends Command
 
                 $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
                     'course_id'=>$course->id,
-                    'session_id'=> currentSession()->id
+                    'session_id'=> currentSession()->id,
+                    'admission_id'=>$student->admission->id
                 ]);
 
                 $course_registration->result()->firstOrCreate([]);
@@ -70,7 +71,8 @@ class MakeStudentSecondYearCourseRegistrationCommand extends Command
 
                 $course_registration = $semester_registration->courseRegistrations()->firstOrCreate([
                     'course_id'=>$repeatCourse->course->id,
-                    'session_id'=> currentSession()->id
+                    'session_id'=> currentSession()->id,
+                    'admission_id'=>$student->admission->id
                 ]);
 
                 $course_registration->result()->firstOrCreate([]);
