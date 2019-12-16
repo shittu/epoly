@@ -9,7 +9,7 @@
     <form class="login-form" action="{{route($route ?? 'department.admission.register')}}" method="post">
         @csrf
         <div class="form-group">
-        	<label>Student Type</label>
+        	<label>Session</label>
             <select name="type" class="form-control">
             	<option value=""></option>
             	@foreach(department()->studentTypes() as $student_type)
@@ -23,7 +23,7 @@
             @enderror
         </div>
         <div class="form-group">
-            <label>Student Session</label>
+            <label>Student Schedule</label>
             <select name="session" class="form-control">
                 <option value=""></option>
                 @foreach(department()->studentSessions() as $student_session)

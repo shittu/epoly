@@ -96,7 +96,7 @@
             @enderror
         </div>
         <div class="form-group">
-        	<label>Student Type</label>
+        	<label>Student Session</label>
             <select name="type" class="form-control">
             	<option value="{{$admission->student->studentType->code}}">{{$admission->student->studentType->name}}</option>
             	@foreach(department()->studentTypes() as $student_type)
@@ -112,7 +112,7 @@
             @enderror
         </div>
         <div class="form-group">
-            <label>Student Type</label>
+            <label>Student Schedule</label>
             <select name="session" class="form-control">
                 <option value="{{$admission->student->studentSession->code}}">{{$admission->student->studentSession->name}}</option>
                 @foreach(department()->studentSessions() as $student_session)

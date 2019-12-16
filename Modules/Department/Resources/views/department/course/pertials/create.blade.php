@@ -39,7 +39,7 @@
 		            </select>
 		        </div>
 		        <div class="form-group">
-		        	<label class="text text-success centered">Level</label>
+		        	<label class="text text-success centered">Programme</label>
 		            <select name="level" class="form-control">
 		            	<option value=""></option>
 		            	@foreach(department()->levels() as $level)
