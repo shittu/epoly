@@ -24,6 +24,7 @@ class CreateLgasTable extends Migration
             ->delete('restrict')
             ->update('cascade');
             $table->string('name');
+            $table->string('catchment')->default(0);
             $table->timestamps();
         });
     }
