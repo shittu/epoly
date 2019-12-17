@@ -19,7 +19,7 @@ class AdmissionController extends ExamOfficerBaseController
     {
         return view('examofficer::admission.index',['route'=>[
             'delete'=>'exam.officer.student.admission.delete',
-            'edit'=>'exam.officer.student.admission.edit',
+            'view'=>'exam.officer.student.view.biodata',
             'revoke'=>'exam.officer.student.admission.revoke',
         ]]);
     }

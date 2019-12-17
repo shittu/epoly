@@ -31,7 +31,7 @@
 	     				</button>
 
 	     				<button class="btn btn-info">
-	     					<a href="{{route($route['edit'] ?? 'department.admission.edit',['admission_id'=>$admission->id])}}" style="color: white">Edit</a></i>
+	     					<a href="{{route($route['view'] ?? 'department.admission.edit',[$admission->student->id])}}" style="color: white">View</a></i>
 	     				</button>
 
 	     				<button class="btn btn-warning"><a href="{{route($route['revoke'] ?? 'department.admission.revoke',['admission_id'=>$admission->id])}}" style="color: white" onclick="confirm('Are you sure you want to revoke this student from having access to his account')">{{$admission->student->is_active == 1 ? 'Revoke' : 'Activate'}}</a></i>
