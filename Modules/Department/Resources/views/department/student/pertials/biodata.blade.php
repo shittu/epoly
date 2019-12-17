@@ -8,7 +8,7 @@
 			<div class="row">
 				<div class="col-md-8"></div>
 				<div class="col-md-4">
-					<a href="{{route('exam.officer.student.view.biodata',[$student->id])}}" class=" cws-button bt-color-1 pull-right m-3">
+					<a href="" onclick="print()" class=" cws-button bt-color-1 pull-right m-3">
 		                <i class="fa fa-print"></i>
 		                <span>Print</span>
 		            </a>

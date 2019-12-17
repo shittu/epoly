@@ -60,7 +60,7 @@ trait CanAdmittStudent
             'address'=>$data['address'],
         ]);
 
-        $image = $this->storeFile($data['picture'],department()->name.'/Admission/Profile');
+        $image = $this->storeFile($data['picture'],str_replace('/','-',department()->name).'/Admission/Profile');
         $account->update(['picture'=>$image]);
 	}
 

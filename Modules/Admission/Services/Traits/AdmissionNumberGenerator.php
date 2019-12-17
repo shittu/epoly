@@ -67,15 +67,21 @@ trait AdmissionNumberGenerator
             'student_session_id' => $this->studentSessionId($student),
             'student_type_id' => $this->studentTypeId($student)
     	]);
-    	return $counter->count;
+        if($counter->count){
+            return $counter->count;
+        }
+    	return 1;
     }
 
     public function updateTheAdmissionCounter($admissionNo)
     {
-        foreach (DepartmentSessionAdmission::where(['session_id' => currentSession()->id,
-            'student_session_id' => substr($admissionNo, 4,1),
-            'student_type_id' => substr($admissionNo, 5,1)]) as $admission) {
-            $admission->update(['count'=>$admission->count+1]);
+
+        foreach (DepartmentSessionAdmission::where([
+            'session_id' => currentSession()->id,
+            'student_session_id' => $this->studentSessionId(['session'=>substr($admissionNo, 4,1)]),
+            'student_type_id' => $this->studentTypeId(['type'=>substr($admissionNo, 5,1)])
+        ])->get() as $admission) {
+            $admission->update(['count'=>$admission->count += 1]);
         }
     }
 
